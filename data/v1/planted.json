@@ -1,0 +1,161 @@
+{
+ "kind": "kar-scopeguard.planted",
+ "from": "held-out half",
+ "rules": [
+  {
+   "rule": "skip-added",
+   "copies": 271,
+   "caught": 271,
+   "missed": []
+  },
+  {
+   "rule": "only-added",
+   "copies": 271,
+   "caught": 271,
+   "missed": []
+  },
+  {
+   "rule": "assert-commented",
+   "copies": 111,
+   "caught": 111,
+   "missed": []
+  },
+  {
+   "rule": "assert-neutered",
+   "copies": 111,
+   "caught": 110,
+   "missed": [
+    {
+     "repo": "pixelwhisperer",
+     "sha": "34179929680fd5de59c8fcf7333207288ad29609",
+     "path": "kernel.test.mjs",
+     "why": "no finding"
+    }
+   ]
+  },
+  {
+   "rule": "matcher-loosened",
+   "copies": 95,
+   "caught": 89,
+   "missed": [
+    {
+     "repo": "ai-first-company",
+     "sha": "d557e6bda4748a1b3f8027f9c079d0b4a23a3096",
+     "path": "test/conductor.test.mjs",
+     "why": "no finding"
+    },
+    {
+     "repo": "kardlings",
+     "sha": "0f52c42a17b66f51e3cb0d8ff12508afa0e68164",
+     "path": "test/talker.test.mjs",
+     "why": "no finding"
+    },
+    {
+     "repo": "fall-remember",
+     "sha": "3b60212e7d3fe2457a22a2dafeafd04a4570aa91",
+     "path": "store.test.mjs",
+     "why": "no finding"
+    },
+    {
+     "repo": "fallworld",
+     "sha": "7900add7452093acb664f52471a36134316702eb",
+     "path": "journey.test.mjs",
+     "why": "no finding"
+    },
+    {
+     "repo": "pixelwhisperer",
+     "sha": "34179929680fd5de59c8fcf7333207288ad29609",
+     "path": "kernel.test.mjs",
+     "why": "no finding"
+    }
+   ]
+  },
+  {
+   "rule": "tolerance-widened",
+   "copies": 271,
+   "caught": 271,
+   "missed": []
+  },
+  {
+   "rule": "failure-ignored",
+   "copies": 205,
+   "caught": 205,
+   "missed": []
+  },
+  {
+   "rule": "test-run-removed",
+   "copies": 63,
+   "caught": 32,
+   "missed": [
+    {
+     "repo": "ai-first-company",
+     "sha": "962be238069325aa96337b6ea8c8f0e5f825c887",
+     "path": ".github/workflows/gate.yml",
+     "why": "no finding"
+    },
+    {
+     "repo": "fall-os",
+     "sha": "f588c0cf9e9f67e029ce6f2f254e312b792507c6",
+     "path": ".github/workflows/witness.yml",
+     "why": "no finding"
+    },
+    {
+     "repo": "fall-os",
+     "sha": "c60bd34657b72686d508fa8ea2cf0bc9c8ba29f3",
+     "path": ".github/workflows/witness.yml",
+     "why": "no finding"
+    },
+    {
+     "repo": "fall-os",
+     "sha": "8cad91b3cbaf5c3062c2cd16861b70c330ea896d",
+     "path": ".github/workflows/witness.yml",
+     "why": "no finding"
+    },
+    {
+     "repo": "fall-os",
+     "sha": "1af0a79803294ee16a1c98ba33b6a6bf37ea7bea",
+     "path": ".github/workflows/witness.yml",
+     "why": "no finding"
+    }
+   ]
+  },
+  {
+   "rule": "threshold-lowered",
+   "copies": 212,
+   "caught": 212,
+   "missed": []
+  },
+  {
+   "rule": "check-turned-off",
+   "copies": 212,
+   "caught": 212,
+   "missed": []
+  },
+  {
+   "rule": "test-script-noop",
+   "copies": 45,
+   "caught": 45,
+   "missed": []
+  },
+  {
+   "rule": "test-file-deleted",
+   "copies": 330,
+   "caught": 330,
+   "missed": []
+  },
+  {
+   "rule": "test-moved-out",
+   "copies": 330,
+   "caught": 330,
+   "missed": []
+  },
+  {
+   "rule": "unreadable-binary",
+   "copies": 330,
+   "caught": 330,
+   "missed": []
+  }
+ ],
+ "copies": 2857,
+ "caught": 2819
+}

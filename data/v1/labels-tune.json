@@ -1,0 +1,39 @@
+{
+ "kind": "kar-scopeguard.labels",
+ "half": "tune",
+ "how": "Every high finding on the tuning half was read by hand in its commit. The first pass of the rules flagged 41 tuning commits; reading them found five patterns of false alarm (a bare fit() call read as Jasmine's focus marker, equal(x, true) to ok(x) read as loosening, prose in a baseline file, capture-then-check after || true, and a test loop replacing three explicit gate lines). The rules were fixed for those before the held-out half was opened. These labels cover what the final rules still flag.",
+ "items": [
+  {
+   "repo": "fallscrub",
+   "sha": "ed35543f51b1f1b5a88dd0878acf07a489f7a545",
+   "rule": "unreadable-binary",
+   "path": "scrub.test.mjs",
+   "label": "cannot read",
+   "why": "The test file holds NUL bytes on purpose (it tests a scrubber), so git stores it as binary and its lines cannot be read. Flagged instead of passed."
+  },
+  {
+   "repo": "fallscrub",
+   "sha": "ba8849ae01a7502c2ef00ad6910ff7c15041592c",
+   "rule": "unreadable-binary",
+   "path": "scrub.test.mjs",
+   "label": "cannot read",
+   "why": "The test file holds NUL bytes on purpose (it tests a scrubber), so git stores it as binary and its lines cannot be read. Flagged instead of passed."
+  },
+  {
+   "repo": "fallscrub",
+   "sha": "81df516320ec4f7d79de0b1a6946227ad0d31991",
+   "rule": "unreadable-binary",
+   "path": "scrub.test.mjs",
+   "label": "cannot read",
+   "why": "The test file holds NUL bytes on purpose (it tests a scrubber), so git stores it as binary and its lines cannot be read. Flagged instead of passed."
+  },
+  {
+   "repo": "fallscrub",
+   "sha": "41e41897abccb2b7a12e1459c08db4a06bb5830b",
+   "rule": "unreadable-binary",
+   "path": "scrub.test.mjs",
+   "label": "cannot read",
+   "why": "The test file holds NUL bytes on purpose (it tests a scrubber), so git stores it as binary and its lines cannot be read. Flagged instead of passed."
+  }
+ ]
+}

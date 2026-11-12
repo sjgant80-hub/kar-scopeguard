@@ -1,0 +1,717 @@
+[
+ {
+  "d": "acg-autopilot",
+  "repo": "acg-autopilot",
+  "half": "tune"
+ },
+ {
+  "d": "agent-proof",
+  "repo": "agent-proof",
+  "half": "held"
+ },
+ {
+  "d": "ai-first-company",
+  "repo": "ai-first-company",
+  "half": "held"
+ },
+ {
+  "d": "ai-geo-kit",
+  "repo": "ai-geo-kit",
+  "half": "tune"
+ },
+ {
+  "d": "ai-native-gap",
+  "repo": "ai-native-gap",
+  "half": "held"
+ },
+ {
+  "d": "ai-nativesolutions",
+  "repo": "ai-nativesolutions",
+  "half": "held"
+ },
+ {
+  "d": "bes-inward",
+  "repo": "bes-inward",
+  "half": "held"
+ },
+ {
+  "d": "bot-team-kit",
+  "repo": "bot-team-kit",
+  "half": "tune"
+ },
+ {
+  "d": "break-it",
+  "repo": "break-it",
+  "half": "tune"
+ },
+ {
+  "d": "bred-minds",
+  "repo": "bred-minds",
+  "half": "held"
+ },
+ {
+  "d": "build-broadcast",
+  "repo": "build-broadcast",
+  "half": "held"
+ },
+ {
+  "d": "build-geometry",
+  "repo": "build-geometry",
+  "half": "held"
+ },
+ {
+  "d": "chaff",
+  "repo": "chaff",
+  "half": "tune"
+ },
+ {
+  "d": "chip-immune",
+  "repo": "chip-immune",
+  "half": "tune"
+ },
+ {
+  "d": "code-rsi",
+  "repo": "code-rsi",
+  "half": "held"
+ },
+ {
+  "d": "copy-gate",
+  "repo": "copy-gate",
+  "half": "tune"
+ },
+ {
+  "d": "couple-gate",
+  "repo": "couple-gate",
+  "half": "held"
+ },
+ {
+  "d": "crossover-gate",
+  "repo": "crossover-gate",
+  "half": "held"
+ },
+ {
+  "d": "csv-forge",
+  "repo": "csv-forge",
+  "half": "tune"
+ },
+ {
+  "d": "daily-prompt",
+  "repo": "daily-prompt",
+  "half": "tune"
+ },
+ {
+  "d": "dex-frontier",
+  "repo": "dex-frontier",
+  "half": "tune"
+ },
+ {
+  "d": "didy-arena",
+  "repo": "didy-arena",
+  "half": "held"
+ },
+ {
+  "d": "didy-kernels",
+  "repo": "didy-kernels",
+  "half": "held"
+ },
+ {
+  "d": "digi-card",
+  "repo": "kardlings",
+  "half": "held"
+ },
+ {
+  "d": "dream-gate",
+  "repo": "dream-gate",
+  "half": "held"
+ },
+ {
+  "d": "estate-attest",
+  "repo": "estate-attest",
+  "half": "tune"
+ },
+ {
+  "d": "estate-nest",
+  "repo": "estate-nest",
+  "half": "tune"
+ },
+ {
+  "d": "everything-factory",
+  "repo": "everything-factory",
+  "half": "held"
+ },
+ {
+  "d": "fall-architect",
+  "repo": "fall-architect",
+  "half": "tune"
+ },
+ {
+  "d": "fall-euaiact",
+  "repo": "fall-euaiact",
+  "half": "tune"
+ },
+ {
+  "d": "fall-kit",
+  "repo": "fall-kit",
+  "half": "tune"
+ },
+ {
+  "d": "fall-os",
+  "repo": "fall-os",
+  "half": "held"
+ },
+ {
+  "d": "fall-prompt-gate",
+  "repo": "fall-prompt-gate",
+  "half": "tune"
+ },
+ {
+  "d": "fall-registry",
+  "repo": "fall-registry",
+  "half": "tune"
+ },
+ {
+  "d": "fall-remember",
+  "repo": "fall-remember",
+  "half": "held"
+ },
+ {
+  "d": "fallaccount-trades",
+  "repo": "fallaccount-trades",
+  "half": "held"
+ },
+ {
+  "d": "fallback",
+  "repo": "fallback",
+  "half": "held"
+ },
+ {
+  "d": "fallboot",
+  "repo": "fallboot",
+  "half": "held"
+ },
+ {
+  "d": "fallbrain",
+  "repo": "fallbrain",
+  "half": "tune"
+ },
+ {
+  "d": "fallcorp",
+  "repo": "fallcorp",
+  "half": "held"
+ },
+ {
+  "d": "fallcorp-demo",
+  "repo": "fallcorp-demo",
+  "half": "tune"
+ },
+ {
+  "d": "fallflow",
+  "repo": "fallflow",
+  "half": "held"
+ },
+ {
+  "d": "fallforce",
+  "repo": "fallforce",
+  "half": "tune"
+ },
+ {
+  "d": "fallforge",
+  "repo": "fallforge",
+  "half": "held"
+ },
+ {
+  "d": "fallforge-catalogue",
+  "repo": "fallforge-catalogue",
+  "half": "tune"
+ },
+ {
+  "d": "fallforge-factory",
+  "repo": "fallforge-factory",
+  "half": "tune"
+ },
+ {
+  "d": "fallforge-gate",
+  "repo": "fallforge-gate",
+  "half": "held"
+ },
+ {
+  "d": "fallforge-mesh",
+  "repo": "fallforge-mesh",
+  "half": "held"
+ },
+ {
+  "d": "fallforge-mint",
+  "repo": "fallforge-mint",
+  "half": "held"
+ },
+ {
+  "d": "fallforge-store",
+  "repo": "fallforge-store",
+  "half": "held"
+ },
+ {
+  "d": "fallforgecell",
+  "repo": "fallforgecell",
+  "half": "tune"
+ },
+ {
+  "d": "fallforgemint",
+  "repo": "fallforgemint",
+  "half": "held"
+ },
+ {
+  "d": "fallforgemint-rerun",
+  "repo": "fallforgemint-rerun",
+  "half": "tune"
+ },
+ {
+  "d": "fallgarden",
+  "repo": "fallgarden",
+  "half": "held"
+ },
+ {
+  "d": "fallgravity",
+  "repo": "fallgravity",
+  "half": "tune"
+ },
+ {
+  "d": "fallkard",
+  "repo": "sovereign-node",
+  "half": "tune"
+ },
+ {
+  "d": "fallkard-forge",
+  "repo": "fallkard-forge",
+  "half": "held"
+ },
+ {
+  "d": "falllearn",
+  "repo": "falllearn",
+  "half": "tune"
+ },
+ {
+  "d": "falllink",
+  "repo": "falllink",
+  "half": "held"
+ },
+ {
+  "d": "fallnode",
+  "repo": "fallnode",
+  "half": "held"
+ },
+ {
+  "d": "fallroom",
+  "repo": "fallroom",
+  "half": "tune"
+ },
+ {
+  "d": "fallrouter",
+  "repo": "fallrouter",
+  "half": "held"
+ },
+ {
+  "d": "fallscrub",
+  "repo": "fallscrub",
+  "half": "tune"
+ },
+ {
+  "d": "fallseed-compliance",
+  "repo": "fallseed-compliance",
+  "half": "held"
+ },
+ {
+  "d": "fallshell",
+  "repo": "fallshell",
+  "half": "tune"
+ },
+ {
+  "d": "fallskin",
+  "repo": "fallskin",
+  "half": "held"
+ },
+ {
+  "d": "fallworld",
+  "repo": "fallworld",
+  "half": "held"
+ },
+ {
+  "d": "federated-dreaming",
+  "repo": "federated-dreaming",
+  "half": "tune"
+ },
+ {
+  "d": "geometric-defence",
+  "repo": "geometric-defence",
+  "half": "tune"
+ },
+ {
+  "d": "geometric-ladder",
+  "repo": "geometric-ladder",
+  "half": "held"
+ },
+ {
+  "d": "glampos",
+  "repo": "glampos",
+  "half": "tune"
+ },
+ {
+  "d": "glass-company",
+  "repo": "glass-company",
+  "half": "held"
+ },
+ {
+  "d": "hybrid-gate",
+  "repo": "hybrid-gate",
+  "half": "held"
+ },
+ {
+  "d": "immune-exchange",
+  "repo": "immune-exchange",
+  "half": "tune"
+ },
+ {
+  "d": "kar-anchor",
+  "repo": "kar-anchor",
+  "half": "tune"
+ },
+ {
+  "d": "kar-benfordgap",
+  "repo": "kar-benfordgap",
+  "half": "tune"
+ },
+ {
+  "d": "kar-build-hub",
+  "repo": "kar-hub",
+  "half": "held"
+ },
+ {
+  "d": "kar-build5",
+  "repo": "kar-glyphguard",
+  "half": "tune"
+ },
+ {
+  "d": "kar-build6",
+  "repo": "kar-shingle",
+  "half": "tune"
+ },
+ {
+  "d": "kar-build7",
+  "repo": "kar-canon",
+  "half": "held"
+ },
+ {
+  "d": "kar-build8",
+  "repo": "kar-tally",
+  "half": "held"
+ },
+ {
+  "d": "kar-citelock",
+  "repo": "kar-citelock",
+  "half": "held"
+ },
+ {
+  "d": "kar-conform",
+  "repo": "kar-conform",
+  "half": "tune"
+ },
+ {
+  "d": "kar-foldcycle",
+  "repo": "kar-foldcycle",
+  "half": "tune"
+ },
+ {
+  "d": "kar-foldsignature",
+  "repo": "kar-foldsignature",
+  "half": "tune"
+ },
+ {
+  "d": "kar-hysteresis-gate",
+  "repo": "kar-hysteresis-gate",
+  "half": "held"
+ },
+ {
+  "d": "kar-lessons-spiral",
+  "repo": "kar-lessons-spiral",
+  "half": "held"
+ },
+ {
+  "d": "kar-mind",
+  "repo": "kar-mind",
+  "half": "tune"
+ },
+ {
+  "d": "kar-passport",
+  "repo": "kar-passport",
+  "half": "tune"
+ },
+ {
+  "d": "kar-pixel-cost",
+  "repo": "kar-pixel-cost",
+  "half": "tune"
+ },
+ {
+  "d": "kar-pixelfold",
+  "repo": "kar-pixelfold",
+  "half": "held"
+ },
+ {
+  "d": "kar-spendwall",
+  "repo": "kar-spendwall",
+  "half": "held"
+ },
+ {
+  "d": "kar-veil",
+  "repo": "kar-veil",
+  "half": "tune"
+ },
+ {
+  "d": "kar-voice",
+  "repo": "kar-voice",
+  "half": "held"
+ },
+ {
+  "d": "kar-warden",
+  "repo": "kar-warden",
+  "half": "tune"
+ },
+ {
+  "d": "kar-wisp",
+  "repo": "kar-wisp",
+  "half": "held"
+ },
+ {
+  "d": "kcc-mesh",
+  "repo": "kcc-mesh",
+  "half": "tune"
+ },
+ {
+  "d": "konomi-design-kit",
+  "repo": "konomi-design-kit",
+  "half": "tune"
+ },
+ {
+  "d": "konomi-skins",
+  "repo": "konomi-skins",
+  "half": "tune"
+ },
+ {
+  "d": "konomi-slm",
+  "repo": "konomi-slm",
+  "half": "tune"
+ },
+ {
+  "d": "KonomiStandard",
+  "repo": "KonomiStandard",
+  "half": "held"
+ },
+ {
+  "d": "liveware",
+  "repo": "liveware",
+  "half": "held"
+ },
+ {
+  "d": "living-crystal",
+  "repo": "living-crystal",
+  "half": "tune"
+ },
+ {
+  "d": "living-seed",
+  "repo": "living-seed",
+  "half": "tune"
+ },
+ {
+  "d": "memory-keep",
+  "repo": "memory-keep",
+  "half": "held"
+ },
+ {
+  "d": "mesh-governance",
+  "repo": "mesh-governance",
+  "half": "held"
+ },
+ {
+  "d": "mesh-self",
+  "repo": "mesh-self",
+  "half": "held"
+ },
+ {
+  "d": "mesh-share",
+  "repo": "mesh-share",
+  "half": "held"
+ },
+ {
+  "d": "meshos",
+  "repo": "meshos",
+  "half": "held"
+ },
+ {
+  "d": "mint-a-node",
+  "repo": "mint-a-node",
+  "half": "tune"
+ },
+ {
+  "d": "mint-an-app",
+  "repo": "mint-an-app",
+  "half": "tune"
+ },
+ {
+  "d": "nested-fabric",
+  "repo": "nested-fabric",
+  "half": "tune"
+ },
+ {
+  "d": "nexus-drive",
+  "repo": "nexus-drive",
+  "half": "held"
+ },
+ {
+  "d": "no-fixed-self",
+  "repo": "no-fixed-self",
+  "half": "tune"
+ },
+ {
+  "d": "offspring",
+  "repo": "offspring",
+  "half": "tune"
+ },
+ {
+  "d": "pattern-libraries",
+  "repo": "pattern-libraries",
+  "half": "held"
+ },
+ {
+  "d": "perimeter",
+  "repo": "perimeter",
+  "half": "tune"
+ },
+ {
+  "d": "perimeter-post",
+  "repo": "perimeter-post",
+  "half": "tune"
+ },
+ {
+  "d": "pixelwhisperer",
+  "repo": "pixelwhisperer",
+  "half": "held"
+ },
+ {
+  "d": "plainsight",
+  "repo": "plainsight",
+  "half": "tune"
+ },
+ {
+  "d": "post-proof",
+  "repo": "post-proof",
+  "half": "held"
+ },
+ {
+  "d": "proven-shelf",
+  "repo": "proven-shelf",
+  "half": "tune"
+ },
+ {
+  "d": "seed-laptop",
+  "repo": "seed-laptop",
+  "half": "held"
+ },
+ {
+  "d": "seed-library",
+  "repo": "seed-library",
+  "half": "held"
+ },
+ {
+  "d": "self-audit",
+  "repo": "self-audit",
+  "half": "held"
+ },
+ {
+  "d": "sentinel",
+  "repo": "sentinel",
+  "half": "tune"
+ },
+ {
+  "d": "settling-cell",
+  "repo": "settling-cell",
+  "half": "tune"
+ },
+ {
+  "d": "si-didy-cascade",
+  "repo": "si-didy-cascade",
+  "half": "tune"
+ },
+ {
+  "d": "si-didy-cascade-sdk",
+  "repo": "si-didy-cascade-sdk",
+  "half": "held"
+ },
+ {
+  "d": "slm-suite",
+  "repo": "slm-suite",
+  "half": "tune"
+ },
+ {
+  "d": "sovereign-enterprise",
+  "repo": "sovereign-enterprise",
+  "half": "tune"
+ },
+ {
+  "d": "spore-card",
+  "repo": "spore-card",
+  "half": "tune"
+ },
+ {
+  "d": "steward-gate",
+  "repo": "steward-gate",
+  "half": "tune"
+ },
+ {
+  "d": "structural-alignment",
+  "repo": "structural-alignment",
+  "half": "tune"
+ },
+ {
+  "d": "structure-beats-scale",
+  "repo": "structure-beats-scale",
+  "half": "tune"
+ },
+ {
+  "d": "the-assembly",
+  "repo": "the-assembly",
+  "half": "held"
+ },
+ {
+  "d": "the-dreamer",
+  "repo": "the-dreamer",
+  "half": "tune"
+ },
+ {
+  "d": "the-toll",
+  "repo": "the-toll",
+  "half": "held"
+ },
+ {
+  "d": "twelve-powers",
+  "repo": "twelve-powers",
+  "half": "tune"
+ },
+ {
+  "d": "ui-gate",
+  "repo": "ui-gate",
+  "half": "tune"
+ },
+ {
+  "d": "watch-dream-remember",
+  "repo": "watch-dream-remember",
+  "half": "tune"
+ },
+ {
+  "d": "wishwood",
+  "repo": "wishwood",
+  "half": "held"
+ },
+ {
+  "d": "witness",
+  "repo": "witness",
+  "half": "held"
+ }
+]

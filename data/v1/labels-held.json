@@ -1,0 +1,143 @@
+{
+ "kind": "kar-scopeguard.labels",
+ "half": "held",
+ "how": "Every high finding on the held-out half, read by hand in its commit after the kernel was frozen (9e580e8). The half was read once.",
+ "items": [
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-chrome.pdf",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-lossless.webp",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-lossy.webp",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-pymupdf-objstm.pdf",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-reportlab.pdf",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev.gif",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev.jpg",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev.png",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "sha": "5a1ffba13c06eb0e4702f8eb7468bbf53c3281ea",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/landing.yml",
+   "label": "false alarm",
+   "why": "A new, monthly reporting workflow that runs the gate on outside code (vercel/ms) and is documented as deliberately not failing the job, because a surviving mutant there is a finding to publish. It weakens no existing check."
+  }
+ ]
+}
