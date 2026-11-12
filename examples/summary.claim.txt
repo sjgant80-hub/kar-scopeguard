@@ -1,0 +1,1 @@
+I only changed src/auth/session.js to fix the timeout.

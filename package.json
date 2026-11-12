@@ -1,0 +1,15 @@
+{
+  "name": "kar-scopeguard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Checks a code change made by an AI coding agent: did it stay inside the files it was allowed to touch, and did it make the tests easier to pass instead of making the code right? Deterministic, no LLM judge, no network.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "agensi": { "allow": [] },
+  "scripts": {
+    "test": "node --test kernel.test.mjs cli.test.mjs skill.test.mjs skillcli.test.mjs checkcase.test.mjs page.test.mjs",
+    "build": "node tools/build-skill.mjs && node tools/build-page.mjs",
+    "zip": "node tools/make-zip.mjs"
+  }
+}

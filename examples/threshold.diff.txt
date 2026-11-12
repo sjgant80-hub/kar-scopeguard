@@ -1,0 +1,15 @@
+diff --git a/jest.config.js b/jest.config.js
+index 8c7b6a5..2f1e0d9 100644
+--- a/jest.config.js
++++ b/jest.config.js
+@@ -2,8 +2,8 @@ module.exports = {
+   testEnvironment: 'node',
+   coverageThreshold: {
+     global: {
+-      branches: 90,
+-      lines: 90,
++      branches: 60,
++      lines: 60,
+     },
+   },
+ };

@@ -1,0 +1,82 @@
+{
+  "verdict": "flagged",
+  "ok": true,
+  "v": "scopeguard/1.1",
+  "counts": {
+    "files": 3,
+    "high": 2,
+    "review": 2,
+    "added": 3,
+    "removed": 3
+  },
+  "files": [
+    {
+      "path": "src/auth/form.js",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "source",
+      "scope": "allowed",
+      "binary": false,
+      "added": 1,
+      "removed": 1
+    },
+    {
+      "path": "src/billing/rates.js",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "source",
+      "scope": "outside",
+      "binary": false,
+      "added": 1,
+      "removed": 1
+    },
+    {
+      "path": "package.json",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "gate",
+      "scope": "outside",
+      "binary": false,
+      "added": 1,
+      "removed": 1
+    }
+  ],
+  "findings": [
+    {
+      "rule": "outside-scope",
+      "severity": "high",
+      "path": "src/billing/rates.js",
+      "line": null,
+      "side": "file",
+      "text": "src/billing/rates.js"
+    },
+    {
+      "rule": "outside-scope",
+      "severity": "high",
+      "path": "package.json",
+      "line": null,
+      "side": "file",
+      "text": "package.json"
+    },
+    {
+      "rule": "unclaimed-change",
+      "severity": "review",
+      "path": "src/billing/rates.js",
+      "line": null,
+      "side": "file",
+      "text": "not named in the summary"
+    },
+    {
+      "rule": "unclaimed-change",
+      "severity": "review",
+      "path": "package.json",
+      "line": null,
+      "side": "file",
+      "text": "not named in the summary"
+    }
+  ],
+  "fingerprints": {
+    "input": "3f0cc94b28d422d381e2243d744b2bec95734e50b068cc26b63622fe9da62b58",
+    "result": "46a342d5580f973acd810da92167d7fe632611ee786e13d375f9f2aa932e4009"
+  }
+}

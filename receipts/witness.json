@@ -1,0 +1,56 @@
+{
+ "kind": "kar-scopeguard.witness",
+ "v": 1,
+ "at": "2026-11-12",
+ "witness": {
+  "tag": "bbe3d35 (local run, witness 0.7.0; CI re-runs witness v0.6 on every push)",
+  "sha256": "54ee52fd685b67d4bcb19609b65a25fc24b040a1aaf08bc7017bad852b7d9fbb"
+ },
+ "gates": [
+  {
+   "file": "kernel.mjs",
+   "sha256": "b73a4f42d63dda586e3f4014d7743c03210e5c007f287fad85ca893b20ea7fa9",
+   "tests": "node --test kernel.test.mjs",
+   "testsSha256": "2112adf7858b0af6b7a86de937167517cc3f017edcfaca9ae8db45c2821bb505",
+   "total": 433,
+   "killed": 433,
+   "survived": 0,
+   "baselined": 0,
+   "clean": true
+  },
+  {
+   "file": "cli.mjs",
+   "sha256": "e97ffadfb2845de2534b6d8c83a98564ad668773ab01f1f10c79d1d928427844",
+   "tests": "node --test cli.test.mjs",
+   "testsSha256": "03af0a3f50a9e96ad538d0676fd7168bfdea657211a87770337987a3b4d98551",
+   "total": 55,
+   "killed": 55,
+   "survived": 0,
+   "baselined": 0,
+   "clean": true
+  },
+  {
+   "file": "skillcli.mjs",
+   "sha256": "e0f24924d44eb25fa496b8597308db2a0a219419300f67fd5e2eafe55227de35",
+   "tests": "node --test skillcli.test.mjs",
+   "testsSha256": "8c797a1063f238476eb633ea76243a57fbcfd57de84dbbfaeb94b8d223737ebb",
+   "total": 17,
+   "killed": 17,
+   "survived": 0,
+   "baselined": 0,
+   "clean": true
+  },
+  {
+   "file": "checkcase.mjs",
+   "sha256": "efa87fde95d53d5204bad735c6d44c6e835c9055787c7a434cdbf4315542aa2e",
+   "tests": "node --test checkcase.test.mjs",
+   "testsSha256": "bebe4d7cbe54d794ae58b5194849d0d77763b8d982dac8dd381612d1ecfa1bb0",
+   "total": 16,
+   "killed": 16,
+   "survived": 0,
+   "baselined": 0,
+   "clean": true
+  }
+ ],
+ "history": "Kernel v1 was frozen at 9e580e8 after three gate runs (369/423, then 412/413: the one survivor exposed a real blind spot, settings past the first true/false on a line, fixed; then 412/412). v1.1 fixes three blind spots the planted weakenings found and is gated again here. Nothing is baselined anywhere."
+}

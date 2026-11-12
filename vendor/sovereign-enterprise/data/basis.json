@@ -1,0 +1,193 @@
+{
+  "about": "Every external figure the cost case uses, with its source. Nothing in the white paper is typed — the kernel (src/office.mjs) computes from this file and data/office.json. Checked 2026-10-14 unless noted; entries marked 'via estate basis' were sourced in fallfloor-enterprise/prices.lock.json on 2026-09-29/30.",
+  "currency": "GBP, ex-VAT (a VAT-registered business reclaims VAT on hardware; SaaS seats are quoted ex-VAT)",
+  "wageMedianHourly": {
+    "value": 19.67,
+    "unit": "GBP per hour",
+    "what": "ONS ASHE 2025: median hourly earnings excluding overtime, full-time employees, UK",
+    "source": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2025",
+    "via": "estate basis 2026-09-29"
+  },
+  "seniorSalary": {
+    "value": 56438,
+    "unit": "GBP per year",
+    "what": "ONS ASHE 2025 Table 14.7a, median gross annual pay, full-time, SOC 2132 IT managers — used for every senior / AI-native lead role",
+    "source": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/occupation4digitsoc2010ashetable14",
+    "via": "estate basis 2026-09-29"
+  },
+  "employerNiRate": {
+    "value": 0.15,
+    "what": "Employer Class 1 National Insurance above the secondary threshold, 2026 to 2027",
+    "source": "https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2026-to-2027",
+    "also": "https://www.iris.co.uk/blog/payroll/employer-national-insurance-contributions-guide/"
+  },
+  "employerNiThreshold": {
+    "value": 5000,
+    "unit": "GBP per year",
+    "what": "Secondary threshold, 2026 to 2027 (£96 a week, £417 a month, £5,000 a year)",
+    "source": "https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2026-to-2027"
+  },
+  "pensionEmployerRate": {
+    "value": 0.03,
+    "what": "Automatic enrolment: minimum employer contribution on qualifying earnings",
+    "source": "https://www.thepensionsregulator.gov.uk/employers/new-employers/im-an-employer-who-has-to-provide-a-pension/declare-your-compliance/ongoing-duties-for-employers/earnings-thresholds",
+    "also": "https://www.moorepay.co.uk/payroll-hr-rates/automatic-enrolment/"
+  },
+  "pensionQeLower": {
+    "value": 6240,
+    "unit": "GBP per year",
+    "what": "Lower level of qualifying earnings, 2026/27",
+    "source": "https://www.gov.uk/government/publications/review-of-the-automatic-enrolment-earnings-trigger-and-qualifying-earnings-band-for-202627/review-of-the-automatic-enrolment-earnings-trigger-and-qualifying-earnings-band-for-202627"
+  },
+  "pensionQeUpper": {
+    "value": 50270,
+    "unit": "GBP per year",
+    "what": "Upper level of qualifying earnings, 2026/27",
+    "source": "https://www.gov.uk/government/publications/review-of-the-automatic-enrolment-earnings-trigger-and-qualifying-earnings-band-for-202627/review-of-the-automatic-enrolment-earnings-trigger-and-qualifying-earnings-band-for-202627"
+  },
+  "cpi": {
+    "value": 0.031,
+    "what": "UK CPI, 12 months to August 2026 — applied every year to pay, seats and electricity",
+    "source": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/august2026",
+    "via": "estate basis 2026-09-29"
+  },
+  "electricityPencePerKwh": {
+    "value": 24.51,
+    "what": "UK non-domestic electricity incl. Climate Change Levy, Q2 2026 (DESNZ Quarterly Energy Prices, Sept 2026)",
+    "source": "https://assets.publishing.service.gov.uk/media/6aba2810fe72ed1e2b02f0e7/Quarterly_Energy_Prices_September_2026.pdf",
+    "via": "estate basis 2026-09-29"
+  },
+  "fxGbpPerUsd": {
+    "value": 0.75396,
+    "what": "ECB reference rates 2026-09-28 (GBP 0.85785 / USD 1.1378 per euro)",
+    "source": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
+    "via": "estate basis 2026-09-29"
+  },
+  "vat": {
+    "value": 0.2,
+    "what": "UK standard rate of VAT",
+    "source": "https://www.gov.uk/vat-rates",
+    "via": "estate basis 2026-09-29"
+  },
+  "seat.crm": {
+    "value": 80,
+    "unit": "GBP per user per month",
+    "product": "Salesforce Pro Suite",
+    "source": "https://www.salesforce.com/uk/sales/pricing/",
+    "via": "estate basis 2026-09-30"
+  },
+  "seat.finance": {
+    "value": 161.5,
+    "unit": "GBP per user per month",
+    "product": "Microsoft Dynamics 365 Finance",
+    "source": "https://www.microsoft.com/en-gb/dynamics-365/products/finance/pricing",
+    "via": "estate basis 2026-09-30"
+  },
+  "seat.hr": {
+    "value": 103.8,
+    "unit": "GBP per user per month",
+    "product": "Microsoft Dynamics 365 Human Resources",
+    "source": "https://www.microsoft.com/en-gb/dynamics-365/products/human-resources/pricing",
+    "via": "estate basis 2026-09-30"
+  },
+  "seat.copilot": {
+    "value": 23.1,
+    "unit": "GBP per user per month",
+    "product": "Microsoft 365 Copilot (enterprise)",
+    "source": "https://www.microsoft.com/en-gb/microsoft-365-copilot/enterprise",
+    "via": "estate basis 2026-09-29"
+  },
+  "frontier": {
+    "inPerM": 2,
+    "outPerM": 10,
+    "unit": "USD per million tokens",
+    "product": "Claude Sonnet 5 (API)",
+    "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "via": "estate basis 2026-09-29"
+  },
+  "voicePerMinute": {
+    "value": 0.08,
+    "unit": "USD per minute",
+    "product": "ElevenLabs conversational AI agents (Business, per-minute rate; the agent's language model runs on our own models)",
+    "source": "https://elevenlabs.io/conversational-ai"
+  },
+  "aiBox": {
+    "product": "NVIDIA DGX Spark (GB10, 128 GB unified memory, 4 TB)",
+    "priceIncVat": 4673.35,
+    "priceSource": "https://shop.teqex.co.uk/nvidia-dgx-spark-gb10-128-gb-lpddr5x-sdram-4-tb-ssd-dgx-os-workstation-gold-940-54242-0005-000.html",
+    "priceNote": "current UK listing (launch price was about £3,700 at Scan / Novatech; we use the higher current figure)",
+    "watts": 240,
+    "wattsSource": "https://docs.nvidia.com/dgx/dgx-spark/hardware.html",
+    "decodeTokPerSec": 368,
+    "prefillTokPerSec": 7950,
+    "throughputSource": "https://www.lmsys.org/blog/2025-10-13-nvidia-dgx-spark",
+    "throughputNote": "LMSYS, SGLang: aggregate decode 368 tokens/s at batch 32, prefill ~7,950 tokens/s"
+  },
+  "hub": {
+    "product": "Apple Mac mini, M4 Pro (12-core CPU, 24 GB, 512 GB)",
+    "priceIncVat": 1399,
+    "priceSource": "https://everymac.com/global-mac-prices/all-msrp-mac-mini-prices-in-united-kingdom.html",
+    "also": "https://pricespy.co.uk/s/mac-mini-m4-pro/",
+    "watts": 155,
+    "wattsSource": "https://www.apple.com/za/mac-mini/specs"
+  },
+  "laptopExtraWatts": {
+    "value": 15,
+    "what": "Intel Core i7-1255U Processor Base Power — the extra draw of in-browser AI on a laptop already in use",
+    "source": "https://www.intel.com/content/www/us/en/products/sku/226259/intel-core-i71255u-processor-12m-cache-up-to-4-70-ghz/specifications.html",
+    "via": "estate basis 2026-09-29"
+  },
+  "awsGpuLondon": {
+    "usdPerHour": 8.944,
+    "unit": "USD per instance-hour",
+    "product": "AWS EC2 p5.4xlarge (1 x NVIDIA H100 80 GB HBM3, 16 vCPU, 256 GiB), Linux on-demand, EU (London) — the dedicated cloud GPU that runs the same open-model class as the AI box",
+    "source": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/EU%20(London)/Linux/index.json",
+    "specSource": "https://aws.amazon.com/ec2/instance-types/p5/",
+    "via": "AWS price file published 2026-10-12, read 2026-10-14"
+  },
+  "bedrockGptOss120b": {
+    "inPerM": 0.23,
+    "outPerM": 0.93,
+    "unit": "USD per million tokens",
+    "product": "Amazon Bedrock — OpenAI gpt-oss-120b, Standard on-demand, EU (London)",
+    "source": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonBedrock/20261014033016/eu-west-2/index.json",
+    "via": "AWS Price List API, published 2026-10-14, read 2026-10-14 (EUW2-gpt-oss-120b-input-tokens $0.00023 / output-tokens $0.00093 per 1K)"
+  },
+  "hoursPerYear": {
+    "value": 8760,
+    "what": "an always-on service: 24 hours x 365 days"
+  },
+  "redundancy": {
+    "weeklyCap": 751,
+    "capFrom": "2026-04-06",
+    "maxServiceYears": 20,
+    "minServiceYears": 2,
+    "weeksPerYear": {
+      "under22": 0.5,
+      "from22to40": 1,
+      "from41": 1.5
+    },
+    "what": "UK statutory redundancy pay: half a week's pay per full year of service under 22, one week from 22 to 40, one and a half weeks from 41; service capped at 20 years; weekly pay capped at £751 for redundancies on or after 6 April 2026 (maximum £22,530); needs 2 years' service",
+    "source": "https://www.gov.uk/redundancy-your-rights/redundancy-pay",
+    "via": "read 2026-10-14"
+  },
+  "statutoryNotice": {
+    "what": "Statutory minimum notice: one week between one month and two years' service; one week per full year from 2 to 12 years; 12 weeks at 12 years or more",
+    "source": "https://www.gov.uk/redundancy-your-rights/notice-periods",
+    "via": "read 2026-10-14"
+  },
+  "collectiveConsultation": {
+    "threshold": 20,
+    "days20to99": 30,
+    "days100plus": 45,
+    "what": "20 or more redundancies at one establishment within 90 days: consult for at least 30 days (20–99) or 45 days (100+) before the first dismissal, and notify the Redundancy Payments Service on form HR1 before consultation starts",
+    "source": "https://www.gov.uk/staff-redundant/redundancy-consultations",
+    "via": "read 2026-10-14"
+  },
+  "discountRateReal": {
+    "value": 0.035,
+    "what": "HM Treasury Green Book Social Time Preference Rate: 3.5% in real terms for years 1 to 30 of an appraisal — combined here with CPI to discount cash flows that rise with inflation",
+    "source": "https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026",
+    "via": "read 2026-10-14"
+  }
+}

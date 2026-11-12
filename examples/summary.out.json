@@ -1,0 +1,74 @@
+{
+  "verdict": "review",
+  "ok": true,
+  "v": "scopeguard/1.1",
+  "counts": {
+    "files": 3,
+    "high": 0,
+    "review": 3,
+    "added": 3,
+    "removed": 3
+  },
+  "files": [
+    {
+      "path": "src/auth/session.js",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "source",
+      "scope": "unscoped",
+      "binary": false,
+      "added": 1,
+      "removed": 1
+    },
+    {
+      "path": "test/auth/session.test.js",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "test",
+      "scope": "unscoped",
+      "binary": false,
+      "added": 1,
+      "removed": 1
+    },
+    {
+      "path": "config/security.json",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "source",
+      "scope": "unscoped",
+      "binary": false,
+      "added": 1,
+      "removed": 1
+    }
+  ],
+  "findings": [
+    {
+      "rule": "expected-changed",
+      "severity": "review",
+      "path": "test/auth/session.test.js",
+      "line": 4,
+      "side": "+",
+      "text": "expect(TIMEOUT_MINUTES).toBe(15); → expect(TIMEOUT_MINUTES).toBe(60);"
+    },
+    {
+      "rule": "unclaimed-change",
+      "severity": "review",
+      "path": "test/auth/session.test.js",
+      "line": null,
+      "side": "file",
+      "text": "not named in the summary"
+    },
+    {
+      "rule": "unclaimed-change",
+      "severity": "review",
+      "path": "config/security.json",
+      "line": null,
+      "side": "file",
+      "text": "not named in the summary"
+    }
+  ],
+  "fingerprints": {
+    "input": "d616772886d557787b774f67f79f6eaebcb644048160a9b7aebc48d0a897b8a0",
+    "result": "f756108c128011b9c36882e5ce98a90bbfc7aec43041c529673030e4ece5ec1d"
+  }
+}

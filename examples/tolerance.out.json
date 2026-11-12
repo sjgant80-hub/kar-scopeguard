@@ -1,0 +1,46 @@
+{
+  "verdict": "flagged",
+  "ok": true,
+  "v": "scopeguard/1.1",
+  "counts": {
+    "files": 1,
+    "high": 2,
+    "review": 0,
+    "added": 2,
+    "removed": 2
+  },
+  "files": [
+    {
+      "path": "tests/test_pricing.py",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "test",
+      "scope": "unscoped",
+      "binary": false,
+      "added": 2,
+      "removed": 2
+    }
+  ],
+  "findings": [
+    {
+      "rule": "tolerance-widened",
+      "severity": "high",
+      "path": "tests/test_pricing.py",
+      "line": 16,
+      "side": "+",
+      "text": "self.assertAlmostEqual(quote.monthly, 31.42, places=2) → self.assertAlmostEqual(quote.monthly, 31.42, places=0)"
+    },
+    {
+      "rule": "tolerance-widened",
+      "severity": "high",
+      "path": "tests/test_pricing.py",
+      "line": 19,
+      "side": "+",
+      "text": "np.testing.assert_allclose(loadings(), EXPECTED, rtol=1e-6) → np.testing.assert_allclose(loadings(), EXPECTED, rtol=0.5)"
+    }
+  ],
+  "fingerprints": {
+    "input": "0dbeb1553586412e36677eea8b9b39a127ad1aae215cd1343f9828cd96cf41fc",
+    "result": "22a6fcf2f00c4f2b95c0d05d3420ec140987ba05f230983e7b3ed1a837b88a30"
+  }
+}

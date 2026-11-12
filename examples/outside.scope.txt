@@ -1,0 +1,3 @@
+# the login task
+allow src/auth/**
+allow test/auth/**

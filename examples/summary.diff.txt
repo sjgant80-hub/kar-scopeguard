@@ -1,0 +1,30 @@
+diff --git a/src/auth/session.js b/src/auth/session.js
+index 6a5b4c3..0d9e8f7 100644
+--- a/src/auth/session.js
++++ b/src/auth/session.js
+@@ -1,3 +1,3 @@
+-export const TIMEOUT_MINUTES = 15;
++export const TIMEOUT_MINUTES = 60;
+ export function expired(started, now) {
+   return now - started > TIMEOUT_MINUTES * 60_000;
+diff --git a/test/auth/session.test.js b/test/auth/session.test.js
+index 3c2b1a0..9e8d7c6 100644
+--- a/test/auth/session.test.js
++++ b/test/auth/session.test.js
+@@ -2,5 +2,5 @@ import { expired, TIMEOUT_MINUTES } from '../../src/auth/session.js';
+
+ test('the timeout is short', () => {
+-  expect(TIMEOUT_MINUTES).toBe(15);
++  expect(TIMEOUT_MINUTES).toBe(60);
+ });
+
+diff --git a/config/security.json b/config/security.json
+index 1f0e2d3..7c6b5a4 100644
+--- a/config/security.json
++++ b/config/security.json
+@@ -1,4 +1,4 @@
+ {
+-  "requireMfa": true,
++  "requireMfa": false,
+   "lockoutAfter": 5
+ }

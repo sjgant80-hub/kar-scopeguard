@@ -1,0 +1,46 @@
+{
+  "verdict": "flagged",
+  "ok": true,
+  "v": "scopeguard/1.1",
+  "counts": {
+    "files": 1,
+    "high": 2,
+    "review": 0,
+    "added": 2,
+    "removed": 2
+  },
+  "files": [
+    {
+      "path": "jest.config.js",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "gate",
+      "scope": "unscoped",
+      "binary": false,
+      "added": 2,
+      "removed": 2
+    }
+  ],
+  "findings": [
+    {
+      "rule": "threshold-lowered",
+      "severity": "high",
+      "path": "jest.config.js",
+      "line": 5,
+      "side": "+",
+      "text": "branches: 90, → branches: 60,"
+    },
+    {
+      "rule": "threshold-lowered",
+      "severity": "high",
+      "path": "jest.config.js",
+      "line": 6,
+      "side": "+",
+      "text": "lines: 90, → lines: 60,"
+    }
+  ],
+  "fingerprints": {
+    "input": "8e6a454b71d3f1344aa25ab7ad7617bfe8bd3e624aa185b116408ddd431284ee",
+    "result": "64dc541f1d678d3a4d910b3215d738aab8a6479ca35889b3a2a792bb5466fb9c"
+  }
+}

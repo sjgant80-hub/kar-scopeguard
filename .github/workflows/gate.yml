@@ -1,0 +1,89 @@
+name: gate
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: kernel tests (every rule, every parser path, every refusal)
+        run: node --test kernel.test.mjs
+      - name: command line tests (exit codes, --git, the Claude Code hook)
+        run: |
+          git config --global user.email ci@example.invalid
+          git config --global user.name ci
+          node --test cli.test.mjs
+      - name: cost case tests (and the pinned sourced basis)
+        run: node --test checkcase.test.mjs
+      - name: page tests (the page runs the same kernel; its examples, rules table and measured figures match)
+        run: node --test page.test.mjs
+      - name: the page's measured block and the skill script are what their sources give
+        run: |
+          node tools/build-page.mjs --check
+          node tools/build-skill.mjs --check
+      - name: skill tests (the one-file script runs alone in an empty folder on every example)
+        run: |
+          node --test skill.test.mjs
+          node --test skillcli.test.mjs
+      - name: receipt matches the files it names
+        run: |
+          node -e "const c=require('crypto'),fs=require('fs');const w=JSON.parse(fs.readFileSync('receipts/witness.json'));let bad=0;for(const g of w.gates){const h=f=>c.createHash('sha256').update(fs.readFileSync(f)).digest('hex');const tf=g.tests.split(' ').pop();if(h(g.file)!==g.sha256||h(tf)!==g.testsSha256){console.error('receipt stale for '+g.file);bad=1}}process.exit(bad)"
+  scopeguard-on-itself:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: ScopeGuard checks this push (the Action, run on its own repository)
+        uses: ./
+  witness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: witness v0.6 mutation gate on the kernel (every mutant)
+        uses: sjgant80-hub/witness@v0.6
+        with:
+          files: kernel.mjs
+          test-command: node --test kernel.test.mjs
+          cap: 100000
+          node-version: 22
+          fuzz: kernel.mjs:audit kernel.mjs:parseDiff kernel.mjs:parseScope kernel.mjs:classify kernel.mjs:assertionShape kernel.mjs:claimedPaths kernel.mjs:globToRegExp kernel.mjs:unquotePath kernel.mjs:fingerprintInput kernel.mjs:fingerprintResult kernel.mjs:exitCode
+  witness-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git config --global user.email ci@example.invalid
+          git config --global user.name ci
+      - name: witness v0.6 mutation gate on the command line (every mutant)
+        uses: sjgant80-hub/witness@v0.6
+        with:
+          files: cli.mjs
+          test-command: node --test cli.test.mjs
+          cap: 100000
+          node-version: 22
+  witness-skillcli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: witness v0.6 mutation gate on the skill's command line (every mutant)
+        uses: sjgant80-hub/witness@v0.6
+        with:
+          files: skillcli.mjs
+          test-command: node --test skillcli.test.mjs
+          cap: 100000
+          node-version: 22
+  witness-checkcase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: witness v0.6 mutation gate on the cost case kernel (every mutant)
+        uses: sjgant80-hub/witness@v0.6
+        with:
+          files: checkcase.mjs
+          test-command: node --test checkcase.test.mjs
+          cap: 100000
+          node-version: 22
+          fuzz: checkcase.mjs:checkCase checkcase.mjs:figures

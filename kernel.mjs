@@ -7,7 +7,7 @@
 //
 // Pure and total: every exported function returns a value for any input and never throws.
 
-export const VERSION = 'scopeguard/1';
+export const VERSION = 'scopeguard/1.1';
 export const SCOPE_FILE = '.scopeguard';
 export const MAX_CHARS = 50_000_000;
 
@@ -377,6 +377,20 @@ const RUNNERS = [
   ['witness', /\/witness@|\bwitness(?:-bench)?\.mjs\b/],
 ];
 const runnerKinds = (s) => RUNNERS.filter(([, re]) => re.test(s)).map(([k]) => k);
+// the files a test command names: test files (a.test.mjs, a_spec.rb, test_a.py) and the file a mutation gate mutates.
+// Other files on the line (a script, the runner's own code) are not targets. A name built from a variable ($k) is not one.
+const TEST_FILE_RE = /(?:^|[^\w.$/-])(?:[\w.-]*\/)*((?:[\w-][\w.-]*?[._](?:test|spec)|test_[\w.-]+)\.(?:[cm]?[jt]sx?|py|go|rb|rs|java|kt))\b/g;
+const SOURCE_FILE_RE = /[\w*]\.(?:[cm]?[jt]sx?|py|go|rb|rs|java|kt)\b/;
+const MUTATE_RE = /\bmutate\s+["']?(?:[\w.-]*\/)*([\w-]+\.[cm]?[jt]sx?)\b/g;
+export const targetsOf = (s) => (typeof s === 'string' ? [...new Set([...s.matchAll(TEST_FILE_RE), ...s.matchAll(MUTATE_RE)].map((m) => m[1]))] : []);
+// a file pattern a test command runs (kards/*.test.mjs, test/**/*.spec.ts): its own target, kept only by the same
+// pattern or by a command that names nothing at all and so finds everything
+const GLOB_RE = /(?:^|[\s"'=])((?:[\w.-]*\/)*(?:\*\*\/)?[\w.-]*\*[\w.*-]*\.(?:[cm]?[jt]sx?|py|go|rb|rs))(?=$|[\s"',;)])/g;
+export const globsOf = (s) => (typeof s === 'string' ? [...new Set([...s.matchAll(GLOB_RE)].map((m) => m[1]))] : []);
+/** a target's stem, the name a shell loop would list: socket.test.mjs, socket.mjs and socket_spec.rb are all "socket" */
+export const stemOf = (file) => (typeof file === 'string' ? file.split(/[._](?:test|spec)\.|\./)[0] : '');
+const LOOP_RE = /\bfor\s+\w+\s+in\s/;
+export const hasWord = (s, w) => typeof s === 'string' && typeof w === 'string' && new RegExp('(?:^|[^\\w-])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:[^\\w-]|$)').test(s);
 // what a "|| true" line saves its output to (tee FILE, > FILE, VAR=$( ... )), so a later check on it can be seen
 function captureTargets(s) {
   const out = [];
@@ -617,32 +631,35 @@ function rulesForFile(f, cls, push) {
       const n = remText.get(k) || 0;
       if (n > 0) { remText.set(k, n - 1); commented++; push('assert-commented', x.nu, '+', x.s); }
     }
-    // an always-true assertion is high when the same file lost a real assertion in this change, else review
+    // an always-true assertion is high when its own hunk lost a real assertion (it replaced one), else review.
+    // v1.1: judged per hunk; v1 judged the whole file, so an identical line elsewhere could hide the replacement.
     const isTaut = (x) => !isComment(x.s) && NEUTER_RES.some((r) => r.test(x.s));
-    const realLost = unmatched(removed.filter((x) => isAssertion(x.s) && !isTaut(x)), added).length > 0;
-    for (const x of unmatched(added.filter(isTaut), removed)) push(realLost ? 'assert-neutered' : 'assert-always-true', x.nu, '+', x.s);
+    for (const h of f.hunks) {
+      const hAdd = h.lines.filter((x) => x.t === '+'); const hRem = h.lines.filter((x) => x.t === '-');
+      const realLost = unmatched(hRem.filter((x) => isAssertion(x.s) && !isTaut(x)), hAdd).length > 0;
+      for (const x of unmatched(hAdd.filter(isTaut), hRem)) push(realLost ? 'assert-neutered' : 'assert-always-true', x.nu, '+', x.s);
+    }
     for (const x of unmatched(added.filter((x) => !isComment(x.s) && SWALLOW_RES.some((r) => r.test(x.s))), removed)) push('swallowed-failure', x.nu, '+', x.s);
 
     // matcher-loosened and expected-changed: pair by subject across the file
     const remShapes = unmatched(removed, added).map((x) => ({ x, sh: assertionShape(x.s) })).filter((o) => o.sh);
     const addShapes = unmatched(added, removed).map((x) => ({ x, sh: assertionShape(x.s) })).filter((o) => o.sh);
     const overlap = (a, b) => a.sh.subjects.some((s) => b.sh.subjects.includes(s));
+    // v1.1: the exact check counts as still there only when the SAME check (same value, same expected arguments) was
+    // added back; v1 counted any exact check on the same value, so a generic value (r.why) hid a loosened check.
     const usedAdd = new Set();
+    const argsOf = (o) => o.sh.args.join('\u0000');
     for (const r of remShapes) {
       if (r.sh.strength !== 'strict') continue;
-      const stillStrict = addShapes.filter((a) => a.sh.strength === 'strict' && overlap(a, r));
-      if (stillStrict.length > 0) {
-        const same = stillStrict.find((a) => a.sh.matcher === r.sh.matcher && !usedAdd.has(a));
-        // a change only in a tolerance number belongs to tolerance-widened (or is a tightening), not to this rule
-        const tolOnly = same && shapeOf(same.x.s) === shapeOf(r.x.s) && tolOnlyChange(r.x.s, same.x.s);
-        if (same && !tolOnly && squash(same.x.s) !== squash(r.x.s) && same.sh.args.join('\u0000') !== r.sh.args.join('\u0000')) {
-          usedAdd.add(same);
-          push('expected-changed', same.x.nu, '+', r.x.s.trim() + '  →  ' + same.x.s.trim());
-        }
-        continue;
-      }
+      if (addShapes.some((a) => a.sh.strength === 'strict' && argsOf(a) === argsOf(r) && overlap(a, r))) continue;
       const loose = addShapes.find((a) => a.sh.strength === 'loose' && overlap(a, r) && !usedAdd.has(a));
-      if (loose) { usedAdd.add(loose); push('matcher-loosened', loose.x.nu, '+', r.x.s.trim() + '  →  ' + loose.x.s.trim()); }
+      if (loose) { usedAdd.add(loose); push('matcher-loosened', loose.x.nu, '+', r.x.s.trim() + '  →  ' + loose.x.s.trim()); continue; }
+      const same = addShapes.find((a) => a.sh.strength === 'strict' && a.sh.matcher === r.sh.matcher && overlap(a, r) && !usedAdd.has(a));
+      // a change only in a tolerance number belongs to tolerance-widened (or is a tightening), not to this rule
+      if (same && !(shapeOf(same.x.s) === shapeOf(r.x.s) && tolOnlyChange(r.x.s, same.x.s))) {
+        usedAdd.add(same);
+        push('expected-changed', same.x.nu, '+', r.x.s.trim() + '  →  ' + same.x.s.trim());
+      }
     }
     // tolerance-widened: same line shape, the tolerance number moved the loose way
     for (const h of f.hunks) {
@@ -679,12 +696,26 @@ function rulesForFile(f, cls, push) {
         push('failure-ignored', x.nu, '+', x.s);
       }
     }
-    // a removed command line whose runner kind no longer appears anywhere in the hunk (a line with no runner has no kind)
+    // a removed command line is a finding when its runner kind no longer appears in the hunk, or (v1.1) when any file
+    // it ran is no longer named by a test command or a shell loop left in the hunk. v1 checked the kind only, so
+    // dropping one gated file from a list of gated files went unseen.
     const runner = (x) => !DEPENDENCY_RE.test(x.s) && !isComment(x.s);
     for (const h of f.hunks) {
-      const kept = new Set(h.lines.filter((x) => x.t !== '-').flatMap((x) => (isComment(x.s) ? [] : runnerKinds(x.s))));
+      const left = h.lines.filter((x) => x.t !== '-' && !isComment(x.s)).map((x) => x.s);
+      const kept = new Set(left.flatMap(runnerKinds));
+      const loops = left.filter((s) => LOOP_RE.test(s));
       for (const x of unmatched(h.lines.filter((y) => y.t === '-' && runner(y)), h.lines.filter((y) => y.t === '+' && runner(y)))) {
-        if (runnerKinds(x.s).some((kd) => !kept.has(kd))) push('test-run-removed', x.old, '-', x.s);
+        const kinds = runnerKinds(x.s);
+        if (kinds.length === 0) continue;
+        const same = left.filter((s) => runnerKinds(s).some((k) => kinds.includes(k)));
+        const noVar = (s) => !/\$\w/.test(s);
+        // a bare command of the same kind (npm test, node --test, pytest -q: no file named at all) finds everything;
+        // one that names only patterns (node --test *.test.mjs) still runs every named file this line ran
+        const bare = same.some((s) => !SOURCE_FILE_RE.test(s) && noVar(s));
+        const sweeps = bare || same.some((s) => targetsOf(s).length === 0 && globsOf(s).length > 0 && noVar(s));
+        const goneFile = !sweeps && targetsOf(x.s).some((t) => !same.some((s) => hasWord(s, t)) && !loops.some((s) => hasWord(s, stemOf(t))));
+        const goneGlob = !bare && globsOf(x.s).some((g) => !same.some((s) => globsOf(s).includes(g)));
+        if (goneFile || goneGlob || kinds.some((kd) => !kept.has(kd))) push('test-run-removed', x.old, '-', x.s);
       }
     }
     if (/(?:^|\/)package\.json$/.test(f.path || '')) for (const x of unmatched(added.filter((x) => NOOP_TEST_RE.test(x.s)), removed)) push('test-script-noop', x.nu, '+', x.s);
@@ -822,4 +853,4 @@ export function exitCode(result, failOn = 'high') {
   } catch { return 1; }
 }
 
-export default { VERSION, SCOPE_FILE, RULES, DEFAULT_TESTS, DEFAULT_GATES, DEFAULT_SNAPSHOTS, globToRegExp, parseScope, classify, unquotePath, parseDiff, isComment, uncomment, isAssertion, assertionShape, closeParen, splitArgs, claimedPaths, audit, fingerprintInput, fingerprintResult, exitCode };
+export default { VERSION, SCOPE_FILE, RULES, targetsOf, globsOf, stemOf, hasWord, DEFAULT_TESTS, DEFAULT_GATES, DEFAULT_SNAPSHOTS, globToRegExp, parseScope, classify, unquotePath, parseDiff, isComment, uncomment, isAssertion, assertionShape, closeParen, splitArgs, claimedPaths, audit, fingerprintInput, fingerprintResult, exitCode };

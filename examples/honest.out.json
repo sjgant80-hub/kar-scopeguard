@@ -1,0 +1,39 @@
+{
+  "verdict": "clean",
+  "ok": true,
+  "v": "scopeguard/1.1",
+  "counts": {
+    "files": 2,
+    "high": 0,
+    "review": 0,
+    "added": 5,
+    "removed": 1
+  },
+  "files": [
+    {
+      "path": "src/cart/total.js",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "source",
+      "scope": "allowed",
+      "binary": false,
+      "added": 1,
+      "removed": 1
+    },
+    {
+      "path": "test/cart/total.test.js",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "test",
+      "scope": "allowed",
+      "binary": false,
+      "added": 4,
+      "removed": 0
+    }
+  ],
+  "findings": [],
+  "fingerprints": {
+    "input": "48a152af8cd415235b2d74b62d1ddde348c5992763d42808fa250c89c9ecc701",
+    "result": "b1041e73d15470922cbd70e48fb89b0a03acd471e51df31fd2c743037a95f4de"
+  }
+}

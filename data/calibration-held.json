@@ -1,0 +1,4286 @@
+{
+ "kind": "kar-scopeguard.calibration",
+ "at": "2026-11-12",
+ "kernelSha256": "b73a4f42d63dda586e3f4014d7743c03210e5c007f287fad85ca893b20ea7fa9",
+ "summary": {
+  "half": "held",
+  "repos": 69,
+  "commitsSeen": 7865,
+  "checked": 330,
+  "refused": 0,
+  "flagged": 4,
+  "review": 103,
+  "clean": 223,
+  "byRule": {
+   "baseline-grew": {
+    "commits": 48,
+    "findings": 51
+   },
+   "expected-changed": {
+    "commits": 47,
+    "findings": 104
+   },
+   "assert-always-true": {
+    "commits": 7,
+    "findings": 7
+   },
+   "assert-net-loss": {
+    "commits": 3,
+    "findings": 3
+   },
+   "swallowed-failure": {
+    "commits": 3,
+    "findings": 3
+   },
+   "test-run-removed": {
+    "commits": 1,
+    "findings": 1
+   },
+   "unreadable-binary": {
+    "commits": 1,
+    "findings": 8
+   },
+   "failure-ignored": {
+    "commits": 2,
+    "findings": 9
+   }
+  }
+ },
+ "records": [
+  {
+   "repo": "agent-proof",
+   "sha": "d1e249b893c421a25f6a3c29ab9778bfff4511b9",
+   "diffSha256": "44db1ca99b5b016cbd3defaa597ce4051fd072d53cdcb846968158e3a7253742",
+   "chars": 110524,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "17 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "2e69755e7deb48e4ca46d7888188a6dc0c0afbac",
+   "diffSha256": "9d615de7e0ad9c0f71044ca180e4260a290d09ce7bc552c62250c193c3f00466",
+   "chars": 5577,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/distill.test.mjs",
+     "status": "modified",
+     "line": 110,
+     "text": "assert.equal(valuesOf(RUNS.v1, []), CARV); → assert.equal(domainOf(RUNS.v1, []), CARV);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/distill.test.mjs",
+     "status": "modified",
+     "line": 111,
+     "text": "assert.deepEqual(valuesOf(RUNS.v3, [{ odor: 'n' }, { odor: 'a' }, { odor: 'n' }]).odor, ['a', 'n']); → assert.deepEqual(domainOf(RUNS.v3, [{ odor: 'n' }, { odor: 'a' }, { odor: 'n' }]).odor, ['a', 'n…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/distill.test.mjs",
+     "status": "modified",
+     "line": 113,
+     "text": "assert.deepEqual(valuesOf(null, []), {}); → assert.deepEqual(domainOf(null, []), {});"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/distill.test.mjs",
+     "status": "modified",
+     "line": 114,
+     "text": "assert.deepEqual(valuesOf({ values: 5 }, []), {}); → assert.deepEqual(domainOf({ values: 5 }, []), {});"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/distill.test.mjs",
+     "status": "modified",
+     "line": 115,
+     "text": "assert.deepEqual(valuesOf({ values: 'train', names: ['x'] }, 'x'), {}); → assert.deepEqual(domainOf({ values: 'train', names: ['x'] }, 'x'), {});"
+    }
+   ]
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "8e3698b76280669418e41768c40fa0a42c01bca6",
+   "diffSha256": "506110ee3f452e466a6d61f59dcdb47f1e9f28bf1e3ffd48227fbd6ce3dd130c",
+   "chars": 28818,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "48cc2f32472cdfd3b1413c76a093104969d2fb68",
+   "diffSha256": "ad8394c9eb87347e25068a0e0bb26c5349198a94a3ed442477724d8392e8ad57",
+   "chars": 33444,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "data/mint1-baseline-run.json",
+     "status": "added",
+     "line": null,
+     "text": "34 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "1041ee65f691a12a0e5a09e8000e2eeef13ce0f6",
+   "diffSha256": "1c6b682636e2812220c25f1e4f57bef837b5669f639adfb09d58ac731a6510d7",
+   "chars": 6715,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "data/mint1-baseline-prereg.json",
+     "status": "added",
+     "line": null,
+     "text": "24 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "6e66c1b78645700e412fce5b61cc8c17d0802321",
+   "diffSha256": "f14f98642d06d63b2db4888d4de1f514874354ab00c1e25b127f950fc2e92cdc",
+   "chars": 46108,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "7551702b9503d8a31f8ca03f8093fa188fc070fa",
+   "diffSha256": "6bdaf05dd19217eb1494c44864201a96f0b8978cf8b4a907d5f63f39d771ba0c",
+   "chars": 55912,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "0b028902264003b43ed48c58de78a547e2e37468",
+   "diffSha256": "1c343f8a9b323c7392331345f2b761f00982815790d4306d9053ef361189cd7c",
+   "chars": 12027,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "962be238069325aa96337b6ea8c8f0e5f825c887",
+   "diffSha256": "95d22bb15cd647cd8a887551f945d7cf2203c1ab8120a3529af09d0c89344ed6",
+   "chars": 33374,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "665171b8f3a77b03e35fcbad060f5195d2fbf85d",
+   "diffSha256": "c3b6695789b88babeb77ece27a5f73abc8019bd262c311e0556ef0c018dc47c9",
+   "chars": 39177,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "6e7cd2beb7b2252d2f81db035e02f61b2c795ca4",
+   "diffSha256": "216d82d11ff3b1e1ddd9e9fa4630c7b042c978883007ad1e9f8dcdc9d3651d7a",
+   "chars": 10702,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "b05c7f6befee291eb63da5d7e2e645a63c2fd117",
+   "diffSha256": "c4b60b76a52b1d9fc1f480534dfb0df0d2027093685e808552bfb92ec89db3ce",
+   "chars": 51395,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "ba2f03bd46b3569a350757ee58d485af7f6991bf",
+   "diffSha256": "b7a7ef85a1e032b21dae030a80417a3ce47be570d0da6a5aa411d27c9579821d",
+   "chars": 74049,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "1496fb0a1f2d5da66236e10de612e286cac7fb2c",
+   "diffSha256": "46552eeedfa00cdde0dfcc75479e6fc8a016d16a70476d9d82b27682d05e1978",
+   "chars": 16623,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/funnel.test.mjs",
+     "status": "modified",
+     "line": 24,
+     "text": "assert.equal(replyText('ada', OFFERS[2]), '@ada Thanks for asking. That is DIGI cards: https://sjgant80-hub.github.io/digi-card/\\nEvery claim on that page links to a receipt you can re-run yourself.'…"
+    }
+   ]
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "32aeef954628943f35e8db62340f59b8ce98c625",
+   "diffSha256": "6c224a626464126953898337412dfff600e9866ca1cebcff675bc2f1ba9a7701",
+   "chars": 10184,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "f465962ce7a949503f7dd0dfd95833db6bb34a21",
+   "diffSha256": "90dd67979c5b01aa36e6006c3b89c34a402d4d56b52346a33483fd1657201a7b",
+   "chars": 115658,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "b8c3f32e1201fb83691258d755b9c47bdbf26b83",
+   "diffSha256": "3ccafed8e0f0d54f083c0a139349249dda39417cf8171f64ec406b02ebc59902",
+   "chars": 16256,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "8935702cb032113d80cda82cbdcdcf415d0649e4",
+   "diffSha256": "1a68dc10e04db062a4512f1172814f49c342dc99fd675d070ab77cadad1a5fc1",
+   "chars": 27442,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "1ae1e5da188d5b30b875b307b4df5add8068ce4c",
+   "diffSha256": "8960f2036950e3f0abb1e05cf0fd8b9dacd2c9f12b008f060ab9cdc0c5adb5e7",
+   "chars": 102885,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "d557e6bda4748a1b3f8027f9c079d0b4a23a3096",
+   "diffSha256": "46e5e6d7fe630ae42b02a54bff90d4d756d3135ad64388bbd2a3a4f40a54881c",
+   "chars": 16898,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/conductor.test.mjs",
+     "status": "modified",
+     "line": 42,
+     "text": "assert.deepEqual(flagsOf(W('process the order', { moneyPence: 0 })), []); → assert.deepEqual(flagsOf(W('update the order', { moneyPence: 0 })), []);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/conductor.test.mjs",
+     "status": "modified",
+     "line": 43,
+     "text": "assert.deepEqual(flagsOf(W('close the tab')), []); → assert.deepEqual(flagsOf(W('update the order')), []);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/conductor.test.mjs",
+     "status": "modified",
+     "line": 72,
+     "text": "assert.deepEqual(flagsOf(W('follow the steps')), []); → assert.deepEqual(flagsOf(W('follow the steps')), ['unknown']);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/conductor.test.mjs",
+     "status": "modified",
+     "line": 79,
+     "text": "assert.deepEqual(flagsOf(W('enable the dark theme')), []); → assert.deepEqual(flagsOf(W('enable the dark theme')), ['unknown']);"
+    }
+   ]
+  },
+  {
+   "repo": "ai-first-company",
+   "sha": "6097f7b87fc74d80cddb6216b86a5989bc8af779",
+   "diffSha256": "ad0559c6a81d7555dee755df6681b3fa9d4691b17fe92e2c799f0f796a673d21",
+   "chars": 22591,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-native-gap",
+   "sha": "d5cd7f880c7d617e32aadaa06c70c239d5357e96",
+   "diffSha256": "c2de60979d2a197549c96b22c628d355881372b695b641b9ea8be5fd36781252",
+   "chars": 70998,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-nativesolutions",
+   "sha": "3008a0a2bd64cf858afd06ea7b5dbc3c47d5018c",
+   "diffSha256": "696d4b1a017ff94234a792904c6ab1aab8e453f2d7d08ccea6cd899eaf0672e2",
+   "chars": 9161,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-nativesolutions",
+   "sha": "5031bc6411c0d86e79cd0543c94669835e45d33e",
+   "diffSha256": "f51b9d7f7c80307824caf33bf836dc837f4dff5cf57584ed7e4e4b01b8eaf963",
+   "chars": 381856,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-nativesolutions",
+   "sha": "b8b608ff49184d7c7c5b0329e973ef02da028be7",
+   "diffSha256": "ddcd9dedf35d9ca366469dc7679ef1fa413cde63b4a67fbc11be5829b00dd695",
+   "chars": 31848,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "stages.test.mjs",
+     "status": "added",
+     "line": 79,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "ai-nativesolutions",
+   "sha": "50610cbda2bda46ac481f8a88140593aa7d3c6af",
+   "diffSha256": "91bcba1925d5feeaf297015fe0b013b4d825c071759296227b337cfa2830f118",
+   "chars": 1315,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-nativesolutions",
+   "sha": "4bd9d8d5c36f393581fed2c112b6aabc1f4ef2d8",
+   "diffSha256": "0602ed1163da873844c61f179ccf108f90442776698d21463f86251e161b5517",
+   "chars": 3630,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-nativesolutions",
+   "sha": "91b7007d328f1ae85b80c68a07329b142be5426e",
+   "diffSha256": "b95609062af3c47bfecb22313c80377b0e74a0eaffb32047c59da6342cca4d8f",
+   "chars": 2981,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-nativesolutions",
+   "sha": "ccb26e6955c14c42ba6cd87afd52fcf6181bcd5f",
+   "diffSha256": "bb6595da7501cc72c776dde3f982ab09c36793f9ddc5c932952caff52c47c1fc",
+   "chars": 13842,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-nativesolutions",
+   "sha": "3729da2b2400b93ec1617786096a34da5c56dd64",
+   "diffSha256": "de4266d2eec0484429a7d5d837664a535c3ac9fdc15ab9929812703d0c4881c2",
+   "chars": 1476,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "bes-inward",
+   "sha": "3a3375f50472f91a99c17d875f5b29bec1e0d5ec",
+   "diffSha256": "ca281cab366203f2d1d6cac8aab4178da1f195c033f89d0c86fd1c0f972a0a17",
+   "chars": 6535,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "bes-inward",
+   "sha": "38b88429b3fdf5b2c5b38baa7e6c0ca1139fe98a",
+   "diffSha256": "ad959847b5e6ca2b6e5e478d87af7216a7dedfa5720669ddd5af927cf19199c3",
+   "chars": 38528,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "119 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "bes-inward",
+   "sha": "50c3a3a55e0f90847a03437d78626c5fceaaa175",
+   "diffSha256": "c70574947b8c7a9914c3f4ebcd140cb811d18142b8adbb810b7f9ef5ca4f204d",
+   "chars": 425436,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "bes-inward",
+   "sha": "de31cc6411b5077313820f3ac17e96635a4baffa",
+   "diffSha256": "44313083fe34964f005be5e9067b99420e8fb8fc1df2f53b1e3febf0e8207c05",
+   "chars": 70306,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "17 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "bred-minds",
+   "sha": "4dacaf8433c4029ce78c2687bc3a29676bd044a5",
+   "diffSha256": "a2cc5a85ab22d776277c62bc1a058a6a91153558e9191f0b5626afce391a7a77",
+   "chars": 12793,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "bred-minds",
+   "sha": "13656700f2f03736ab3b1e50408bf91bb1b0e2f6",
+   "diffSha256": "d618af6ffe30af2d86e33558b03e28a475139d0b7f844d88afe130f0fb3bbfbc",
+   "chars": 50746,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "bred-minds",
+   "sha": "c21500f90cbce801c5c5e9784a9bcddc8bdbc9de",
+   "diffSha256": "1389687b9bfd0183ddf80aedc3ab586b405a0ac01f66b2540dfd482df0e4ce68",
+   "chars": 32396,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "bred-minds",
+   "sha": "b6a0332dd524f3f74ea9f4cba24faca0f2c11b2d",
+   "diffSha256": "87330c06bb5fef4041322e11c462c6ddfaa8f8f4e62c56b74f67d9607d2f5391",
+   "chars": 293623,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "bred-minds",
+   "sha": "f4c665203ace5ebd5a7eced3a846f70c3307905d",
+   "diffSha256": "54d7accf3c76d68407d70968d1fb070f5deb3ec2972b36651f07787cb622941c",
+   "chars": 10626,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "bred-minds",
+   "sha": "565ada6d296d11f863fa5b8c9e4a4ea02e1d9353",
+   "diffSha256": "9261aa35c5bc20b5c3e98caf32b15cfc9314b8d3daf10deb9c963ffb93dca479",
+   "chars": 66004,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "build-broadcast",
+   "sha": "e6f98f1b5bdfeb4c43f8095f5db52a5ba2d00414",
+   "diffSha256": "fdcf33072885d59a9cb88214ddabe578a8298c7806546249e9b94cd013e22465",
+   "chars": 50802,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 55,
+     "text": "assert.equal(src.files.length, 8); → assert.equal(src.files.length, 9);"
+    }
+   ]
+  },
+  {
+   "repo": "build-broadcast",
+   "sha": "9e3fdfafc036f7401aabbd226c5fc454839c1146",
+   "diffSha256": "d143d60a8d8344a9f8003db69c513256cc85d3de533f663e0161fb8089d4970f",
+   "chars": 9269,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "build-broadcast",
+   "sha": "91b0852ddd7c79ff764f23fe60754badc76427b0",
+   "diffSha256": "0437374759299d6e8c1200ad554a16ee90eaa44a6b0d630f1887f85bea8de937",
+   "chars": 2391,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "build-broadcast",
+   "sha": "5047263a8914aff8a0fbbabdd9ca581d9859a05c",
+   "diffSha256": "b1b0552ec13abebc9fcf24312c57d9cd2a14d13321ce7d6e56f6b2a8b15c6132",
+   "chars": 329640,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "build-geometry",
+   "sha": "fd3ec93b35f0c36e941ce683986c2f2c5ff022c5",
+   "diffSha256": "d5ffc521d2f115fbcde1706746c7610798ca734eafb9a8c0524e901aa8fe7e1a",
+   "chars": 75529,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "code-rsi",
+   "sha": "170250b07370e983622bdc49d64d6bcb9b197338",
+   "diffSha256": "1f8f0b9b726ab19c948c5665a9913696c5c154b2a81d76d0839504ff0a3935b0",
+   "chars": 59706,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "code-rsi",
+   "sha": "77bc2cbe9b2e08d2d6657696bb0a22a6c03ad5e0",
+   "diffSha256": "385a3bb72939133bfb7c862d353da1160eca846587da206754c9787febdb6bca",
+   "chars": 181803,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "couple-gate",
+   "sha": "46dbf1087354ba156e3a7261da923344009a66a8",
+   "diffSha256": "4e93b7933dda96bfd461a84e542c175894c583567919ef4dd54baa4560033dcf",
+   "chars": 77153,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "crossover-gate",
+   "sha": "c612b76d097299444e0bf1d5ea6d680655320dcd",
+   "diffSha256": "2ebf756265ee123403d01f34aea60b4a5527e24040faf792b1975b8239478b96",
+   "chars": 70826,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "didy-arena",
+   "sha": "e94e6992172b3a1adec194a22a4b52f0c1ab3d1d",
+   "diffSha256": "a95566fe0ef7c4dcafac6df891fb0776d3826fb10d1d4177276b98aa58c189ac",
+   "chars": 32298,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "didy-arena",
+   "sha": "297fa350f0e67862b57dde5e4de9ac31f8593c4b",
+   "diffSha256": "79e2ea141e9d26f6e089e27d624e9b018b502b4de5d09e30d4e08781321afd73",
+   "chars": 75407,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "didy-kernels",
+   "sha": "0cadb1ec80ef7581c58194fd39a9e96268bc9fb5",
+   "diffSha256": "7d90267b69aebe6d3b7a1a2544543dfab08cb88b26e2e4856cde92e6dee640b8",
+   "chars": 20017,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "didy-kernels",
+   "sha": "5636199ed5e40027ce12c650c86adbc0e3ac8282",
+   "diffSha256": "6e3a811673bb2bc34ba2365bdbf3b43a49804219f4a694a0ce2a79b01b6c6b3a",
+   "chars": 69334,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.find.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "1 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "didy-kernels",
+   "sha": "4e310de1325633c6f4d4d4d49020885ceef33a51",
+   "diffSha256": "39564a8f5f76495ca4c1e253a9ac65686b957a6a283858c440c84227dc34f572",
+   "chars": 41614,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "didy-kernels",
+   "sha": "994f05961ae2a3bd184eff2e7f5f488b027b9f39",
+   "diffSha256": "273c71cacab9109a04bb4db8fe8da9b7a016fd8cdc04025458f50171af58a3c6",
+   "chars": 131301,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.loadout.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kardlings",
+   "sha": "9225d2bcd3a950f4ce47e6559e4f6982b7376526",
+   "diffSha256": "1b8ff1f524ce5084f52873c6e78a9aa1abe03a39f5e4c982cbe0bb6fa0bebaea",
+   "chars": 40420,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "903f5301aa20118538b3573b1a3c97adbe631d0e",
+   "diffSha256": "2e84b80f383157cb9abea3d1a20affdaf3916e3cf6316343db5fbb82d73c72af",
+   "chars": 162520,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "c7b71f048f4aaeec338536aaab0b9e11e6ca7bcd",
+   "diffSha256": "1cd4bb633fd0aa2010ae9304495a35af37d13db5b196af3134948e9d4c6299da",
+   "chars": 43431,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "de0a837b547b58c0098ff4faab4fd0bd2cc4c01b",
+   "diffSha256": "873bb29e74e8472b0f5d7de8166f1495f6180ef156fc5f71160f65e6ad404fe2",
+   "chars": 7769,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "d03bc0a6b12618e72148f7de45e034fdedc4ffab",
+   "diffSha256": "83ee546647d2eda0ad3ee2b74b0662e0ec52b2a16c801cee70a759726e6d8b9f",
+   "chars": 218449,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "ad568b97c623f0aed55ce475e53c08f549651e4b",
+   "diffSha256": "97d04472887d65c36133afe19ca159854b99226ee69b4882d8531accc20d7f90",
+   "chars": 13467,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/hero.test.mjs",
+     "status": "modified",
+     "line": 197,
+     "text": "assert.deepEqual(ASKS_ABOUT.map(([k]) => k), ['preference', 'project', 'person', 'identity']); → assert.deepEqual(ASKS_ABOUT.map(([k]) => k), ['dislike', 'preference', 'project', 'person', 'identity'…"
+    }
+   ]
+  },
+  {
+   "repo": "kardlings",
+   "sha": "229d315c789bd4db65f7b2f6735a94f3f8981173",
+   "diffSha256": "39921f4d7568df33a2c4e47697a31d5ad3324ea1d9d319620fa4c946f26f0422",
+   "chars": 230585,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "9725457bdb68418f992979bf6b4750db65b49a7b",
+   "diffSha256": "0a6efd80bc94e64684fcc0c6508eaa1d1e6fd1ceb77cc6943a1f5cba260ebe50",
+   "chars": 38867,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "6d3788a192440c41a9e90de1f70fa61ae922ad09",
+   "diffSha256": "2f11c804a2143b207d3a9f547d948e0413f84fdb8d2a190a418f19e557fd16c8",
+   "chars": 95104,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "1624a9a9091976e8078871f1e7fbbd4a2c09fee1",
+   "diffSha256": "3abdb442098bd7c185b53a22c7f7c615f17e76352bf8a94e0f65aa2a4325ae6f",
+   "chars": 22262,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/claims.test.mjs",
+     "status": "modified",
+     "line": 15,
+     "text": "assert.equal(PAGE, 'https://sjgant80-hub.github.io/digi-card/'); → assert.equal(PAGE, 'https://sjgant80-hub.github.io/kardlings/');"
+    }
+   ]
+  },
+  {
+   "repo": "kardlings",
+   "sha": "0f52c42a17b66f51e3cb0d8ff12508afa0e68164",
+   "diffSha256": "d0b1d831b4a68299ce40b4b5d81527d78175af0510a0ae21739a34e5cd951b74",
+   "chars": 12911,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "fff9fa6f9a0c6caf0a4ad88d282cfa0a3285f9de",
+   "diffSha256": "9e8502f9c632b811d2667c7f97290e01154efe68cd86e367463ccf7d7694072f",
+   "chars": 31353,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "a65f3189b8c0c74aef5497c07d7b4ac55730f522",
+   "diffSha256": "0730f5abe79f16307fb8e1a067b2a43811a256b0c74ab08625e0a176d18e6b0d",
+   "chars": 39910,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "80623622287eb4d54ef1e47eefaf62669e30e53d",
+   "diffSha256": "a08eda456fd909f8801a48f1dac0edea8f67e753333811add8e823c532ccc51e",
+   "chars": 40971,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "b185ff650658b7de0d7d0bf5c5d51c233a801dd6",
+   "diffSha256": "b3c14c9b29e5bb60147b694d5f093a2141428986819b3e5f41e4765f56fe3a4f",
+   "chars": 81903,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/dossier.test.mjs",
+     "status": "modified",
+     "line": 177,
+     "text": "assert.deepEqual(FORMS, ['card', 'chat']); → assert.deepEqual(FORMS, ['card', 'talker']);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/dossier.test.mjs",
+     "status": "modified",
+     "line": 181,
+     "text": "for (const f of ['scorer', 'suite-node', 'hybrid', '', 5, null]) assert.equal((await issue(g, maker, { ...opts, form: f })).why, 'the form is one of card, chat', String(f)); → for (const f of ['score…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/dossier.test.mjs",
+     "status": "modified",
+     "line": 183,
+     "text": "assert.deepEqual([vg.ok, vg.owner, vg.form], [true, eve.pub, 'chat'], 'a chat card lives as any card'); → assert.deepEqual([vg.ok, vg.owner, vg.form], [true, eve.pub, 'talker'], 'a talker card lives …"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/talker.test.mjs",
+     "status": "renamed",
+     "line": 39,
+     "text": "assert.equal(MAX_Q, 500); → assert.equal(MAX_Q, 1000);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/talker.test.mjs",
+     "status": "renamed",
+     "line": 66,
+     "text": "assert.deepEqual(parse('x'.repeat(600) + ' tenure 3', VOC, FEATS).case, {}, 'only the first 500 characters are read'); → assert.deepEqual(parse('x'.repeat(1100) + ' tenure 3', VOC, FEATS).case, {}, '…"
+    }
+   ]
+  },
+  {
+   "repo": "kardlings",
+   "sha": "73258ac361e227fca5333921a6588c4133df63b5",
+   "diffSha256": "91d41a3e9b23c5c99964af66cdc3df5208b7e874262c8b514ee742b2c2e2387f",
+   "chars": 66427,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "6c0dbbfcf17affe3306b4001bf3829f48129b1db",
+   "diffSha256": "7fc38dc8f7a83bdbd58a62ac6b88d1ea1f007e752b9f060612cb9f0bd70d5855",
+   "chars": 12495,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "e8e4925da93d592f2357474c981c069454f3eb1b",
+   "diffSha256": "aa254c29c7826025c30571b00c9f4da915cc82f82ba026879370531eca92c471",
+   "chars": 156730,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "ecb8d639e75b3ea215de46b0ce9a0b41812409d2",
+   "diffSha256": "87d3a06fa178a55bc3016d828fb3f53978aa740753a60484a88521dfa5f3b108",
+   "chars": 39377,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "9eb9bb5fe76637bd5a1d8d400b20c7cc3b1c64bf",
+   "diffSha256": "cd5c1331b70efd19ed4b64552f780acd8964411e5f5c1fcac681ce7ad7ff3bff",
+   "chars": 169618,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "339b898c3ca76f009f517bbf4b673052ea67811e",
+   "diffSha256": "708c07398a4ce275c03c17bb460b277c1f0a2c72a34f94be20521ecaa8aff11b",
+   "chars": 213299,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "97112101f4086a4f4d26891485cf921af829be78",
+   "diffSha256": "d48811266ca100c8c619786f83a8f000905d781b4367a2ad03e35aab8c836c45",
+   "chars": 13231,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "a85ec85f7bd056b7b7fc17e592946c1ee5f7e15e",
+   "diffSha256": "2f43475a358ed707afdc4d99e22af06980d31c176eaaa9e03c709788eb826f38",
+   "chars": 49331,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "985866aa8861cc732d206800533076e2eefb3ea9",
+   "diffSha256": "853e5e4100e2ffc8dcede81b873effe259a7cca574fa53adef2c02915fc4c5df",
+   "chars": 14266,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "97aa2e3d9332d9cb5fbea50ddec17a385aa11c76",
+   "diffSha256": "400606af970463f4a0b5fba6a2cf5527638d42e7225c6732d3ee15174b68c707",
+   "chars": 538678,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "9d144efae59aebde9e06cd28ff2eaf20bf8916bd",
+   "diffSha256": "4f5c934195154db60f0b0336610fe42b1bba3ecd19d39efe2d4d42a5b5037e57",
+   "chars": 44001,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "f99c3a3819da302e315151777341e3c1385bd55e",
+   "diffSha256": "08357bdfba92530635599957627f936adb0fcb2e1d6044707935982d13f21457",
+   "chars": 49715,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "1516319cb53a46c1bb21c0e8807af57c08ef6767",
+   "diffSha256": "74701d95b5501f9ea9e7472e4390f98c032dbcf6ab7439edc501a9e293a29bbb",
+   "chars": 17630,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "29c3633d8df68dd56223ff1f9c0144db31e1700b",
+   "diffSha256": "061e4e573f36ee68de56b30c7cd6bb3413802b2fa8daf7c559defe045c0668d3",
+   "chars": 43890,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "9c6a7aa9903975c344b7736c73dc39ecc6b153ca",
+   "diffSha256": "489bf8dec934be18253cb88d968279657cdb51c77030fe21a4d47811bb7390ab",
+   "chars": 14006,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "4b27df31543f1af90d6b26b3e0aef257e086928d",
+   "diffSha256": "9f26320a25aa441eab9ced87fb113e282a0afc9950ed1770b4cc4104b2fc3ad1",
+   "chars": 249863,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "f3faecbc30b6b72ecab0c5e09c07afedda543fa1",
+   "diffSha256": "c500526625b996247a0bb2c5d370cfb8615d8bf6959f2742eaae4fe1a054f55b",
+   "chars": 26184,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/dossier.test.mjs",
+     "status": "modified",
+     "line": 159,
+     "text": "assert.deepEqual([across.dataset, across.department, across.title], ['credit', 'customer+payment', 'Two Departments'], 'a child of two departments shows both'); → assert.deepEqual([across.dataset, ac…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/dossier.test.mjs",
+     "status": "modified",
+     "line": 163,
+     "text": "assert.deepEqual([trail.dataset, trail.department], ['credit', 'customer+x']); → assert.deepEqual([trail.dataset, trail.department], ['credit', 'customer-x']);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/dossier.test.mjs",
+     "status": "modified",
+     "line": 165,
+     "text": "assert.equal(cut.department, 'abcdefghijklmno', 'a join cut at sixteen drops its dangling plus'); → assert.equal(cut.department, 'abcdefghijklmno', 'a join cut at sixteen drops its dangling hyphen');"
+    }
+   ]
+  },
+  {
+   "repo": "kardlings",
+   "sha": "c7fa6d7a59725662d708dcab5a03f3b1e321e4ee",
+   "diffSha256": "8d75d368f3b5c8e558748677d65da0c264d1d483fdb1e5a4c6aa342bcfbb0cb8",
+   "chars": 1755,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kardlings",
+   "sha": "7eb645c34f7e685527bbd295f6e0f1b9b4868c5e",
+   "diffSha256": "e2b5aa7002402453b384e498a74f880f371afdc2453de4f5befc997683db9a10",
+   "chars": 179202,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/dossier.test.mjs",
+     "status": "modified",
+     "line": 92,
+     "text": "assert.equal(decode('x'.repeat(18001)).why, 'a dossier is at most 18000 characters'); → assert.equal(decode('x'.repeat(18001)).why, 'a dossier is at most 18000 bytes');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/dossier.test.mjs",
+     "status": "modified",
+     "line": 156,
+     "text": "assert.deepEqual([f.stage, f.rarity], [12, 'legendary']); → assert.deepEqual([f.stage, f.rarity], [12, 'legendary'], 'only levels count toward the stage');"
+    }
+   ]
+  },
+  {
+   "repo": "kardlings",
+   "sha": "6078a36ae2020d8c3f36af29185b0e87fdfedb6f",
+   "diffSha256": "d6802b26a4ef25f4da0d175f000d4bf2d34aea53771fdc0e2f38763f88e5844e",
+   "chars": 36370557,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dream-gate",
+   "sha": "66796a381754b4dc9389a8aaeb5bf64ac8e1b295",
+   "diffSha256": "80b747fbbc855ca96e01caf4c866da1d67dc7aec61aca5b2f63af329b2ebcf22",
+   "chars": 71287,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "everything-factory",
+   "sha": "34b2967622d2a00c8a43fa2842dc404147192270",
+   "diffSha256": "aaca5341d0daf540ed9f3fa902020ea9695b575a59d3ba9c45d8b16c9ae30508",
+   "chars": 1239362,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "vendor/mint.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-os",
+   "sha": "f4f0927b7853ac3683d09876108763b24645d96d",
+   "diffSha256": "dbc045854f3540f008934a58015791bce19042f4f7670f465065e8dfc34bf20f",
+   "chars": 4535,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "f588c0cf9e9f67e029ce6f2f254e312b792507c6",
+   "diffSha256": "1e59f038510343360fddab7a789e857b08cdc2c52d7a8c87c864096c5a49498d",
+   "chars": 151639,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "c60bd34657b72686d508fa8ea2cf0bc9c8ba29f3",
+   "diffSha256": "d95d07cfde3be7f2d8e950ffeb59538c6e1c82f9c5e0d9fe70a477f86cdcb707",
+   "chars": 107177,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "5de6062fb3fd1fa2241866b8d136264d95eb720b",
+   "diffSha256": "c64121fd5cef4e8202a89f396b3a33917fd6118b9002a14bc044d2882bb191a9",
+   "chars": 2975,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "8cad91b3cbaf5c3062c2cd16861b70c330ea896d",
+   "diffSha256": "740cb820f603cbd917d14c0c0b49b58c8dd2a6a028f83fbfa16a4ba980cf56d5",
+   "chars": 38713,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "1af0a79803294ee16a1c98ba33b6a6bf37ea7bea",
+   "diffSha256": "d6bc0d8019602d71db77af24da395689e6ef33942bf0545472ff5d8b85f01b32",
+   "chars": 24982,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "1143dfcae141a1968519659503207199d5ead639",
+   "diffSha256": "58243c23bdfaa32b551d62ea81ed6a0113acb45ba27b0bd5bce522e3766dc0ca",
+   "chars": 39022,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "fdfac403ff7f4631e4f566a36849dfe8647f2c03",
+   "diffSha256": "e99fba4c0aa6c913db63fab6c6b601cf7dd5880b928775c5d715c336dd764493",
+   "chars": 31426,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "49daff10a8fa600b357cbe81d964e7bd7ba67b7f",
+   "diffSha256": "57133fb0d8c65b8108a04b92c7d6bdf14fd5265e1f39a1832a296cfce0eef3d0",
+   "chars": 44964,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "3dc56593cc54a6218ee05a4249fad8f96ff7b3e0",
+   "diffSha256": "18d356b46b40138278bc3e1a6be9aaf66d3273345d60c16a9543e6173b864ae8",
+   "chars": 138995,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "ca4bd6d23ef93ba3c742ceaf8b4ed75ace9fd4ab",
+   "diffSha256": "03212c96fad394efdfcd1ca0995131c37450558aa8ccc79c8b3ca8c000e824e8",
+   "chars": 2325,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "134ff71c5d5495f8de84acdc2c07ccd6d79319bf",
+   "diffSha256": "b86ea1d8cbf56400de6de86972f05c77906af7eac00f79b9cf4a7471ec262083",
+   "chars": 100593,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "e5661316d25a2ba03dbdbe059627f2d2f0e63783",
+   "diffSha256": "3938aa1fc5e0b37b6c88c155c777da4d9fcd66555d565ef23677b64611e51134",
+   "chars": 10059,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "3653a7f00d7677dbf1273a6ada3566523bda1361",
+   "diffSha256": "eccc0507bf8cd36a9b2ffc745006bd99277cc71dc724863926606c42e1220ee5",
+   "chars": 15533,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "5ef245b26acc2e2a2af01da2ad57416e75a7fb59",
+   "diffSha256": "588d1467222ce9d6f9a120d5f2d64645a21f35b483ff74d0d7532c2f225ff1fb",
+   "chars": 41095,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "c54bffc12d0dc13051e44046e52584af9d015dff",
+   "diffSha256": "89d6d9c0a44dacdc307791e2739197db59c5df9591dd76da88e0f151e6108cea",
+   "chars": 19172,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-os",
+   "sha": "32ae43c6cff3b4001b8f97e2a471b1be3720310a",
+   "diffSha256": "8aa55d4f1d4030ec5ff1af4df1a3cb21542dbea244ac364cd86d448fb63dfe98",
+   "chars": 30475,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-remember",
+   "sha": "d6be032c03855aac6aa0fd1a8b4c6a06cd6e93e3",
+   "diffSha256": "0e130e27a7d8cc4d1a6b432b1682578c3eb6687db7f709d5d452bcd0bca8d254",
+   "chars": 1364,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-remember",
+   "sha": "3b60212e7d3fe2457a22a2dafeafd04a4570aa91",
+   "diffSha256": "195018c39fe985b5f0f567b88520fd4dd05a1c47446891af92a9575e5b6515c8",
+   "chars": 22967,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-remember",
+   "sha": "45c9953440ff34373d510de2c358231697f9cb01",
+   "diffSha256": "62368f5e436beec1e2c525217ebdb9fb69afeb80276910ef46a0fbb907734701",
+   "chars": 22985,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "fold.witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-remember",
+   "sha": "f593081b651b0ace605038a41bfde2729b493ce1",
+   "diffSha256": "20a4a115ea29acadf86b4500c4a07bba72544c73fba9b72373dcf59ca690f591",
+   "chars": 128419,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "senses.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "112 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallaccount-trades",
+   "sha": "2ebb009c92eb7be098336d22513dc90d6036bef1",
+   "diffSha256": "1d7077bb2ea68115025ee133e01114e9158fec8b03531d47a60a9a74cc4391ba",
+   "chars": 864,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallaccount-trades",
+   "sha": "74b9cf8ea7c11c1ed4770e1ef8a202b8f9228d96",
+   "diffSha256": "d69d173b81b026f24ff0e889b6398341c49dcaeb16b846f976f95018b2d6447f",
+   "chars": 781,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallback",
+   "sha": "2e9b42754980d4ca61597255339e807485da20a1",
+   "diffSha256": "46e0c10319babb9cb3b4b72b6f3c2d71850803400cd23b95a5946d543a015775",
+   "chars": 115438,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "42 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallback",
+   "sha": "6ddef0a615300d09a6cd7bda9e6cc3e588a69d44",
+   "diffSha256": "843ff4b34f03cd628d7da64f02fd4f4a784eaa9d54b3592cdf8fd68726fed918",
+   "chars": 763,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallboot",
+   "sha": "ad0f6997acbfc8aabc4115e3dba423a187dde876",
+   "diffSha256": "3d03c322a3da56462a53264d379632026543aac3f006529f06e92e4f18dde6ac",
+   "chars": 3471,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallcorp",
+   "sha": "94d4b3d1bf41ab44c7f2adfcbedddb8d114cd392",
+   "diffSha256": "44bdf0ab2e595c1621d5c4bfd84b75cc448a2b67f060e2b434bb09194d091721",
+   "chars": 129156,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "company.test.mjs",
+     "status": "added",
+     "line": 115,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "fallflow",
+   "sha": "e8166494d423076a0cba03c9fdd934be3cc0b65f",
+   "diffSha256": "c9ff23526f1bc8f20283ee3916d670ea15b9e19592aee1a25195a9e4c0d4a510",
+   "chars": 157843,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "37 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforge",
+   "sha": "db383dbacd558506909a7063c3d32e609fc6adb6",
+   "diffSha256": "6ca2936f03430468f9a93bd4c4d215c1d09b1d41dfb482c168b1ffb1de4ccf02",
+   "chars": 70328,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforge",
+   "sha": "cba678f4262fb585b189dc9943ea6049d9acf2a2",
+   "diffSha256": "43f5d4a644f87d6fb2e6bb9e54d6bacda27b0a51812b137d2ec1522bbaf9d6d2",
+   "chars": 20913,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforge",
+   "sha": "8ce0cb341ce1a2182113bd722a70a6aa49ab9e94",
+   "diffSha256": "1f1eea101bcf9b063b5cb22ad2ead6f476c989b36e752e0bb8adb04e8e8bbe57",
+   "chars": 91961,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforge",
+   "sha": "6a2886a24be7a3adc609a8513c184857b7776126",
+   "diffSha256": "f718a77d4657dcc56dc44996a9d70275117fac496611dbc97df1fcf821eb303d",
+   "chars": 30736,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforge",
+   "sha": "565dd03ed6c6536c9d2c68aa5a9ffe7aba0efbb0",
+   "diffSha256": "2d40314537a47d12396360eb1963a2bcf81cd0a89a608fa73cf7805dafc1e932",
+   "chars": 12856,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforge-gate",
+   "sha": "4fd8c10e14bfa6d3d721b0eb4fbe13e46611d190",
+   "diffSha256": "b518e33989c7e592968b3e515cdc13c1725e8235a4120538b38bda1226df8402",
+   "chars": 109970,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforge-mesh",
+   "sha": "ec556ac80a3cb9aacb7dce37a548366af5a14a96",
+   "diffSha256": "366e571c77673871dd6983e2be5fe27d419bed5ba5b2a19ae1fff55ae75a3d20",
+   "chars": 110405,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforge-mint",
+   "sha": "d528e3ed8a28903c557cf442221e89f3e40445b8",
+   "diffSha256": "3b410423c1dcf2ae9d24632eff4458791786a34d0d99ef1c129af2b9d8cef8a8",
+   "chars": 136951,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "06f125c3146b11a60fa2bed4bd0ff9386e6b3bf5",
+   "diffSha256": "5d3415ef336b74f2ada3795217101e9e9e49a837b639983dc840018728028365",
+   "chars": 83076,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "kernel.test.mjs",
+     "status": "modified",
+     "line": 1536,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "43fc964295d98570b9b3095cc447bdff7ec93816",
+   "diffSha256": "cad8b47d373ab582d1f20bc020f53eaa319c2cdcd6a1e0aa7358f0a1b40f5f5e",
+   "chars": 21628,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "ea8485aa1f34b73c5bf457354cea419a9ed71a28",
+   "diffSha256": "1405cee3e60256c9680f506bb041eb7d98693407c39b7ac89ff9f97bc18fd7df",
+   "chars": 166474,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "941dacd079a3adedc571f47e1bd2bb72f96c2c3f",
+   "diffSha256": "668dedf9aa70a01c3da0a403e2a6a1f07dd106b041ea81e27dd063d8fec3f4b5",
+   "chars": 26419,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "a6d176fc6ad4ea26a8ab76de36acb531c6e98939",
+   "diffSha256": "93bbb4d7cb8ae40a4138678fd58eafa6f1efe0ae654584c529f68548368d7283",
+   "chars": 82744,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "e44795a64026d095fc3afddbc71b267bd6bfe48e",
+   "diffSha256": "74c2cf4ecf8922899f6a810d1b967130251e84e629c7a731c94b118b895f4e30",
+   "chars": 104221,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "7a2989b1917db20114a76576d28f655e54e151c6",
+   "diffSha256": "5950e77172a3e3db06bff402e72ac3f1396934d578e2e3f0de6a836c95425817",
+   "chars": 55270,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "86b32ac0030b4b36f9181aabc7ef5522b9353695",
+   "diffSha256": "85b91f601b7106d06a8737f954b996012fce0c09f08bfbc2ba5a6a7d7d378d45",
+   "chars": 14787,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "5681d15c3f2dc7123fa1c566d4cd1233efdaf03d",
+   "diffSha256": "32200c3d8e15a12c64d4e86eca36ebcb580345777cefc6e91df95f0b9b15d9fd",
+   "chars": 14569,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "80bed35b1d01e00279dd942fd24c70baf7c9aade",
+   "diffSha256": "2ab22433f195653cf967c52c3a07d798cde022e256051eb4fc394054b3cfc3be",
+   "chars": 11656,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "721a94d0bd9821fa7ca8ea9fcf68af8607958f0c",
+   "diffSha256": "53e91094027f89f9124e98528b18fdb948e35d02c7a0e864c87971a121fc1b14",
+   "chars": 11433,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "90946d3bf8307121b3c2a03ca8f27c00cbc3617a",
+   "diffSha256": "fc328465dc90276be2e9abc0030be2c20d2020a9fba3bdb476ba2bfe31bb11ce",
+   "chars": 17826,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "5880d491495d21b2181a694652bfc6aec2ddeadb",
+   "diffSha256": "a13da29c8f5308e82bfa150e2b30ea68370caff35a577255dc065cb47a24c348",
+   "chars": 18385,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "a871ee9c99a3fa8695d13f0303d81d3b5e658e5d",
+   "diffSha256": "301903aa20d49eaebcf3bc14bf5d1f3acc09901c81edf9e3a2b5d6c630fd8e82",
+   "chars": 23075,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "26b65eccf57dc558b6f8a978a8c3cd84e18a5bea",
+   "diffSha256": "43cc99a14aca91e2c6538c2bcf2eb75e9e58b869e064a3d0970f37509eb0854e",
+   "chars": 30956,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforgemint",
+   "sha": "54a204bd360219b730c13f50c5e071badc222b4b",
+   "diffSha256": "8b458928ed6ea9f4f25e489c1eb56ff7fea2d0373aeb169344aaa3389ab9bf70",
+   "chars": 158962,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallgarden",
+   "sha": "ae8f520334eef96c1b3d2b60e2b3e0ab020f51a5",
+   "diffSha256": "036c708a34285bc10055b4cd2226660daba7585325bca3680c18b48c49980767",
+   "chars": 171653,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallgarden",
+   "sha": "3b13c9e34d93976706d57bdc5a1301c16e7497e7",
+   "diffSha256": "7f3406ea96fa6c675087e3068259d830aa51672eaab1fc1b6df806464f654f30",
+   "chars": 12456,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-net-loss",
+     "severity": "review",
+     "path": "live/vendor.test.mjs",
+     "status": "modified",
+     "line": null,
+     "text": "3 fewer assertion lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallgarden",
+   "sha": "d9e2e02dde3330d4e243fa81f56806aa71858176",
+   "diffSha256": "2ad49b65f79dcf14e4dc2669100fa53997d47e0c58cffab84e7abf7693643af2",
+   "chars": 24477,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "live/kernel.test.mjs",
+     "status": "modified",
+     "line": 29,
+     "text": "assert.deepEqual(KINDS, ['germinate', 'born', 'layer', 'link', 'receipt', 'ci', 'pass', 'drop', 'stage', 'flow']); → assert.deepEqual(KINDS, ['germinate', 'born', 'layer', 'link', 'receipt', 'ci', 'p…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "live/kernel.test.mjs",
+     "status": "modified",
+     "line": 75,
+     "text": "assert.deepEqual(s.nodes.get('core'), { id: 'core', label: 'core', kind: 'core', fam: '', live: false, ci: null, stage: null, receipts: 0, sim: false }); → assert.deepEqual(s.nodes.get('core'), { id:…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "live/kernel.test.mjs",
+     "status": "modified",
+     "line": 76,
+     "text": "assert.deepEqual(s.nodes.get('a'), { id: 'a', label: 'a', kind: 'organ', fam: 'x', live: true, ci: 'green', stage: 'assist', receipts: 0, sim: false }); → assert.deepEqual(s.nodes.get('a'), { id: 'a'…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "live/kernel.test.mjs",
+     "status": "modified",
+     "line": 77,
+     "text": "assert.deepEqual(s.nodes.get('b'), { id: 'b', label: 'Bee', kind: 'repo', fam: '', live: false, ci: 'red', stage: null, receipts: 1, sim: false }); → assert.deepEqual(s.nodes.get('b'), { id: 'b', lab…"
+    }
+   ]
+  },
+  {
+   "repo": "fallgarden",
+   "sha": "84872606be195156eab6ec3f1be5ade0afd0059b",
+   "diffSha256": "8acfc66defb12d515efd85a2a9bbfdc579f73c43847156c06e6608708dbea658",
+   "chars": 683832,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallgarden",
+   "sha": "9cbd3400bbb72782c8a6beffa5011b1f76f4dea0",
+   "diffSha256": "f46da9f7514da09331a216dc00de2861e6fe932fc105ff1f726de7281ed6e183",
+   "chars": 14938,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallgarden",
+   "sha": "8fb65c1a2db97d6bf094c598fd8974c16d86a630",
+   "diffSha256": "4ef9ae024ee4df29a5f4ded467c681c6c4bcff5ecc52500726a535a586a07e60",
+   "chars": 96657,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "d15ee248da86ffb1033866e1e59d7fa5ab6917d0",
+   "diffSha256": "ba56921bcb3f9ccf6e62a6dc6ed2c063cf30a711b35ddcc9be3a4659a8eb8f84",
+   "chars": 5030,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "swallowed-failure",
+     "severity": "review",
+     "path": "forge-estate.test.mjs",
+     "status": "modified",
+     "line": 378,
+     "text": "} finally { try { chmodSync(join(dir, 'locked.png'), 0o600); } catch {} rmSync(dir, { recursive: true, force: true }); }"
+    }
+   ]
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "49ed1c0aa65ae1bb4f76806870daeb24808e5aa0",
+   "diffSha256": "bb9084df1fdaf3d0006c458a0cb817325fd678f867cb99a94a4c480c0ec7fc61",
+   "chars": 233134,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "6930c80f07f67ba34f839016f4e7d6c58cfe5d37",
+   "diffSha256": "72abd7bcb48cef0086a06c9b0ba40d715ef769ac2bdb034b42f309668412bb40",
+   "chars": 15401,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "6dc9fcadfc6b69d6bd4e1f51e27fae1a4acdc861",
+   "diffSha256": "b60027a35b3d3d19e80371cca32d2a9f2aad81d2b546a39e6bc033687c7cc999",
+   "chars": 165907,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "swallowed-failure",
+     "severity": "review",
+     "path": "page-safety.test.mjs",
+     "status": "added",
+     "line": 43,
+     "text": "assert.ok(PAGE.includes(\"if (n > max) { rd.cancel().catch(() => {}); throw new Error(\"));"
+    }
+   ]
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "cad1539d115f2b6626d9f021f9973bc47ad81d6a",
+   "diffSha256": "286f0f7c78a8c11ce36055595d5d46517b8878292f87a1f756907e0b58fc097d",
+   "chars": 94728,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "51686bd69daada9520da6827754718216012ecd1",
+   "diffSha256": "a70a1ca6833250f65305d95c99b0fc6011e36174b6d20ffbe2d7cce164fb9ae1",
+   "chars": 95880,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "5851b33754dbf82b5e924e42050f44ff840be1f2",
+   "diffSha256": "161f2a6e90866da45036b93cba4b9b8488cc65abcbb74731b75f259b63895863",
+   "chars": 238656,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "093cc324f8b7e1d78440ce81abab67c168222959",
+   "diffSha256": "5df8a87ed6190b433ecfd65ae332a10c9a89e30052bf1be8165bf6506acea6f7",
+   "chars": 149012,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "383a08fbb5f0d06d2b7eeca7a6fb9b25d5a40107",
+   "diffSha256": "c0e7df4be3719dfebfd3c0ff0d7a0fcbf2a8f4f448c44a717ae4ecb424ff48c8",
+   "chars": 253172,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "0586dbdaf523a023f3086499f61145e597c970d8",
+   "diffSha256": "69456c5c9923b68db112b9ffb6c7174ed87d188c9765206b152109ad59624195",
+   "chars": 18008,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "49adf9b8462cf09010e7908541afd4a3163387c5",
+   "diffSha256": "70f1d78bc401b4381559c3e36ff247bdf5f2377f5f70b7c6e7501997c861f57a",
+   "chars": 2996,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "61744dd681d37d9644e75ab38baf74e07b44c7d5",
+   "diffSha256": "1ae19afc8edbb6ad018f459390ca279681c1a2c71d1ce3ccfaa7c49b8d6e7388",
+   "chars": 319,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "554d013c1e1e154f2af9148027f95594ac272e19",
+   "diffSha256": "03977fcd601a11b6b2a1ce22ae0394399a9cdeb3ce64957a6ccf60d2d0d6c5d1",
+   "chars": 124548,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "1e2611d3e68fd91d82b365570d5e25b9d2cbff47",
+   "diffSha256": "255c321409e59ae5a382a7d5714087539a09e953f8353bec87f07ef24cf88bd9",
+   "chars": 16770,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "studio-suite.test.mjs",
+     "status": "modified",
+     "line": 187,
+     "text": "assert.equal(ORGANS.length, 7); → assert.equal(ORGANS.length, 8);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "studio-suite.test.mjs",
+     "status": "modified",
+     "line": 316,
+     "text": "assert.equal((await sha(full7)).slice(0, 32), '0e7796d2f6692fdffc9020bf1ec2984d', 'the full seven-organ palette moved'); → assert.equal((await sha(full7)).slice(0, 32), '0ef06d1c413959b5bc48e69a04373…"
+    }
+   ]
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "f895ba58a301fb052c5714e2894cae4a6a54e469",
+   "diffSha256": "56ad8202638db80219ab57558bd6dc1a34ad5cc6ffb9455ed02cec534ba812b1",
+   "chars": 19358,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "studio-suite.test.mjs",
+     "status": "modified",
+     "line": 187,
+     "text": "assert.equal(ORGANS.length, 3); → assert.equal(ORGANS.length, 7);"
+    }
+   ]
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "77e259461ffd2859aa7d94b71f0410bdea0d79da",
+   "diffSha256": "cacc7607724a8702cad7648a944414a61a6b93858de05f14858c0ad5a69f271d",
+   "chars": 94453,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "5 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "d380947b059bae8c41bdd37765ccc05871a7d88c",
+   "diffSha256": "928a2dd01ab0a09854570786b073a9d5f158f05859548389f328e36ca805ba7d",
+   "chars": 47233,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "fold.test.mjs",
+     "status": "added",
+     "line": 169,
+     "text": "assert.ok(true);"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "5 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "5c114081c3106eeaed16ed88706ed22847f9a658",
+   "diffSha256": "4640f89b50798959342cd6a5cf7fa2da603158f1fba5fedbbcdd19ebbd81e72e",
+   "chars": 28495,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "92 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "7a0bd32e11861e18009abd6883b1fc248308188d",
+   "diffSha256": "279b9de85b3c855411dcb9fc7dbfcb99e9355ae72b7277e8ed242aa0b05a33a9",
+   "chars": 65906,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.card.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "14 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallkard-forge",
+   "sha": "6f99c6c89c85e29e554affacd2bd8787035a071f",
+   "diffSha256": "3b02aa8941104819db821db61ddb4f8df4188df6aefff2790fafe53754a62c9d",
+   "chars": 49528,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "falllink",
+   "sha": "9c7bca544bdf75da446506a4c4413d78a7d7cbc9",
+   "diffSha256": "63dae5357db6626928332fffef37b52bb1cfb2b79a04f4473cb87f94359ea57d",
+   "chars": 24141,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "falllink",
+   "sha": "59bdbb7e804bd1fd1376a6c9a2c8a311a5b853fe",
+   "diffSha256": "3d03c322a3da56462a53264d379632026543aac3f006529f06e92e4f18dde6ac",
+   "chars": 3471,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallnode",
+   "sha": "e67a504ffe5f682956e3cc0f27a5e1578f6ec356",
+   "diffSha256": "e22de7fa5c64749c27266741cfd271d0ea27e5e3541353d60f0d831884720f28",
+   "chars": 117993,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "17 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallrouter",
+   "sha": "82d41434ca9c5b80c2d3a822a4351ab0048aeb88",
+   "diffSha256": "7f28cb43b59304f5e563a501b1e96f3b171bfb6d635104139238f78ed347b66b",
+   "chars": 913,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallrouter",
+   "sha": "71f762440c60f1e717260442d74178202f57a8a9",
+   "diffSha256": "8b6e7b0f60f173864cc633013990c087382508a4a27c177552d6f94f5abf2b0b",
+   "chars": 2808,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallrouter",
+   "sha": "222ba9e3447e91be928df93b773ff4e89323ba84",
+   "diffSha256": "27a82e38e142273dae15239a44d098accebed8c80c83c8f3d64971fc5c95c256",
+   "chars": 82427,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallrouter",
+   "sha": "b33dcf622c4ac802a86627cc6c30f91dcc4d9a2c",
+   "diffSha256": "3d03c322a3da56462a53264d379632026543aac3f006529f06e92e4f18dde6ac",
+   "chars": 3471,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallrouter",
+   "sha": "8b371d17387be2e6a02b8a0f80a886fa859436dc",
+   "diffSha256": "17df401fef0666084b5778540a17a03ef9415b4e98982608cde65677afdfd7b3",
+   "chars": 124692,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallseed-compliance",
+   "sha": "37162804299fe2b4e0cfa3a614530df830e4504a",
+   "diffSha256": "7a7193d0083ff3a8ef7647ac3aac73252b8b6a8e23d48ce18ea7622e74fdf13b",
+   "chars": 64886,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallseed-compliance",
+   "sha": "090ed7b3a7186ff83f86c6be5d1d0fac71e08ca3",
+   "diffSha256": "3d03c322a3da56462a53264d379632026543aac3f006529f06e92e4f18dde6ac",
+   "chars": 3471,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallskin",
+   "sha": "27351173efd8f8c31a6c231e4c8262f1209a1e32",
+   "diffSha256": "607f355e58256f224af251bf2a01a17b3adc97a5f1b00c3316ce5c969689ae7b",
+   "chars": 154230,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallskin",
+   "sha": "4a603a02cda0d2b0510f08c73a818e66501391cd",
+   "diffSha256": "3d03c322a3da56462a53264d379632026543aac3f006529f06e92e4f18dde6ac",
+   "chars": 3471,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "88e1710391bd50147fb529a84f970d6dce58efd7",
+   "diffSha256": "589ab5b810c3f7cda5cc14b11bdd0829ee1aa976497d98914e8d62ad6cae537f",
+   "chars": 148976,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "01ac6cf7089f797779e357c752f70e993684fb39",
+   "diffSha256": "f406f69b86bfb512485d038492be429737ae5f69ff731f5a769181db8e7ccf8a",
+   "chars": 4673,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "bcef77d31f1fff668cde5709b635ed48d4637a82",
+   "diffSha256": "37a9d1b1131e4bd3299c5d7a30450e132f397087323bf3d0f9455672e93cbe09",
+   "chars": 88267,
+   "verdict": "flagged",
+   "findings": [
+    {
+     "rule": "test-run-removed",
+     "severity": "high",
+     "path": ".github/workflows/gate.yml",
+     "status": "modified",
+     "line": 78,
+     "text": "node .witness/witness.mjs mutate bridge.mjs --test node --test | tee -a gate.out"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "e6e7d2d96a9d40dc42e8d94498fa793dedd8fa39",
+   "diffSha256": "22d1333fbb1eb636c0f7f5b9f7347fb7e70076d0873db54860b4a2ced213c496",
+   "chars": 11458,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "d1dc42b58f1db30d09ea7bf61ae7dffedd94ea58",
+   "diffSha256": "f743e12311d56f7cef324820b11e7af0980d985736098d70e8bf4c874fc7ee0e",
+   "chars": 327119,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 20); → assert.equal(Object.keys(D).length, 21);"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "cc48f53fb57be561f8f686601fee27b3e00be50b",
+   "diffSha256": "47ac59ed953c9b6a55a3e8847a82f35b88a0d49189995e8097810a6b7cde9b78",
+   "chars": 325113,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 19); → assert.equal(Object.keys(D).length, 20);"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "2a684357e114ef139232c718e8cd44b17d715d03",
+   "diffSha256": "1101d6a9beeef7a43e5a71d443c56d2a95365f5dc8fa25ec261cbdc9e7a05f26",
+   "chars": 302732,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 18); → assert.equal(Object.keys(D).length, 19);"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "1ffc8b4221deeafaf21424cdf613078de2a92003",
+   "diffSha256": "fc32e866ba8cd64efc02164dc4833cec187a36360dfa58ed44cc43d49980d0b1",
+   "chars": 327069,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 17); → assert.equal(Object.keys(D).length, 18);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "trial.test.mjs",
+     "status": "modified",
+     "line": 11,
+     "text": "assert.deepEqual(TIER_LABEL, { unknown: 'Unidentified', normal: 'Normal', magic: 'Magic', rare: 'Rare', unique: 'Unique', set: 'Set', ledger: 'Ledger' }); → assert.deepEqual(TIER_LABEL, { unknown: 'U…"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "c994c54f20612c4f5103f113ac464be1a00cebe8",
+   "diffSha256": "cd845b750bdfe3f125510efa9630f3de6a169b89534cbf02a933cee4093d0b0b",
+   "chars": 322073,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 16); → assert.equal(Object.keys(D).length, 17);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "trial.test.mjs",
+     "status": "modified",
+     "line": 11,
+     "text": "assert.deepEqual(TIER_LABEL, { unknown: 'Unidentified', normal: 'Normal', magic: 'Magic', rare: 'Rare', unique: 'Unique', set: 'Set' }); → assert.deepEqual(TIER_LABEL, { unknown: 'Unidentified', norm…"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "9610b333b401eae3723e6136a16f2f337af49382",
+   "diffSha256": "5a45886082d342b4ccac95c6b45ada51ed1e45760bfa23351935095977bf8071",
+   "chars": 305768,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 15); → assert.equal(Object.keys(D).length, 16);"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "8b406323495871a8799c0de600445494bfb860f3",
+   "diffSha256": "3b00ca5ebe17aa05a7613c4445ab1123fc6da0fb1128b9d81dbe54101cfcd3ea",
+   "chars": 321724,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 14); → assert.equal(Object.keys(D).length, 15);"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "0a0809802a233b0de593a3282a352937cf4419a4",
+   "diffSha256": "8d8370ef277b3af7bbbf110a5a5043b59d804476019f0291e61892877257072c",
+   "chars": 358315,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 13); → assert.equal(Object.keys(D).length, 14);"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "c5f16291b5360047c25dcddf64e2349ca8005d1c",
+   "diffSha256": "560ab82d8eb8d1fcc7a137e34bb4d9ed8d7de58013c4ab7c455e91aac552f9c0",
+   "chars": 335126,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "deck.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "assert.equal(Object.keys(D).length, 11); → assert.equal(Object.keys(D).length, 13);"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "96c16e54570f87989514feed3f553131099173ac",
+   "diffSha256": "a87e63b74fbf8884069559166d18fff4efc3897e278d8988dab541a0ed8b2a82",
+   "chars": 20367,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "17 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "01bc2fae44cc08736fc2abac83753cba62c3ffe8",
+   "diffSha256": "46e30db161da9522af6a924c77d7c50ccd98c72ba21d3339475a794d58906ec5",
+   "chars": 1362,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "c18c9c2a8ee1277424f1e3ac10e270b88e489c79",
+   "diffSha256": "10d939398f2f08426b5cf94184d59b5affcdc38106a756a22b759562b354f107",
+   "chars": 562397,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "e44fc05c821e3efb4b4b617684f58fc17ea3562c",
+   "diffSha256": "9811b5ee262fb177e6d2ce14bc8fbfffde4a1718a610acb128f0a08e11bf23c9",
+   "chars": 2249776,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "003a12d2fcce28545d4791b226dd59d2a5701a10",
+   "diffSha256": "af957dfaf46908fb6a4e22529c357eca7a0a18890a24bcdc54fc692410f2716b",
+   "chars": 13652,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "f216b725529f77c3a4144253580533189b7f1df5",
+   "diffSha256": "e805eca7a0e7c63c087a720cbc0a15695c5c398671f383191931a67db9782aac",
+   "chars": 1562336,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "render.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "14 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "dbbe09254e3883f2d7a59c6b55f2c973609dc543",
+   "diffSha256": "5e7483c07bc351f502bec343d0b1828d1adb136dcddfe084c04e30a4c60502c8",
+   "chars": 1243,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "c97691dc29f99c6e5f21fa0ae720861f78176f2c",
+   "diffSha256": "a1f6ab2a77db577a66dfc0620110d1abc98085499bffef01c070ac439cbb4261",
+   "chars": 30094,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "doors.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "8 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "a45e588f21f85ecdebc3fcf411617a765c62a4a0",
+   "diffSha256": "8570ee0c24c233317ca0e35110c1a10862ea64a1ee4bab957ddc6e53705cfcde",
+   "chars": 30062,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "mind.test.mjs",
+     "status": "added",
+     "line": 85,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "7900add7452093acb664f52471a36134316702eb",
+   "diffSha256": "1d7f85488bdc3e96595fdde1c102b8e84b0354f545d6906573eec92b80377bd2",
+   "chars": 27609,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "journey.test.mjs",
+     "status": "modified",
+     "line": 20,
+     "text": "assert.equal(j.cores.length, 6); → assert.equal(j.cores.length, 10);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "journey.test.mjs",
+     "status": "modified",
+     "line": 81,
+     "text": "assert.equal(j.level, 3, 'two cores done = level 3'); → assert.equal(j.level, 4, 'three cores done = level 4');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "journey.test.mjs",
+     "status": "modified",
+     "line": 83,
+     "text": "assert.equal(j.title, 'the game', 'the title is the LAST done core in set order'); → assert.equal(j.title, 'a duel won', 'the title is the LAST done core in set order');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "journey.test.mjs",
+     "status": "modified",
+     "line": 92,
+     "text": "assert.equal(j.level, 7); → assert.equal(j.level, 11);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "journey.test.mjs",
+     "status": "modified",
+     "line": 94,
+     "text": "assert.equal(j.title, 'the whole world'); → assert.equal(j.title, 'meshed — the whole world, together');"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "ac5b6615c84b333fb44a715947023c45a6d3db74",
+   "diffSha256": "0569db4585129949453ca4faf06252c168716443943fa9fa3595352e6b317623",
+   "chars": 27121,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "7982a4162ec15551295fb8af1123b8eced1b882c",
+   "diffSha256": "92e6168395de0495a59d0b9ab27ae63fa201458c7f14d4e40fd13d646720e612",
+   "chars": 14042,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-net-loss",
+     "severity": "review",
+     "path": "guide.test.mjs",
+     "status": "modified",
+     "line": null,
+     "text": "5 fewer assertion lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallworld",
+   "sha": "0080f7ba23a6494f6971df28889d3396930f1cb6",
+   "diffSha256": "7458b1a12b24489205e613606a33d207b72656fef075d2d00fbeb656ff35217b",
+   "chars": 27360,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "0af01eabab817f83809b83230ccc7df7cb42743c",
+   "diffSha256": "5301994f0ee0890bc4b4483bf715da751e353c5be8be86fcf212afab43a0338d",
+   "chars": 555491,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "3d96c021eb3b8c265ecd81c3fc5a4119631d5e72",
+   "diffSha256": "66a08fff12074a136ce1ba9ca27e5e4a4381a00b1064fd991bb48d97962eb135",
+   "chars": 86932,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "d8b9fa0143d92187ddea7dcb645775f632a38a1f",
+   "diffSha256": "553c0e13423d0109b7dd68ae41973419307c9c7c22d5be87c75d76681702ac1a",
+   "chars": 498130,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "d330dd0dedcb4781b502cdcf2048ffb12a509077",
+   "diffSha256": "c41661ffdc3799fd75270f0b972cd09aac1d30149c58f1450fe8e362848350db",
+   "chars": 1556,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "65e3b80f10ed5aa5156bb9e5aa4b6ace06e920bb",
+   "diffSha256": "18961ec8ffc3bceb60864b2c0df7f4436a11380811d748ec05a2b29f335dfe56",
+   "chars": 3965,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "49132b605cd24633ec6058de792176eb359d443e",
+   "diffSha256": "e381668412aca59a76905bb4d988cfa0cb5ed514a18ddde184a9e15a79daf9fe",
+   "chars": 2154,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "a48150b8d14812d13908f343a9620dc049cd7829",
+   "diffSha256": "230ecef440529a014db54219e3332c88fe8cc59368a67b44286dce376d2f9fc4",
+   "chars": 3112,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "fba40b9893002e384db901c052f34bea35f8ef7a",
+   "diffSha256": "f8fd1cbdc9cc9a6df2bff94d0109744cb27149f3291454b7b7d389428b0c1aa3",
+   "chars": 294042,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "62fdc94d71e850c24f41a00aac306343e7e182c6",
+   "diffSha256": "103a88a0183cdbd436532f02e0d5f8da300d44aa99d515dd341452b70ab30e8d",
+   "chars": 2592,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "a12235bc46cc0a883717370d11de11f09d126f0e",
+   "diffSha256": "e072a5efc385af205c294ce085dff3c97468e22c99f213f4039980f49b3e72d6",
+   "chars": 838,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "711ca7e5c9bd3ab6ee8f63d53c57997eece13c67",
+   "diffSha256": "53c2eaa58a38c16d7fad54f3743187ea792d33faba507109e6e5e5b982a77252",
+   "chars": 32108,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallworld",
+   "sha": "374d9dd5bd0bba4d8b0a529bc21b95c4fca53ae5",
+   "diffSha256": "763a166650eb692c8abe6fa260eb51a0f7d31d721a2dee84e45ea9fd22758f45",
+   "chars": 768157,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "geometric-ladder",
+   "sha": "1d8e85f902b302d80eee30005621591611c11706",
+   "diffSha256": "c47d1c4f33a7b1845b6e0e8ca9421930388c6a1718ed3ae05fe97e251ccb8635",
+   "chars": 403766,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "glass-company",
+   "sha": "56c804f001ef0646dbe06e21ed868ec78ee28c9a",
+   "diffSha256": "273addf5ae5875bf490f6233371a8666372d379fddf451d0392b03403ce86d36",
+   "chars": 32385,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "heartbeat.witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "seam.witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "hybrid-gate",
+   "sha": "b593def2c15ffaa1fffee038e7c22511f3373647",
+   "diffSha256": "458d4e0d392af286e76ef9240c6cd0ae3d0ec0c468c5b37b8216b5d675492a4e",
+   "chars": 71584,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "hybrid-gate",
+   "sha": "09c6e67bdec3f2e5f8a1fa593d0673ebad2935e2",
+   "diffSha256": "a51d49d990c0246be4269e1e5fd30a567c3c214d1455075ac0100a1a94fa80b8",
+   "chars": 112353,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-citelock",
+   "sha": "05b9cf75fadf234a2c77a34157adc2ea28ffcbda",
+   "diffSha256": "ae0bb724304a6b5921f27c0e9ffa9a24208c46dc7115939618267520b094f410",
+   "chars": 32916,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kernel.test.mjs",
+     "status": "modified",
+     "line": 13,
+     "text": "assert.equal(ALGO_VERSION, 'citelock-v1'); → assert.equal(ALGO_VERSION, 'citelock-v2');"
+    }
+   ]
+  },
+  {
+   "repo": "kar-citelock",
+   "sha": "c297063e74cf82b95c3eb9fd40005b8f8a32cebb",
+   "diffSha256": "aec119432279efc9d47364e6eb35644e5952cb9fde507384e7ae47f8cdc3f17e",
+   "chars": 18563,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-citelock",
+   "sha": "2f9aef25a6611e0cb1b3b5c1d91f271656432d21",
+   "diffSha256": "081eccb5a2bd599874192f1ec4fc2e755c51461b9cae62d75b3db7ebcc974a39",
+   "chars": 38062,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-citelock",
+   "sha": "b754a2a7e7226929590cf4f14998ca7b066afd04",
+   "diffSha256": "22cf0a960647a771880892b5ed91048a73b68b377be064ba10771884ee9d9d74",
+   "chars": 617,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-citelock",
+   "sha": "c5d9dfac3793a3b4f9e4d04691eb28d581232a01",
+   "diffSha256": "e05de2ac052fb23d892f4cf8a94f520bba4321ed8cb69d3a68e1c8742a28323c",
+   "chars": 6662,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "skill.test.mjs",
+     "status": "modified",
+     "line": 51,
+     "text": "assert.equal(r.stdout, JSON.stringify(expected.report, null, 2) + '\\n'); → assert.equal(r.stdout, serialise(expected.report) + '\\n');"
+    }
+   ]
+  },
+  {
+   "repo": "kar-citelock",
+   "sha": "654e2ce6cb0a0b2ffd449f77a3cef1fdd0650bd1",
+   "diffSha256": "141f31832163b1f0c8997c69a6cc7de5dd66d6d687e35ebb26f28d60b20a5bd2",
+   "chars": 90802,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "14 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-hysteresis-gate",
+   "sha": "37ef7322e1a452f43c30ef3761483d2df8552b28",
+   "diffSha256": "8b3c464c84b9cb580ba743e598df7fe90b3ae9e1d827725987d1774e90474dbd",
+   "chars": 32647,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-lessons-spiral",
+   "sha": "3349e0da523fb32c9979f72623681ecbddea7f8e",
+   "diffSha256": "3d5df512d1215be8253293fd19a913ec34a1d6f8be9ce42179715d250f6e92b3",
+   "chars": 42775,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-pixelfold",
+   "sha": "1f3e09f7bfe0862a84a4a06212124ea9a9f46b75",
+   "diffSha256": "0c9a745dd6d3ccd2f81110c3f0c0096d1417dee19560b900c5dbe5f1cfba3ab9",
+   "chars": 55469,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "37 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-spendwall",
+   "sha": "5d02254f8df7142810a15867ff77fcd6dc316a2e",
+   "diffSha256": "c4fd61736c88ec757d17ddafec828b6ca1a2b28619a4e7018bd88531901cd84a",
+   "chars": 51447,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/audit.test.mjs",
+     "status": "modified",
+     "line": 19,
+     "text": "assert.deepEqual(pass([]), { K1: true, K2: true, K3: true, K4: true, O: true }); → assert.deepEqual(pass([]), { K1: null, K2: null, K3: null, K4: null, O: null });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/sim.test.mjs",
+     "status": "modified",
+     "line": 29,
+     "text": "assert.equal(sha(sim), '2f32717cd60de9ef23c14b10cf202121483f0637d1a8bb9762e9541ca020a8c6'); → assert.equal(sha(sim), '943f2084da708e0086e6a4458e9099922e3595aab7b6fc8d6166a088c5f6f920');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/sim.test.mjs",
+     "status": "modified",
+     "line": 30,
+     "text": "assert.equal(sha(run({ prices: PRICES, days: 3, seed: 5, settings: { dayCents: 100 } })), 'db8a2964c842424a8d5c1ee373090ef5b80d616956d7ab264bafe2fb71d1af52'); → assert.equal(sha(run({ prices: PRICES,…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/sim.test.mjs",
+     "status": "modified",
+     "line": 44,
+     "text": "assert.equal(sha(m), 'ed2b9bd17b76cc352951101c5705b28c861a865250ad6eeaec3f0146a746b41b'); → assert.equal(sha(m), '66e6450671d950a3723b6e11acdc309c0eab7a7539295458ff7390e4490a1f36');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/wall.test.mjs",
+     "status": "modified",
+     "line": 219,
+     "text": "assert.equal(check(st(1234, 0, 9500), '2026-11-09', 1, cfg).why, 'the API tier is off: $12.34 of the $100.00 credit is spent and Kar stops at $95.00, until Simon raises the stop'); → assert.equal(che…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/wall.test.mjs",
+     "status": "modified",
+     "line": 264,
+     "text": "assert.deepEqual(p.entry, { seq: 5, at: AT, day: '2026-11-09', job: 'teacher', spentToday: 9, spentTotal: 9, kind: 'reserve', model: 'claude-opus-5-5', effort: 'medium', maxTokens: 6000, bytes: 3000,…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/wall.test.mjs",
+     "status": "modified",
+     "line": 321,
+     "text": "assert.equal(brief(L, {}, AT), 'API tier: today $0.19 of $2.50 · $0.19 of the $100.00 credit spent, $94.81 left before Kar stops at $95.00 · 3 calls, 1 refused · by job: cold-read $0.02, teacher $0.1…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/wall.test.mjs",
+     "status": "modified",
+     "line": 324,
+     "text": "assert.equal(brief([], {}, AT), 'API tier: today $0.00 of $2.50 · $0.00 of the $100.00 credit spent, $95.00 left before Kar stops at $95.00 · 0 calls, 0 refused'); → assert.equal(brief([], {}, AT), '…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/wall.test.mjs",
+     "status": "modified",
+     "line": 325,
+     "text": "assert.equal(brief([res(1, 9500)], {}, AT), 'API tier OFF: $95.00 of the $100.00 credit is spent (Kar stops at $95.00); Kar runs on the free tiers until Simon raises the stop · 1 calls, 0 refused · b…"
+    }
+   ]
+  },
+  {
+   "repo": "kar-spendwall",
+   "sha": "eb2338005afdcb898a924639eb0a8fbc694e9758",
+   "diffSha256": "ccd1f3f57cc0a4e98a2773901fdbc0fc348b5dd30f98ecfd2a4663786eb8f3be",
+   "chars": 126836,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/audit.test.mjs",
+     "status": "modified",
+     "line": 69,
+     "text": "assert.equal(rows([res(1, 14), set(1, 15)]).O.measured, '1 overruns'); → assert.equal(rows([res(1, 14), set(1, 15)]).O.measured, '1 overruns; no answered call yet to check the one-token-per-byte boun…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 37,
+     "text": "assert.match(app, /pass \\? 'HELD' : 'FAILED'/); → assert.match(app, /await checkP\\(\\)/, 'P is decided in the browser too');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/sim.test.mjs",
+     "status": "modified",
+     "line": 29,
+     "text": "assert.equal(sha(sim), '8d2f8eb5812872507b1ebd5df6430756e3b211bb63b968994d96771c2f4b370a'); → assert.equal(sha(sim), '2f32717cd60de9ef23c14b10cf202121483f0637d1a8bb9762e9541ca020a8c6');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/sim.test.mjs",
+     "status": "modified",
+     "line": 30,
+     "text": "assert.equal(sha(run({ prices: PRICES, days: 3, seed: 5, settings: { dayCents: 100 } })), '87144e2450d130c997e267375b8481cb5ccdb729b9add042fce11a1cc83cd9a4'); → assert.equal(sha(run({ prices: PRICES,…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/wall.test.mjs",
+     "status": "modified",
+     "line": 262,
+     "text": "assert.deepEqual(p.entry, { seq: 5, at: AT, day: '2026-11-09', job: 'teacher', spentToday: 9, spentTotal: 9, kind: 'reserve', model: 'claude-opus-5-5', effort: 'medium', maxTokens: 6000, bytes: 3000,…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/wire.test.mjs",
+     "status": "modified",
+     "line": 138,
+     "text": "assert.deepEqual(L.map((e) => [e.seq, e.kind, e.code]), [[1, 'refuse', 'tier'], [2, 'refuse', 'day'], [3, 'refuse', 'key'], [4, 'refuse', 'size'], [5, 'refuse', 'size']]); → assert.deepEqual(L.map((e…"
+    }
+   ]
+  },
+  {
+   "repo": "kar-spendwall",
+   "sha": "5c536106b9ef88dc6655921f0d8bf1517a33153c",
+   "diffSha256": "6f36d674d5197a564576086ebec16fa8a070f0ecaceba55071b509111e177617",
+   "chars": 197189,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "swallowed-failure",
+     "severity": "review",
+     "path": "test/wire.test.mjs",
+     "status": "added",
+     "line": 65,
+     "text": "try { o = JSON.parse(stdout.trim().split('\\n').pop()); } catch {}"
+    }
+   ]
+  },
+  {
+   "repo": "kar-voice",
+   "sha": "75a563a031e64a3c82ef8ed79363cd3be00caf76",
+   "diffSha256": "d7ac8f33c5c431ea9e19606a175411d6c68a368baaa822a640e2a895659983ed",
+   "chars": 73575,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-voice",
+   "sha": "d2cffb66e9f32054be754e7ccb43ac56b3cea154",
+   "diffSha256": "3823793e2990a53865e5fdb65802defcc2b70068bf1bf96e6b091b2bd1357706",
+   "chars": 74441,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-wisp",
+   "sha": "560a40c72cb0529964320abd3a7a1f01e06ccff8",
+   "diffSha256": "682a8755eb69eb51e15e226e525ed923419bbabf9e657ba3194ad7d375287a71",
+   "chars": 30568,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel.witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "27 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "KonomiStandard",
+   "sha": "428b55c54fdc03215c9cd16dfc0522ebeb8c6d41",
+   "diffSha256": "f2b1c9af8e9c0829ea6d21d383a269cd90afef02559cfcf7da786c0bff9ba6b1",
+   "chars": 486,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "KonomiStandard",
+   "sha": "69fadfc457e94a10b13f5d04c50496e91f0fc88a",
+   "diffSha256": "fa1353b87bdb8885ba00c152488e5466ed25f70389dd9b70e32b8bd379fa373b",
+   "chars": 11363,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "KonomiStandard",
+   "sha": "d1e67b38bf2d347116811849862e15351fafb2a4",
+   "diffSha256": "fe242db850f04ce2f8bf48beefd6bad104c3c07abbde82d933de3e438bee61ae",
+   "chars": 50826,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "KonomiStandard",
+   "sha": "6bbb009bf5d5cfe5a2dca953a9d48ce4aed4fa95",
+   "diffSha256": "adb5166f510a8d3963206a0223ecda779956ef5f769659bede7004b56668d095",
+   "chars": 209651,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "KonomiStandard",
+   "sha": "0dd9c8564070bd5be8bc710f27abed817ca8239f",
+   "diffSha256": "f379fac532af52614e718becf91afd5dbc180c99c567e1ee49bc2221df0ae87d",
+   "chars": 9853,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "liveware",
+   "sha": "4f51108abd0c112eff56ddb3586350bba169ae3d",
+   "diffSha256": "a97c0d1846d4a77b3398a27698f373640f066a5c9a18024b31dc4b3e512d14a0",
+   "chars": 71465,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "liveware",
+   "sha": "ee580e4bebeeb1ddbf2fb30817a471572a414c80",
+   "diffSha256": "7c477dc5e7ac51b1af62cf7f3527c172fbc8c38d575050e4adc0cc34e5601200",
+   "chars": 45842,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/t11.test.mjs",
+     "status": "modified",
+     "line": 38,
+     "text": "assert.equal(src.files.length, 13); → assert.equal(src.files.length, 14);"
+    }
+   ]
+  },
+  {
+   "repo": "liveware",
+   "sha": "23d2a1c3ae6136ebdd7f91c136aec5777c67044b",
+   "diffSha256": "c26c77e03c2917bd2b1e3db677d5694393c15a9070cec2bbffa7ba5acc531ca1",
+   "chars": 568636,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "liveware",
+   "sha": "3cb45b704dc381d3f3fc473b66d637cb33db2af2",
+   "diffSha256": "0198a28f9d9987608c62d19ca1f424fd4e434beb3482af7f52f7274e233e8555",
+   "chars": 133994,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "src/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "14 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "memory-keep",
+   "sha": "9cdf97fd9e80a84f2fdfdeb9522ca52a5894c426",
+   "diffSha256": "17046bc74e352335e2e0ed6b0413410fe1051391c91271e4e49b64bb72ea9fec",
+   "chars": 104245,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "32 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "mesh-governance",
+   "sha": "c46441afb82f1ad2804a3b06a1245b575f2b5d13",
+   "diffSha256": "fe03181e9a63bd4e1f734b2382d479a97828e1416fff58266ab3afc2504698a6",
+   "chars": 76568,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "mesh-self",
+   "sha": "ac41f5a8013593bf6b2dc5c9b39b9407d5989a9b",
+   "diffSha256": "4968460cc270146b671d1feda2fb8e2e5101a8924f1380a67192ba48ff55b33e",
+   "chars": 86781,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "mesh-share",
+   "sha": "9088b98717099572892ac1eb29a27d556f7a5d23",
+   "diffSha256": "c3cd903b6ad46783fe4178edc6661fd949b10774a7fc145ab7266a1d65dda554",
+   "chars": 69622,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "mesh-share",
+   "sha": "879634860e9c20d48938c9fd4f70ec7e1ffb6985",
+   "diffSha256": "f40a665bd03e44617c67993dab2efea4d845b36c4e01e5f9ba4937d8387b4331",
+   "chars": 72211,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "meshos",
+   "sha": "5dddba348575b04b8622c6359dba9734f7bf8835",
+   "diffSha256": "435409041171ad573505f1eafcbb3aa84c3f22d85bea34c5fabaced57880e3ff",
+   "chars": 112216,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "meshos",
+   "sha": "e6cf145eacdbb653f044419e263fafb431f02c10",
+   "diffSha256": "9fecfa622ac5f8476f59100e7339799c539cf7c98aa5583c77b071937768984e",
+   "chars": 133883,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "nexus-drive",
+   "sha": "70b0879eac89bad470a99cbee8cb5e864578db27",
+   "diffSha256": "9cec52716b97dfb733a1aeaf29675debf63206acd9f348513b61e624de64b62e",
+   "chars": 172792,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "nacelle_steering.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "transducer.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "d5f2cc44538d3f9dd8ed6f40d1bebe2934c47716",
+   "diffSha256": "34da4d09341fc4c544c7016eb87b4348f00a7f6107a5234779cae47401bd00ae",
+   "chars": 1819,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 28,
+     "text": "assert.equal(sha(buf), 'e9ae2f594d04bcdf92dbbff9f04991a96c83bb630e2f1367b11b1ce517cfc651'); → assert.equal(sha(buf), SEALED_WHOLE);"
+    }
+   ]
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "f7503c77902e3bc9f325a26e426c66b987464633",
+   "diffSha256": "2d7587467d01abe7143a30aaebe1511f0b505fa0e52f4dc217e998587161aced",
+   "chars": 6523,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/scan.test.mjs",
+     "status": "modified",
+     "line": 33,
+     "text": "assert.match(w, /env: O\\.env\\(process\\.env, p\\.cfg\\.maxTokens\\)/); → assert.match(w, /env: O\\.env\\(process\\.env, p\\.cfg\\.maxTokens, karToken\\(\\)\\)/);"
+    }
+   ]
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "beaf3636315c5720d1a816d132d06faa94429e9b",
+   "diffSha256": "fc406abcb5e76c9d29732057cbdb69275da9dc17db183aa776a08742e72cdefc",
+   "chars": 8755,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "bd450db4d2e5fa2af19c520f85a9ceededb4e6ff",
+   "diffSha256": "fa6c5227f5a2326fb60c3958246de268b89033ee8f627ab4ed15267a976b5f9b",
+   "chars": 1181378,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/finance.test.mjs",
+     "status": "modified",
+     "line": 264,
+     "text": "assert.deepEqual(F.SCHEDULE, { meter: 100, seed: 300, batch: 40, salt: 'cord:' }); → assert.deepEqual(F.SCHEDULE, { meter: 100, seed: 300, batch: 40, salt: 'cord:', hash: 'sha256' });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 23,
+     "text": "assert.equal(sha(buf), '1d40d88cbcab33f1ef8c20dd4f681af13132d6d1bc32139bbcc98db8838566ae'); → assert.equal(sha(buf), 'e9ae2f594d04bcdf92dbbff9f04991a96c83bb630e2f1367b11b1ce517cfc651');"
+    },
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "test/triage.test.mjs",
+     "status": "added",
+     "line": 131,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "79d3e3f2b9cc741484b68ebdc76491451326aefe",
+   "diffSha256": "8e7855349dad2502dba328bbafd129ccc96d364bb6e375281db78a67664b257c",
+   "chars": 242728,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "test/finance.test.mjs",
+     "status": "added",
+     "line": 295,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "15e0d13f956f8a7df68bb136bc1fcbef037daafe",
+   "diffSha256": "21698fb49f11061de91cf312cff68d2328591bfc9746ee95525576cb82c8d956",
+   "chars": 23006,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/night.test.mjs",
+     "status": "modified",
+     "line": 146,
+     "text": "assert.deepEqual(eff.map((p) => p.prov.recipe), ['recipe from agreement-date', 'mine-1', 'mine-1', 'mine-1', 'mine-2', 'mine-2']); → assert.deepEqual(eff.map((p) => p.prov.recipe).filter((r) => r !==…"
+    }
+   ]
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "23d5d1a29076e67682be7b70facc243a85763d59",
+   "diffSha256": "8538d1bb3a396a6982c261ce27d30e946497317119a02a4fb90cf502d662b973",
+   "chars": 10826,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "c645c2412912e2e033d9db775bd55fdc58efed32",
+   "diffSha256": "89efe088c5c20e833b5e009cbbed0c98e3061e401ffcfa8d86bdee98ff82a11b",
+   "chars": 14454,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "2d8a0401f509e18e8eb46569b48d5c3ff71f6cbb",
+   "diffSha256": "74598a2bf130c103df6af67f2ddfcb439e46ae270e5618bb1488af48df9fc322",
+   "chars": 4451,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "30e8278a18c0314aae1dc633fbf2a9f91b01c02c",
+   "diffSha256": "9815f4ed3b4fb8ff9b3b32f088566131f8f513e6aa31124bb0e40b87f15b1664",
+   "chars": 146168,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "3f19af3ccb6b36d2df14a6a509e7e728a96067f5",
+   "diffSha256": "8ffba4423a5336801d4d448c5ca6694c327c4800b139f6a2491a21f700b8cf9f",
+   "chars": 41393,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pattern-libraries",
+   "sha": "f95bfea220fae4eb7dc2d43c36351a386c81bc7a",
+   "diffSha256": "ffd3cb40c4276fa23c3f970a43a5af835935e1c83a68cc8612db159543322dec",
+   "chars": 168353,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "0616ea2339b6b262d1bb6cc09f7f816e9d46ad27",
+   "diffSha256": "44e1e9c4bbdce34b28d55b9e9960a762956465927b2d7178736424bc68e29e0c",
+   "chars": 62565,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['arena.mjs', 'back.mjs', 'basis.mjs', 'build.mjs', 'costcase.mjs', 'estate.mjs', 'fusion.mjs', 'gear.mjs', 'hero.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mj…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 60,
+     "text": "assert.deepEqual(printed.map((m) => m[1]), ['kards/kardart.mjs', 'kards/kardpng.mjs', 'kards/ui.mjs', 'kards/ttf.mjs', 'kards/estate.mjs', 'kards/arena.mjs', 'kards/raid.mjs', 'kards/gear.mjs', 'kard…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "f0a08115fbdb59a459e92153bc85291b398fd5ac",
+   "diffSha256": "1433c1f2be94816a9b63f5813c9f1f8c13ef0cac22f768d9eb39db9ce45fa01e",
+   "chars": 71065,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/build.test.mjs",
+     "status": "modified",
+     "line": 39,
+     "text": "assert.deepEqual(k.b, { job: { set: 'hospital', title: 'The Waiting Room', bar: 600000 }, kind: 'kit', parts: [{ id: id('lead'), ri: 2, gate: 571000, role: 'lead' }, { id: id('n1'), ri: 1, gate: 5520…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/build.test.mjs",
+     "status": "modified",
+     "line": 583,
+     "text": "assert.deepEqual(Object.keys(PINS).sort(), [...THEME_IDS, ...THEME_IDS.map((t) => 'jobs ' + t), 'sizes', ...THEME_IDS.map((t) => 'sheet ' + t), 'sheet sizes', ...THEME_IDS.map((t) => 'book ' + t), 'b…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "a4d8d53fc38586de1b49bb030fd30bb8fb07c5a2",
+   "diffSha256": "8349d4e9df01f236351dcb973fe29865416c83538d0923f28723617bcfda2529",
+   "chars": 40753,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "99cb704377844cd0fafc7c778a4ffadf9ad8ee92",
+   "diffSha256": "c6abadbbda179c00245561bf553d993d72718639b64408d80d1e5a7d781751ab",
+   "chars": 147974,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['arena.mjs', 'back.mjs', 'build.mjs', 'costcase.mjs', 'estate.mjs', 'fusion.mjs', 'gear.mjs', 'hero.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mjs', 'raid.mjs…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "95ffeac370790c7d0dce5356f6842e3578338dbb",
+   "diffSha256": "182eabbf3604c898df4da04b063abd7f49f4553f0ca328f0fa8242bf1ad849ff",
+   "chars": 23350,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/items.test.mjs",
+     "status": "modified",
+     "line": 36,
+     "text": "assert.deepEqual(checkFacts(ITEM), { ok: true, f: { form: 'app', id: ITEM.id, name: 'Churn Radar', source: 'divorcerbot', tier: 'works', spdx: '', kit: false, ri: 1 } }); → assert.deepEqual(checkFact…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/kardart.test.mjs",
+     "status": "modified",
+     "line": 351,
+     "text": "assert.deepEqual(exportsList, ['DATASETS', 'RARITIES', 'FORMS', 'TIERS', 'GEAR', 'KIT_SLOTS', 'checkFacts', 'spriteOf', 'FONT', 'ICON_ROWS', 'FORM_ICON_ROWS', 'STAR_ROWS', 'RAR', 'THEMES', 'PIXEL', '…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "4556c14ff9a37883656b8780ea231186bd3c17f8",
+   "diffSha256": "40f0b9c783cc667522c20892f1aa49d28b5a80d52cce2d1dba8e2ca77b4375fa",
+   "chars": 38468,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['arena.mjs', 'back.mjs', 'build.mjs', 'costcase.mjs', 'estate.mjs', 'fusion.mjs', 'gear.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mjs', 'raid.mjs', 'samples.…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 60,
+     "text": "assert.deepEqual(printed.map((m) => m[1]), ['kards/kardart.mjs', 'kards/kardpng.mjs', 'kards/ui.mjs', 'kards/ttf.mjs', 'kards/estate.mjs', 'kards/arena.mjs', 'kards/raid.mjs', 'kards/gear.mjs', 'kard…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "70c60334fc2c3cc9641b2eae7ede25628e5e6abc",
+   "diffSha256": "ef134cd47c30f556b61bcabe6384deaddfe50f5a019c68b60607c129737fdf39",
+   "chars": 69150,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/build.test.mjs",
+     "status": "modified",
+     "line": 264,
+     "text": "for (const parts of ['x', [two[1]], FULL_TITLES.concat('Ninth').map((t, i) => P('n' + i, t, null, null))]) assert.equal(R({ parts }), 'a receipt has 2 to 8 parts'); → for (const parts of ['x', [two[1…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/build.test.mjs",
+     "status": "modified",
+     "line": 325,
+     "text": "assert.equal(rgb(base, 20 + (qb % 9), 89 + Math.floor(qb / 9), 400), vox(fb, qb), 'the second next'); → assert.equal(rgb(base, 20 + (qb % 9), 94 + Math.floor(qb / 9), 400), vox(fb, qb), 'the second n…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/build.test.mjs",
+     "status": "modified",
+     "line": 501,
+     "text": "assert.deepEqual(Object.keys(PINS).sort(), [...THEME_IDS, ...THEME_IDS.map((t) => 'jobs ' + t), 'sizes', ...THEME_IDS.map((t) => 'sheet ' + t), 'sheet sizes'].sort()); → assert.deepEqual(Object.keys(…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "0ced791efdf3dd1a3277d921eab7841158563d9e",
+   "diffSha256": "8c9ca741eac42c8f0005c7a35583f2c1ef855329e48a8c34192dc2e57c765696",
+   "chars": 63754,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/build.test.mjs",
+     "status": "modified",
+     "line": 382,
+     "text": "assert.deepEqual(Object.keys(PINS).sort(), [...THEME_IDS, ...THEME_IDS.map((t) => 'jobs ' + t), 'sizes'].sort()); → assert.deepEqual(Object.keys(PINS).sort(), [...THEME_IDS, ...THEME_IDS.map((t) => '…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "e2989fd26a17f91211764f9abfdded74e3130493",
+   "diffSha256": "dd92266f053d32c03c3d0d49eaf2b9426eef8a6469b405e984165fa6186a7437",
+   "chars": 90079,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['arena.mjs', 'back.mjs', 'costcase.mjs', 'estate.mjs', 'fusion.mjs', 'gear.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mjs', 'raid.mjs', 'samples.mjs', 'ui.mjs…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 60,
+     "text": "assert.deepEqual(printed.map((m) => m[1]), ['kards/kardart.mjs', 'kards/kardpng.mjs', 'kards/ui.mjs', 'kards/ttf.mjs', 'kards/estate.mjs', 'kards/arena.mjs', 'kards/raid.mjs', 'kards/gear.mjs', 'kard…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "4ad5afdc849ff0a1bd2b0cc6e1efe52f78401ebd",
+   "diffSha256": "8c429207f15e80c496acff9fec3af024bd77b21ad6443588dbf96d4e217a17e4",
+   "chars": 3928,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "f6052a91ecc171851cd6cab4d6e572e125ebfab9",
+   "diffSha256": "72ff352a82f4d02eb874761b73cdbf7642a4d8c94ee6fff683f2b56696ee80a2",
+   "chars": 18129,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "6ff5e67cec4360fa1fe5c4db4e6732fcfc703ff5",
+   "diffSha256": "7d90347290d2c0da18f2dcba4ef4f7f942b7c364e86668fb6904f4e0aacc1cb3",
+   "chars": 66791,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "34e45c82a7b548c3bd041ae88e8854598d9e1781",
+   "diffSha256": "5c7a35d7047467d7f9e2a0cc2001e16acf5a4b5baf1f30944c9b7a034b7fc6ff",
+   "chars": 13932,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "633ae6261cf87d5012b732f18b297f17fbc666a2",
+   "diffSha256": "2d020c6140aad30003b360b83eda14c0f5429d4f01b591706283289afdc10c5d",
+   "chars": 116171,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "05ef794bf8f6bcf5f691c26235b85c1b62073998",
+   "diffSha256": "eb26fd635fbd37f34c634a70acfc186262876a44dbf48538600cab5d3b103ac8",
+   "chars": 98391,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['arena.mjs', 'back.mjs', 'costcase.mjs', 'estate.mjs', 'gear.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mjs', 'raid.mjs', 'samples.mjs', 'ui.mjs']); → assert.…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 60,
+     "text": "assert.deepEqual(printed.map((m) => m[1]), ['kards/kardart.mjs', 'kards/kardpng.mjs', 'kards/ui.mjs', 'kards/ttf.mjs', 'kards/estate.mjs', 'kards/arena.mjs', 'kards/raid.mjs', 'kards/gear.mjs', 'kard…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/ui.test.mjs",
+     "status": "modified",
+     "line": 44,
+     "text": "assert.deepEqual(Object.keys(UI_ICONS), [...DOCK, ...ACTIONS, ...INVENTORY, ...GEAR_SLOTS], 'the published icons first, the new ones appended'); → assert.deepEqual(Object.keys(UI_ICONS), [...DOCK, ..…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "1794b5f3d8bf402bfe88b095ba336e56b73edd32",
+   "diffSha256": "55e2cadd01b9c89258dd0090ad798f6d960bd201c8e83f3393a552033f13a33b",
+   "chars": 78326,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['arena.mjs', 'costcase.mjs', 'estate.mjs', 'gear.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mjs', 'raid.mjs', 'samples.mjs', 'ui.mjs']); → assert.deepEqual(im…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 60,
+     "text": "assert.deepEqual(printed.map((m) => m[1]), ['kards/kardart.mjs', 'kards/kardpng.mjs', 'kards/ui.mjs', 'kards/ttf.mjs', 'kards/estate.mjs', 'kards/arena.mjs', 'kards/raid.mjs', 'kards/gear.mjs', 'kard…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "67fd872f0ea810d1dd1f392b77cc925b26a6fd11",
+   "diffSha256": "a3f8a2b5031aefa28287f763ee5a341cf41ff4600620da460f1c10c96cba06c9",
+   "chars": 47904,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "0f90d93bbad606fdd1a729f9f68101a0bfbe4ef8",
+   "diffSha256": "5a0a83603f387155a53c51ee60c8caf143bbf2d15d3e03d719b61943ad647256",
+   "chars": 41442,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/items.test.mjs",
+     "status": "modified",
+     "line": 34,
+     "text": "assert.deepEqual(checkFacts(ITEM), { ok: true, f: { form: 'app', id: ITEM.id, name: 'Churn Radar', source: 'divorcerbot', tier: 'works', spdx: '', ri: 1 } }); → assert.deepEqual(checkFacts(ITEM), { o…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/kardart.test.mjs",
+     "status": "modified",
+     "line": 350,
+     "text": "assert.deepEqual(exportsList, ['DATASETS', 'RARITIES', 'FORMS', 'TIERS', 'GEAR', 'checkFacts', 'spriteOf', 'FONT', 'ICON_ROWS', 'FORM_ICON_ROWS', 'STAR_ROWS', 'RAR', 'THEMES', 'PIXEL', 'creatureFront…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "a90610893fa05dc101bd8ac9c08769ec9278fdea",
+   "diffSha256": "30547ddfe010ae07b53260ba43b1f97d6ff1c61f1ef901e3fee96a7a5155fde6",
+   "chars": 237422,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/kardart.test.mjs",
+     "status": "modified",
+     "line": 350,
+     "text": "assert.deepEqual(exportsList, ['DATASETS', 'RARITIES', 'checkFacts', 'spriteOf', 'FONT', 'ICON_ROWS', 'STAR_ROWS', 'RAR', 'THEMES', 'PIXEL', 'creatureFront', 'paintArt']); → assert.deepEqual(exportsL…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['costcase.mjs', 'estate.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mjs', 'samples.mjs', 'ui.mjs']); → assert.deepEqual(imports.sort(), ['arena.mjs', 'costcase…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 60,
+     "text": "assert.deepEqual(printed.map((m) => m[1]), ['kards/kardart.mjs', 'kards/kardpng.mjs', 'kards/ui.mjs', 'kards/ttf.mjs', 'kards/estate.mjs', 'kards/costcase.mjs']); → assert.deepEqual(printed.map((m) =…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/ui.test.mjs",
+     "status": "modified",
+     "line": 52,
+     "text": "assert.equal(new Set(all).size, all.length, 'no icon repeats another, or a dataset icon'); → assert.equal(new Set(all).size, all.length, 'no icon repeats another, a dataset icon or a form icon');"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "cafe45bf4f6182bce77bf9f38e9702a0532d53b6",
+   "diffSha256": "b6b6fe8338d1fd5b10636bcbe327180a4f6fce78f80aecbcd811d0cf17fd0a97",
+   "chars": 5757,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "7f5f43f0f6f0db605da59a9d9351e6159c1cfade",
+   "diffSha256": "6f6c5f7b17371c693fad14369c0063336c135a11666f7b55f7b61d44275e668f",
+   "chars": 12430,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-net-loss",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": null,
+     "text": "2 fewer assertion lines"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "c1a01539e5e1f46d34ea6df1d333cc0caba231c1",
+   "diffSha256": "2acbbf6fc771f63cfbca0c7d122f42e371c765d2c45afda4a7467a068d8e2efb",
+   "chars": 132661,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/kardart.test.mjs",
+     "status": "modified",
+     "line": 350,
+     "text": "assert.deepEqual(exportsList, ['checkFacts', 'spriteOf', 'THEMES', 'paintArt']); → assert.deepEqual(exportsList, ['DATASETS', 'RARITIES', 'checkFacts', 'spriteOf', 'FONT', 'ICON_ROWS', 'STAR_ROWS', '…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['costcase.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mjs', 'samples.mjs']); → assert.deepEqual(imports.sort(), ['costcase.mjs', 'estate.mjs', 'kardart.mjs', '…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 51,
+     "text": "assert.deepEqual(printed.map((m) => m[1]), ['kards/kardart.mjs', 'kards/kardpng.mjs', 'kards/costcase.mjs']); → assert.deepEqual(printed.map((m) => m[1]), ['kards/kardart.mjs', 'kards/kardpng.mjs', '…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "2aff9f59b14b172551ca0c53c69747a4a7f2dcce",
+   "diffSha256": "c462c1a48c6e8b150842306e9ffb8b6c22637eed5b092a7bbb1c051dbcb439a4",
+   "chars": 51431,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/kardart.test.mjs",
+     "status": "modified",
+     "line": 81,
+     "text": "assert.equal(at(2, 140), HI[i]); → assert.equal(at(2, 140), HI[i], theme + ' ' + rarity);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/kardart.test.mjs",
+     "status": "modified",
+     "line": 82,
+     "text": "assert.equal(at(1, 140), MID[i]); → assert.equal(at(1, 140), MID[i], theme + ' ' + rarity);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/kardart.test.mjs",
+     "status": "modified",
+     "line": 83,
+     "text": "assert.equal(at(189, 140), HI[i]); → assert.equal(at(189, 140), HI[i], theme + ' ' + rarity);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/kardart.test.mjs",
+     "status": "modified",
+     "line": 84,
+     "text": "assert.equal(at(190, 140), MID[i]); → assert.equal(at(190, 140), MID[i], theme + ' ' + rarity);"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "1a2a37524f4316f4db5ee4455a10130b2b82dd8b",
+   "diffSha256": "a3435cb576c0d7b165384160c2b299a054554f643287e28bef34740595a3f8a9",
+   "chars": 9019,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "3047ccc63d2f9a125cb269ffe7a764fa6ce57146",
+   "diffSha256": "bae0af9a06618159d90e6a59d3358e4e735aa5e943c5d5086f5f94203dc314fd",
+   "chars": 853,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "e98994fccf0dc7decb7e4eb0528e46103e2d4317",
+   "diffSha256": "45b151dbb142219b23ff896755ed09fff78386ab8dda1f6595f49e9642e41dc7",
+   "chars": 34817,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kards/page.test.mjs",
+     "status": "modified",
+     "line": 31,
+     "text": "assert.deepEqual(imports.sort(), ['kardart.mjs', 'kardart.pins.mjs', 'kardpng.mjs', 'samples.mjs']); → assert.deepEqual(imports.sort(), ['costcase.mjs', 'kardart.mjs', 'kardart.pins.mjs', 'kardpng.mj…"
+    }
+   ]
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "6d0a5d139e85f507ace73f6539bfee2882410036",
+   "diffSha256": "2c776a22aa692da3341d5ae394a1af107a520c938918abcdcd404c017b32fbfb",
+   "chars": 147768,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "34179929680fd5de59c8fcf7333207288ad29609",
+   "diffSha256": "dec862ff7b36dc538d0bb53b450153427627f6f70b3033a10665d9095e10c0bd",
+   "chars": 14982,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "ee68febfeced8d239de6c04077845a29af56d6a4",
+   "diffSha256": "225c64d38d83c6282599ab1838769fecb6b1ede33d244a5cd7a8dad3bfe78ea5",
+   "chars": 11551,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "pixelwhisperer",
+   "sha": "8d9af82fa8c931d75e4a0f81531ff3d880d77451",
+   "diffSha256": "d3991221fa1c938720e591dd62ba3d58bf6c484052de6a058b81fce8f53a1c22",
+   "chars": 6624,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "post-proof",
+   "sha": "8e8688b7866bb291e515dd19fbdd8c5d4a4e58db",
+   "diffSha256": "747fba8e82a676cebc33d497bfcc48b65658bca786668475070314901706b7c7",
+   "chars": 71013,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "post-proof",
+   "sha": "4cfa12b0c49cdad2e2fa48c82d25eebd6e875617",
+   "diffSha256": "bc60f02bf12d78e1c85e0d5321ea465c9d9489939cc2314019435a5007014de0",
+   "chars": 109657,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "7869ff07aa906e29adacf918259dab9f826acb00",
+   "diffSha256": "9acf98d82cb2639ea1268a238311c4bb93531de93891d5637922952f9ca43700",
+   "chars": 18636,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/receipt.test.mjs",
+     "status": "modified",
+     "line": 81,
+     "text": "assert.deepEqual(Object.keys(KINDS), ['grew', 'refused', 'opened', 'saved', 'asked', 'imported', 'quarantined', 'backed-up', 'regrown', 'synced', 'paired', 'exported']); → assert.deepEqual(Object.key…"
+    }
+   ]
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "d09cf13d4aea3f5963a2379414f14807617e5ba7",
+   "diffSha256": "efe8bec8c80c57e4be5e2b21f3c5050990efe44c5fc662a19f495393cec0acb9",
+   "chars": 3570,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "e140bcc63221c6b58aa791a3c8080f829a1b4570",
+   "diffSha256": "5f7bd50b5d7eb6bc5ea28eb5af025a473e0fc0c9694097495b8af469334b801c",
+   "chars": 14372,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "7f03325588d124c35c3cb11663a8ada4d655695a",
+   "diffSha256": "2df2c8b7460974a42d74ef2dc57152c63a0f5fe34de83c3bd09a70b732ac2943",
+   "chars": 18357,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "fa72fa8351dd661f48d976edb38c3fbaf3dc8ec9",
+   "diffSha256": "6ceb959935784f5053bf2b94328e3aa700192064297a1c3d10a7d7ac49b4cef6",
+   "chars": 161181,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "a4f0229c6d153a35374704b1b30d45edf0c22421",
+   "diffSha256": "f570973cb1004d0f3daa0334cae10a2dbe858665286955ffb8e7d5e82c648145",
+   "chars": 7795,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "e281835ea315fd426b96fc32ba58f0ced59af1e6",
+   "diffSha256": "8367fa61ba768c0e2b253502ef90ba8bafaec74d3c11e7baba545e4622bf489e",
+   "chars": 19075,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc",
+   "diffSha256": "8096282719f9b7fc27cbf1159b871b74ce864a207b91cc0b4261e923c4e22f93",
+   "chars": 211737,
+   "verdict": "flagged",
+   "findings": [
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "test/fixtures/dev/dev-chrome.pdf",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    },
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "test/fixtures/dev/dev-lossless.webp",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    },
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "test/fixtures/dev/dev-lossy.webp",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    },
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "test/fixtures/dev/dev-pymupdf-objstm.pdf",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    },
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "test/fixtures/dev/dev-reportlab.pdf",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    },
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "test/fixtures/dev/dev.gif",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    },
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "test/fixtures/dev/dev.jpg",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    },
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "test/fixtures/dev/dev.png",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "src/parse/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "14 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "e65f93e850ab84fee6024a2590c98812502066b5",
+   "diffSha256": "8115b0212cb5e8f8ac54eae7b69621a715203cd701bf79558b88805fb6647495",
+   "chars": 61035,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "fceac02741a9149df4fa97519677787c238bcf59",
+   "diffSha256": "2d657159e34afd60a2ea85d8706ac58475ac9c8e69ae51a9c66e4db09c02156e",
+   "chars": 69884,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "aca5fd7f1a17966cfaf52e48039221f9fd5e0eb9",
+   "diffSha256": "8e6c3463e2bb4a10ec48bd9a097a8be5bc4ef66974a77300009b367112461c87",
+   "chars": 191349,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "d61fce09291ab1de52f2475f50ddf01b639679b1",
+   "diffSha256": "7b7612cac82c32266c44b9a729bbd6ce4c115ba24992a053365c39149f360ab3",
+   "chars": 5903,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "439c6833ad90c38fd2602ddce0e101374a042df5",
+   "diffSha256": "5a8a1982cef5290ec91dec9e7d1dd39f5ea86c9a69d1e10263a4d57aca825477",
+   "chars": 16598,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "46b3e6ac22703ea51f842a4a07b931813c11fe5c",
+   "diffSha256": "758a680ce9cc95146d7ac6c186550e1accf92c184164bab3a2704f042b93330a",
+   "chars": 1842565,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-laptop",
+   "sha": "9c109c3163b63880fe2ac4c5f82dfef525da7f90",
+   "diffSha256": "5de4219fac4db10c9344c4333ef4e2b8aa6f95e9f5a788fdcbcc436f9b681b62",
+   "chars": 61468,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "seed-library",
+   "sha": "47cd0015b1ea2c6dba8f036ee2c5b07b05c7fe58",
+   "diffSha256": "9810b7654b0b27a1e2be5511d78200a24781457adb0dcb75f7246899bf1e84b1",
+   "chars": 1257681,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "47 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "self-audit",
+   "sha": "ff4e5f5df306684c8da73430c925dbafad47ec54",
+   "diffSha256": "5f6df3492c8f2cc8bc4754ba4d3aa7d51fdb920e1140c1dfebbea30525e2abc0",
+   "chars": 74082,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "si-didy-cascade-sdk",
+   "sha": "26a81e3b4933c598d708b1b616c3a862f4a0a6b2",
+   "diffSha256": "64d65d17889f4871ec9c28a83811576f109156e8c4aa67bfa9d0f8148f90b3f8",
+   "chars": 7056,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "the-assembly",
+   "sha": "e5c5afc1175b9e94434a96553a2a02be8949db89",
+   "diffSha256": "12d19802da572624353005b048cf85977ff85e5b110e5403fe816229e6443406",
+   "chars": 726,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "the-assembly",
+   "sha": "ddf5c5c828abbc69420fd32730b0421cc5a9aed5",
+   "diffSha256": "f6cb8bb299386cd613b1c5c8491470613af12ed65a1a4fc4b1d8788b9d140075",
+   "chars": 46792,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "the-toll",
+   "sha": "52882d028b1ef057c4bb0973b1f9440cba466a7b",
+   "diffSha256": "62568b5df86c0841e026b92acbc7c75d89b8c20d3b582303e6f9339b62f1e11e",
+   "chars": 39829,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "10 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "the-toll",
+   "sha": "e4d8222318a2569ba7c8b43a699a1bc85e280838",
+   "diffSha256": "810967014e4894cd344d9438b26fcb9e1817009797eab3f1b6c7466f0f3289e1",
+   "chars": 41839,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "30 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "the-toll",
+   "sha": "ba297dc6c32233c50579835d0f269ccedb725510",
+   "diffSha256": "81d670f56cf68184b2bdc89c21b0ec4a3218f230da4b016bef089bdfcb3eb484",
+   "chars": 75918,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "27 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "wishwood",
+   "sha": "77ebad6fce1cd538a57c446222351d05811293ad",
+   "diffSha256": "7a4b193410dffd543f7588b2553ae1b922a55f35737018ccc1ade34702e9d8f1",
+   "chars": 206515,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "wishwood",
+   "sha": "00374a96ae7693db1b4b1dec191dd54b730c3c2e",
+   "diffSha256": "583d0a44a2408517d1ff58490095fba661fbffeac5c888c916785f50568fdd79",
+   "chars": 71057,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "62 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "witness",
+   "sha": "9c83bc205150d79ba310cef0f3d5cac626adf02a",
+   "diffSha256": "44d5f10428940ebada6d8393cc7c747a09a8a032b41df5df6382b65b532e9eb3",
+   "chars": 23797,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "witness",
+   "sha": "00b8ffe5c937a8cecf9a7a7153cf084dc995f9bb",
+   "diffSha256": "13039d1ac55fa36a23d5a2a67d9ff3842bb94791293f98ef6f3f262a3ce99b27",
+   "chars": 39023,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "witness",
+   "sha": "5c5da265d167c7e93f96dba685af6b182e41388f",
+   "diffSha256": "6aa6c190dbaca9ee1d90aee2472472893020eb8843c9306ce33c121d2b49fb6e",
+   "chars": 136886,
+   "verdict": "flagged",
+   "findings": [
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/ci.yml",
+     "status": "modified",
+     "line": 48,
+     "text": "set +e"
+    },
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/ci.yml",
+     "status": "modified",
+     "line": 77,
+     "text": "set +e"
+    },
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/ci.yml",
+     "status": "modified",
+     "line": 107,
+     "text": "set +e"
+    },
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/ci.yml",
+     "status": "modified",
+     "line": 135,
+     "text": "set +e"
+    },
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/ci.yml",
+     "status": "modified",
+     "line": 145,
+     "text": "set +e"
+    },
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/ci.yml",
+     "status": "modified",
+     "line": 177,
+     "text": "set +e"
+    },
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/ci.yml",
+     "status": "modified",
+     "line": 214,
+     "text": "continue-on-error: true"
+    },
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/ci.yml",
+     "status": "modified",
+     "line": 222,
+     "text": "continue-on-error: true"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "case/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "1 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "witness",
+   "sha": "6ec68f482b2574e1fc084597b3b11bdae73f41ef",
+   "diffSha256": "68a66da67e8636b1d3b44acdf4b5d6fb4e7b09aee1766f2e38a5e78dd5171c37",
+   "chars": 99005,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "witness",
+   "sha": "5a1ffba13c06eb0e4702f8eb7468bbf53c3281ea",
+   "diffSha256": "b3acf9716babda386284aeb5b16db3ea6ccd05adadbfd009eebac77442d841fd",
+   "chars": 267378,
+   "verdict": "flagged",
+   "findings": [
+    {
+     "rule": "failure-ignored",
+     "severity": "high",
+     "path": ".github/workflows/landing.yml",
+     "status": "added",
+     "line": 56,
+     "text": "continue-on-error: true"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "62 more lines"
+    }
+   ]
+  }
+ ]
+}

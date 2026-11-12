@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScopeGuard</title>
+<meta name="description" content="Checks a code change made by an AI coding agent: did it stay inside the files it was allowed to touch, and did it make the tests easier to pass instead of making the code right? Runs in your browser; nothing is uploaded.">
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--ink:#1c1b19;--muted:#5d5a54;--line:#e3dfd6;--accent:#1f5f8b;--accent-ink:#ffffff;--good:#2f7a3d;--warn:#8a5f00;--bad:#a3322a;--code:#f2efe8;--hi:#fbe9e7;--rv:#fdf3dc}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#151513;--card:#1e1d1b;--ink:#ecebe7;--muted:#a7a39b;--line:#34322e;--accent:#6fb0dc;--accent-ink:#0d1b24;--good:#6cc47b;--warn:#e0b04a;--bad:#ec7a70;--code:#262522;--hi:#3a2422;--rv:#3a3020}}
+:root[data-theme="dark"]{--bg:#151513;--card:#1e1d1b;--ink:#ecebe7;--muted:#a7a39b;--line:#34322e;--accent:#6fb0dc;--accent-ink:#0d1b24;--good:#6cc47b;--warn:#e0b04a;--bad:#ec7a70;--code:#262522;--hi:#3a2422;--rv:#3a3020}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:940px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.9rem;margin:.2em 0 .1em}h2{font-size:1.35rem;margin:2.2em 0 .5em;padding-top:.6em;border-top:1px solid var(--line)}h3{font-size:1.05rem;margin:1.4em 0 .3em}
+p,li{max-width:74ch}a{color:var(--accent)}
+.lede{font-size:1.12rem;color:var(--muted)}
+nav.toc{display:flex;flex-wrap:wrap;gap:4px 6px;font-size:.92rem;margin:14px 0}
+nav.toc a{display:inline-flex;align-items:center;min-height:32px;padding:0 8px;border-radius:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0}
+textarea{width:100%;min-height:200px;font:13px/1.4 ui-monospace,Consolas,monospace;background:var(--code);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px}
+textarea.short{min-height:70px}
+input{font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+input[type=number]{width:7.5em}
+label{font-size:.93rem}
+button{font:inherit;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:8px 14px;cursor:pointer;min-height:40px}
+button.ghost{background:transparent;color:var(--accent)}
+button[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:1px;font-weight:650}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.verdict{font-size:1.3rem;font-weight:700}
+.v-clean{color:var(--good)}.v-review{color:var(--warn)}.v-flagged{color:var(--bad)}.v-error{color:var(--bad)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border-bottom:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}
+td.n,th.n{text-align:right;white-space:nowrap}
+.tbl{overflow-x:auto}
+tr.high td{background:var(--hi)}tr.review td{background:var(--rv)}
+code,pre{background:var(--code);border-radius:4px;font-size:.9em}
+code{padding:1px 5px;overflow-wrap:anywhere}
+pre{padding:10px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.muted{color:var(--muted)}.small{font-size:.88rem}
+.sev{font-weight:700;white-space:nowrap}.sev-high{color:var(--bad)}.sev-review{color:var(--warn)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+dl dt{font-weight:650;margin-top:.8em}dl dd{margin:.15em 0 0 0;color:var(--muted)}
+.fp{font:12px ui-monospace,Consolas,monospace;word-break:break-all}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:1px 9px;font-size:.85rem;margin:2px 4px 2px 0}
+svg{max-width:100%;height:auto}
+svg text{fill:var(--ink);font:13px system-ui,sans-serif}
+svg .box{fill:var(--card);stroke:var(--line)}svg .acc{fill:none;stroke:var(--accent);stroke-width:2}svg .bad{fill:var(--bad)}svg .good{fill:var(--good)}
+details{margin:.5em 0}summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center}
+.trace li{margin:.35em 0}
+footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>ScopeGuard</h1>
+<p class="lede">Your AI coding agent says the tests pass. ScopeGuard checks how it got there. It reads the change and flags every test that was skipped, loosened, commented out or deleted, every CI step told to ignore failures, and every file the task never allowed it to touch.</p>
+<p class="row"><span class="pill">Runs in your browser: nothing is uploaded</span><span class="pill">No AI decides the verdict</span><span class="pill">Same answer on the command line, in CI and as a Claude Code hook</span><span class="pill">MIT licence</span></p>
+<nav class="toc" aria-label="On this page">
+<a href="#try">Try it</a><a href="#start">Start here</a><a href="#how">How it works</a><a href="#rules">The rules</a><a href="#measured">Measured</a><a href="#limits">What it can't tell you</a><a href="#install">Put it to work</a><a href="#bp">Blueprint</a><a href="#biz">For your business</a><a href="#cost">Cost case</a><a href="#sec">Security</a><a href="#ro">Roll-out</a><a href="#risk">Risks</a><a href="#board">For the board</a><a href="#paper">The explainer</a><a href="#words">Words</a><a href="#faq">FAQ</a>
+</nav>
+</header>
+
+<section id="try" aria-labelledby="try-h">
+<h2 id="try-h" style="border:0;margin-top:0;padding-top:0">Try it</h2>
+<p>Pick one of the real-shaped examples, or paste your own change: the output of <code>git diff</code>, <code>git show</code>, or a pull request's <code>.diff</code> link saved as text.</p>
+<div class="row" id="examples" role="group" aria-label="Examples"></div>
+<p class="small muted" id="story" aria-live="polite"></p>
+<div class="card">
+<label for="diff"><b>The change</b> (a unified diff)</label>
+<textarea id="diff" spellcheck="false" placeholder="diff --git a/src/a.js b/src/a.js&#10;..."></textarea>
+<div class="grid2">
+<div><label for="scope"><b>Scope</b> (optional): which files the task may touch</label>
+<textarea id="scope" class="short" spellcheck="false" placeholder="allow src/auth/**&#10;deny .github/**"></textarea></div>
+<div><label for="claim"><b>The agent's summary</b> (optional): what it says it changed</label>
+<textarea id="claim" class="short" placeholder="I fixed the login bug in src/auth/form.js"></textarea></div>
+</div>
+<div class="row" style="margin-top:10px"><button id="go" type="button">Check it</button><button id="clear" type="button" class="ghost">Clear</button></div>
+</div>
+<div id="out" aria-live="polite"></div>
+</section>
+
+<section id="start" aria-labelledby="start-h">
+<h2 id="start-h">Start here</h2>
+<ol>
+<li><b>Press an example above</b>, then <b>Check it</b>. "It skipped the failing test" is the quickest to read: one line, one finding.</li>
+<li><b>Read the verdict.</b> <span class="v-flagged">Flagged</span> means at least one high finding: a reviewer must read those lines before the change is merged. <span class="v-review">Review</span> means only review findings: worth a look, often honest. <span class="v-clean">Clean</span> means no rule fired.</li>
+<li><b>Read each finding.</b> Every one names its rule, the file and line, and the exact text. The rule list below says what each rule looks for.</li>
+<li><b>Paste your own change.</b> In a terminal in your project, run <code>git diff main...HEAD</code> (or <code>git show</code> for the last commit), copy the output, paste it in. Nothing leaves this page.</li>
+<li><b>Add a scope</b> if the task should only touch some files: one <code>allow</code> line per folder or file pattern. Anything else the change touches is flagged.</li>
+<li><b>Put it to work</b>: in CI on every pull request, as a Claude Code hook so the agent cannot finish with a weakened test, or as a pre-commit check. See <a href="#install">Put it to work</a>.</li>
+</ol>
+</section>
+
+<section id="how" aria-labelledby="how-h">
+<h2 id="how-h">How it works</h2>
+<p>Five steps, all in one small file of code (<code>kernel.mjs</code>) that this page runs directly. The same file runs on the command line and in CI, so this page's answer is the command line's answer.</p>
+<svg viewBox="0 0 900 190" role="img" aria-labelledby="flow-t">
+<title id="flow-t">The change goes through five steps: read the diff, sort every path, run the rules, give the verdict, fingerprint it</title>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<g style="color:var(--accent)">
+<rect class="box" x="6" y="30" width="160" height="96" rx="9"/><text x="86" y="58" text-anchor="middle" font-weight="700">1 · Read</text><text x="86" y="80" text-anchor="middle">the diff, line by line</text><text x="86" y="100" text-anchor="middle">refuse what can't be read</text>
+<rect class="box" x="186" y="30" width="160" height="96" rx="9"/><text x="266" y="58" text-anchor="middle" font-weight="700">2 · Sort</text><text x="266" y="80" text-anchor="middle">each file: test, gate</text><text x="266" y="100" text-anchor="middle">or code; in scope or not</text>
+<rect class="box" x="366" y="30" width="160" height="96" rx="9"/><text x="446" y="58" text-anchor="middle" font-weight="700">3 · Rules</text><text x="446" y="80" text-anchor="middle" id="svg-rules">a closed list</text><text x="446" y="100" text-anchor="middle">over added and removed lines</text>
+<rect class="box" x="546" y="30" width="160" height="96" rx="9"/><text x="626" y="58" text-anchor="middle" font-weight="700">4 · Verdict</text><text x="626" y="80" text-anchor="middle">clean · review · flagged</text><text x="626" y="100" text-anchor="middle">every finding with its line</text>
+<rect class="box" x="726" y="30" width="168" height="96" rx="9"/><text x="810" y="58" text-anchor="middle" font-weight="700">5 · Fingerprint</text><text x="810" y="80" text-anchor="middle">SHA-256 of the input</text><text x="810" y="100" text-anchor="middle">and of the result</text>
+<line class="acc" x1="166" y1="78" x2="184" y2="78" marker-end="url(#arr)"/><line class="acc" x1="346" y1="78" x2="364" y2="78" marker-end="url(#arr)"/><line class="acc" x1="526" y1="78" x2="544" y2="78" marker-end="url(#arr)"/><line class="acc" x1="706" y1="78" x2="724" y2="78" marker-end="url(#arr)"/>
+<text x="86" y="156" text-anchor="middle" class="small">a cut-off diff stops here</text><text x="446" y="156" text-anchor="middle">no AI model, no network</text><text x="810" y="156" text-anchor="middle">anyone can recompute both</text>
+</g>
+</svg>
+<h3>Traced from a real run</h3>
+<p>This trace is computed when the page loads, by running the "It skipped the failing test" example through the kernel. It is not a picture of what should happen; it is what happened.</p>
+<ol class="trace" id="trace"><li class="muted">Running…</li></ol>
+<h3>Two kinds of rule</h3>
+<p><b>Line rules</b> look at one added line: a skip marker, a focus marker, a "continue on error". They only fire when the marker is new: one that was removed and added back (moved, re-indented) is not new.</p>
+<p><b>Pairing rules</b> compare what was removed with what was added in the same file. An exact check (<code>toBe(2500)</code>, <code>assertEqual</code>, <code>==</code>) removed and a looser one (<code>toBeDefined()</code>, <code>assertTrue</code>, <code>!=</code>) added <i>on the same value</i> is a loosened check. The pairing is by the value being checked, so argument order does not matter, and a rename to a different value is not paired. A removed line and an added line that differ only in one number are compared number by number, which is how a widened tolerance or a lowered coverage floor is found.</p>
+</section>
+
+<section id="rules" aria-labelledby="rules-h">
+<h2 id="rules-h">The rules</h2>
+<p>This is the whole list, read from the kernel as the page loads. Nothing is checked that is not on it. <b>High</b>: a reviewer must read it before merging. <b>Review</b>: worth a look, often honest.</p>
+<div class="tbl"><table id="ruletable"><thead><tr><th>Rule</th><th>Level</th><th>Looks at</th><th>What it finds</th></tr></thead><tbody></tbody></table></div>
+<h3>Which files count as tests and gates</h3>
+<p class="small"><b>Tests:</b> <span id="deftests"></span></p>
+<p class="small"><b>Snapshots:</b> <span id="defsnaps"></span></p>
+<p class="small"><b>Gates</b> (CI and test configuration): <span id="defgates"></span></p>
+<p class="small">Add your own with <code>tests &lt;pattern&gt;</code> and <code>gate &lt;pattern&gt;</code> lines in the scope. Patterns: <code>**</code> any number of folders, <code>*</code> any characters within one name, <code>?</code> one character.</p>
+</section>
+
+<section id="measured" aria-labelledby="m-h">
+<h2 id="m-h">Measured: how often it cries wolf, and whether it catches what it says</h2>
+<p>A checker that flags every honest change gets switched off. So before the rules were written, we fixed how they would be judged (<a href="https://github.com/sjgant80-hub/kar-scopeguard/blob/main/CLAIMS.md">CLAIMS.md</a>, committed first): every commit that touches a test or CI file in our own public repositories, split by repository into a half the rules could be tuned on and a half held back and read once, after the code was frozen.</p>
+<h3>The sealed result: version 1, the held-out half read once</h3>
+<p class="small" id="v1say"></p>
+<div class="tbl"><table id="mtable"><thead><tr><th></th><th class="n">Tuning half</th><th class="n">Held-out half</th></tr></thead><tbody></tbody></table></div>
+<p id="mread"></p>
+<h3>Planted weakenings, on real diffs</h3>
+<p>For each high rule, a weakening was planted into the held-out real diffs (one line, or one removed and one added line, with the hunk header adjusted) and the copy run through the kernel. A plant counts as caught when that rule fires on that file. The sealed target was every plant caught, for every rule.</p>
+<div class="tbl"><table id="planted"><thead><tr><th>Rule</th><th class="n">Version 1 (sealed)</th><th class="n">Version 1.1</th></tr></thead><tbody></tbody></table></div>
+<p id="plantsay"></p>
+<h3>Version 1.1: the fixes for what version 1 missed</h3>
+<p>Version 1 missed planted weakenings for three reasons, all real: it treated a CI step as still testing when any command of the same runner stayed (so dropping one gated file from a list went unseen); it counted a check as "still exact" when any exact check on the same value was added (so a generic value like <code>r.why</code> hid a loosened one); and it judged a replaced assertion across the whole file (so an identical line elsewhere hid it). Version 1.1 fixes all three. Because the held-out half had already been read, version 1.1's figures on it are a re-run, not a held-out result.</p>
+<div class="tbl"><table id="v11table"><thead><tr><th></th><th class="n">Tuning half</th><th class="n">Held-out half (re-run)</th></tr></thead><tbody></tbody></table></div>
+<h3>What the high findings on the held-out half were (version 1.1 re-run)</h3>
+<p class="small">Each was read by hand and labelled: a real weakening (a catch, not a false alarm), a false alarm, or a file the checker cannot read (git stores it as binary, so it says so instead of passing it).</p>
+<div class="tbl"><table id="labels"><thead><tr><th>Repository · commit</th><th>Rule</th><th>File</th><th>Label</th><th>Why</th></tr></thead><tbody></tbody></table></div>
+<p class="small muted">Re-run any number on this page: every record names a public repository, a commit and the SHA-256 of the diff the kernel read. <code>git show --format= --no-color --no-ext-diff -M &lt;commit&gt; | node cli.mjs - --json</code> gives the same findings. The tools are in <code>tools/</code>.</p>
+</section>
+
+<section id="limits" aria-labelledby="limits-h">
+<h2 id="limits-h">What it can't tell you</h2>
+<ul>
+<li><b>Intent.</b> A flagged line can be honest: a test deleted along with the feature it tested, an expected value changed because the specification changed. The verdict is a list of lines to read, with the reason for each, not an accusation.</li>
+<li><b>Weakenings it has no rule for.</b> If the agent changes the code under test so a test passes trivially, or writes a brand-new test that checks nothing useful, no rule here sees it. Pair ScopeGuard with a mutation test (such as <a href="https://github.com/sjgant80-hub/witness">witness</a>), which measures whether the tests can fail at all.</li>
+<li><b>Whether the tests pass.</b> It reads the change; it does not run anything.</li>
+<li><b>Every language equally.</b> The rules know JavaScript and TypeScript (Jest, Vitest, Mocha, node:test, Chai), Python (pytest, unittest), Go (testing, testify), Java and Kotlin (JUnit), C# (NUnit, xUnit), Ruby (RSpec, Minitest), PHP (PHPUnit) and Rust. The honest-data measurement above is mostly JavaScript, because that is what our repositories are written in, and mostly AI-written. Other languages are covered by the rules and their tests, not yet by a measurement on honest changes.</li>
+<li><b>Multi-line statements.</b> Rules read one line at a time. An assertion split across several lines is seen through its first line only.</li>
+<li><b>Binary files.</b> A binary test or gate file cannot be read, so it is flagged as unreadable rather than passed.</li>
+</ul>
+</section>
+
+<section id="install" aria-labelledby="install-h">
+<h2 id="install-h">Put it to work</h2>
+<h3>In CI, on every pull request (GitHub Actions)</h3>
+<pre id="yaml-ci">name: scopeguard
+on: [pull_request]
+jobs:
+  scopeguard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: sjgant80-hub/kar-scopeguard@main   # pin to a commit SHA in production
+        with:
+          fail-on: high        # or: review</pre>
+<p class="small">The scope file (<code>.scopeguard</code> in the repository root) is read from the base commit, not from the pull request, so a change cannot widen its own scope. The findings go to the job summary.</p>
+<h3>As a Claude Code hook: the agent cannot finish with a weakened test</h3>
+<p>Claude Code runs "Stop" hooks when the agent is about to end its turn. When a Stop hook exits with code 2, the agent is not allowed to stop and is shown the hook's message as the reason. ScopeGuard's hook checks the working tree against the last commit. On a high finding it stops the agent once, lists the lines, and asks it to fix the code instead of the check, or to explain an honest change in its final message. It never stops the agent twice for the same findings, so it cannot trap it in a loop. Review findings never stop it. Put this in <code>.claude/settings.json</code>:</p>
+<pre id="json-hook">{
+  "hooks": {
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "node /path/to/kar-scopeguard/cli.mjs --hook" } ] }
+    ]
+  }
+}</pre>
+<h3>Before each commit</h3>
+<pre>node /path/to/kar-scopeguard/cli.mjs --git --staged</pre>
+<p class="small">Put that line in <code>.git/hooks/pre-commit</code>. It checks what is staged and exits 2 on a high finding, which stops the commit.</p>
+<h3>On the command line</h3>
+<pre>git diff main...HEAD | node cli.mjs - --scope .scopeguard
+node cli.mjs change.diff --claim summary.txt --json
+node cli.mjs --git            # this folder against its last commit, new files included</pre>
+<p class="small">Exit codes: <b>0</b> clean (and review, unless <code>--fail-on review</code>), <b>2</b> flagged, <b>1</b> the input could not be read or the options were wrong. Node.js 20 or later; nothing to install.</p>
+</section>
+
+<section id="bp" aria-labelledby="bp-h">
+<h2 id="bp-h">Blueprint</h2>
+<p>Each part, what it does and how it is checked. A mutation gate changes the code on purpose (flips a comparison, swaps <code>&amp;&amp;</code> for <code>||</code>) and reruns the tests: if the tests still pass, they were not really checking that line. Every part below is gated on every change, in public, on GitHub.</p>
+<div class="tbl"><table id="bptable"><thead><tr><th>Part</th><th>What it does</th><th class="n">Gate</th></tr></thead><tbody></tbody></table></div>
+<p class="small muted" id="bpnote"></p>
+</section>
+
+<section id="biz" aria-labelledby="biz-h">
+<h2 id="biz-h">For your business</h2>
+<p>AI coding agents are now writing a large share of the changes many teams merge. They are rewarded for one thing: the tests going green. When a test is hard to pass, the cheapest way to green is often to change the test, not the code. A reviewer reading a large AI change can miss one <code>.skip</code> or one <code>toBeDefined()</code> among hundreds of lines. ScopeGuard reads every line, every time, and puts those lines at the top.</p>
+<div class="grid2">
+<div class="card"><b>CTO and engineering leads</b><p class="small">A green build from an AI agent becomes something you can trust: weakened tests and widened scope are caught before merge, not found in an incident review. The same rules run in CI and in the agent's own loop.</p></div>
+<div class="card"><b>CISO and information security</b><p class="small">Scope files turn "the agent may only touch these paths" into a check that runs on every change, read from the base commit. Changes to CI and test configuration (the controls themselves) are always surfaced. No code leaves your machines.</p></div>
+<div class="card"><b>CFO</b><p class="small">Review time is the cost of using AI agents safely. This puts the lines that need a human first, so the rest of the review goes faster. The cost case below counts that time at the UK median wage.</p></div>
+<div class="card"><b>COO and delivery</b><p class="small">Fewer escaped defects from "it passed CI" changes, and a written record (the fingerprint) of what was checked on each change.</p></div>
+<div class="card"><b>Chief executive and the board</b><p class="small">Evidence that AI-written code is governed by a control, not by hope, and a control anyone can rerun and get the same answer.</p></div>
+<div class="card"><b>The engineers</b><p class="small">No new tool to log into. It is a CI step and a hook. When it flags an honest change, a sentence in the pull request explains it.</p></div>
+</div>
+<h3>Against what you pay now</h3>
+<p>Today this check is done, when it is done, by a human reviewer reading the whole diff. AI code-review services read changes too, usually sold as a subscription for each developer, and judge them with a model, so the same change can get a different answer on a different day. ScopeGuard is MIT-licensed with no licence fee, gives the same answer every time, and runs on your own machines. If it replaces a tool you pay for, enter that tool's monthly cost in the case below and it is counted. We do not quote other vendors' prices; yours are the ones that matter.</p>
+</section>
+
+<section id="cost" aria-labelledby="cost-h">
+<h2 id="cost-h">Cost case</h2>
+<p>The inputs are yours; change them. Staff time is costed at the UK median hourly wage with on-costs left out, so the figure is a floor (an engineer costs more). It rises each year with UK inflation. Both figures are from the Office for National Statistics and listed under the table.</p>
+<div class="card">
+<div class="grid2">
+<label>AI-made changes reviewed per week<br><input id="c-items" type="number" min="0" step="1" value="40"></label>
+<label>Minutes to check one by hand for weakened tests and scope<br><input id="c-min" type="number" min="0" step="1" value="10"></label>
+<label>Share of that this takes over (0 to 1)<br><input id="c-share" type="number" min="0" max="1" step="0.05" value="0.7"></label>
+<label>Seconds to run it and read the result<br><input id="c-sec" type="number" min="0" step="1" value="30"></label>
+<label>Tool paid for today, £ a month<br><input id="c-tool" type="number" min="0" step="1" value="0"></label>
+<label>Years<br><input id="c-years" type="number" min="1" max="10" step="1" value="3"></label>
+</div>
+<div id="cost-out" aria-live="polite" style="margin-top:12px">Working it out…</div>
+</div>
+<p class="small muted">"By hand" means a reviewer going through the diff for test, CI and scope changes specifically. The 10-minute default is our assumption; use your own. The share is below 1 because flagged lines still need a human to read them.</p>
+</section>
+
+<section id="sec" aria-labelledby="sec-h">
+<h2 id="sec-h">Security, compliance and data protection</h2>
+<p><b>Nothing leaves the page, and the browser enforces it.</b> The page carries a Content-Security-Policy with <code>connect-src 'none'</code>: it cannot open a connection to any site, its own included, so even a changed copy of the code could not send your diff anywhere. It loads only its own files. Check it yourself: open your browser's developer tools, Network tab, paste a change and press Check it. No request is made.</p>
+<dl>
+<dt>Where is the code processed?</dt><dd>Only in the browser tab, or on the machine that runs the command line (your laptop, your CI runner). No server of ours is involved. GitHub Pages serves the page's files and never sees what is pasted.</dd>
+<dt>How long is anything kept?</dt><dd>On the page: not at all. No cookies, no local storage, nothing written to disk. The hook writes one line to your repository's <code>.git</code> folder: the fingerprint of the last findings it stopped on, so it never stops twice for the same ones.</dd>
+<dt>Is an AI model involved?</dt><dd>No. The verdict comes from fixed rules in code you can read. The same input gives the same output on any machine, which is what the fingerprints prove.</dd>
+<dt>Supply chain?</dt><dd>No package dependencies. The page, the kernel and the command line are plain JavaScript files you can read. In CI, pin the Action to a commit SHA rather than a branch, as you would any Action.</dd>
+<dt>Can it run with no internet?</dt><dd>Yes. Copy the repository; the command line and the page both work offline.</dd>
+<dt>Who is the data processor?</dt><dd>Nobody: no data reaches AI Native Solutions, GitHub or anyone else when you use the page or the command line. You stay the controller of your own code.</dd>
+<dt>Can a change get past it by editing the scope?</dt><dd>In CI and in the hook, the scope is read from the committed version, not the change being checked. A change to <code>.scopeguard</code> itself is a high finding.</dd>
+</dl>
+</section>
+
+<section id="ro" aria-labelledby="ro-h">
+<h2 id="ro-h">Roll-out</h2>
+<ol>
+<li><b>Day one:</b> paste last week's three largest AI-made changes into this page. Read what it flags.</li>
+<li><b>Week one:</b> add the Action to one repository with <code>fail-on: high</code>. Read the job summaries.</li>
+<li><b>Week two:</b> add a <code>.scopeguard</code> file to repositories where agents work on bounded tasks. Turn on the Claude Code hook for the agents.</li>
+<li><b>Month one:</b> make the ScopeGuard step a required check. Ask for one sentence in the pull request for every honest high finding.</li>
+</ol>
+<h3>Support and ownership</h3>
+<p>Supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>; start through that site. Support, any service level, warranty and liability are agreed per deployment, in each deployment's agreement. The software is MIT-licensed and keeps running without us: you own your copy.</p>
+</section>
+
+<section id="risk" aria-labelledby="risk-h">
+<h2 id="risk-h">Risks, answered straight</h2>
+<dl>
+<dt>What if it flags honest changes?</dt><dd id="risk-fa">It will sometimes. The measured rate is in <a href="#measured">Measured</a>. A false flag costs a reviewer the time to read the named lines and a sentence of explanation.</dd>
+<dt>What if it misses a weakening?</dt><dd>It can: see <a href="#limits">What it can't tell you</a>. It is one control. Mutation testing, which checks whether the tests can fail at all, is the natural partner.</dd>
+<dt>Can an agent learn to get round it?</dt><dd>An agent that reads this page could choose weakenings with no rule. That is why the rules are a closed, published list and the verdict is "read these lines", not "this change is safe". Clean means no listed rule fired, nothing more.</dd>
+<dt>Can I trust the code?</dt><dd>Read it: the kernel is one file, and every rule has a test with an example that must fire and one that must not. A mutation gate checks the tests on every change. The first version's rules were tuned on half of our history and still had to pass the held-out half.</dd>
+<dt>Who is accountable for a merge?</dt><dd>Your reviewers. ScopeGuard points; people decide.</dd>
+</dl>
+</section>
+
+<section id="board" aria-labelledby="board-h">
+<h2 id="board-h">The case for the board</h2>
+<p>AI agents write code faster than people can review it. The specific way that goes wrong is quiet: the agent makes the checks pass by weakening the checks. That failure leaves no trace in a green build. ScopeGuard is a fixed, published control that finds it on every change, costs no licence fee, sends nothing outside the company, and gives an answer anyone can rerun. Its false-alarm rate on honest changes is measured and published, not promised.</p>
+</section>
+
+<section id="paper" aria-labelledby="paper-h">
+<h2 id="paper-h">The explainer</h2>
+<p><b>The problem.</b> A coding agent is trained and prompted to finish tasks, and a task is "finished" when the tests pass. Tests are code, and the agent can edit code. So there are two ways to green: fix the program, or change the test. Agents take the second way often enough that people who supervise them have learnt to look for it, and published evaluations of coding agents have caught it many times: tests skipped, assertions deleted, expected values rewritten to match wrong output, CI told to ignore a failing step.</p>
+<p><b>Why a reviewer misses it.</b> The weakening is usually one line in a large change, and it reads as plausible: <code>toBeDefined()</code> looks like a test. A reviewer looks at what the change does, not at what it stopped checking.</p>
+<p><b>What ScopeGuard does.</b> It reads only the diff, so it works on any change from any agent or person, before anything runs. It sorts each file into test, snapshot, CI/test configuration ("gate") or ordinary code, and checks the path against an optional scope. Then it runs a closed list of rules: markers that stop tests running, assertions turned into comments or into checks that can never fail, exact checks replaced by looser ones on the same value, tolerances widened, coverage floors lowered, test commands removed, failures ignored, test files deleted or renamed out of the runner's reach. Each finding carries its line. A diff it cannot fully read (cut off, combined merge, a binary test file) is refused or flagged, never passed.</p>
+<p><b>Why no AI judge.</b> A model judging a change gives a different answer on a different day and can be talked round by the change itself (a comment saying "this skip is fine"). A fixed rule does neither. The fingerprints (SHA-256 of the exact input and of the result) let anyone confirm, later, that a given change got a given verdict.</p>
+<p><b>How it was checked.</b> The claims were written and committed before the code. The rules were tuned on half of our repositories' history and then run, once, on the other half. Each held-out high finding was read and labelled. Weakenings were planted into real diffs to measure whether each rule fires on real-world diff shapes. Every part is mutation-gated. All of it is on this page and in the repository.</p>
+</section>
+
+<section id="words" aria-labelledby="words-h">
+<h2 id="words-h">Words on this page</h2>
+<dl>
+<dt>Diff</dt><dd>The text that shows what a change added (lines starting <code>+</code>) and removed (<code>-</code>). <code>git diff</code> prints one.</dd>
+<dt>Hunk</dt><dd>One block of a diff, starting with <code>@@ -10,4 +10,5 @@</code>: where the block starts and how many lines it has on each side. ScopeGuard checks those counts; a diff whose counts don't add up was cut off or edited, and is refused.</dd>
+<dt>Assertion</dt><dd>The line in a test that checks a result, such as <code>expect(total).toBe(24)</code> or <code>assert total == 24</code>. Remove it and the test checks nothing.</dd>
+<dt>Exact and loose checks</dt><dd><code>toBe(24)</code> passes for 24 only. <code>toBeDefined()</code> passes for 24, 0, or a wrong answer. Swapping the first for the second makes a test easier to pass without making the code more right.</dd>
+<dt>Gate file</dt><dd>A file that decides whether a change is accepted: CI workflows, test runner and coverage settings, compiler strictness settings, a mutation-test baseline.</dd>
+<dt>Scope</dt><dd>The files a task is allowed to touch, written as patterns in a <code>.scopeguard</code> file.</dd>
+<dt>Mutation gate</dt><dd>A check on the tests themselves: it changes the code on purpose and expects the tests to fail. If they still pass, they were not really testing that line. Every part of ScopeGuard passes one.</dd>
+<dt>Fingerprint (SHA-256)</dt><dd>A 64-character code computed from exact bytes. Change one character and it changes completely. The same diff always gives the same fingerprint, so a saved result can be checked later.</dd>
+<dt>Held-out data</dt><dd>Data kept aside while the rules were written and read once afterwards, so the rules could not be fitted to it.</dd>
+<dt>Stop hook</dt><dd>A command Claude Code runs when its agent is about to finish a turn. If the command exits with code 2, the agent keeps working and sees the command's message.</dd>
+</dl>
+</section>
+
+<section id="faq" aria-labelledby="faq-h">
+<h2 id="faq-h">FAQ</h2>
+<details><summary>Does it only work on changes made by AI?</summary><p>No. It reads any diff. People weaken tests too, usually under deadline pressure. It was built for AI agents because they make many changes, fast, and are rewarded for green.</p></details>
+<details><summary>Why are some findings "review" and not "high"?</summary><p>Because on honest changes they are common. An expected value changes whenever a specification changes, and a mutation baseline grows when a survivor is accepted with a reason. They are listed so a reviewer can read them, but by default they do not fail the build. <code>--fail-on review</code> makes them fail it.</p></details>
+<details><summary>What does the fingerprint prove?</summary><p>That this exact diff, scope and summary gave this exact result. Run the command line on the same input and you get the same two fingerprints. It does not prove the change is good; it proves what was checked and what was found.</p></details>
+<details><summary>A test was skipped for a good reason. What do I do?</summary><p>Say why in the pull request. The finding is a request to read the line, not a block on the change. In the hook, the agent is asked to explain it in its final message and is not stopped again for the same finding.</p></details>
+<details><summary>Can I add my own rules?</summary><p>The kernel is one MIT-licensed file; add a rule with a test that fires and one that does not, and run the mutation gate. Rules are deliberately a closed list in code, not a configuration file, so a change cannot turn a rule off.</p></details>
+<details><summary>Does it support GitLab, Bitbucket or other CI?</summary><p>Yes, through the command line: <code>git diff "$BASE"...HEAD | node cli.mjs -</code>. Exit code 2 fails the job. The GitHub Action is a convenience around that line.</p></details>
+<details><summary>Why does it read only one line at a time?</summary><p>Because a diff is lines, and a rule that reads one line is simple enough to test completely. The cost: an assertion split over several lines is seen through its first line only. That is written down above as a limit.</p></details>
+</section>
+
+<footer>
+<p>ScopeGuard, built by Kar for <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>. MIT licence. Source, tests, the sealed claims and every gate receipt: <a href="https://github.com/sjgant80-hub/kar-scopeguard">github.com/sjgant80-hub/kar-scopeguard</a>.</p>
+<p>Powered by the Konomi architecture, created by Thomas Frumkin.</p>
+<p class="small" id="ver"></p>
+</footer>
+</main>
+
+<script type="application/json" id="measured">{"generated":"2026-11-12","v1":{"kernelSha256":"d4bbe7e4f8916b0c775e68344dffb7f503eab674a18c5a0ce65342eb5b98b930","commit":"9e580e8","tune":{"repos":74,"commitsSeen":1257,"checked":395,"refused":0,"clean":303,"review":88,"flagged":4,"reviewAny":88,"labels":{"real":0,"falseAlarm":0,"cannotRead":4}},"held":{"repos":69,"commitsSeen":7865,"checked":330,"refused":0,"clean":224,"review":103,"flagged":3,"reviewAny":106,"labels":{"real":0,"falseAlarm":2,"cannotRead":1},"items":[{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-chrome.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-lossless.webp","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-lossy.webp","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-pymupdf-objstm.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-reportlab.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.gif","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.jpg","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.png","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5a1ffba13c06eb0e4702f8eb7468bbf53c3281ea","rule":"failure-ignored","path":".github/workflows/landing.yml","label":"false alarm","why":"A new, monthly reporting workflow that runs the gate on outside code (vercel/ms) and is documented as deliberately not failing the job, because a surviving mutant there is a finding to publish. It weakens no existing check."}]},"planted":{"rules":[{"rule":"skip-added","copies":271,"caught":271},{"rule":"only-added","copies":271,"caught":271},{"rule":"assert-commented","copies":111,"caught":111},{"rule":"assert-neutered","copies":111,"caught":110},{"rule":"matcher-loosened","copies":95,"caught":89},{"rule":"tolerance-widened","copies":271,"caught":271},{"rule":"failure-ignored","copies":205,"caught":205},{"rule":"test-run-removed","copies":63,"caught":32},{"rule":"threshold-lowered","copies":212,"caught":212},{"rule":"check-turned-off","copies":212,"caught":212},{"rule":"test-script-noop","copies":45,"caught":45},{"rule":"test-file-deleted","copies":330,"caught":330},{"rule":"test-moved-out","copies":330,"caught":330},{"rule":"unreadable-binary","copies":330,"caught":330}],"copies":2857,"caught":2819}},"tune":{"repos":74,"commitsSeen":1257,"checked":395,"refused":0,"clean":303,"review":88,"flagged":4,"reviewAny":88,"labels":{"real":0,"falseAlarm":0,"cannotRead":4}},"held":{"repos":69,"commitsSeen":7865,"checked":330,"refused":0,"clean":223,"review":103,"flagged":4,"reviewAny":106,"labels":{"real":0,"falseAlarm":3,"cannotRead":1},"items":[{"repo":"fallworld","sha":"bcef77d31f1fff668cde5709b635ed48d4637a82","rule":"test-run-removed","path":".github/workflows/gate.yml","label":"false alarm","why":"The removed line gated bridge.mjs, which had been deleted two months earlier; the line produced no verdict (the commit message says so). A diff cannot show that a file no longer exists, so the rule flags it and a reviewer reads the reason."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-chrome.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-lossless.webp","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-lossy.webp","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-pymupdf-objstm.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-reportlab.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.gif","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.jpg","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.png","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5a1ffba13c06eb0e4702f8eb7468bbf53c3281ea","rule":"failure-ignored","path":".github/workflows/landing.yml","label":"false alarm","why":"A new, monthly reporting workflow that runs the gate on outside code (vercel/ms) and is documented as deliberately not failing the job, because a surviving mutant there is a finding to publish. It weakens no existing check."}]},"planted":{"rules":[{"rule":"skip-added","copies":271,"caught":271},{"rule":"only-added","copies":271,"caught":271},{"rule":"assert-commented","copies":111,"caught":111},{"rule":"assert-neutered","copies":111,"caught":110},{"rule":"matcher-loosened","copies":95,"caught":95},{"rule":"tolerance-widened","copies":271,"caught":271},{"rule":"failure-ignored","copies":205,"caught":205},{"rule":"test-run-removed","copies":63,"caught":60},{"rule":"threshold-lowered","copies":212,"caught":212},{"rule":"check-turned-off","copies":212,"caught":212},{"rule":"test-script-noop","copies":45,"caught":45},{"rule":"test-file-deleted","copies":330,"caught":330},{"rule":"test-moved-out","copies":330,"caught":330},{"rule":"unreadable-binary","copies":330,"caught":330}],"copies":2857,"caught":2853},"witness":{"gates":[{"file":"kernel.mjs","total":433,"killed":433,"survived":0,"baselined":0,"clean":true},{"file":"cli.mjs","total":55,"killed":55,"survived":0,"baselined":0,"clean":true},{"file":"skillcli.mjs","total":17,"killed":17,"survived":0,"baselined":0,"clean":true},{"file":"checkcase.mjs","total":16,"killed":16,"survived":0,"baselined":0,"clean":true}]},"basis":{"wageMedianHourly":{"value":19.67,"unit":"GBP per hour","what":"ONS ASHE 2025: median hourly earnings excluding overtime, full-time employees, UK","source":"https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2025"},"cpi":{"value":0.031,"unit":"","what":"UK CPI, 12 months to August 2026 — applied every year to pay, seats and electricity","source":"https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/august2026"}}}</script>
+<script type="module">
+import { audit, RULES, VERSION, DEFAULT_TESTS, DEFAULT_GATES, DEFAULT_SNAPSHOTS, fingerprintInput, fingerprintResult } from './kernel.mjs';
+import { EXAMPLES } from './examples.mjs';
+import { checkCase } from './checkcase.mjs';
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const M = (() => { try { return JSON.parse($('measured').textContent || '{}'); } catch { return {}; } })();
+async function sha256(s) {
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, '0')).join('');
+}
+const pct = (a, b) => (b ? (100 * a / b).toFixed(1) + '%' : 'n/a');
+const VERDICT = { clean: 'Clean: no rule fired', review: 'Review: worth a look, often honest', flagged: 'Flagged: a reviewer must read these lines' };
+
+// examples
+for (const ex of EXAMPLES) {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'ghost'; b.textContent = ex.title; b.setAttribute('aria-pressed', 'false');
+  b.addEventListener('click', () => {
+    $('diff').value = ex.diff; $('scope').value = ex.scope; $('claim').value = ex.claim; $('story').textContent = ex.story;
+    for (const o of $('examples').children) o.setAttribute('aria-pressed', String(o === b));
+    check();
+  });
+  $('examples').appendChild(b);
+}
+
+async function check() {
+  const diff = $('diff').value; const scope = $('scope').value; const claim = $('claim').value;
+  const r = audit(diff, scope, claim);
+  if (!r.ok) {
+    $('out').innerHTML = '<div class="card"><p class="verdict v-error">Could not check this input</p><p>' + esc(r.why) + (r.line ? ' (line ' + r.line + ')' : '') + '</p><p class="small muted">ScopeGuard refuses what it cannot fully read, instead of passing it.</p></div>';
+    return;
+  }
+  const fi = await sha256(fingerprintInput(diff, scope, claim)); const fr = await sha256(fingerprintResult(r));
+  const rows = r.findings.map((f) => '<tr class="' + f.severity + '"><td><span class="sev sev-' + f.severity + '">' + (f.severity === 'high' ? 'High' : 'Review') + '</span></td><td><code>' + esc(f.rule) + '</code></td><td><code>' + esc(f.path) + (f.line === null ? '' : ':' + f.line) + '</code></td><td><code>' + esc(f.text) + '</code></td></tr>').join('');
+  const files = r.files.map((f) => '<tr><td><code>' + esc(f.path) + '</code>' + (f.oldPath ? ' <span class="small muted">from ' + esc(f.oldPath) + '</span>' : '') + '</td><td>' + esc(f.status) + '</td><td>' + esc(f.kind) + '</td><td>' + esc(f.scope) + '</td><td class="n">+' + f.added + ' −' + f.removed + '</td></tr>').join('');
+  const c = r.counts;
+  $('out').innerHTML = '<div class="card"><p class="verdict v-' + r.verdict + '">' + VERDICT[r.verdict] + '</p><p>' + c.high + ' high, ' + c.review + ' review, across ' + c.files + (c.files === 1 ? ' file' : ' files') + ' (+' + c.added + ' −' + c.removed + ' lines).</p>'
+    + (rows ? '<div class="tbl"><table><thead><tr><th>Level</th><th>Rule</th><th>Where</th><th>The line</th></tr></thead><tbody>' + rows + '</tbody></table></div>' : '')
+    + (files ? '<details><summary>Every file it read (' + c.files + ')</summary><div class="tbl"><table><thead><tr><th>File</th><th>Change</th><th>Kind</th><th>Scope</th><th class="n">Lines</th></tr></thead><tbody>' + files + '</tbody></table></div></details>' : '')
+    + '<p class="small">Input fingerprint <span class="fp">' + fi + '</span><br>Result fingerprint <span class="fp">' + fr + '</span></p>'
+    + '<p class="small muted">Save the change as change.diff (and the scope and summary as files) and run <code>node cli.mjs change.diff' + (scope ? ' --scope scope.txt' : '') + (claim ? ' --claim summary.txt' : '') + '</code>: it prints these two fingerprints.</p></div>';
+}
+$('go').addEventListener('click', check);
+$('clear').addEventListener('click', () => { for (const k of ['diff', 'scope', 'claim']) $(k).value = ''; $('out').innerHTML = ''; $('story').textContent = ''; for (const o of $('examples').children) o.setAttribute('aria-pressed', 'false'); });
+
+// the trace from a real run
+(async () => {
+  const ex = EXAMPLES.find((e) => e.id === 'skipped');
+  const r = audit(ex.diff, ex.scope, ex.claim);
+  const lines = ex.diff.split('\n').length - 1;
+  const f = r.findings[0];
+  $('trace').innerHTML = [
+    '<b>Read:</b> ' + lines + ' lines of diff, ' + r.counts.files + ' files, every hunk count checked: +' + r.counts.added + ' −' + r.counts.removed + ' lines.',
+    '<b>Sort:</b> ' + r.files.map((x) => '<code>' + esc(x.path) + '</code> is ' + esc(x.kind)).join('; ') + '. No scope was given, so nothing is outside it.',
+    '<b>Rules:</b> ' + RULES.length + ' rules ran. <code>' + esc(f.rule) + '</code> fired on <code>' + esc(f.path) + ':' + f.line + '</code>: <code>' + esc(f.text) + '</code>. The removed line had no skip marker, so the marker is new.',
+    '<b>Verdict:</b> <span class="v-' + r.verdict + '">' + r.verdict + '</span>, ' + r.counts.high + ' high, ' + r.counts.review + ' review.',
+    '<b>Fingerprint:</b> result <span class="fp">' + (await sha256(fingerprintResult(r))) + '</span>.',
+  ].map((x) => '<li>' + x + '</li>').join('');
+})();
+
+// the rule table and the default path classes
+$('svg-rules').textContent = 'a closed list of ' + RULES.length;
+$('ruletable').querySelector('tbody').innerHTML = RULES.map((r) => '<tr><td><code>' + esc(r.id) + '</code></td><td><span class="sev sev-' + r.severity + '">' + (r.severity === 'high' ? 'High' : 'Review') + '</span></td><td>' + esc(r.on) + '</td><td>' + esc(r.what) + '</td></tr>').join('');
+$('deftests').innerHTML = DEFAULT_TESTS.map((p) => '<code>' + esc(p) + '</code>').join(' ');
+$('defsnaps').innerHTML = DEFAULT_SNAPSHOTS.map((p) => '<code>' + esc(p) + '</code>').join(' ');
+$('defgates').innerHTML = DEFAULT_GATES.map((p) => '<code>' + esc(p) + '</code>').join(' ');
+$('ver').textContent = 'Kernel ' + VERSION + (M.generated ? ' · figures measured ' + M.generated : '');
+
+// measured
+const row = (label, a, b) => '<tr><td>' + label + '</td><td class="n">' + a + '</td><td class="n">' + b + '</td></tr>';
+const halves = (T, H) => [
+  row('Public repositories', T.repos, H.repos),
+  row('Commits in them', T.commitsSeen, H.commitsSeen),
+  row('Commits that touch a test, snapshot or gate file (checked)', T.checked, H.checked),
+  row('Refused as unreadable', T.refused, H.refused),
+  row('Clean', T.clean + ' (' + pct(T.clean, T.checked) + ')', H.clean + ' (' + pct(H.clean, H.checked) + ')'),
+  row('Review only', T.review + ' (' + pct(T.review, T.checked) + ')', H.review + ' (' + pct(H.review, H.checked) + ')'),
+  row('Flagged (at least one high finding)', T.flagged + ' (' + pct(T.flagged, T.checked) + ')', H.flagged + ' (' + pct(H.flagged, H.checked) + ')'),
+  row('… of which a false alarm, read by hand', T.labels.falseAlarm, H.labels.falseAlarm),
+  row('… of which a file it cannot read (binary)', T.labels.cannotRead, H.labels.cannotRead),
+  row('… of which a real weakening', T.labels.real, H.labels.real),
+].join('');
+if (M.v1 && M.tune && M.held) {
+  const V = M.v1, H = V.held, R = M.held, target = 2;
+  $('v1say').innerHTML = 'Kernel frozen at commit <code>' + esc(V.commit) + '</code> (SHA-256 <span class="fp">' + esc(V.kernelSha256) + '</span>) before the held-out half was opened.';
+  $('mtable').querySelector('tbody').innerHTML = halves(V.tune, H);
+  const fa = H.labels.falseAlarm, rate = H.checked ? 100 * fa / H.checked : 0;
+  $('mread').innerHTML = 'On the held-out half, high findings that were false alarms came to <b>' + fa + ' of ' + H.checked + ' commits (' + pct(fa, H.checked) + ')</b>. The sealed target was at most ' + target + '%: <b>' + (rate <= target ? 'MET' : 'FAILED') + '</b>. Review findings, which do not fail a build by default, came up on ' + H.reviewAny + ' held-out commits (' + pct(H.reviewAny, H.checked) + ').';
+  $('v11table').querySelector('tbody').innerHTML = halves(M.tune, R);
+  $('risk-fa').innerHTML = 'It will sometimes. On the held-out half of our own history, read once, ' + fa + ' of ' + H.checked + ' honest commits (' + pct(fa, H.checked) + ') got a high finding that was a false alarm; version 1.1, re-run on the same commits, ' + R.labels.falseAlarm + ' (' + pct(R.labels.falseAlarm, R.checked) + '). See <a href="#measured">Measured</a>. A false flag costs a reviewer the time to read the named lines and a sentence of explanation.';
+  $('labels').querySelector('tbody').innerHTML = (R.items || []).map((x) => '<tr><td><a href="https://github.com/sjgant80-hub/' + esc(x.repo) + '/commit/' + esc(x.sha) + '">' + esc(x.repo) + ' · ' + esc(x.sha.slice(0, 8)) + '</a></td><td><code>' + esc(x.rule) + '</code></td><td><code>' + esc(x.path) + '</code></td><td>' + esc(x.label) + '</td><td class="small">' + esc(x.why) + '</td></tr>').join('') || '<tr><td colspan="5">No high findings on the held-out half.</td></tr>';
+}
+if (M.planted && M.v1) {
+  const cell = (p) => p ? p.caught + ' of ' + p.copies + ' (' + pct(p.caught, p.copies) + ')' + (p.caught === p.copies ? '' : ' <b>FAILED</b>') : '';
+  const old = new Map(M.v1.planted.rules.map((p) => [p.rule, p]));
+  $('planted').querySelector('tbody').innerHTML = M.planted.rules.map((p) => '<tr><td><code>' + esc(p.rule) + '</code></td><td class="n">' + cell(old.get(p.rule)) + '</td><td class="n">' + cell(p) + '</td></tr>').join('')
+    + '<tr><td><b>All</b></td><td class="n"><b>' + cell(M.v1.planted) + '</b></td><td class="n"><b>' + cell(M.planted) + '</b></td></tr>';
+  const misses = M.planted.rules.filter((p) => p.caught < p.copies);
+  $('plantsay').innerHTML = misses.length ? 'Version 1.1 still misses ' + misses.map((p) => (p.copies - p.caught) + ' ' + esc(p.rule)).join(' and ') + ' plants, read one by one: removing a check that a file is byte-identical (it runs no tests); removing a command whose test file still runs inside the mutation step; removing a shell function the loops still call (CI then fails loudly instead of passing quietly); and an always-true line next to an identical copy of the assertion it replaced. The sealed target was every plant caught, so it stays FAILED.' : 'Every plant was caught.';
+}
+
+// blueprint
+const PARTS = [
+  ['kernel.mjs', 'Reads the diff, sorts every path, runs the rules, gives the verdict. Pure: no network, no clock, no randomness; never throws.'],
+  ['cli.mjs', 'The command line: a file or standard input, --git for a working folder, --hook for Claude Code. Exit codes 0, 2, 1.'],
+  ['checkcase.mjs', 'The cost case, from the sourced ONS figures (shared, byte for byte, with the other Kar verifiers).'],
+  ['examples.mjs', 'The worked examples on this page; their verdicts are pinned by tests.'],
+  ['action.yml', 'The GitHub Action: works out the base commit, reads the scope from it, runs the command line, writes the job summary. Runs on this repository on every push.'],
+  ['index.html', 'This page. It imports kernel.mjs itself, so the page runs the gated code.'],
+];
+const G = Object.fromEntries(((M.witness && M.witness.gates) || []).map((g) => [g.file, g]));
+$('bptable').querySelector('tbody').innerHTML = PARTS.map(([f, w]) => { const g = G[f]; return '<tr><td><code>' + f + '</code></td><td>' + w + '</td><td class="n">' + (g ? g.killed + '/' + g.total + (g.clean ? ' clean' : ' NOT clean') + (g.baselined ? ', ' + g.baselined + ' baselined' : '') : 'tests') + '</td></tr>'; }).join('');
+$('bpnote').textContent = 'Gate figures: mutants killed out of mutants made, from receipts/witness.json; CI reruns every gate on every push.';
+
+// cost case
+function cost() {
+  const n = (id) => Number($(id).value);
+  const c = checkCase({ itemsPerWeek: n('c-items'), minutesPerCheck: n('c-min'), share: n('c-share'), secondsPerCheck: n('c-sec'), toolPerMonth: n('c-tool'), years: Math.round(n('c-years')) }, M.basis || {});
+  if (!c.ok) { $('cost-out').textContent = 'Check the inputs: ' + c.why + '.'; return; }
+  const gbp = (x) => '£' + x.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const rows = c.rows.map((r) => '<tr><td>Year ' + r.year + '</td><td class="n">' + gbp(r.today) + '</td><td class="n">' + gbp(r.withTool) + '</td><td class="n">' + gbp(r.saved) + '</td></tr>').join('');
+  const src = M.basis ? '<p class="small muted">Wage: £' + M.basis.wageMedianHourly.value + ' an hour, ' + esc(M.basis.wageMedianHourly.what) + ' (<a href="' + esc(M.basis.wageMedianHourly.source) + '">source</a>). Inflation: ' + (M.basis.cpi.value * 100).toFixed(1) + '% a year, ' + esc(M.basis.cpi.what) + ' (<a href="' + esc(M.basis.cpi.source) + '">source</a>).</p>' : '';
+  $('cost-out').innerHTML = '<p>Checking by hand: <b>' + c.hoursPerYear.today + ' hours a year</b>. With ScopeGuard: <b>' + c.hoursPerYear.withTool + ' hours</b>. Saved: <b>' + c.hoursPerYear.saved + ' hours a year</b>, ' + gbp(c.total.saved) + ' over ' + c.inputs.years + (c.inputs.years === 1 ? ' year' : ' years') + '.</p><div class="tbl"><table><thead><tr><th></th><th class="n">By hand</th><th class="n">With ScopeGuard</th><th class="n">Saved</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + src;
+}
+for (const id of ['c-items', 'c-min', 'c-share', 'c-sec', 'c-tool', 'c-years']) $(id).addEventListener('input', cost);
+cost();
+</script>
+</body>
+</html>

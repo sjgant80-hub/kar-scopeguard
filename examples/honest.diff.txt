@@ -1,0 +1,23 @@
+diff --git a/src/cart/total.js b/src/cart/total.js
+index 3f1c2a9..8be41d0 100644
+--- a/src/cart/total.js
++++ b/src/cart/total.js
+@@ -1,5 +1,5 @@
+ export function total(items) {
+   const pence = items.reduce((s, i) => s + i.pence * i.qty, 0);
+-  return Math.floor(pence * 1.2) / 100;
++  return Math.round(pence * 1.2) / 100;
+ }
+
+diff --git a/test/cart/total.test.js b/test/cart/total.test.js
+index 77a0c11..0c9e3f2 100644
+--- a/test/cart/total.test.js
++++ b/test/cart/total.test.js
+@@ -4,3 +4,7 @@ import { total } from '../../src/cart/total.js';
+ test('adds VAT', () => {
+   expect(total([{ pence: 1000, qty: 2 }])).toBe(24);
+ });
++
++test('rounds half a penny up', () => {
++  expect(total([{ pence: 1, qty: 3 }])).toBe(0.04);
++});

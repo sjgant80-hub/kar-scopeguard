@@ -1,0 +1,55 @@
+name: ScopeGuard
+description: Flags code changes that left their allowed files or made the tests easier to pass (skipped, loosened, deleted, CI told to ignore failures).
+author: AI Native Solutions
+branding:
+  icon: shield
+  color: blue
+inputs:
+  base:
+    description: Git ref to compare against. Empty means the pull request's base branch, or the commit before a push.
+    required: false
+    default: ''
+  scope:
+    description: Path of the scope file (allow / deny / tests / gate lines). Read from the base commit, so a change cannot widen its own scope. Skipped when absent.
+    required: false
+    default: .scopeguard
+  fail-on:
+    description: high (default) fails the step on high findings only; review also fails it on review findings.
+    required: false
+    default: high
+runs:
+  using: composite
+  steps:
+    - name: ScopeGuard
+      shell: bash
+      env:
+        SG_BASE: ${{ inputs.base }}
+        SG_SCOPE: ${{ inputs.scope }}
+        SG_FAIL_ON: ${{ inputs.fail-on }}
+        SG_BASE_REF: ${{ github.base_ref }}
+        SG_BEFORE: ${{ github.event.before }}
+      run: |
+        set -u
+        base="$SG_BASE"
+        if [ -z "$base" ] && [ -n "$SG_BASE_REF" ]; then
+          git fetch --no-tags --quiet origin "$SG_BASE_REF"
+          base="$(git merge-base "origin/$SG_BASE_REF" HEAD)"
+        fi
+        if [ -z "$base" ] && [ -n "$SG_BEFORE" ] && ! echo "$SG_BEFORE" | grep -q '^0*$' && git cat-file -e "$SG_BEFORE^{commit}" 2>/dev/null; then
+          base="$SG_BEFORE"
+        fi
+        if [ -n "$base" ]; then
+          git diff --no-color --no-ext-diff -M "$base" HEAD > "$RUNNER_TEMP/scopeguard.diff"
+          scope_src="$base"
+        else
+          git show --format= --no-color --no-ext-diff -M HEAD > "$RUNNER_TEMP/scopeguard.diff"
+          scope_src="HEAD~1"
+        fi
+        scope_args=()
+        if git show "$scope_src:$SG_SCOPE" > "$RUNNER_TEMP/scopeguard.scope" 2>/dev/null; then scope_args=(--scope "$RUNNER_TEMP/scopeguard.scope"); fi
+        echo "ScopeGuard: comparing ${base:-the parent of HEAD} with HEAD"
+        set +e
+        node "$GITHUB_ACTION_PATH/cli.mjs" "$RUNNER_TEMP/scopeguard.diff" "${scope_args[@]}" --fail-on "$SG_FAIL_ON" | tee "$RUNNER_TEMP/scopeguard.txt"
+        code=${PIPESTATUS[0]}
+        { echo '### ScopeGuard'; echo '```'; cat "$RUNNER_TEMP/scopeguard.txt"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+        exit "$code"

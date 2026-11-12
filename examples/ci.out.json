@@ -1,0 +1,54 @@
+{
+  "verdict": "flagged",
+  "ok": true,
+  "v": "scopeguard/1.1",
+  "counts": {
+    "files": 1,
+    "high": 2,
+    "review": 1,
+    "added": 2,
+    "removed": 1
+  },
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "gate",
+      "scope": "unscoped",
+      "binary": false,
+      "added": 2,
+      "removed": 1
+    }
+  ],
+  "findings": [
+    {
+      "rule": "failure-ignored",
+      "severity": "high",
+      "path": ".github/workflows/ci.yml",
+      "line": 15,
+      "side": "+",
+      "text": "- run: npm test || true"
+    },
+    {
+      "rule": "failure-ignored",
+      "severity": "high",
+      "path": ".github/workflows/ci.yml",
+      "line": 16,
+      "side": "+",
+      "text": "continue-on-error: true"
+    },
+    {
+      "rule": "unclaimed-change",
+      "severity": "review",
+      "path": ".github/workflows/ci.yml",
+      "line": null,
+      "side": "file",
+      "text": "not named in the summary"
+    }
+  ],
+  "fingerprints": {
+    "input": "92e83e4c6a758145515f10f9cba1ebec29a4929b87434318b3b901a2aba4975b",
+    "result": "646e2faf4d34731a60f700ff1b7a8b4195a0b413c0cecb28618231155d57348f"
+  }
+}

@@ -1,0 +1,118 @@
+{
+ "kind": "kar-scopeguard.planted",
+ "from": "held-out half",
+ "rules": [
+  {
+   "rule": "skip-added",
+   "copies": 271,
+   "caught": 271,
+   "missed": []
+  },
+  {
+   "rule": "only-added",
+   "copies": 271,
+   "caught": 271,
+   "missed": []
+  },
+  {
+   "rule": "assert-commented",
+   "copies": 111,
+   "caught": 111,
+   "missed": []
+  },
+  {
+   "rule": "assert-neutered",
+   "copies": 111,
+   "caught": 110,
+   "missed": [
+    {
+     "repo": "pixelwhisperer",
+     "sha": "34179929680fd5de59c8fcf7333207288ad29609",
+     "path": "kernel.test.mjs",
+     "why": "no finding"
+    }
+   ]
+  },
+  {
+   "rule": "matcher-loosened",
+   "copies": 95,
+   "caught": 95,
+   "missed": []
+  },
+  {
+   "rule": "tolerance-widened",
+   "copies": 271,
+   "caught": 271,
+   "missed": []
+  },
+  {
+   "rule": "failure-ignored",
+   "copies": 205,
+   "caught": 205,
+   "missed": []
+  },
+  {
+   "rule": "test-run-removed",
+   "copies": 63,
+   "caught": 60,
+   "missed": [
+    {
+     "repo": "ai-first-company",
+     "sha": "962be238069325aa96337b6ea8c8f0e5f825c887",
+     "path": ".github/workflows/gate.yml",
+     "why": "no finding"
+    },
+    {
+     "repo": "pixelwhisperer",
+     "sha": "0616ea2339b6b262d1bb6cc09f7f816e9d46ad27",
+     "path": ".github/workflows/kards.yml",
+     "why": "no finding"
+    },
+    {
+     "repo": "pixelwhisperer",
+     "sha": "ee68febfeced8d239de6c04077845a29af56d6a4",
+     "path": ".github/workflows/gate.yml",
+     "why": "no finding"
+    }
+   ]
+  },
+  {
+   "rule": "threshold-lowered",
+   "copies": 212,
+   "caught": 212,
+   "missed": []
+  },
+  {
+   "rule": "check-turned-off",
+   "copies": 212,
+   "caught": 212,
+   "missed": []
+  },
+  {
+   "rule": "test-script-noop",
+   "copies": 45,
+   "caught": 45,
+   "missed": []
+  },
+  {
+   "rule": "test-file-deleted",
+   "copies": 330,
+   "caught": 330,
+   "missed": []
+  },
+  {
+   "rule": "test-moved-out",
+   "copies": 330,
+   "caught": 330,
+   "missed": []
+  },
+  {
+   "rule": "unreadable-binary",
+   "copies": 330,
+   "caught": 330,
+   "missed": []
+  }
+ ],
+ "copies": 2857,
+ "caught": 2853
+}

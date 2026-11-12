@@ -1,0 +1,12 @@
+{
+ "how": "v1.1: every high finding on the tuning half, read by hand in its commit. The first pass of the rules flagged 41 tuning commits; reading them found five patterns of false alarm (a bare fit() call read as a focus marker, equal(x, true) to ok(x) read as loosening, prose in a baseline file, capture-then-check after || true, and a test loop replacing three explicit gate lines). These labels cover what the final rules still flag.",
+ "items": [
+  {
+   "repo": "fallscrub",
+   "rule": "unreadable-binary",
+   "path": "scrub.test.mjs",
+   "label": "cannot read",
+   "why": "The test file holds NUL bytes on purpose (it tests a scrubber), so git stores it as binary and its lines cannot be read. Flagged instead of passed."
+  }
+ ]
+}

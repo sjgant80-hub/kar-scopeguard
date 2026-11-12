@@ -1,0 +1,4663 @@
+{
+ "kind": "kar-scopeguard.calibration",
+ "at": "2026-11-12",
+ "kernelSha256": "b73a4f42d63dda586e3f4014d7743c03210e5c007f287fad85ca893b20ea7fa9",
+ "summary": {
+  "half": "tune",
+  "repos": 74,
+  "commitsSeen": 1257,
+  "checked": 395,
+  "refused": 0,
+  "flagged": 4,
+  "review": 88,
+  "clean": 303,
+  "byRule": {
+   "expected-changed": {
+    "commits": 38,
+    "findings": 112
+   },
+   "baseline-grew": {
+    "commits": 48,
+    "findings": 48
+   },
+   "checker-silenced": {
+    "commits": 1,
+    "findings": 1
+   },
+   "assert-always-true": {
+    "commits": 5,
+    "findings": 5
+   },
+   "unreadable-binary": {
+    "commits": 4,
+    "findings": 4
+   },
+   "assert-net-loss": {
+    "commits": 1,
+    "findings": 1
+   }
+  }
+ },
+ "records": [
+  {
+   "repo": "acg-autopilot",
+   "sha": "00302499c8d7e0d2c3c90bd0b99e41669b33c5b0",
+   "diffSha256": "8b82d13553bd607bb28a3a0285f34e95dc33d5a09f331de59148afa934dd12d4",
+   "chars": 21937,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/sign.test.mjs",
+     "status": "modified",
+     "line": 74,
+     "text": "assert.deepEqual(await why(re), ['log: it does not end where the recorder signed (5 lines, not 5)', 'record: its timeline is not the log’s']); → assert.deepEqual(await why(re), ['log: it does not end…"
+    }
+   ]
+  },
+  {
+   "repo": "acg-autopilot",
+   "sha": "3c1ad0af25a29a44fd4a9d29eeebe53558bfcc82",
+   "diffSha256": "9190ce538389a2316cbc0f0ba613fa8b012b47bd577cd9b673cedf517cce5f04",
+   "chars": 31034,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "acg-autopilot",
+   "sha": "8a3b9550d6f50410872bd1a940f497c296add93a",
+   "diffSha256": "036deaa425d54a984088057c25321298f1b1c1a939725c7238b02e35dc03e43b",
+   "chars": 42753,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "acg-autopilot",
+   "sha": "8eda919aaa317fcb129ce06550261643679dfbdd",
+   "diffSha256": "0d421e30b4ebb85c978802340ef6a1681dead1889e903b3a680707a706b6bef0",
+   "chars": 19316,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "acg-autopilot",
+   "sha": "a7e7cb19347beb2d4234b098c992bcc61a192f8b",
+   "diffSha256": "c6e4658ad393f804659edba8ad1d1c6d47a9a5a68b09b688288eee4e7798cf3b",
+   "chars": 33321,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "acg-autopilot",
+   "sha": "e23906d950d8ebe632919103a6c7543a063eae96",
+   "diffSha256": "e9000ea71c9f806e48152e31732a1159cef38afcbb2a633dd2334452094129c2",
+   "chars": 10053,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "acg-autopilot",
+   "sha": "9ea23f8b0aa417a4ca03198a3cf194aee2a2c91e",
+   "diffSha256": "781b2b973ee5cac16ad7eecea5ec32d9695016a44613e6b14b96e534e801d083",
+   "chars": 40001,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-geo-kit",
+   "sha": "1b9d9dd640df3bdee40c8b0ea11a40692d6551a4",
+   "diffSha256": "c1ea9f86de147a7c0bbff7401a72830610410f4c9fa8ee3e3f4e14e1cf0944eb",
+   "chars": 5295,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-geo-kit",
+   "sha": "fbec7090307a315476fa29d670f82ef8d6bfdc8d",
+   "diffSha256": "c243c84b7f042a4ce9d46f81cd0180695c62b4cf002719df3c54bd7ceebdecf7",
+   "chars": 541,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ai-geo-kit",
+   "sha": "8735a406a15b345447684427ee96ef3c61b89321",
+   "diffSha256": "bdf0b35b0fdf7c716894fa3ee2affd90153b64e9bfa8841ce5ddfd66ababef7a",
+   "chars": 77806,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "bot-team-kit",
+   "sha": "c6a541dce67af502916c8059ecf05abc5b19685b",
+   "diffSha256": "2352dc7e2e010f3b31092482b56ee86ea38a04b7caae1533d6ab9c973d2280d9",
+   "chars": 49367,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "checker-silenced",
+     "severity": "review",
+     "path": "test/checks.mjs",
+     "status": "added",
+     "line": 88,
+     "text": "// eslint-disable-next-line no-unused-expressions"
+    }
+   ]
+  },
+  {
+   "repo": "break-it",
+   "sha": "c30646ce52b30b80192edbe94d0732e264fd67f9",
+   "diffSha256": "134f5e2a67cdf53b69fafc9d169a87988bbb6a1fefade9cf8d6f91857df60ac4",
+   "chars": 3536,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "1995620742c9b970e678dd2d10222a14a8504482",
+   "diffSha256": "aa16a275f610978ffc7986e5cb0d2499e1b34d1c6f0b888167c4e4bac1987de4",
+   "chars": 20048,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "49cc8b30bf2658408533732fbce4d32ed6dabcf0",
+   "diffSha256": "44cdb5a538a001fdbe8965a1c97238c16418f1cf6990db242e6bc29dc68f5017",
+   "chars": 32297,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "88169745a792ce1d6d509243cf597af4d1394f67",
+   "diffSha256": "64ebbad01a7f22a5fabc52375828380e3ae1274e16254902b6787424daddd67b",
+   "chars": 31314,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "badc6ff158b60b764aae68b3deae18014f4b5480",
+   "diffSha256": "9790fbe4532674fbf4c62af6df19a586fd3c24066445eaed36aaf3255af30634",
+   "chars": 25004,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "fa6e5b08e055792f8d1cf45dd423cc9e9dca4f8b",
+   "diffSha256": "b99cdf9a104f941d7f088c7072dd3646db6704b03b53b8043961e576c5cd07b6",
+   "chars": 25026,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "851d32deed378e8200ee4247fa4c5a5308b58ee0",
+   "diffSha256": "deb0da88d1cd042d2ffecf2a26ba1e44dfee25f8ed696ecdc40d90013579f88f",
+   "chars": 19628,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "7d8279e5eaa6757e48b201cd321599a4abe3690a",
+   "diffSha256": "37e10f90768cde6e4060b9b77935253bbfd749128382c6c0f112badfc67a92c0",
+   "chars": 4046,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "c36fff3520e5c4a7b4ffb84a9ef1c396c3167dca",
+   "diffSha256": "bded26ee2ae7598f96a96d8268757db468ae10b7fb73645bdb71e6d73467074a",
+   "chars": 147120,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "8db087c196b0d36b4162f9e3bd66d66e05a63d5c",
+   "diffSha256": "c7b466da45bdb4f8228ffe1d4a92866d2f97895e4f5fe5cd910abfd769a2f7ec",
+   "chars": 58078,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "48a2fe210857c311a50a3e4f7b778cdfc3922983",
+   "diffSha256": "5ef8864c4dd3e310945ff74443aca2c0b18af9d9ef5a5b4682f54b3ac423e2f8",
+   "chars": 162152,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/cost.test.mjs",
+     "status": "modified",
+     "line": 17,
+     "text": "assert.deepEqual(FILE.sources.map((s) => s.id), ['aws-waf', 'aws-apigw', 'ofgem-cap', 'intel-i7-1255u', 'boe-fx', 'ibm-breach']); → assert.deepEqual(FILE.sources.map((s) => s.id), ['aws-waf', 'aws-ap…"
+    }
+   ]
+  },
+  {
+   "repo": "break-it",
+   "sha": "c2d344c28bc984d94bebf02a36b097ac85e0dfa1",
+   "diffSha256": "0d5a6b8e503cfc5a8712726727875168e455efe4c8ca4de400dade16bb2e246d",
+   "chars": 34582,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "79da53930c2f16af8d56dc22c03c0e27f182910c",
+   "diffSha256": "f419c2e9910a93de1c5ed676a45556671234c1ea70617fe77a03acbce7be4d22",
+   "chars": 21666,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "break-it",
+   "sha": "4edbb8f03d4a61c836ce17a70b55b548b9244620",
+   "diffSha256": "ba0cb3a793b2f018a9d8ae57a4f790aeef4c5c63744bfc87251a3b073f1c6137",
+   "chars": 2956210,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/sentinel.test.mjs",
+     "status": "modified",
+     "line": 45,
+     "text": "assert.deepEqual(stBase.baseline, [1000, 0, 0]); → assert.deepEqual(stBase.baseline, [1000, 0, 0, 0]); // set · del · add · rec"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/sentinel.test.mjs",
+     "status": "modified",
+     "line": 122,
+     "text": "assert.deepEqual(st.baseline, [Math.floor((CALIBRATE - 1) * 1000 / CALIBRATE), 0, Math.floor(1000 / CALIBRATE)]); → assert.deepEqual(st.baseline, [Math.floor((CALIBRATE - 1) * 1000 / CALIBRATE), 0, M…"
+    }
+   ]
+  },
+  {
+   "repo": "break-it",
+   "sha": "f99bb204bcda2c28c58dc64760dbe088f8112cd2",
+   "diffSha256": "6953c09f249f3f1b811bc85be34102c2739d89a603fd81a4e6862932da313cf5",
+   "chars": 301657,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "157 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "chaff",
+   "sha": "af49617bcd26836964bf95a39c3d1560c8bd7da0",
+   "diffSha256": "606086d0f0b6822693e51863a869509e9969ac274c6a63195660b432526094c9",
+   "chars": 94174,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "57 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "chip-immune",
+   "sha": "32b7af9776599384fe920a48e5b854aef4dba2a5",
+   "diffSha256": "f9fb82b04330bbf46c9f700fb5f931cd908bba6d3b2540e461b9b6d8e0cf6a68",
+   "chars": 72714,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "chip-immune",
+   "sha": "3ff5da8caa2aa12ec497ea9826227bfa95efbe78",
+   "diffSha256": "cb1378a1ffa8f88d64bf2f3ea0ab3891b20215789dfd599a406a467e6626b26d",
+   "chars": 60374,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "copy-gate",
+   "sha": "5a002ef2b149d7e9bf52f729868d633b3d4b4012",
+   "diffSha256": "323eb53fae90dd1d69d72a4627df91ad7d4fd9f1b5fb612e6dd98dfab07b72f0",
+   "chars": 140585,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "8 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "csv-forge",
+   "sha": "19633c3cf9f79d9352257eb71d5a72fb9ddf1c47",
+   "diffSha256": "6e9cb566d1d235999a2f7187c146fbd11c637c545a8c67cabd8f88c805de893d",
+   "chars": 70042,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "daily-prompt",
+   "sha": "6cd6810699d8a3bb0f4223ce1a78b26c062ae4a2",
+   "diffSha256": "e771d2f1638eb9b6052b40e86e9dabffa971820559b86959605950b34aa43cd2",
+   "chars": 67001,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "e134de7454364ab36c715bac2dd968b28522eb3e",
+   "diffSha256": "2ac035385f1febcb710e77bc5275c3d7cfb59bb262da97a1fd6a6485df8dddd0",
+   "chars": 603483,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "8e91b65e8a8e70db13f05fa8e97895c5f5cd168d",
+   "diffSha256": "aa875243aeea7a2a279cf5bcbf9ea12424910c7ea64daa9de363931a164e2665",
+   "chars": 65189,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "0c58aacdae5c0968705bded59655395e7734aaed",
+   "diffSha256": "c1794da1b03825fa4006aaa4d5f08e91b6f16123d88a5fe015fc13976ad04120",
+   "chars": 10041,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "af527bf2b13aa76bda7720f359546e122113cce1",
+   "diffSha256": "6698c07501c871a6c27cedb1a4c68a8a227df69136346442ef47e050a8b8acd6",
+   "chars": 16068,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "d64f9fcfd722c6a3b2549bb024529d2a530ba9f8",
+   "diffSha256": "3b0b0ea94d2cb1a55a1b02876986fddb246d379eec656bb7721e7c09e54e6fdd",
+   "chars": 748862,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "2bb72d18bf615db5d3d38bd319733b9d9993eba5",
+   "diffSha256": "481adaec946f0883839aaeca199715108417f7d3c1f8ce91bb4110996ff9052e",
+   "chars": 34424,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "edfcf148f18ada3116df515f7eb26624f2905d1e",
+   "diffSha256": "983b852355e09c876966c35a0bd14e0f2a12f4d648d59aa8e13315edfbd74f1e",
+   "chars": 48704708,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "2bc831097fa48f2d945b9601a54a186dc3231190",
+   "diffSha256": "5d6ce9f12c13e8b50f9beefebfdd4ba26aefff9d48c43b17fb88d87818ecb0eb",
+   "chars": 67321,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "698a3deb2f5b5fc2e2e6fb64f2a2591505b79b9e",
+   "diffSha256": "4cc3de1755f382dc0c2620491f10237855ec9e7025d6e2ed96088877d6270cfa",
+   "chars": 125203,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "c3491b1f63ba2ea991da733f7d98829d3fadc06a",
+   "diffSha256": "5cf210590e55a4a6b7342710ff9c40a531785b31eaa78e9a04666c583cc52476",
+   "chars": 2216613,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "6846e9a6dc6c575f715d73468294e22bef95c571",
+   "diffSha256": "42305304a021260673583a2288e11b028fcb68f8ba1d549edde88b6995607b32",
+   "chars": 6709,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "514f60fa7ad4c3dcc59d757bd810279a31cc723c",
+   "diffSha256": "cc545aeff534e821e153be2c75e5eb10f705028d8746dca48420361ed7511f09",
+   "chars": 10650,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "3158e9100d5ffa79c43debd1236051c6970a05c6",
+   "diffSha256": "40f2ed416a1599ff41530d8290a75bd2d52c15dd6c07216994e8ea5ce3a90302",
+   "chars": 115378,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "ee73c0f5ddae04547f22cdf13039013932413401",
+   "diffSha256": "06fd2361208c57e4101888441c952616236bcf5f98ee3468b2bf7b0406ae7e86",
+   "chars": 17157,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "9060174d37141ce4499d6fa14e3af0b7fdb97f6d",
+   "diffSha256": "4d0d00088406e72dcd84f835d142c17a7a2feea2b3aef82668794c447cebd7bb",
+   "chars": 22110881,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/deep.test.mjs",
+     "status": "modified",
+     "line": 21,
+     "text": "assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3, cuts: 'quantile' }); → assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, hel…"
+    }
+   ]
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "57ec9fd6aba65ad2e982feb23f8df0e5ce1a20fe",
+   "diffSha256": "5dab23622284374b63a786a307ac35a122bbaedbd3fafe4f7da32e2d2d39e2e4",
+   "chars": 27224,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/deep.test.mjs",
+     "status": "modified",
+     "line": 21,
+     "text": "assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3 }); → assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3, cuts: 'q…"
+    }
+   ]
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "0f394c7a3e2f6b94c93febba04f26c2ae180f95b",
+   "diffSha256": "4e9fac342928ae6f95e8954f1fcea7024a55251dbdab4d64c04fcf4b542f574b",
+   "chars": 14599,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/deep.test.mjs",
+     "status": "modified",
+     "line": 21,
+     "text": "assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8 }); → assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3 });"
+    }
+   ]
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "41edce484f5f389e032258159022417a4a233a2f",
+   "diffSha256": "ace9e64770602bd134dc36c1cef6d90a66fd7b7c0192523e033a12ed923206cc",
+   "chars": 92226,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "94fdb3d74dc1b58cad8a350ac1c0a84cc29fbc9e",
+   "diffSha256": "698c151311c0721bfa75976d2c275cb7bfa3e6c9d2b52813878e75e9595cd322",
+   "chars": 109832,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "49631314895c5d4ad3c49d36a3e48cba226881ee",
+   "diffSha256": "6a4c2d86e31bca91b020478b334d8b7dee8cc890bfd844d71e49d8fd928d878d",
+   "chars": 11931391,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "6551047e2b9ab0188c8df5fda4a7c8d997d2d712",
+   "diffSha256": "165ac98f3190988cf417cf818166fbfde20f269a1cdcb82f212af4e7005118c7",
+   "chars": 5066,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "978d4c7b3b1cf3581ac9648565af4162dfb7c5e2",
+   "diffSha256": "bbe9094541d1abf505d061845f42112a1e542154d9b3f36b6c37fa7e2e05758b",
+   "chars": 13218,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "bca0f45ab6ce7f5d9e805bab60829733461a601f",
+   "diffSha256": "a5f7ffac7bee41e8ccd5cbdcda58599621e1c305def462bfb0b1fc85bf1ae68c",
+   "chars": 6762,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "e01ce4d1a9d1332fe0588fdf42f764f7fea7f01f",
+   "diffSha256": "d24446e7d45857ea8a276aae60e7b0e2bad0249ae07b884ab6f9bf09e9d29fa4",
+   "chars": 2719,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "057c8cfb4ef8e856bd0548110585d07ef526a90c",
+   "diffSha256": "80e4cb544d2bc07f307ab4ce2b279ee018deadebcc9db99294ac9a51c4a0f14f",
+   "chars": 16091,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "74f0d2621133828e08c4e0d68dc79d3443aad455",
+   "diffSha256": "700d63221f5f92aa26851c5dc471e7939af4382c2a52d84e5efbc598be212227",
+   "chars": 17814,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "72e9f8fa8c16064ba2324323f05acf3947fb25b3",
+   "diffSha256": "4ae01efb68fc35d78274f590ebf0e849758d6e4e28ed94ac2fc1613f9fca3ceb",
+   "chars": 17114,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "a8cb1218238b12c006345a141f703764b1e52d05",
+   "diffSha256": "02158b67a8a9c27c9ba5845fddf585c1659fbfec952fbed60b189b26c5924015",
+   "chars": 28306,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "130133cad559834f8ad960a1773eaf1b65fb1684",
+   "diffSha256": "0e1a1e1012416d84b7dea0e04a6341cb27712d6f862215c3ccf91e4b26d4b033",
+   "chars": 7363,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "0a35fb976680e20d6ab8f792dab2677f8915c8d3",
+   "diffSha256": "4d000680cfea7c9ca3d8fb4e1e7839395c4449a16374eecca3f6bd37977e6dcb",
+   "chars": 3540,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "16358f53a58be5c6647bf1b8a622c50bcd213d2b",
+   "diffSha256": "3d25475e4bcb79529f6a0f771b92abad7c3f6aab39b16ff7c2a2058804356bea",
+   "chars": 25143,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/population.test.mjs",
+     "status": "modified",
+     "line": 60,
+     "text": "assert.equal(pick(tie, () => 0).id, 'p', 'ties go to the earlier id'); → assert.equal(pick(tie, () => 0).id, 'q', 'ties keep their order (a stable sort)');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/population.test.mjs",
+     "status": "modified",
+     "line": 61,
+     "text": "assert.equal(pick(tie, () => 0.999999).id, 'q'); → assert.equal(pick(tie, () => 0.999999).id, 'p');"
+    }
+   ]
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "c46d25f767ba06bf4417e02ac2c556e8871e1c20",
+   "diffSha256": "950d78402605919c2c8ab4090c30bb41255b992a1923f56b2df1d52f9946a1c7",
+   "chars": 27442,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "e4ea49bbb1bbf885b51ea5512d86be7d8e8f15e4",
+   "diffSha256": "dc08901a1e9b824e0a372e4dd7970a0a557db4b492bc6575a76b8bcd4a584b86",
+   "chars": 84332,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "fec8223896ea66bf7b2099f9285d1e17473ff2e0",
+   "diffSha256": "1ba6bea74ec4690ca6165e1fa1d792da8181f67c5bff23b0671d7651c8ef136f",
+   "chars": 7127,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "365260936c8e5c49b4cba259f465b3f095c58a88",
+   "diffSha256": "c896c4d4f57d923e4204fa96ce390f2c6488b1f6f9ceaf360e99802619172348",
+   "chars": 65071,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "dex-frontier",
+   "sha": "368dc95f9fe30adc2f1ce4cfa294a8d7930c89b8",
+   "diffSha256": "a99172c6d768d1644360c1d2658310600ba87ba41c21bb1b86493c96df5be13f",
+   "chars": 2808916,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-attest",
+   "sha": "95b9ded61b800112adf9fb34e699209e73778ec9",
+   "diffSha256": "38251a0fb18a8d93f5ff4a22265fc9b96f2550da6f2d96242dc9dbdc8231d6fa",
+   "chars": 756,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-attest",
+   "sha": "606584c5e5e9af5c52878867ee49e3d8288ff1f0",
+   "diffSha256": "7140c23eb92b373aa578142dc4a772ea838288d47536237a59efde42709ec263",
+   "chars": 25112,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-attest",
+   "sha": "932faf506c9c8f2786822d5267f8989db8813175",
+   "diffSha256": "a052d89ee5955407340e15d9aec86b4ec4e6d59d7ab8fd260608f746d45a1f9f",
+   "chars": 7541,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "estate-attest",
+   "sha": "662ea946f674e562489858091c19865edfe7b3a1",
+   "diffSha256": "e09b186088ec2febb2f3712301d71fbbe12c4a547f24525520b71ff619f4a278",
+   "chars": 230662,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "bea0378dbb7d31ef0869211bd572c1b4e00af9b2",
+   "diffSha256": "e42354beb700300cdba1cefb860e8d1be97f48a7fbc3e33243c4bb12a2a0f531",
+   "chars": 679112,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "1092a4286a01f79b0d85880140418f5f941ec0ba",
+   "diffSha256": "73ad1deaadbec61e3d29dfd76bbaa9deee46464191f7714bc68a08e6c7f0da7f",
+   "chars": 829,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "92e41da50f1037e896b6ab2a99c86eea57c9fa55",
+   "diffSha256": "355e0e72e5490bdf0f105e1209244cfa2d91af441df5b2637d71b6692cac5485",
+   "chars": 863,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "28853a617719ff295b6380aa6f6671b44be00ca3",
+   "diffSha256": "f293b69f58cf1351f1f181ee4f6ce42dd78ed6a89ca2d435e93a2a5a0d8eba80",
+   "chars": 8416,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "ed5d1b046a0bef18fd1447d316101051b9306d30",
+   "diffSha256": "80708b3036624cf185936777262f2324a77f8564187ce72c4b4ac0bb6c61a832",
+   "chars": 6294,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "a328d6e3b7763d5e6e03401671a127266ac0b64a",
+   "diffSha256": "2378e48d74d39eaa0612a4e0da5eb469a5ccf0f2b49be192869b8edf0373d7db",
+   "chars": 577562,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/intake.test.mjs",
+     "status": "modified",
+     "line": 12,
+     "text": "assert.deepEqual(c, { name: 'x', desc: 'does a thing', lang: 'Go', topics: ['a'], live: true, url: 'U', pushed: '2026-07-31' }); → assert.deepEqual(c, { name: 'x', desc: 'does a thing', lang: 'Go', t…"
+    }
+   ]
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "f82e290150d5b3f57660f5c3e6336727561c05b6",
+   "diffSha256": "0ba33022268603b1011e3fa33c0328fef1ca0b2be5c8b9bcbb1a9adaa691803f",
+   "chars": 462346,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "7ff52c5e24603bf3bb9de5bc8db280831b4dad0a",
+   "diffSha256": "167750960704ca5ce43b2274d8f2d06977f36817e33834d28dfedd942f45015f",
+   "chars": 367309,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "5 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "estate-nest",
+   "sha": "16e8dcc651df83c5edf16e8a4e0563f5ca619e33",
+   "diffSha256": "aadb1a185876e74b761d35819501b04a3fbcec57aa6772b6dc21ffc869ca4140",
+   "chars": 235427,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "kernel/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "a8712f6a34148569bf73100f44a9539847957c26",
+   "diffSha256": "8c47baae5f67fb5f7408e0cdde10689cd47692dd3b7caedcc83bf67ce6d8dad7",
+   "chars": 27380,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "0e580265465df39d495a311aec3c63e07c1f50fc",
+   "diffSha256": "a326f37a5f6b463a8b5c1fbfd6c960e725ff9a31b6341d608168ad4a1286e0cc",
+   "chars": 13156,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "7a8723e8275a98cbcce58ecfc2597fc43f56976d",
+   "diffSha256": "d8d2f095a024eccbce692ee68fabd80d92fa7e0f27908984a46f35eea3492b6a",
+   "chars": 6228,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "24bc9292482eceb30399b678aa183e693286b258",
+   "diffSha256": "e53a4233ff87cb3da7139c5a9eece8748e7665bddc9bba64bdcf45c5bb1f221d",
+   "chars": 21260,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "cef2a5e2f90e8a52d11897a98f4cb69fe6830151",
+   "diffSha256": "de15c75d748ee744ce89f80b9ccc8645c717157632480bd5489c568540d02f5c",
+   "chars": 17008,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "9e6784ba45dbb09fe20cb5917216d11a6a5cc681",
+   "diffSha256": "e23ba9339997bee5e5d67e1cee7ff44ed31b1ed33af6b6ca48a3c893a9dc10d6",
+   "chars": 30150,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "a31ed4ed51dd79e598163d45d1ce365478745031",
+   "diffSha256": "1bab9942715a4ba670ba98a72638c03540c08bd8eb775acf964068cbb19e1fe6",
+   "chars": 18066,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "4398217b40beb97d52246ae841c9574cce30b010",
+   "diffSha256": "1de47be219bf136f531591f4a3ffd5779922684b2e77bab67f7956e25846141c",
+   "chars": 22195,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "aaba413f569f586baf232ebc714c7ae71dca0f02",
+   "diffSha256": "59ccb17e68f030f76d385cc66aa111eaed7bcf126e9d765ab8204084177f158d",
+   "chars": 27012,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "4cf9fc0a7626da3b1c95f38f5ca227a27b00ad0f",
+   "diffSha256": "b907ff2f70df6ce94ab33ea2770c11cfd7508dc01b86125467b7513ddd69f66e",
+   "chars": 38348,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "8 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-architect",
+   "sha": "f8f588f0723b0a899edd31aaf45d93669b863aed",
+   "diffSha256": "05ece5e5c1d91c1f7904246df2d431b2d39ac27647afe1518935abd01c601d1d",
+   "chars": 35208,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-euaiact",
+   "sha": "ee490a81ff51e8b08832a3a6db5b4573d3217b3a",
+   "diffSha256": "6d5218e717b342953788f975c784b1b048b2b3350215487346a3657c53388d81",
+   "chars": 83257,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-euaiact",
+   "sha": "a9ff567f953d3645dbc7e9349eb7af41c6996e27",
+   "diffSha256": "e48ed3e74d820bb706af3eb925698d913a3e21d250163b734c44d3b31196462e",
+   "chars": 8675,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-euaiact",
+   "sha": "698a7a2c14035f75a74eeb6d9bd1a533dd60c78e",
+   "diffSha256": "8d6defab7f8250395514c369b0a01ac2b7abebdd79e252c43e5e8132b656aeac",
+   "chars": 36131,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-euaiact",
+   "sha": "cd003db1995b34cddb199ab81cf243c49dec559f",
+   "diffSha256": "76caa7ec0f0bf54c820368a1bec02640b90637b384e309fa9881cee21b60ed7d",
+   "chars": 52593,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-euaiact",
+   "sha": "8f113efe3b868a0bbfb89594ed86473c069ef431",
+   "diffSha256": "d9a43af29d8584bdf232aac053692c21664631ad9eaf8620bdda67fe0409a3f5",
+   "chars": 51010,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "4a6acbf783ce7d031d3371536302679f159c5b21",
+   "diffSha256": "53d94f89428efa7c185c517128c54b544bff33b78a7a89fc4db08e56c0cd9a1c",
+   "chars": 15618,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "cd4ad1b1d76e135cf1093f3a2717e1b3fcac8c29",
+   "diffSha256": "23065e062053b8084b991fd628cf745c0d2defab46003263209196ba21e5a661",
+   "chars": 32398,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "2a7572050fc87a89e6886342c0b8482a614f08dd",
+   "diffSha256": "8ceb8e1d63327f5075ccc5b719c7ab0381af0dc79221612bc08cf65f744a8dbe",
+   "chars": 61201,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "95287fc7151adab5e8dbd502a2043358dbc22982",
+   "diffSha256": "6ee9a482acb36c55bd2a0bc243e8d67f03e860839e88e5adc43bfe71e25a265b",
+   "chars": 8332,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "fc684fb142e68ed60a2b76fd5cf2bfcc790eca60",
+   "diffSha256": "9167238d3eb6ba37f1f29e7ac711ebff63fa4f55acb1f94213366d7f683bf370",
+   "chars": 4711,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "c478346d7ee2e58b8554309a6ebb12a26ac0f043",
+   "diffSha256": "a87622b870627bea283aa054590abc8a98420ca9605503dc98478dd916aea4a1",
+   "chars": 84961,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "dfb4ad5c37f627ecdc8eab901a7296256c7dd485",
+   "diffSha256": "05ccbf1ccbcaca6d8b6f1ac649df6627a19159ea432acba53d4336e1b3fd3fa9",
+   "chars": 9873,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "353f95289ec0f9aa2ce09ce9d1240e6fdea0fe90",
+   "diffSha256": "a125996f2e2593a08b3b30e6c9a1508c44b9daa06627d88e333754edb323abf6",
+   "chars": 184093,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "6ef9ba619b672ca0f6ed6a0546f7117a3a4d47ba",
+   "diffSha256": "9bac8fc1df88935025dbb727267dc69bc4f1147deb12a23b9c3745ec37723f15",
+   "chars": 11721,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "937f3e42d207d576a9f32b1a2c0634bf6a22a630",
+   "diffSha256": "4b9552770ad2cd81dad9273804bf35cd0317cc109ed73fa25cc2e58bf839dcee",
+   "chars": 12414,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "914cb6bc6f6b0e164a6fd43639c699ff28ce8d47",
+   "diffSha256": "d372a5a12fc7d1bf4a528f89bc400ce99d651778101b7879a2eec8d8fac7787a",
+   "chars": 128286,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "117f04fee8662660530a60d2f9f8706ad592703f",
+   "diffSha256": "cf8e3af548801236a2fc232018a5a018197af4e645d4bc0b7717a8c5a38bbb45",
+   "chars": 241547,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "7004d61a12e6aff63b3d9763352922a8502b2135",
+   "diffSha256": "1cb0258e6b8e8da5abd608a0d55549379fd8396ca008462af0c621efab0976f3",
+   "chars": 56918,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "f49576ae4a6b1309afb8d717c786ef18ce15a27f",
+   "diffSha256": "2a36bcb5ec0881cf6a22c0f70a9c8d44c589988c9e1f6c53f230c2c83f0f520c",
+   "chars": 44897,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "498d60cb0c8b25d91d65363834b828aa98076aa2",
+   "diffSha256": "ae78e6622c825c2080001ef200556c096ddf773de45b8d876452ff7cbc62a2e0",
+   "chars": 65261,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "fdb613f08f71919db8b82902d556e3643538d717",
+   "diffSha256": "f84f49c3f04fbb7a6a0899ba23b0a815151409480e71c9eaac1cca7b37ef2e3c",
+   "chars": 13225,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "a6ab3a4613671b54f2957f13cd43137984ed5705",
+   "diffSha256": "641b002bcb0881229b554dab398268aeedb232c6d5536fc26b489d57bc7d6e4a",
+   "chars": 2632847,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "381abc04d7bc3286ec64c67f9e93dfab5fd8ebcd",
+   "diffSha256": "5b97342f77df4c131de289969f3ab0dbb5595569a630b226eb54b2681a51e4a8",
+   "chars": 31365,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "fb6852a8891bfc3780540913956521a1e6ca803c",
+   "diffSha256": "f2db569ade6662fcfe03da77781ba297c06360a6a4674f41f7cba703b22713a8",
+   "chars": 15057,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "a98efc499de55722ca8126a8ca94449ed2b07980",
+   "diffSha256": "4d4aa8a1c88e7523fcf6f78fcd8e7bdbeb3473e2a0453a255bde810c3b4c6430",
+   "chars": 4657,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "core/node.test.mjs",
+     "status": "modified",
+     "line": 903,
+     "text": "assert.deepEqual([misnamed.adopted, misnamed.already, misnamed.refused], [0, 1, [NOT_SIGNED, NOT_ANSWER]], 'bytes already judged, under another holder\\'s name or another ask, are refused by that name…"
+    }
+   ]
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "fca16bb871fc0896573fea6051f51a9a480dda9f",
+   "diffSha256": "632bd9d33b42ff1bfc6262af1f0523ce148aa373f05f6ff54617233c58cabdc6",
+   "chars": 51136,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "fc18de687d217d3392dde8260af2af40d9cdca7f",
+   "diffSha256": "295943c7b0b4dafe8c99100285a29381ef0e66954c38cf7a1fd9470171dd4151",
+   "chars": 222485,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "core/witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "10 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "2960fae3c114ea728d43c734a93bf4fe9a6a1ff3",
+   "diffSha256": "95cd2da31a30bde32d5720fef709a5f604c79b430c343e118d39ae94d7aef514",
+   "chars": 164053,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "core/node.test.mjs",
+     "status": "modified",
+     "line": 71,
+     "text": "assert.deepEqual(choose(peers, 'triage'), { id: 'c', weight: 900000, live: true }); → assert.deepEqual(choose(peers, 'triage'), { id: 'c', weight: 900000, live: true, untried: false });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "core/node.test.mjs",
+     "status": "modified",
+     "line": 72,
+     "text": "assert.deepEqual(choose(peers.slice(0, 2), 'triage'), { id: 'a', weight: 600000, live: true }); → assert.deepEqual(choose(peers.slice(0, 2), 'triage'), { id: 'a', weight: 600000, live: true, untried:…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "core/node.test.mjs",
+     "status": "modified",
+     "line": 73,
+     "text": "assert.deepEqual(choose(peers.slice(0, 2).reverse(), 'triage'), { id: 'a', weight: 600000, live: true }, 'order does not matter'); → assert.deepEqual(choose(peers.slice(0, 2).reverse(), 'triage'), { …"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "core/node.test.mjs",
+     "status": "modified",
+     "line": 75,
+     "text": "assert.deepEqual(choose(pruned, 'triage'), { id: 'y', weight: LINK.FLOOR, live: true }, 'exactly the floor is live'); → assert.deepEqual(choose(pruned, 'triage'), { id: 'y', weight: LINK.FLOOR, live:…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "core/node.test.mjs",
+     "status": "modified",
+     "line": 76,
+     "text": "assert.deepEqual(choose(pruned.slice(0, 1), 'triage'), { id: 'x', weight: LINK.FLOOR - 1, live: false }); → assert.deepEqual(choose(pruned.slice(0, 1), 'triage'), { id: 'x', weight: LINK.FLOOR - 1, l…"
+    }
+   ]
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "b8f9f3a3c9c2e27d5db6bbf9411ad034eae53c2d",
+   "diffSha256": "3f718e5a322269b9e8300cf5f056d69d1e0ea3bd8300cfa27b4c3339829c72a6",
+   "chars": 11452,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "c3c9fccb8ff9ac2c2611a9c6eea66eaa76372480",
+   "diffSha256": "f14a6c087344462dee0a3e57ca7359a0cfd90b697b7aff906e2f155096786eb7",
+   "chars": 34672,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "349af540b7b82998a2a6a6b1dbd9ed2e1370b3ca",
+   "diffSha256": "df469ef8b62281aa29ca195716d6ea541514769db3b7cc06999a351907f57d6b",
+   "chars": 309825,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "core/witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "5 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "8ccc70ff2107c31a2f8e0c7785d5242540cba83e",
+   "diffSha256": "3224dd08fe6a196ab6f1a9fb1f3642dbd60249c03f50162d8457c9b45cbc0fbc",
+   "chars": 36704,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "9fd25326165a72190015e584f962eb2efe1e8198",
+   "diffSha256": "8a0091d1a4fa3919c68f168d99da158ba7caca77e3047495bb79a2016d53c7bb",
+   "chars": 13249,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "94abab8ea69227a4fbc4032086c4bbc624fb3a83",
+   "diffSha256": "c67bd0ff69bbe0b44dd268be2a43f5f6274f0ac35622ac04a87b13652d678102",
+   "chars": 29110,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "776ef6915e4d8d65272d34f5ca203cbbc9550855",
+   "diffSha256": "18a762f91078d75749e6df27a82653e6075d5c9ec3bf1c486254f5b8aa7742e9",
+   "chars": 138440,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "9d26891ab97816b0d7d4081e9a6480d4a00c7060",
+   "diffSha256": "30eb6298d4f814194362c4923d331c0732dd1470e10a6a6569979bf03bf4c724",
+   "chars": 179898,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "core/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "f9e7af28850d3800c3dbc1e5a0f36df93f619dde",
+   "diffSha256": "b93d67ae7e3fef95d48717e4b52af32d7a6c3412961e7efac233c75fc6fefd98",
+   "chars": 126477,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "4fd5e9272aeb004f85f9e3a519d791d2dd51a1e1",
+   "diffSha256": "2098119922d9136d0202b9951f83e70d670ab46774de1b1dd60dc3c14ba5a90f",
+   "chars": 128666,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "4f275a4ac5fc3d2040d198c091d487cab4dd0dc4",
+   "diffSha256": "7db586fa3e3a0b606e81ba230b1f53c621550e0a201d02c189b84dca2ba13064",
+   "chars": 10506,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "socket.test.mjs",
+     "status": "modified",
+     "line": 122,
+     "text": "assert.deepEqual(Object.keys(b), ['name', 'category', 'retires']); → assert.deepEqual(Object.keys(b).slice(0, 3), ['name', 'category', 'retires']);"
+    }
+   ]
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "163590f45efba33ec343261633a26e4539f05208",
+   "diffSha256": "dc6af2448e4ce206ae2a6eb786fbe3e980c21a60f10cb4b67571a650aaec1027",
+   "chars": 15687,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "14a33d74b319990995d9c4b26c468569e162f512",
+   "diffSha256": "8bae26728487c9da4d9a037593082826d0ed2670a2bbf662d2f72ba12991b9ea",
+   "chars": 8018,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "e331545ee05b5865016f33cd0e5b057692dd7c5b",
+   "diffSha256": "29ce23aed126deea22c8967983afa35c4b55b1e710c418600c236da25f631d1b",
+   "chars": 40512,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "socket.test.mjs",
+     "status": "modified",
+     "line": 97,
+     "text": "for (const brain of [{ how: 'other', version: null }, { how: 'inline' }, 5]) assert.equal(why(k({ ...s, brain })), 'the brain is inline, shim or none, with its version'); → for (const brain of [{ how…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "socket.test.mjs",
+     "status": "modified",
+     "line": 102,
+     "text": "assert.equal(why(k({ ...s, brain: { how: 'shim', version: '3.0.0' } })), 'only an inlined brain carries a version (a shim loads the newest)'); → assert.equal(why(k({ ...s, brain: { how: 'shim', versi…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "socket.test.mjs",
+     "status": "modified",
+     "line": 103,
+     "text": "assert.equal(why(k({ ...s, brain: { how: 'none', version: '3.0.0' } })), 'only an inlined brain carries a version (a shim loads the newest)'); → assert.equal(why(k({ ...s, brain: { how: 'none', versi…"
+    }
+   ]
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "ecce94359aca1408b0690c596556e88f84cc953f",
+   "diffSha256": "17d7e8dec563a459e21839833f771b10ba77520e87bf905c69cbcde5cd10bc82",
+   "chars": 165640,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-kit",
+   "sha": "7810c213a705d2e310a0a0e455fe0a9d98570ea0",
+   "diffSha256": "78cfe940306e2c7a2bf18e255338ccc8403875ac9892a491e64a806567a909aa",
+   "chars": 64845,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-prompt-gate",
+   "sha": "080b7d169cdce54d0567d192544c290954be6d60",
+   "diffSha256": "e3c07c9452cb393b4fb305f6e9ff65b2f9ad6f7beca5121c37df0e9249aa34ca",
+   "chars": 96169,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fall-prompt-gate",
+   "sha": "df4fb8bfadb2137bb2ae2904a818eae068c22816",
+   "diffSha256": "3d03c322a3da56462a53264d379632026543aac3f006529f06e92e4f18dde6ac",
+   "chars": 3471,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-registry",
+   "sha": "e49f7e05aeaf98908b69a3c7bc37bbae82672784",
+   "diffSha256": "3d03c322a3da56462a53264d379632026543aac3f006529f06e92e4f18dde6ac",
+   "chars": 3471,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-registry",
+   "sha": "a06c67e02338fff31e46bb3a33a6ef9da3bec660",
+   "diffSha256": "4b2e27f4ae923afe9275622a0abf89cc88d653884c12278835e218d06086a3e6",
+   "chars": 11039,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-registry",
+   "sha": "dac3c205a45a967e17d3e64303edac8573ae43af",
+   "diffSha256": "72f65205f9dadc11dba98bb41c565df54c75a22ac3972172c7a54e7c980fc353",
+   "chars": 842,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fall-registry",
+   "sha": "930f43c259f1948b0ff19d71be65069b26eb99ab",
+   "diffSha256": "daf4a4e4ad3d28dc4131fc7a7da627380a45f595dd0d6ada220d2352d66a2838",
+   "chars": 9504,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "4cb962fcb74acb7134471c59171ae7e952bc2823",
+   "diffSha256": "8588e36b5d1bd90f7eadebd0e2e89cafd7f8380006421bb824ff551ccbc50df0",
+   "chars": 1217,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "ba8019a90fdaaf2a466c6f3bacacf42ea33d8251",
+   "diffSha256": "a2677f344436a82f2bd4b26ff368d204eac4184572bc64449133f2201af85ebb",
+   "chars": 71686,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "fold.witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "07f2216dbba9147aea35db007dc5f47455fb6de1",
+   "diffSha256": "f503b3352ef33c1f9f302232212c79ecc18d1efb0200ba2e0fb24717a5bd150c",
+   "chars": 47831,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "10 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "11b404204e57754814b47939de7c4769666eb536",
+   "diffSha256": "bcb8ac26042ea4fb6bbc01731cd6ae71b24ed6f81f75bc9b4be86b0f8faceab7",
+   "chars": 42976,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "5 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "2c6296cee1085ac7807069dd7080a0067fa3a3fe",
+   "diffSha256": "8ba98b45d458bbb1ed4f9d5e5ec92d649a8f0a93decb3c47220c7c5f3ed1ed30",
+   "chars": 41597,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "10 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "80f930bc55d5143d3b2d79924d3f1c384ee6cdcc",
+   "diffSha256": "80a7df0a6023e5c4e741c4ac48588455a8aee7c5cdd171f4be43228d00fd07a5",
+   "chars": 11871,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "state.test.mjs",
+     "status": "modified",
+     "line": 82,
+     "text": "assert.equal(r.docsAwaited, 3, '2 on cs1 + 1 real one on cs6'); → assert.equal(r.docsAwaited, 5, '2 on cs1 + 1 on cs6 + dip-obtained + in-force; every terminal excluded');"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "3b10009fb784467ee0eb8d05073491caf8941a63",
+   "diffSha256": "371aceb5b2c3836c771d2bbc1aa66414311c2cd457cc8989f4c92a7ea80ebeed",
+   "chars": 4494,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "fe812f9b6b68d5deeed5ae8e4673068bd61af074",
+   "diffSha256": "5065acfa0148be4bc425f28da7cb6f4c9634e723576647431ddce62c28c0160e",
+   "chars": 13952,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "state.test.mjs",
+     "status": "modified",
+     "line": 59,
+     "text": "assert.match(r.why, /no organ signal/, 'the missing signal is SAID, not smuggled as a measurement'); → assert.match(r.why, /docsAwaited reads 0 because no paper-organ cases/, 'absent cases are SAID, …"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "73682befd2cbe231d1f4247140481a51b1c5de13",
+   "diffSha256": "42afe5a2f7e9ab9a0a88958778d50f0c219d40a1eb230bacd65eeee53ec29c21",
+   "chars": 21373,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "ded7fc4ab6fe97625d7c0a92c9bddf515f6b3bcb",
+   "diffSha256": "9a43aea1b19dbb67284e8991f6cc193c48a9322ec23022d56806e90058a3074c",
+   "chars": 27510,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "writeback.test.mjs",
+     "status": "added",
+     "line": 106,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "be3e2b1b13f69b2ab18f6510577f7a84c38d1f1b",
+   "diffSha256": "ee6cffca8c0fecb2cfc448b4d90221780fee7286cb06a2e293e907a2f28f3fae",
+   "chars": 29892,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "inbox.test.mjs",
+     "status": "added",
+     "line": 128,
+     "text": "assert.ok(true);"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "f180a4a75f2b98fc3cda9ecf681afb7aeb287cf6",
+   "diffSha256": "23d1645b45dcbeef2f1ef67fa7735cd3fd0bc50f9549d7bf4adf99ecc491bc64",
+   "chars": 30441,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "draft.test.mjs",
+     "status": "added",
+     "line": 86,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "8ec6106712e07265b4b3422b903abcdf7846f611",
+   "diffSha256": "c428a7377081163bb50ccdceba30a0c35e8997ce05119981c8bf6c45604cf95c",
+   "chars": 26026,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallbrain",
+   "sha": "4a7faa5824a4f4204ef82315474063db7a0befbe",
+   "diffSha256": "fb53b98c12daa52733263a2ec2f491f0c0b18e50e0024b31d18c235e6b280f23",
+   "chars": 61326,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "brain.test.mjs",
+     "status": "added",
+     "line": 146,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "fallcorp-demo",
+   "sha": "b5e432fcb8945c638831f905036ec94b899dc5cb",
+   "diffSha256": "8e404ae8cefadb3322ee6fa32f57e292133efd34b25904f3b6f1e0f45c115248",
+   "chars": 95320,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforce",
+   "sha": "02464cc94b877e94006689107f3045e24816e5ec",
+   "diffSha256": "bfa91bfedfbf35c831432701d563f93c0b533520f1141d84569219de0ab188ff",
+   "chars": 31058,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallforce",
+   "sha": "dfe90431e6d62f14ebaa0b0c07368fa7a25636f8",
+   "diffSha256": "d0ba34e3251cdb225d45021e7e0373afb13deafacc52b41215bd7fbc2cc03cac",
+   "chars": 65493,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-always-true",
+     "severity": "review",
+     "path": "catalogue.test.mjs",
+     "status": "added",
+     "line": 139,
+     "text": "assert.ok(true);"
+    }
+   ]
+  },
+  {
+   "repo": "fallforce",
+   "sha": "74a60058075999620abad8fad60080853fd10d79",
+   "diffSha256": "a3f90fa3942b84de655b5ed24d7206eb67fdce82efdf6ada7dcb222af506bb1c",
+   "chars": 38474,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.forecast.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "1 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforge-catalogue",
+   "sha": "0fc3a0daa85513bebb8ccc3c7f438b1e83101714",
+   "diffSha256": "1e92c5cc95bf27b36460f37481a9406876ae4bbf06c543b1d601a0e14360e400",
+   "chars": 129612,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforge-factory",
+   "sha": "026021cc29a736c56578fa759e40267667d58782",
+   "diffSha256": "29da95f76cbcb38c0c4ff42979d06cfe7fa2347bec176c08c81a791e9457609c",
+   "chars": 91553,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforgecell",
+   "sha": "7b837a576b8759356a944d7e48341fedf8a24ea6",
+   "diffSha256": "fe864dd4bf26b615fa58c1c67445087e5d07729155c03d1465f6b624896bd1c2",
+   "chars": 125080,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "fallforgemint-rerun",
+   "sha": "ddc1d48a49b8bd689c2eaef61cb758b3908c6cac",
+   "diffSha256": "ed698828196e31f6e9d888d0f26b838f96f9d83ae61b47b1f5c6130eb314823d",
+   "chars": 15227,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-node",
+   "sha": "a6f0e666e8309a13418d9f3f6c8ccb4facb19c97",
+   "diffSha256": "2f703ba41700662053ab7c801572f182013390c900ef346010c584ab0ae84e83",
+   "chars": 156273,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "falllearn",
+   "sha": "b8f6ba15dea3fcd7bd9fd2309c95ffd83bc5bd38",
+   "diffSha256": "ac7b9edc6f33e4b4f8e3e5a2819e31accb6e86ceb0195e14179a4339921871bb",
+   "chars": 370398,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "falllearn",
+   "sha": "ddd1d07de6aa2a21820e128a57ef12eca026c123",
+   "diffSha256": "06b817045bdb05b710294174946a8fac1622612f8eaba8f0d251a790012baae9",
+   "chars": 3659,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "falllearn",
+   "sha": "23e4068d133565dceb7474fa83534e8c85b50775",
+   "diffSha256": "1c028d4e92193d081e4335af72532caa69857c7e65c44cbb044d7b418ddbf4c8",
+   "chars": 915,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallroom",
+   "sha": "9301668f7c27aeacff06f67bff0a6898c4582dc1",
+   "diffSha256": "89f1a95f11bee0253adbd23281bdb7662e9206856d7af463930dcd0ac2e6963c",
+   "chars": 101840,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallscrub",
+   "sha": "ed35543f51b1f1b5a88dd0878acf07a489f7a545",
+   "diffSha256": "121c0996129ca4ab17a9eda5ba6f5461276da06ddc1400b64aa0e68691e3997b",
+   "chars": 1372,
+   "verdict": "flagged",
+   "findings": [
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "scrub.test.mjs",
+     "status": "modified",
+     "line": null,
+     "text": "(binary content)"
+    }
+   ]
+  },
+  {
+   "repo": "fallscrub",
+   "sha": "ba8849ae01a7502c2ef00ad6910ff7c15041592c",
+   "diffSha256": "e5ef7237915b0d717232d44164071feecb16f367bcd672e27c547c1065f82a74",
+   "chars": 19602,
+   "verdict": "flagged",
+   "findings": [
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "scrub.test.mjs",
+     "status": "modified",
+     "line": null,
+     "text": "(binary content)"
+    }
+   ]
+  },
+  {
+   "repo": "fallscrub",
+   "sha": "81df516320ec4f7d79de0b1a6946227ad0d31991",
+   "diffSha256": "57255788d5e1ef7f66c60138ecdd2f930a94e12c3a7aa4379754504f722bc151",
+   "chars": 2142,
+   "verdict": "flagged",
+   "findings": [
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "scrub.test.mjs",
+     "status": "modified",
+     "line": null,
+     "text": "(binary content)"
+    }
+   ]
+  },
+  {
+   "repo": "fallscrub",
+   "sha": "41e41897abccb2b7a12e1459c08db4a06bb5830b",
+   "diffSha256": "bf1eafcda1a5ef182b8ce0d269ee9eacdbd08f115517eabb6d3888ce88fec70f",
+   "chars": 24644,
+   "verdict": "flagged",
+   "findings": [
+    {
+     "rule": "unreadable-binary",
+     "severity": "high",
+     "path": "scrub.test.mjs",
+     "status": "added",
+     "line": null,
+     "text": "(binary content)"
+    }
+   ]
+  },
+  {
+   "repo": "fallshell",
+   "sha": "7766d5e23aef2e8ed8795fa876c955da8c7736bd",
+   "diffSha256": "17235dc0c90296f09c6d27997033195bb7c3f91eab12c552248a45acd64f48e1",
+   "chars": 940,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallshell",
+   "sha": "cb13efdffd48613c42f360017ebafb256744e4d0",
+   "diffSha256": "43f5d242fd8ccfb36a2de703e46ec91b63ce3bba6704b8251795138291e8d703",
+   "chars": 911,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "fallshell",
+   "sha": "601cf304b3739329a32b9a80c2a893cfd6e0f131",
+   "diffSha256": "3d03c322a3da56462a53264d379632026543aac3f006529f06e92e4f18dde6ac",
+   "chars": 3471,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "federated-dreaming",
+   "sha": "3d3f682996ccf5574564a3eaef8a6dd50933e0ff",
+   "diffSha256": "11bff10f33dbdd91c709c26a72397a107d4779983df2c7db89b6b2ddbd7ed39c",
+   "chars": 60325,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "geometric-defence",
+   "sha": "1cb3e454bd33e80a88f4348efd85a6f0ec19d48f",
+   "diffSha256": "060374b970c82070fd8a88936dac55a67d055a296855234acf09a0e12c6a06ee",
+   "chars": 64345,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "geometric-defence",
+   "sha": "93451636e8a4ac16c46ce1322f5dd651440dba07",
+   "diffSha256": "e65cbfda3b80388c16f585d2b1526dcc10488268e69d641d810c4f110548876d",
+   "chars": 37311,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "immune-exchange",
+   "sha": "9886e1f2638f18e6d69df7ea455327425c56b143",
+   "diffSha256": "1357b55ae07ba63a6f6bda8f1c24a32d74e1e6882c7d4f3143b0c8380d0830f7",
+   "chars": 28704,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "immune-exchange",
+   "sha": "6fe9a2ab77a64f066e4659566324c2517a5859e9",
+   "diffSha256": "0b0ae92493f4fb69027b4fc7612f85a806a820ad2a101599afed5d2a06e45314",
+   "chars": 149793,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "72 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-benfordgap",
+   "sha": "7ca553d3e37648ef1d4cb5170140517afcfb65e3",
+   "diffSha256": "e7c1903d4b78e2f4b8b52c5ce80565b1b643e51db361e1a70ad2ab0c223b975f",
+   "chars": 13037,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-benfordgap",
+   "sha": "7b9f4f6f5d47e483350a11ac615b54119de076e3",
+   "diffSha256": "29c16bd0520f235b5e01bc8f239b99a3b1ef6347ca994cdc84fc1d11a15a26e7",
+   "chars": 51453,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "cli.test.mjs",
+     "status": "modified",
+     "line": 61,
+     "text": "assert.equal(r.code, 2, r.err); → assert.equal(r.code, 0, r.err);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "cli.test.mjs",
+     "status": "modified",
+     "line": 62,
+     "text": "assert.equal(r.out.verdict, 'nonconformity'); → assert.equal(r.out.verdict, 'acceptable');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kernel.test.mjs",
+     "status": "modified",
+     "line": 80,
+     "text": "assert.deepEqual(a.lookFirst, [9, 8, 7, 6]); → assert.deepEqual(a.lookFirst, [9, 8, 7]);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kernel.test.mjs",
+     "status": "modified",
+     "line": 85,
+     "text": "assert.deepEqual(a.notes, [\"the amounts span 0.96 orders of magnitude; Benford's Law needs data spread over several (two or more), so treat any verdict as weak\"]); → assert.deepEqual(a.notes, [CHI_NO…"
+    }
+   ]
+  },
+  {
+   "repo": "kar-benfordgap",
+   "sha": "89a32a4cc1c889a84c6f7cb5c2b8442dd525ae23",
+   "diffSha256": "b68b0eceef2ca9f8c1c87bf4d047d4b3222d5f657c0c95644b6a1c7990336be6",
+   "chars": 9896,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-benfordgap",
+   "sha": "7fe48b0dcd668dc276b976cdf06528e2a6437d62",
+   "diffSha256": "2047673d92efadfbf1e334b14028b370dc8de875d2ff36740371d478bf4a4ac2",
+   "chars": 130925,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kernel.test.mjs",
+     "status": "modified",
+     "line": 51,
+     "text": "assert.deepEqual(r.counts, [1, 1, 1, 1, 1, 1, 1, 1, 1]); → assert.deepEqual(r.counts, [4, 0, 0, 0, 0, 0, 0, 0, 0]); assert.equal(r.n, 4); assert.equal(r.ok, true);"
+    }
+   ]
+  },
+  {
+   "repo": "kar-benfordgap",
+   "sha": "dc4763bd95546c273dc6c4b316cd9255ce55d3c5",
+   "diffSha256": "f02d3ebceba10d2ba57b0f998329e2650831e0b5829abd632b8329dae92d8069",
+   "chars": 44410,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-conform",
+   "sha": "9a37b87858862e04bd25ad3f6e92e850fc450efc",
+   "diffSha256": "6d56abb1feb00f0185bfaf4c861e510aaf00c4f81843c2001223f56ff72c6302",
+   "chars": 38133,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kernel.test.mjs",
+     "status": "modified",
+     "line": 14,
+     "text": "test('the algorithm name', () => assert.equal(ALGO_VERSION, 'kar-conform-v1')); → test('the algorithm name', () => assert.equal(ALGO_VERSION, 'kar-conform-v2'));"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "kernel.test.mjs",
+     "status": "modified",
+     "line": 76,
+     "text": "assert.deepEqual(errs({ $ref: '#/nope' }, 1), ['$: cannot resolve $ref #/nope']); → assert.deepEqual(errs({ $ref: '#/nope' }, 1), [cannot('cannot resolve $ref #/nope', '#')]);"
+    }
+   ]
+  },
+  {
+   "repo": "kar-conform",
+   "sha": "1a1a3b684288eb8fad93c56bced199a6e9287d81",
+   "diffSha256": "6abd09a206b8d87b3ac39ae40f4e05d463984a7742446184307d2c418e339127",
+   "chars": 18302,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-conform",
+   "sha": "16dd740d04c0293a54fd9ffd15cd42f810a8f2df",
+   "diffSha256": "ad23f2b1d62ae4439bf68ad2bad256d1b304ee030e66ab7fd88b49c54143bc91",
+   "chars": 37893,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-conform",
+   "sha": "d75acd071ca07d34f68a48690ad8f703ae5d5e5f",
+   "diffSha256": "22cf0a960647a771880892b5ed91048a73b68b377be064ba10771884ee9d9d74",
+   "chars": 617,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-conform",
+   "sha": "effedc52ecb581defd1675e98a23c3981c1bb632",
+   "diffSha256": "43614ea71aeab072c6ed28502305c4cb2135ecafac2efd9a6d85b70623837377",
+   "chars": 123768,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "8 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-foldcycle",
+   "sha": "886bf428d68b625e687fd5aa7f2826c7cf987a2e",
+   "diffSha256": "e135ea61fa2f2dd562d78efc93178f5a58e93b8acd59cefaee96eeb1ab6a7a0e",
+   "chars": 90287,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "balancer.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-foldcycle",
+   "sha": "d6e461ed6df0374b8099606b255184035079ac87",
+   "diffSha256": "e68aa970276d2535c950c9e000abbdec4eaf93e883784a143f4adbc4c568b058",
+   "chars": 83475,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "capacitypool.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "1 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-foldcycle",
+   "sha": "331df57492b5eb6f88bebaaabfc72f248e5c485d",
+   "diffSha256": "ad6bdbf62e07e3fc16e2d2d35a2c83490d838435aa93244f43f882544776c17b",
+   "chars": 53578,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "foldcycle.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "1 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-foldsignature",
+   "sha": "904d674f23f978fc11bdfe94936244a19cfe4ddf",
+   "diffSha256": "233b42b94e116c9d22b96683ae41cb0b965d41dc7f440c77fe94765ec50f878d",
+   "chars": 47123,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "1c588b21fa0fb5978418d341cbb9bb89f116cd7c",
+   "diffSha256": "bd5b4ee46a8b9141695d2e5a3fbf2de1959397d2476c2894058effc95bdce643",
+   "chars": 18650,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "a8ca2922b7bba2a6951c0fe0b9b7102f3c911b35",
+   "diffSha256": "9cc948e6f6c48e26b8ba576a9e284d1efe60550096be8efdc7575d5907ed0c30",
+   "chars": 22996,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "1f43b4695daacbdeac5388183a40b528ba5b74ba",
+   "diffSha256": "f3cd4b2eb9a330b8a9cc3622ba38fc955539e44cf5b70f6d58d049201e397aff",
+   "chars": 7136,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "33b5dc767ffd5bc225b9d06a17456c46574e77de",
+   "diffSha256": "6fecf2afd6c8b203f6b0d93d067349547e2d3be68710be388c6ea5247e2f82b0",
+   "chars": 27044,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 51,
+     "text": "assert.equal(first.journal, join(A.brain, 'mind-journal.json')); → assert.equal(first.journal, join(A.brain, 'mind-journal.light'));"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 63,
+     "text": "assert.equal(b.restoredFrom, join(A.brain, 'mind-journal.json')); → assert.equal(b.restoredFrom, join(A.brain, 'mind-journal.light'));"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 66,
+     "text": "assert.deepEqual(JSON.parse(fresh.stdout), { facts: 5, events: 6, journal: join(A.brain, 'mind-journal.json'), digest: join(A.brain, 'digest.txt') }); → assert.deepEqual(JSON.parse(fresh.stdout), { f…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "persist.test.mjs",
+     "status": "modified",
+     "line": 35,
+     "text": "assert.deepEqual(loaded.events, []); → assert.deepEqual((await j.load()).events, [], 'an empty log is kept as an empty log');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "persist.test.mjs",
+     "status": "modified",
+     "line": 145,
+     "text": "assert.throws(() => createJournal({ dir: join(tmpdir(), 'escape-' + Date.now()), roots: [roots] }), 'a dir outside the roots throws'); → assert.throws(() => createJournal({ dir: join(tmpdir(), 'escap…"
+    }
+   ]
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "3a8890756c02dfe61d54c34e4d8261fc2100d922",
+   "diffSha256": "254d895bb53e0400f6d992f0e101e0bb74d578a37e99373f452e3066c5123864",
+   "chars": 15745,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "90f56d322bf5124c95d8efb4638f50b3be2b8d20",
+   "diffSha256": "0c7a2d17a2a355988ac0ee32380c51159b2841d5aa582865eb7674ff0a29abcb",
+   "chars": 56453,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "fc2377bb032579bbbeaa2260290a8ccd01b81135",
+   "diffSha256": "80859da5990b8ef9814e7b2ae9ce93acd4e774e9c9a48cc4bc3f607a5778fd1a",
+   "chars": 193380,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "c91200323a380c110a3c25d609bbd2ea7d300b09",
+   "diffSha256": "e463fba86356c7b0255cd90e2b8367eb54d82f07ace0bc7a9f27cc5a9ee74044",
+   "chars": 1824,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "24ed77b9ca85c8ff83b373e2c8eac31722e5a3a4",
+   "diffSha256": "b677d5ee5a2e21f676ecaa01de1ee84c991f0d1ca8d7b3c50af1601891a02b03",
+   "chars": 27366,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "3c8dbee4923fefa32c39df19f43a5ee1f817563c",
+   "diffSha256": "bfaf24138e2bf95031fcc525237ba8bfddb223aba05e1a83e2945a9e01f5a5f0",
+   "chars": 26200,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "2b2417374ba69d820103950e6fcd5b5caa4a8220",
+   "diffSha256": "71370114b89d3e098dcc6b2d4b662be54f6f8cca9275100c40ad27035ed72005",
+   "chars": 51635,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "cd4913b307f24f65d3b300c8323ffb970610f545",
+   "diffSha256": "c578b5db9362682febf86218bb50df5985994e1e2b3a09cee4e1416e59db536c",
+   "chars": 63964,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "4d212140d38d2a09044954d51d4bbd0b4dce6a3f",
+   "diffSha256": "04d27166d9fa55414007ddcd982758d16b18a899b81776df8d50c1dc51380d5e",
+   "chars": 51761,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 81,
+     "text": "assert.deepEqual(JSON.parse(readFileSync(join(A.brain, 'look.json'), 'utf8')), { at: Date.UTC(2026, 9, 1, 12) }); → assert.deepEqual(JSON.parse(readFileSync(join(A.brain, 'look.json'), 'utf8')), { at…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 85,
+     "text": "assert.deepEqual(JSON.parse(readFileSync(join(A.brain, 'look.json'), 'utf8')), { at: Date.UTC(2026, 9, 1, 12) }, 'reading without a mark leaves the last look alone'); → assert.deepEqual(JSON.parse(re…"
+    }
+   ]
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "bb44ceb357fae293b42c796c3ef458f99a499721",
+   "diffSha256": "95a7b34a80a7703d6822817e2e24b0a24e3f894f0b13f7f9c54094c02a0fcc61",
+   "chars": 47821,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain.test.mjs",
+     "status": "modified",
+     "line": 11,
+     "text": "assert.equal(Object.keys(B).length, 15); → assert.equal(Object.keys(B).length, 20);"
+    }
+   ]
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "ab9f17ee845f14b37a9c31b6a27dea61a8e027d9",
+   "diffSha256": "8561ed055a09501c37181c62e4e1f6c8cc4823f5fcff0f065ca567c1714d8352",
+   "chars": 36152,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 50,
+     "text": "assert.deepEqual([first.read, first.wrote, first.events], [5, 5, 5]); → assert.deepEqual([first.read, first.wrote, first.events], [5, 5, 5], 'two memory files, one ask, two queue items — not the inde…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 63,
+     "text": "assert.equal(b.restoredFrom, join(dirs.brain, 'mind-journal.json')); → assert.equal(b.restoredFrom, join(A.brain, 'mind-journal.json'));"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 78,
+     "text": "assert.equal(readFileSync(join(dirs.brain, 'digest.txt'), 'utf8'), d + '\\n'); → assert.equal(readFileSync(join(A.brain, 'digest.txt'), 'utf8'), d + '\\n');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "brain-cli.test.mjs",
+     "status": "modified",
+     "line": 79,
+     "text": "assert.deepEqual(JSON.parse(readFileSync(join(dirs.brain, 'look.json'), 'utf8')), { at: Date.UTC(2026, 9, 1, 12) }); → assert.deepEqual(JSON.parse(readFileSync(join(A.brain, 'look.json'), 'utf8')), {…"
+    }
+   ]
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "00a00c8e3c7801231e27912254886eacc54f1414",
+   "diffSha256": "451b30e0b00056d59b4f87998e17dd28560d0845b5f2b2dd5f9745acc9c7ce71",
+   "chars": 2651,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "ff14f8866103014fb2d667298ca90fc57adda5dd",
+   "diffSha256": "8670d5e292f10fdb56afdd5a7982cb3ec3fa40e8719a2b1d78ec16ada7092e80",
+   "chars": 76950,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "b694e5b1ca7a4df3fe904df627817c595d4d60bb",
+   "diffSha256": "e92ab07ef1d09e5fff32ffc1e5b948d76397f2d6e7bc930fed62e12cdab9cf77",
+   "chars": 2728,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-mind",
+   "sha": "7377f171e4014c44c4b778902acc81cb442f4b7a",
+   "diffSha256": "d4d12a39af440034303c71f12b1f8fce223e30407d0994a32c44732e0926d7fb",
+   "chars": 214320,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "crystal.witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "54bf285c94bed4fdc2755285acf4cf5233fd63b3",
+   "diffSha256": "d6c84ba4fdf23b2512bc17ca5613ef19ef562457ccaf7415d54c748e5e587192",
+   "chars": 5219,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "ce6dd096d3775dabe3e6b721cb70c20c93bcfcb0",
+   "diffSha256": "88dfe8d2234673f643e3e65a34faa2f8523884e76489a5189faa74ccaeaa5f4a",
+   "chars": 7568,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "7d1eb72cd997202252b766c6b9fafbaf3f298239",
+   "diffSha256": "f1e9ae59beae7eea5344dc32ff62cef211b72155140ff6fecdd6e2a5491eb796",
+   "chars": 7314,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "a8ba9a38f4bdf5ef8fe82db352aaae8184734fb1",
+   "diffSha256": "282615e618e3a945d772695837d8a7bb6b1ad774871ea177922e38614034587d",
+   "chars": 7600,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "125124f0b04aadbe2dd843e1fe2d0208bd9d4a86",
+   "diffSha256": "6f7cd95ed7b8f7aea4a909bcc8886a5fad7986d58021358700c14d05c831e43b",
+   "chars": 8864,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "f534938a253fa214601324c500280aa141ec3819",
+   "diffSha256": "15575a37ed8e8b2e99de4f1cca256c0e1cb1bfba732bb75393b84bf6534bfdac",
+   "chars": 6727,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "0b16e614450ea3fe8139b72eb89b117e17853686",
+   "diffSha256": "9759d436a2483a34001ff6ad5b1c3605b517db3fa146417809c7aaa8889f0775",
+   "chars": 10110,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "6cee1b9436457c8590a6d15c95c05c56bb8abd48",
+   "diffSha256": "4b27db5a72c76960d0f43f40b38605c8377d12afdd6c2cdbf26a967b7ffac302",
+   "chars": 57385,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "3482d2dc1b7af828698948623006c88add34f004",
+   "diffSha256": "b856c5f8aa792d789e66c29b9159c326c0e8234ad03319a33ec4babf1bfed632",
+   "chars": 32071,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "aba6655139995b26f610ae9cc01fe8d3217997fa",
+   "diffSha256": "e41d0f7090c6f567e8a47dba4697eb94a3707f0339af83cdeeeef8bfdcbf3aff",
+   "chars": 1141714,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "6745512ae2bf13b25ffce88f5046471e1d75e2c0",
+   "diffSha256": "82c1e1db3d0fe110672bc4eaf0e48ba8789b92926b3c76341a6d4e36451acab1",
+   "chars": 26368,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "cd6e39fc514611b06a740ad6ab4ca3dfec049c85",
+   "diffSha256": "327060192c2614a0caa94bb59ac793a5711011fc146d624605403cee893c739f",
+   "chars": 37045,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "63098c907688b6779b24b4ca1d35b391bec7d218",
+   "diffSha256": "bd2224f0239b0d8e238419164f6074cc1d153a18f99b6520d9c21ba488bfcb2d",
+   "chars": 17586,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "1c57572f3ce720a44d9d4f5bf8056272a356391c",
+   "diffSha256": "0e17befb92320ee74e3c3719d9f437c82515c66c0a1351dae794c47d81770697",
+   "chars": 24139,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "f1b54bbc7f08e44364e74c537b3b25aa7edf9358",
+   "diffSha256": "eb43f8557f5d2b03c0ed0641c57e1d40084c7f15b5d8bd04cca05500eb81b7fc",
+   "chars": 588194,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-passport",
+   "sha": "5f66189ea58f14e4f26ea37838ef4268b33b1894",
+   "diffSha256": "9ed347753c3aedf464ce0448067981b8bd9dd2e0ec751d39a95be10215aefc94",
+   "chars": 153296,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-pixel-cost",
+   "sha": "4fc79182373839d87ab53a013ab74d15cd683b56",
+   "diffSha256": "4de71e9a2603a500ba2a9f777c6cb599d7fc979c41fbd934fe5d5fa2cd535172",
+   "chars": 64832,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-veil",
+   "sha": "bf591c843821a9acf1296ad53dd1a65e7fb467da",
+   "diffSha256": "cce4384cf60b4e59cb90dc9005b78f504a3b4334884bdbdad443eb9bb7f32c88",
+   "chars": 169108,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kar-warden",
+   "sha": "bb4f3b458fbfb1705852d4575d4d1d85ff7e1ed5",
+   "diffSha256": "a5941bae2f2d8d6eae0e9d1759b52979a1ee75d6ef3a759dbc7d327041c9ce9e",
+   "chars": 180501,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "kcc-mesh",
+   "sha": "f3cdad533076ee9112c39a528639bf9671679026",
+   "diffSha256": "2538c5304cd39a08c49e50ceef97075d987aa037430abb7d5132e6afaa10bd3c",
+   "chars": 3659,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kcc-mesh",
+   "sha": "03c5f8a1c62978f4f65960fa8acc2c201f6a1303",
+   "diffSha256": "c1e2636a5141cf53b0007615dc199b8cf59b86881f72ab3c9b4ea29906443b8a",
+   "chars": 647228,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "kcc-mesh",
+   "sha": "4a904000a404a15c61253ee43c8b4ff6617c138f",
+   "diffSha256": "9365b9e65615c37cfb34738428a237e68238369b0df398752da1ad24993351cc",
+   "chars": 82543,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-design-kit",
+   "sha": "a779aee965225b01dde2fa4b2c031fd07c7a603d",
+   "diffSha256": "fa4be02c800183b6bc6529a52a1a425ad4e3a71f43892717a736b9138a16b570",
+   "chars": 69212,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-skins",
+   "sha": "b42e2d5d96d940ef871967e40fd7a355cb526065",
+   "diffSha256": "f8bbc43f00b7cff994ceb7b03351b7fd35604e09d03d5c176d94d152251dc79c",
+   "chars": 109113,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "3005a613bbb46a557c7bd8d4d726df588181b4c7",
+   "diffSha256": "5da7509cdc3f81c4e1365ec1b625a0b23d19d35e8d545f6b1339a4459bc5ec39",
+   "chars": 148911,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "56ad1cfef092ef8ff80c6efbff989c0089a0c992",
+   "diffSha256": "96d4f4b356ebf1575f88b962140a299b3860ce07b5457a94b8d39b2bf06dcedf",
+   "chars": 39836,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "tools/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "0f43839c06fbd92782164ad3d9bd8ace5b7c0a01",
+   "diffSha256": "38d6dd11dd5b3d4bd1f8804b96ed4b98fab1d34355168b03ba538f6082a19de6",
+   "chars": 18573,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "c7106d33a7aeabe5025b6c0e68532dbae1811950",
+   "diffSha256": "bdb7171b379c10a64b4d9c3a4658effa33f0cda6c503847ae674155220a90b99",
+   "chars": 14279,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "d4f9b7e2bebfc0878cef1af43ca9f715b317c2be",
+   "diffSha256": "72fc4a0a5dce7669e81b44ea14e36cbdb57d345810469a5a1d06ff1964ccf2ed",
+   "chars": 18294,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "cec94cc9b222b2e3064a48952e007ccdc45e2b71",
+   "diffSha256": "9de7c36e4f767b6d50c00065d081224c873f7b557e0a536c8bd27f0f920d8218",
+   "chars": 21046,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "c755da565ade060994da17a1cf32facd0a4e5cf4",
+   "diffSha256": "81a87bed2893730d651db125ca84718cbe948087ac88f4850258325add4dea46",
+   "chars": 22550,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "1f7f5bf8e7344465113446b220720829aa7a049e",
+   "diffSha256": "e466ddf5e6a6d7f79d1b33224fa2a86889e656741bfb49aba35b5f9c163fa0a7",
+   "chars": 20724,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "2bdde606f714245829c7fde1d33ae4005967e4f8",
+   "diffSha256": "20c860a2a27a917db099a89636d39342f6268b1cb3efcc464c29d4f2f7fcc41b",
+   "chars": 11254,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "fb41ea0d6f4f6e22b0c82c4cb95fde9571c37ce3",
+   "diffSha256": "b08aa624913c38294e1019c99aa234303aa2d9d79c60bb08a9b512fedbc6e47a",
+   "chars": 18224,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "0ec85bb3ec110c7d88fa3e2a9fd863a1708d61e0",
+   "diffSha256": "e3bc7ac04a0607b4781ebe2df57c9e2f076e5ae280dd5698f05983938d3cc953",
+   "chars": 15269,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "ccde39c4e6a007ad8d8cbf154e5f23dc7444134d",
+   "diffSha256": "b2702b8aaf7e6b3153499cdf5005227868d079e8e29ca7b7ddd8795911918677",
+   "chars": 14604,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "5900737f8636f495268f945193d0d9f1b87664e2",
+   "diffSha256": "955f675c86d42dca3b678f58911c617e6709a10e64b38fe04dbd61a5e87bfd8e",
+   "chars": 43021,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness-tier.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "42 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "1d07291760da0a6e875a076f23e4420f4eeb3512",
+   "diffSha256": "ae0c02218bd20f844de85c3730670c8b446c26225e448e552630b061f728013f",
+   "chars": 1343,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "konomi-slm",
+   "sha": "74a8e7a8384517ea03ca64cf5cef9e0aa78989cd",
+   "diffSha256": "2a55c5bcae82d039e680541faf120dd271c04ca0903abfdad5e97b7f0015cd80",
+   "chars": 1224366,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "32 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "living-crystal",
+   "sha": "7c6bcfc4e6bd84cf718028107575688e7cd9fe20",
+   "diffSha256": "60a9db65803e1df6353a736839524e3068581a1cf6796d924a8181add4115ba7",
+   "chars": 14383,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-crystal",
+   "sha": "f7f15311344d3d1a4aa161dfd5f904ca8fc94f75",
+   "diffSha256": "11fd0d4930d33b0221723797e79c267e34aa431e35eb2d55a69cad1c9c7cb230",
+   "chars": 302654,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "7e0314d6d01748fbd82367e5211d7a35132d310d",
+   "diffSha256": "7aa7559d3b97f3182d0cdf89e72c3a91b0e2039e368ff4409ff604302733d932",
+   "chars": 99174,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "a4ea976e6656ff0250067af61f65758b75a1693b",
+   "diffSha256": "f098002d273e8d6f3c17f6ec02d1bbef27b417359ccdd50ac95da5c65f1660e7",
+   "chars": 5515,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "5f7e068e3ecee7ab69083307c9429af71a8a5b1e",
+   "diffSha256": "3c6e1b929573eae6139b251cda728aa0cc2ea8b4eb3d01247fe8b4160e9097e7",
+   "chars": 68829,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 128,
+     "text": "assert.deepEqual(Object.keys(PAPER).map(Number), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14]); → assert.deepEqual(Object.keys(PAPER).map(Number), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15]);"
+    }
+   ]
+  },
+  {
+   "repo": "living-seed",
+   "sha": "b77b19ccefd4b9d26c81b8c5dac680e9bde3b783",
+   "diffSha256": "82ea93b979e543bb20aa8149a72db360a63b9605155726d39d543c150a47ae25",
+   "chars": 58216,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/csp.test.mjs",
+     "status": "modified",
+     "line": 23,
+     "text": "assert.deepEqual(scripts.filter((s) => !s.startsWith(\"'sha256-\")), [\"'self'\"], p + ': no other script source'); → assert.deepEqual(scripts.filter((s) => !s.startsWith(\"'sha256-\")), [\"'self'\", \"'wasm-…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 128,
+     "text": "assert.deepEqual(Object.keys(PAPER).map(Number), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13]); → assert.deepEqual(Object.keys(PAPER).map(Number), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14]);"
+    }
+   ]
+  },
+  {
+   "repo": "living-seed",
+   "sha": "3988faa7df837801dc84c867878c531901f13d1d",
+   "diffSha256": "0cf302c1e4e8be81f4905ca4979e6aa03bc6b60d4a87ba83fec04ef47c24f054",
+   "chars": 4318,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "f29368f643cfed89a6ca9dcd0ac19bbc0e4f7093",
+   "diffSha256": "81e066c090225b675897f59e578fd35610c50e350c153f8f665a7165960f2301",
+   "chars": 11489,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "ea667a507706cac7628fc140346b3c1f4564d273",
+   "diffSha256": "c4baee1c30b0365c5e4faa9e4ad8465c9c73fc9e805f2851abb0b169906775d8",
+   "chars": 53006,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "27aa84ce48b77c914ed8bb654df57c5c28bb735f",
+   "diffSha256": "b8ccd8e6a20326e2470d33690060f61c9012662b67b470d18921e3f67e052194",
+   "chars": 60138,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 128,
+     "text": "assert.deepEqual(Object.keys(PAPER).map(Number), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]); → assert.deepEqual(Object.keys(PAPER).map(Number), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13]);"
+    }
+   ]
+  },
+  {
+   "repo": "living-seed",
+   "sha": "dfec6482bcafc434f82cf162cc413e2503e8b6f2",
+   "diffSha256": "a2234feb03c9105d22cb18ac912a31f352c82f09a84a1bf4e5b59610f09159d0",
+   "chars": 569,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "5852489fca6edfe718b2763981479c5ab0f82b6a",
+   "diffSha256": "500482873970c08ed67c447a3c7b985276072a5cdf9fd99ef9134d6f4ffe9e46",
+   "chars": 19558,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "02277b470143720f6732d6a3432f91964c40b9e8",
+   "diffSha256": "fceb229753c6a399534944e8d56397dc455883cd959eec60955fd9fb772933da",
+   "chars": 251105,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "46bb762eb15c1d0498aa70467bebf0b29f43cb04",
+   "diffSha256": "20919f9d806b1b544f4c261aa75f9829fae0aba57956d399c9b386d5c81abe17",
+   "chars": 1192,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "02f471fa1b6c69b74604d3160072762f312259ae",
+   "diffSha256": "d5d3d1ee5c01b00d0a6da8ed9b55a0c68defd4d9ac201acca1f07ea81047a447",
+   "chars": 1478,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "f7ca86d1e64f523f90cdf628201292c8d08973a4",
+   "diffSha256": "2a912a4033474148f94786692a8721fba0f0b72b126eb49a99d2130de417bfdf",
+   "chars": 25027,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 130,
+     "text": "for (const [n, ks] of Object.entries({ 1: ['1'], 2: ['2', '2c'], 3: ['3'], 4: ['4', '4b'], 5: ['5'], 6: ['6'], 7: ['7'], 8: ['8', '8b', '8c'], 9: ['9', '9b'], 10: ['10', '10b'], 11: ['11', '11b'] }))…"
+    }
+   ]
+  },
+  {
+   "repo": "living-seed",
+   "sha": "b2a30d0e0a38b673ce117ee60d040bc50d1dafb3",
+   "diffSha256": "75896ca98da5345cf110333d079d3ee0da1098accb6e3177530d736306a75f14",
+   "chars": 50771,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "ad84b7a71a1ded31ce462644877e81ff7c171da0",
+   "diffSha256": "2f8b1dd1cd1befbe9509a85d8a344169edd7f091f74f4a86adbc64ef7f778094",
+   "chars": 37540,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "c7e5dc549c8a89fef6fccb52641869c853c4b185",
+   "diffSha256": "8af95665f4c017f8ccc44a80d1067ea8eb9e3e5f1eeedbea9f3a0203cef1a70f",
+   "chars": 39895,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "4debcc232008f6ce4139e4dc51520fc2293e2919",
+   "diffSha256": "f5d9e890d02c057d52cca1d52e72684d912f641bb3ad06889d80a0b4f9144716",
+   "chars": 9713,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "7b7f1a07c3be1c2f474899988ef1a92a7c5d49de",
+   "diffSha256": "ff8d20c175301f3ac3c89a354b8f82baec82ccd6f62fa6c2c3b28606e561ec11",
+   "chars": 4134,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "f62363fcf8af0268bc82cf506b9316e8f8610dd2",
+   "diffSha256": "428d2ad4b17d628dd09c89e9f76ce5bbf946edcc6f5a7df105cc771d0f279eac",
+   "chars": 3106,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "f0148b8e8b0d46ffac66868a982801d041668637",
+   "diffSha256": "fd295ae8fb78f5c2f552ecf20ff93d61e851400c0697adb787f799ea996aa301",
+   "chars": 12338,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "86a2830234f880e3648fe455fe87003848f7b16f",
+   "diffSha256": "1067a29907978a33d1b51110135c0d2041d7da7d3efafdcdca7ec768103bc10c",
+   "chars": 44382,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "5dd034b31574e998a3b76de19ccb1ec92bcaf7be",
+   "diffSha256": "e4b9dec03e7cce83efbf25c39168ef0714b3d63f668c12e0b04dfdaa4ef4b571",
+   "chars": 46082,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "aae112b068b11823ec38ba60e18fe4b34d6d9f3e",
+   "diffSha256": "7c456f44006efab0d1b1f8261c6508cbb7e4476d485575d34c51b625239078ef",
+   "chars": 7449,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "1e4f7a2b31e741d70d65381aa87748917007fad3",
+   "diffSha256": "b54d55cec01b2766ae786632248041ed44377f64849be6a8260e4b45b4fba121",
+   "chars": 5387,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "c5524cc5b156c80e6798edc2d100af4bca2d01bf",
+   "diffSha256": "e516a7638a84b56743b68df0e00cf26efcb7bb7f903f8f557bbc504d6fc794d1",
+   "chars": 40688,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "b5968b92266d3145657350549fb30a2151c07235",
+   "diffSha256": "9543f1f6e0ea97fa643c067a20b1390fb71b3b80d6cacbb063171d7d93ab47ba",
+   "chars": 2066,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "48e110dbad1f81efc5911fd8b97b68f7000d0690",
+   "diffSha256": "12c88291e6e665e228d13d769229590df359691617767174dd9e76fc87bd5eeb",
+   "chars": 5181,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "179914965de58ec8ddf526a8401e0f0f722f01fe",
+   "diffSha256": "9afe8554816d7eec6b25fc28bfdec42f753408520635c5b2d190bfa849d18234",
+   "chars": 29176,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "c537a9fdf667d1922af95859c0debc09a4a588e6",
+   "diffSha256": "4ddbb521444bfb54021e731dad48758342152960e96b03e9adcce6f1704998f5",
+   "chars": 3256,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "cfd142d6e5c98926839c24c3a66809061144138b",
+   "diffSha256": "dc444705b31791f79d00a518b2138f4d1b645e02808e3e10e9b3c647470059e9",
+   "chars": 5436,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "8d102f93ce2c457d54055f81b4318e5707942dc5",
+   "diffSha256": "10cbaa44284b3f3c848ed2425de333f6c6068ae10aa000a0c15ac9e0e5b5d51a",
+   "chars": 16999,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "cefa5c1adba807d5e2e795b270cbcc5467f8b538",
+   "diffSha256": "099cff30b266c21333e71c0f254b5d8dfcf2e280d8e85559acb6a192c05b3675",
+   "chars": 32260,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "16000df60df0e235c3a73db2bdd2ec1e26b0cccc",
+   "diffSha256": "745eb2bca9e15e9672fcff8c01e39f20bf6f40b17a27fe8a6a5dd65c2621fe43",
+   "chars": 12402,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "6f0e4667c326fc30e3c11d295ab36c3021242536",
+   "diffSha256": "54e586b5f5f4f636033d48fe2a4eeef670944cd926b656e919733a460aab1416",
+   "chars": 28081,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "bce1712c45cf80e33c370cdb36ae6cbcad0febda",
+   "diffSha256": "9c6c9c20931eab63bfe59140f67e097ed0eaa3c45df191c094606e10cd8e54cb",
+   "chars": 37342,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "963accde24afafd5efe0780b7d35ec804ab02046",
+   "diffSha256": "2e5e6aba162cd221e6a7a51e6dd0e1b2fe70580fee524e0570700198d285abaf",
+   "chars": 4530,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "6f3faf84684a46e3136a9d9bac391e8ae10ede26",
+   "diffSha256": "1d047c6bfd6852fc85f43ed8f80d0c143ac4c855a3473a15546946abfc2413eb",
+   "chars": 17959,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "4512ba2da40b0fd32decaa4a64f14595a840d53c",
+   "diffSha256": "14bfa22ade24400908cd95cc6fd21c1b4735e52a8ea901016d35dcea8b436be2",
+   "chars": 59081,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "41ec11f2b355cc3662b52eb3cc3ea75936c7a06a",
+   "diffSha256": "e0d8847f0cc123657a179ec70ab7e0a810b0ec5ea11250ef75b5ffed81027129",
+   "chars": 5903,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "2840a627742fa4bdb7c40edc71635d9719595e86",
+   "diffSha256": "b55387722f39430d5d042fe67ff19da6f16b6d1ff53369e3cd9efc827ab064d0",
+   "chars": 3707,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "80d2c49a945dd9b939939601b7f7e801a0db7eba",
+   "diffSha256": "1023e4d7cbf8c2170c555a62d4437ffbf76a588957b5924818280ec69cb0da1c",
+   "chars": 23342,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "bf39d37e4c347a048b44d10467e08db79b5e1d5e",
+   "diffSha256": "8ff49f7174058f16ea129ab627ae7ee23526f83613c2e2815413c7a968da417b",
+   "chars": 3658,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "59d280058bed9708a8f664b589ba8bc86a2ba906",
+   "diffSha256": "0460e4f9b2f83f55907f838ce1076bc6f13e05b1ae8c70d508fa729ddf28207c",
+   "chars": 25076,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "b66d5e4c9f109d14a7451c0ffa299aed2396affa",
+   "diffSha256": "6e4a42103efc8fcbe59f76889091899141e528ac1e2946740e549c8cbde766c1",
+   "chars": 4550,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "073a5e54c46cc608b164792e618a722bdf8ad09a",
+   "diffSha256": "4aaf88050f62c9785b2a7023ac54f923884b99ac8d5a4afd8a5db59b12df2fa7",
+   "chars": 53531,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "7834171df36c62dfdb9445dff0a7873bb7d2dff9",
+   "diffSha256": "e7260be96a83542689ea32e7d74fe3b777218429d52052b9d05a2271ac05d377",
+   "chars": 3216,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "c9ee55c3f5af2b0b63972af3f1ba88080684190d",
+   "diffSha256": "4127f2926f21c82aeafbc7d011f7d00b3c829e0305b6710095b0e1cfd71fcd19",
+   "chars": 3442,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "e8c18f17ce4d15193b6d39eaaa0de0db7c738896",
+   "diffSha256": "10164de1bd7f9ca3c92a798e60a8d5736d1b822697e522a95c6ab006d6e7c037",
+   "chars": 57896,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "79db689dae7aa0ce3a73876ea05f3766ed700d3d",
+   "diffSha256": "671ba9ad6de9065b7812630626e704e94915d12972be649847e8e9bedc02ba0e",
+   "chars": 4982,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "0d70016838ffad2e38373a07951bcf7a9d8b586e",
+   "diffSha256": "344d948ed4652bf8fba9a49e8d4c70445dbfb82f92d7ff5f0a9e049d438e9394",
+   "chars": 52445,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "480588ec5264726a6a5843c99374261d3acaf63c",
+   "diffSha256": "6bd60bea1a67aecf58faed5bc54a73b32f5563a6907d48d0d0d12442d2440830",
+   "chars": 3312,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "775a99d9814a765006c5a577abbce7781a2a638b",
+   "diffSha256": "0a4075c07da66a35233029a216ab3054adcda2142a8870f8ec6a21878219fe47",
+   "chars": 21052,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "095f032563572d7b61d59229b0c62f4373d985cd",
+   "diffSha256": "6136039f0084a5c0143ab9138f66bb517db6bc95aa6188d86311d37bb7192777",
+   "chars": 4279,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "e6b0203341ff403fc5c6c49124de5befcb6f1d64",
+   "diffSha256": "c175a2a2d6c57697be3a378e39b0d9f95505268768ed19e584d02641105ecbdf",
+   "chars": 27207,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "6cfa9a5b57dd2a26c92bda13fba040b81cdcef92",
+   "diffSha256": "c33ee6d1110371327fd76fda3f7ba7fea35d98ac5b3060d5bf157e3d9d32deb8",
+   "chars": 3488,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "6d0c99c850404ca8104d12f0383801bd23ec4946",
+   "diffSha256": "7552677512f0a9e031be35aa6d6ee5afe2375df0864b3c574e3ce256d56d39da",
+   "chars": 182151,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/page.test.mjs",
+     "status": "modified",
+     "line": 51,
+     "text": "assert.deepEqual(buttons.filter((b) => !wanted.has(b)), [], 'a dead button'); → assert.deepEqual(buttons.filter((b) => !named.has(b)), [], 'a dead button');"
+    }
+   ]
+  },
+  {
+   "repo": "living-seed",
+   "sha": "a9a87c7205f6287c2af4be3971e6544a4e3cc2b2",
+   "diffSha256": "e32ed75cfe98e65311ac1eb4c2ea259bfa8e0094f13d3fb85be442115c434c19",
+   "chars": 103595,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "c501b281188ec56d4142aa2072ea2e88fd1d03e1",
+   "diffSha256": "7866141d4880b5c836544b8fab4c7e2d2bd615db48818e07c84c380a8acc55d2",
+   "chars": 6758,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "living-seed",
+   "sha": "102ae7a330e14c7a2dc611de9702b6f766dff517",
+   "diffSha256": "39d064de93ab034bc9223a7bf9815ba21f1be6bcbf8a1757c8d4e5ae1ed1fe90",
+   "chars": 1207027,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "mint-an-app",
+   "sha": "6bd1c3d2528525bd52a2bb68da7ee7e931d8574b",
+   "diffSha256": "eb172a9341a4e013f82618c646f2a1e766ea7037d81bbc771b1aab2c289c0be8",
+   "chars": 2205391,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "mint.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "mint-an-app",
+   "sha": "9c6d2e67b4b1e7f80be7b3921905b86718acf386",
+   "diffSha256": "0df50f89f4e20eab1df79325fa52b5628da77f7887f883a8ec902e8539721bb6",
+   "chars": 1154971,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "mint-an-app",
+   "sha": "f7f3dddf801ffdf06f8e88858d9d99f4ed9063e8",
+   "diffSha256": "824287e9725fd427d7fb51562c281c0900b8c2305d04107c4d453d7c43348e6e",
+   "chars": 480559,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "nested-fabric",
+   "sha": "ad6b6611765bf1b6c7c7c9268d09889d41c0bdb8",
+   "diffSha256": "26918ab102bca74b8299b8c4b8c35ffd179de9c1b2c59e4df4845601d5ee8586",
+   "chars": 2537,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "nested-fabric",
+   "sha": "a82a622b4c0b97e7dbdd064aa2a04447eb8eee0e",
+   "diffSha256": "71532b2baa7c107215e699f00cdc87bb5a55298376f9db8965da781a65483ffe",
+   "chars": 59398,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "nested-fabric",
+   "sha": "7906c97938e3b2d1d7e520e0fdd1d0d0be97f14e",
+   "diffSha256": "67aaed8a4bb780ef1b365126c357cad4c071de7879376e16cfc6719598e5290c",
+   "chars": 891019,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "no-fixed-self",
+   "sha": "9c3487eff543f71dd499701d3682bb2cf980556d",
+   "diffSha256": "878913564782b3dbe31a0b91fe73d020c5fbba0b0ce4d2f910db258b6ee40244",
+   "chars": 78572,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "offspring",
+   "sha": "b8f95fd4e470ac2d3197ca34bf58fe2f69650c5f",
+   "diffSha256": "aea41574447837116acab386ca26c9f3ba9bd089c1d734883089fb389f19ecc6",
+   "chars": 80505,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "perimeter-post",
+   "sha": "b6aa6b5db96bbf1ad5ae57c1637f2fc7afe59c78",
+   "diffSha256": "ab1cd51335ff001238f5118558ba0b361ef3c6af4db2e5adf36d9783ed15e2aa",
+   "chars": 79389,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "1 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "plainsight",
+   "sha": "769bb49ea4deb936a80c40e456ccdc77c76bdda6",
+   "diffSha256": "115bc4559c99448dd6fc99d6242c8d7768d74b3744c3471a66b85addd255e479",
+   "chars": 65872,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "proven-shelf",
+   "sha": "1c143896551be2c87be5ead70c74228060fd5fb1",
+   "diffSha256": "242d8eb2c8a764b128311a008c67ba6734af8f65f2684d6f8227a621354a774c",
+   "chars": 83897,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sentinel",
+   "sha": "a2828a0979b8447a7dd72acbc35a3b67fb2aca6c",
+   "diffSha256": "e7297dbc22b5d313366ae729241f70c4ea350b619ac1362bcd07a76f9cd21008",
+   "chars": 40014,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sentinel",
+   "sha": "8bd5e5007a123883eae18d974a2fd7d19137a147",
+   "diffSha256": "bcebe31ded295f9ba4046afdc22bac272f0cf9b35399535b8402da05626cc9fb",
+   "chars": 51105,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "sentinel.test.mjs",
+     "status": "modified",
+     "line": 239,
+     "text": "assert.equal(j.passed, 6); → assert.equal(j.passed, 10);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "sentinel.test.mjs",
+     "status": "modified",
+     "line": 240,
+     "text": "assert.equal(j.of, 6); → assert.equal(j.of, 10);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "sentinel.test.mjs",
+     "status": "modified",
+     "line": 241,
+     "text": "assert.deepEqual(j.rules.map((r) => r.id), ['hard-catches-all', 'hard-zero-false-pass', 'verify-before-parse', 'grown-beats-baseline', 'grown-zero-false-pass', 'reproducible']); → assert.deepEqual(j.…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "sentinel.test.mjs",
+     "status": "modified",
+     "line": 244,
+     "text": "assert.equal(S.grade({}, { ...run, hard: { ...run.hard, caught: 49 } }).passed, 5); → assert.equal(S.grade({}, { ...run, hard: { ...run.hard, caught: 49 } }).passed, 9);"
+    }
+   ]
+  },
+  {
+   "repo": "sentinel",
+   "sha": "6de203a4c2d121d78f12396eb87351a4d8384010",
+   "diffSha256": "1a97a0b892d17a2e91f6108ea430a03e30968c490553e45d3ce684b9574bcada",
+   "chars": 47329,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sentinel",
+   "sha": "967302e85f8798c778577b6f1837b4bafa557ab1",
+   "diffSha256": "3d33348001e217c2e7545e893db05c86f84b3ee86857598beae011a3911bfc08",
+   "chars": 5715,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sentinel",
+   "sha": "154b65c022657119dffd711f3a25ceecfe27ed29",
+   "diffSha256": "c5b327c660ad9d1ee0efeca5e95f414c2d90330059950055f8f6f7e00e0cba2a",
+   "chars": 118498,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "settling-cell",
+   "sha": "c672f5e09000356d4ed7a0748d423550e8af4213",
+   "diffSha256": "c5ba3bef8c671ce62755861a82e3f3a7984f3d804fd0c15fae89d14a4b182686",
+   "chars": 354142,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "settling-cell",
+   "sha": "9574e190af6db899b67a455bbc53298828cf9963",
+   "diffSha256": "8a51ef551710104e96d85ff849ef469df55f09012e09d06be6b656ce8a9aca17",
+   "chars": 94162,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "settling-cell",
+   "sha": "2ecb01ab050df465b90e321062548ca23d90e485",
+   "diffSha256": "598320f192a15755f946843ecf75ec8f2ffeed9d1a7b566c1ca9fbf9515bd657",
+   "chars": 94837,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "si-didy-cascade",
+   "sha": "965d779510402893d3017bd44f24e758e9f3735a",
+   "diffSha256": "436f44ed8c5342d1034279d649daae746d3fd06cd2c7860b23ce48a5e0cb0b2d",
+   "chars": 833,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "si-didy-cascade",
+   "sha": "10e5185057221640a1b9fa375f1d92ad1af0c9ca",
+   "diffSha256": "961647df7406b2da9c08e4f8e144e5a8fffc94845ac3561ae1ffbb53dd0945df",
+   "chars": 22262,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "22 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "si-didy-cascade",
+   "sha": "c221445cec14181768e3649a8677eb611d12547b",
+   "diffSha256": "da8ddfdc05c39a0320974cc42d206c52918ed0ef9ced799daea14e565e195b9c",
+   "chars": 14768,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "slm-suite",
+   "sha": "c2eb84bcc545acb0b35a0fee080aaefeed7a744a",
+   "diffSha256": "80dcec92158ca1bede5c5acdf8abd59b08186ce2b421266d65bef5658660ec64",
+   "chars": 167178,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "slm-suite",
+   "sha": "54ce6218dd2a61781e4591282c1fd0764c12278c",
+   "diffSha256": "4c37f54ff73a7bfdecfbf9fcb84598a8e6832f2b0b26df86577f176a86fede7a",
+   "chars": 110608,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "slm-suite",
+   "sha": "2e1fbe1c62e884cc4e622203c10d3e788fb92667",
+   "diffSha256": "7b516fb0e9421e9f86c92c9a1c9c4603bea129c4d8d9abf6aec1d01960309baf",
+   "chars": 593202,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "fa7abd0208946fb81dbd4709673f053d129e82ac",
+   "diffSha256": "f059f39b67c99391308ece850f65f5c8bec3730f01edd2a553c1e0a24c48afa1",
+   "chars": 26691,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "c5c38703c7814a894d06fa462ca03e3694bffee0",
+   "diffSha256": "392c677ef47dabff7098ab837d55f48f3e7d7dfdeb1d0ea5ba1a91a879039367",
+   "chars": 199416,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/bridge.test.mjs",
+     "status": "modified",
+     "line": 544,
+     "text": "assert.deepEqual(fns.map(([k]) => k).sort(), ['bankToJournal', 'bridgeReceipt', 'crmToCsv', 'dateOf', 'journalToCsv', 'moneyOf', 'parseBankCsv', 'parseCrmCsv', 'parseJournalCsv', 'parseTrialBalance']…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/company.test.mjs",
+     "status": "modified",
+     "line": 469,
+     "text": "assert.deepEqual(overturnEffects('raise-po', 'no-reorder', e('inventory'), 'ops'), [], 'not a decision about a customer'); → for (const status of ['received', 'paid', 'cancelled', undefined]) assert.…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/explain.test.mjs",
+     "status": "modified",
+     "line": 337,
+     "text": "assert.equal(t.narrative[2], 'Because it was a money call, a second, independent brain had to agree — but no other device replied with an independent verified answer (a copy of the same brain does no…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/explain.test.mjs",
+     "status": "modified",
+     "line": 342,
+     "text": "assert.equal(X.traceDecision(u.rec).narrative[3], 'Because it was an unsure call (below the confidence floor the overseer set), a second, independent brain had to agree — but no other device replied …"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/oversight.test.mjs",
+     "status": "modified",
+     "line": 313,
+     "text": "assert.deepEqual(ok('500'), { ok: true, fields: { moneyLimit: 50000, minConfidence: 50, autoPause: true } }); → assert.deepEqual(ok('500'), { ok: true, fields: { moneyLimit: 50000, minConfidence: 50,…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/oversight.test.mjs",
+     "status": "modified",
+     "line": 314,
+     "text": "assert.deepEqual(ok('£1,250.50', '0.1', false), { ok: true, fields: { moneyLimit: 125050, minConfidence: 100, autoPause: false } }); → assert.deepEqual(ok('£1,250.50', '0.1', false), { ok: true, fiel…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/oversight.test.mjs",
+     "status": "modified",
+     "line": 315,
+     "text": "assert.deepEqual(ok(' £ 12.5 ', '.35').fields, { moneyLimit: 1250, minConfidence: 350, autoPause: true }); → assert.deepEqual(ok(' £ 12.5 ', '.35').fields, { moneyLimit: 1250, minConfidence: 350, aut…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/oversight.test.mjs",
+     "status": "modified",
+     "line": 316,
+     "text": "assert.deepEqual(ok('0', '0').fields, { moneyLimit: 0, minConfidence: 0, autoPause: true }); → assert.deepEqual(ok('0', '0').fields, { moneyLimit: 0, minConfidence: 0, autoPause: true, propose: '' });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/oversight.test.mjs",
+     "status": "modified",
+     "line": 398,
+     "text": "assert.deepEqual(O.reviewable({ ...d, channel: 'inventory', action: 'raise-po' }), { ok: false, why: 'only a decision about a customer can be reviewed' }); → assert.deepEqual(O.reviewable({ ...d, cha…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 586,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0, autoPause: true }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0, autoPause: true, propose: [] });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 590,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 0, autoPause: true }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 0, autoPause: true, propose: [] });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 593,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 250000, autoPause: true }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 250000, autoPause: true, propose: [] …"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 596,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 0, autoPause: false }, 'a limit that is not a whole number of pence is no limit'); → assert.deepEqual(S.policyOf(n), { minConfidence:…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 609,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0, autoPause: true }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0, autoPause: true, propose: [] });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 621,
+     "text": "for (const junk of [null, {}, 7]) { assert.deepEqual(S.policyOf(junk), { minConfidence: 0.05, moneyLimit: 0, autoPause: true }); assert.equal(S.isPaused(junk, 'ops'), false); assert.deepEqual(S.clear…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 1506,
+     "text": "assert.deepEqual(['pr1', 'pr2', 'pr3', 'pr4', 'rb1', 'rb2'].map((id) => rec(F, 'watch', id).status), ['executed', 'approved', 'approved', 'refused', 'refused', 'approved']); → assert.deepEqual(['pr1'…"
+    }
+   ]
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "abaa39a0381404a690cd54bb7f4d03ec7455898e",
+   "diffSha256": "41aa47e17778d643f6bca97dc5df39ea5e9afe5c946885d0f2616d2db3b706b6",
+   "chars": 36921,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/console.test.mjs",
+     "status": "modified",
+     "line": 399,
+     "text": "assert.match(st.say, /^This device re-checks its planted brains on fraud\\.csv, credit\\.csv\\./); → assert.match(st.say, /^This device re-checks its planted brains on fraud\\.csv, credit\\.csv — until th…"
+    }
+   ]
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "bfa74c24cfa08cacf1aa5c29505b5f78bebc4039",
+   "diffSha256": "365805c2d8b9b0e9cda51343953ceebbc8e57f9afb71de9f93dbb05f8bf57519",
+   "chars": 83813,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/bridge.test.mjs",
+     "status": "modified",
+     "line": 490,
+     "text": "assert.match(x.why, /^a Xero file is not written: Xero’s own manual-journal import layout could not be checked/); → assert.match(x.why, /^Xero takes the bank statement itself through its own bank imp…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/console.test.mjs",
+     "status": "modified",
+     "line": 69,
+     "text": "assert.match(bank.xero, /^a Xero file is not written/); → assert.match(bank.xero, /^Xero takes the bank statement itself through its own bank import/);"
+    }
+   ]
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "91156ed30d46993f95bad5eb5a9554ae83e07044",
+   "diffSha256": "65cc1940b106fe5b8c11803a57af331b651b0e8d82ba84b5cb8b4e7309430896",
+   "chars": 4243,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "7b08f0b6870db5900febeaf9319a22a69bc551ce",
+   "diffSha256": "74d7891f992cf00adf343d1967c1db14fbbb6fe1052c685bd57254b812ae62de",
+   "chars": 326111,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/explain.test.mjs",
+     "status": "modified",
+     "line": 492,
+     "text": "assert.match(X.traceDecision({ ...rec, state: 'watch', why: 'a second brain disagreed — held for the watchers' }, { id: 'e7', truth: 1, label: 1 }).narrative.at(-1), /not scored/); → assert.match(X.t…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/receipt.test.mjs",
+     "status": "modified",
+     "line": 436,
+     "text": "assert.equal(SPINE.filter((x) => x.agent === 'door').length, 2, 'the two pieces of work that arrived while every agent was away'); → assert.equal(SPINE.filter((x) => x.agent === 'door').length, 1, 't…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/receipt.test.mjs",
+     "status": "modified",
+     "line": 448,
+     "text": "assert.deepEqual(live.perAgent.find((x) => x.agent === 'door'), { agent: 'door', decisions: 2, held: 2, done: 0, right: 0, rightPermille: null }); → assert.deepEqual(live.perAgent.find((x) => x.agent…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/runtime.test.mjs",
+     "status": "modified",
+     "line": 110,
+     "text": "assert.equal(done.resolvedBy, 'AI overseer'); → assert.equal(done.resolvedBy, 'Overseer (a person)');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 101,
+     "text": "assert.equal(decisionsFor(H, 'e000001').length, 0, 'still waiting on the mesh'); → assert.equal(decisionsFor(H, 'e000001').length, 0, 'not decided by Ops');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 105,
+     "text": "assert.deepEqual(opsAsks().map((a) => a.item + '/' + a.kind).sort(), ['e000001/answer', 'e000007/answer', 'e000008/answer', 'e000010/answer', 'e000011/answer']); → assert.deepEqual(opsAsks().map((a) …"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 103,
+     "text": "assert.deepEqual(signers(H, 'decisions', (op) => op.f.event === 'e000001'), [o.k.ops.pub], 'signed by the Ops device itself'); → assert.deepEqual(envs(H).filter((e) => e.op.c === 'inbox' && e.op.id =…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 157,
+     "text": "assert.equal(learnt.from, 'finance'); → assert.equal(learnt.from, 'ops');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 158,
+     "text": "assert.equal(learnt.patternId, fin.fraud.patternId); → assert.equal(learnt.patternId, ops.maintenance.patternId);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 255,
+     "text": "assert.equal(decisionsFor(H, 'e000004')[0].by, 'mesh:finance'); → assert.equal(decisionsFor(H, 'e000004')[0].by, 'mesh:ops');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 256,
+     "text": "assert.deepEqual(calls, { finance: 1, ops: 0 }); → assert.deepEqual(calls, { finance: 0, ops: 0, systems: 1 });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 259,
+     "text": "assert.equal(audits[0].agent, 'finance'); → assert.equal(audits[0].agent, 'systems');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 123,
+     "text": "assert.deepEqual(signers(H, 'model'), [o.k.finance.pub]); → assert.deepEqual(signers(H, 'decisions', (op) => op.f.event === 'e000001'), [o.k.finance.pub], 'signed by the Finance device itself');"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 485,
+     "text": "assert.deepEqual(o.nodes.finance.list('payments').map((p) => p.customer), ['S3']); → assert.deepEqual(o.nodes.finance.list('msg').map((p) => p.body), ['S3']);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 535,
+     "text": "assert.deepEqual(d.o.nodes.ops.list('adopt').filter((x) => x.source === 'learned').map((x) => x.adopted), [false]); → assert.deepEqual(d.o.nodes.finance.list('adopt').filter((x) => x.source === 'lear…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 586,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0 }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0, autoPause: true });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 590,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 0 }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 0, autoPause: true });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 593,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 250000 }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 250000, autoPause: true });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 596,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 0 }, 'a limit that is not a whole number of pence is no limit'); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: …"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 602,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0 }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0, autoPause: true });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 614,
+     "text": "for (const junk of [null, {}, 7]) { assert.deepEqual(S.policyOf(junk), { minConfidence: 0.05, moneyLimit: 0 }); assert.equal(S.isPaused(junk, 'ops'), false); assert.deepEqual(S.clearsOf(junk), {}); }…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 735,
+     "text": "assert.deepEqual(f.list('payments').map((p) => p.customer + ':' + p.status).sort(), ['C9:held', 'P1:released']); → assert.deepEqual(f.list('payments').map((p) => p.customer + ':' + p.status).sort(), …"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 741,
+     "text": "assert.equal(hs.length, 1, 'the CRM write it could not make went to the Sales agent'); → assert.equal(hs.length, 1, 'the CRM write it could not make went to the Sales agent (once: for w6, never for w…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 767,
+     "text": "assert.match(logs[0], /^AI overseer paused the Finance agent — the watch read it as hijacked/); → assert.match(logs[0], /^The behaviour watch \\(automatic\\) paused the Finance agent — it read it as hi…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 984,
+     "text": "assert.deepEqual(S.grantFor(view, { role: 'hub', pub: K }), { ok: true, id: 'hub-bbbbbbbb.2', to: K, role: 'hub', cols: ['inbox', 'msg', 'model', 'wire'] }); → assert.deepEqual(S.grantFor(view, { rol…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 1298,
+     "text": "assert.deepEqual(o.nodes.finance.list('payments').map((p) => p.customer), ['REAL']); → assert.deepEqual(o.nodes.finance.list('msg').map((p) => p.body), ['REAL']);"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "5 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "f2de64a267c5d761ef22687ed68221bb14f1cb3b",
+   "diffSha256": "17de981b73dffbfea34a1f4cef3273ea2c1f5a5e291fc498d61bdc3171cef36d",
+   "chars": 35756,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "10 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "a2ae8bfe5ec491574fdea20a09ae2ebe110f587a",
+   "diffSha256": "14aebb6094be28ad84eea0ce4c8c20dd8e282c982f42dea1fb997e6eb772cbca",
+   "chars": 205206,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "a40315f464688830376993ab2c736555963c5d47",
+   "diffSha256": "3a74211acb7dc1092f6319e057503a07d0a2059636c81fd16ba1a671a9c132c5",
+   "chars": 15411,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 534,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.05 }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.05, moneyLimit: 0 });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 538,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.2 }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 0 });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 541,
+     "text": "assert.deepEqual(S.policyOf(n), { minConfidence: 0.05 }); → assert.deepEqual(S.policyOf(n), { minConfidence: 0.2, moneyLimit: 250000 });"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 559,
+     "text": "for (const junk of [null, {}, 7]) { assert.deepEqual(S.policyOf(junk), { minConfidence: 0.05 }); assert.equal(S.isPaused(junk, 'ops'), false); assert.deepEqual(S.clearsOf(junk), {}); } → for (const j…"
+    }
+   ]
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "91da2478d6a8ed447e167b3b27a8f733de44ffd9",
+   "diffSha256": "8ca59bd941d1083b14f0d12bfda6773f7e8fe3f6772b5e80abc57bcacd5587a8",
+   "chars": 12025,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "1d703323639aa508b229521df0a4efeea484fd04",
+   "diffSha256": "fa762a1fa80394c4c2115ddb635ac247b554013c17aec2da771b1001dd560f20",
+   "chars": 23182,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/shell.test.mjs",
+     "status": "modified",
+     "line": 451,
+     "text": "assert.deepEqual(o.nodes.finance.list('payments').map((p) => p.customer), ['S2']); → assert.deepEqual(o.nodes.finance.list('payments').map((p) => p.customer), ['S3']);"
+    }
+   ]
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "b484331b7047ae16ce5d69736e6b9202dd261974",
+   "diffSha256": "c64682be8898864477119a64ed13dacc7dc5adc3dc9a0a69d18dcd72f6063b9c",
+   "chars": 263787,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "172c7a5f94370a75a5d764292389708b84e7ce7b",
+   "diffSha256": "a849d68ff8c5959bdd2759fa61a30c04bcde24e7f372ed343c8f9bf62f1c46d6",
+   "chars": 5987,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "3437b2c18f64533192e0ffd56b1a10f2f840e88e",
+   "diffSha256": "7b7081ca78b74e3f9b929dc35c69c72ede88aea63bca89bb19fbece3ab822010",
+   "chars": 101111,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "97eb5758e7fa12177b37186070a11f2f25901eff",
+   "diffSha256": "3034b442b968a57e1cb1c653cbbd459f0385014743bd408303f270672c77b835",
+   "chars": 212469,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "7ae66c2aaa3fb0273f8dbe10cd9402015a070efe",
+   "diffSha256": "2a18de412040c288c4f619b00615f6d5b9608b1062fabb7398a7f1c4559a8470",
+   "chars": 9148,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "d598daf19476dd360724aef2a10e67e0a7cc2ca7",
+   "diffSha256": "36f8fbeaf22ed3df5de77df176e3901b2df9d53aec51f86aa240eae6447b750e",
+   "chars": 100350,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "c5328e6be467e13c028c7e482c22cbb6cdf06933",
+   "diffSha256": "f4791f6bdc6993e86e8341228bdb44b4b9d34ce867c74bf5cb91b0621c5ed19e",
+   "chars": 23924,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "ffc4347286087ac02a89d269103b54cac8988ba8",
+   "diffSha256": "d50113a461ae5f0cc640c6ea6c11e85209a1cbed4a4b8ca897b33b61651d3bd4",
+   "chars": 141921,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "08f0fcf2f7f93bbdce8d61c3776252d964b49f1d",
+   "diffSha256": "9c02639cef7e9d943654874e1200a68eb0fab3514b75513a20e7c0e711b1d531",
+   "chars": 120978,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "0e691989210f18e358e75cc070a994ad0395c603",
+   "diffSha256": "98882431e6b37e59b3de635d6021566f428449e40cb37e5a16344816022ec6cb",
+   "chars": 10069,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "003e44795bc0ef90c92b7ee6a53160f51be1be79",
+   "diffSha256": "b95667b1636b28191872c959cefc4cf0699c8241fe1632d1387d66f9459752ad",
+   "chars": 1679565,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "assert-net-loss",
+     "severity": "review",
+     "path": "test/brain.test.mjs",
+     "status": "modified",
+     "line": null,
+     "text": "9 fewer assertion lines"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/company.test.mjs",
+     "status": "modified",
+     "line": 207,
+     "text": "assert.deepEqual(rel[0].post.lines, [['1200', 12000, 0], ['4000', 0, 10000], ['2200', 0, 2000]]); → assert.deepEqual(rel[0].post.lines, [['1200', 12000, 0], ['4000', 0, 10000], ['2200', 0, 2000], ['5…"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/company.test.mjs",
+     "status": "modified",
+     "line": 260,
+     "text": "assert.deepEqual(p.lines, [['5000', 50000, 0], ['2201', 10000, 0], ['2100', 0, 60000]]); → assert.deepEqual(p.lines, [['1001', 50000, 0], ['2201', 10000, 0], ['2100', 0, 60000]]);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/company.test.mjs",
+     "status": "modified",
+     "line": 263,
+     "text": "assert.match(poEntry({ net: 1 }).memo, /supplier/); → assert.match(invoiceEntry({ net: 1 }).memo, /supplier/);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/gate.test.mjs",
+     "status": "modified",
+     "line": 111,
+     "text": "assert.equal(r.body, canonical({ from: H, op: put(), seq: 1, v: 1 })); → assert.equal(r.body, canonical({ from: H, op: put(), prev: GENESIS_PREV, seq: 1, v: 2 }));"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/gate.test.mjs",
+     "status": "modified",
+     "line": 125,
+     "text": "assert.equal(inspect(utf8('{\"a\":1}')).reason, 'envelope'); → assert.equal(inspect(utf8('{\"a\":1}')).reason, 'version'); // no version at all"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "20 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "dc17c438c982d7f66a34954312bac19bbbd1bafe",
+   "diffSha256": "4f7486e1f81f7b650f8f7e8a7aba4d0d69d136937be2cd952e52efa61d55b081",
+   "chars": 390801,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "sovereign-enterprise",
+   "sha": "9bae7aa84e1fa4a30dccede26399bf2f55457449",
+   "diffSha256": "37c98066e47ba5db75e1a99b45818fe46b78ad36da68fe09492fd4b8ef63249f",
+   "chars": 236561,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "27 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "spore-card",
+   "sha": "a0efb7aa8dcf76a6a3b7aefbed1cb51e6bbe6335",
+   "diffSha256": "4e730a1161de9cdc3ada019d4e5645958729894e850fc3c5c5bd5e3a9645a007",
+   "chars": 83371,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "spore-card",
+   "sha": "b6e743e6587241cca67ac22decefcd1072068977",
+   "diffSha256": "1d02e738fe97eea0bf3bdb13622d25e85ef126da6d034da3d369dba3438368f9",
+   "chars": 25529,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "spore-card",
+   "sha": "1e1601fb3443fd725a673fbff5db32bb1b045d46",
+   "diffSha256": "8982045f133f4ebb99f776d1d307c6214fd14900434afe3b6e29f7f49b222e5d",
+   "chars": 39619,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "grow-on.test.mjs",
+     "status": "modified",
+     "line": 43,
+     "text": "assert.equal(extraEvals(3), 5); → assert.equal(extraEvals(3), 6);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "job-flow.test.mjs",
+     "status": "modified",
+     "line": 148,
+     "text": "assert.deepEqual(seenProposals, [2], '106 − 102 grown − 2 confirmation leaves room for 2'); → assert.deepEqual(seenProposals, [1], '106 − 102 grown − 2 confirmation − 1 spare re-judgement leaves room…"
+    }
+   ]
+  },
+  {
+   "repo": "spore-card",
+   "sha": "c7b918f9c041b45570cce9a950a46d81a5e95a72",
+   "diffSha256": "87a4155408565238ccc54c1cc8a4cab3aa41f8492cafa9ececaed8510537bf9d",
+   "chars": 185300,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "edge.test.mjs",
+     "status": "modified",
+     "line": 10,
+     "text": "assert.deepEqual([...STAGES], ['parse', 'seal', 'data', 'rerun', 'accepted']); → assert.deepEqual([...STAGES], ['parse', 'seal', 'cite', 'seed', 'data', 'rerun', 'accepted']);"
+    },
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "spore-card.test.mjs",
+     "status": "modified",
+     "line": 35,
+     "text": "assert.equal(frame(Uint8Array.from([1]), 3)[1], 1); → assert.equal(frame(Uint8Array.from([1]), 3)[1], 3, 'version 3 (a signed answer) is real');"
+    }
+   ]
+  },
+  {
+   "repo": "spore-card",
+   "sha": "4f4aeadbcb14b976542056bdd8a0a04dd231ba37",
+   "diffSha256": "a8860260b4b81ce161c4c1aca92c33cf755dde831648f697ef0a5693c839d1e9",
+   "chars": 101585,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "spore-card",
+   "sha": "55a84e52db4d6946c4de01781879229afd1379de",
+   "diffSha256": "31d07693c56e7f4fa141fe3e982f3a063cd7045fda3af493a4d39358c8bf016c",
+   "chars": 1203670,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "steward-gate",
+   "sha": "67456df95cb0b570bd3e6fa409d251d0bbed4270",
+   "diffSha256": "a7a7f2f999c9d92dfbe3d2efddd9120b6c30f049bf91631e4ea0aee532a227c4",
+   "chars": 85143,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "structural-alignment",
+   "sha": "2882ab4e6a9bb36ebb347847682e81b7318a6731",
+   "diffSha256": "c6ad0b6966da60c06321db468f3cbdb608e9eb2deda7a67160b358990f3a7fa0",
+   "chars": 49197,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "band.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "structural-alignment",
+   "sha": "4e0be7800d494d0f2c47dcf5b7a4896f159ebcdd",
+   "diffSha256": "6e734a9315383ca06a8342e087d2e50f92c55e97bb6cfdf3e51feccd035eda60",
+   "chars": 88453,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "structure-beats-scale",
+   "sha": "ff5fc28017c2fc78fc463c98ab6e4d1e1d292c4b",
+   "diffSha256": "ce8acd9d236365cd20c597af88adf90e6a942a6d5761fa56a0ebd3a03e4726b0",
+   "chars": 1867835,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "the-dreamer",
+   "sha": "178eca031f9ac2c003fdd8fa3c754a06a0619e59",
+   "diffSha256": "9f4a938ee31ef0c2ae6ca86144332b26a028fe93da7908f01a59436a043209aa",
+   "chars": 14209,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "22 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "twelve-powers",
+   "sha": "1d5d71d05cea97a3538ab9439cfea3b565357b0e",
+   "diffSha256": "28c44cabed95b4ea9cd35a43a0213448d9754ee303bf8eba61db519d0c5bde84",
+   "chars": 69162,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "ui-gate",
+   "sha": "53121a459fba5f9e667b7695d9ba74883ec16856",
+   "diffSha256": "9c091b510994d17eb4fae2a8efa6416bdc13067241b8fdde4459dbccf9a0da29",
+   "chars": 93648,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "7 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "5fcce284a8b423f5cecc72a3aec06c8641b6b0fe",
+   "diffSha256": "68329a9145b1897221ad5ccf24dc8e65e9e805f323c167b2f7923db543ae024a",
+   "chars": 31150,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "df9c405a101b40fb1fd4cab38cbb061b8b9a266a",
+   "diffSha256": "f9e18348525d492a1181e18373fead6a2b20063caf872007ec1dcbe5ceaf3fbf",
+   "chars": 24156,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/inherit.test.mjs",
+     "status": "modified",
+     "line": 151,
+     "text": "assert.deepEqual(MODES, ['prove', 'trust']); → assert.deepEqual(MODES, ['prove', 'trust', 'blind']);"
+    }
+   ]
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "37ffac62aae7d2e60b04cdd1247053322f6a8bed",
+   "diffSha256": "8fd72c4c7995d62161dd949a942c23260b932d8b7e99b3b1727ebdf1265935c1",
+   "chars": 1097,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "c849f501b2d13f3bf06cfcdc86268b8f69720d9f",
+   "diffSha256": "6762cd95e8c8f3dac918d88f6156089c0aa4eb35d43462b7e1416d5fbf168551",
+   "chars": 1057,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "1e28e841d3275b5dd1113495b335ed80163f261c",
+   "diffSha256": "3d1661df4911c9c20a8d69628d0c3f04cca0d90d12776d87940639059874c6ed",
+   "chars": 31076,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "10dead0f1e5fa1607019daf53a6ccc1d820920ee",
+   "diffSha256": "8cc29769d272f16022997ccfa2a41d54dddb4cfc336953dc6e77a2c38d017343",
+   "chars": 25165,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "760f1d8fac395a05ebfa50b58973d7b1d00a4623",
+   "diffSha256": "24dc3ce67a31f98219aa0294f77e2c9e0fd93613258ddc111fc1bbb752d1116c",
+   "chars": 2763,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "c1f6288cb928bb896e9775f8102ed61f21327613",
+   "diffSha256": "dbb15ae25815bbaa82569de2f3922366215d720ef5d02acd71e0d5857517c478",
+   "chars": 28861,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "6767e0d8f55c85c11d434fcf7abf0de6a143671d",
+   "diffSha256": "33001395a07169511f2f73f44dcfa77f287a5616c8498ccf7524056a90a4d3e8",
+   "chars": 23623,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "c0f4d32bb6e71f2e445dc52b6ccac7c15662d7ff",
+   "diffSha256": "dc17d0851cccc78b247c3025b800b9d9a09a88eaa89236ef90426b6a60504f16",
+   "chars": 2085,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "802e8ca11970a62b3ed61619f203ddad6171427b",
+   "diffSha256": "59ce3886287bde64989ef879ae732ae2af8f81a2b88f84357d054398a2bacedf",
+   "chars": 744,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "90121e3eb6d51b22de70bd3204fc9896523f85f5",
+   "diffSha256": "93697d003eb830403597b5299e66e8569b668e1f6e12bb49bec2ef24470a1aaf",
+   "chars": 15208,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "src/witness.baseline.json",
+     "status": "modified",
+     "line": null,
+     "text": "10 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "c2eb84661d3a3adb07523b6f93f3e62092f90ed4",
+   "diffSha256": "f911c131ba76fe961827703e37a8da23fe5808941bdfd927f1dfd492b39c447e",
+   "chars": 56986,
+   "verdict": "review",
+   "findings": [
+    {
+     "rule": "expected-changed",
+     "severity": "review",
+     "path": "test/model.test.mjs",
+     "status": "modified",
+     "line": 32,
+     "text": "assert.deepEqual(s.q, { 0.25: 4, 0.5: 5, 0.75: 5, 0.9: 9 }); → assert.deepEqual(s.q, { 0.25: 4, 0.5: 5, 0.75: 5, 0.9: 7 }); // nearest rank on 7·q: 1.75→2, 3.5→4, 5.25→5, 6.3→6"
+    },
+    {
+     "rule": "baseline-grew",
+     "severity": "review",
+     "path": "src/witness.baseline.json",
+     "status": "added",
+     "line": null,
+     "text": "12 more lines"
+    }
+   ]
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "adda83ed85d10ebfdc4611f149ce3da2723cd871",
+   "diffSha256": "9c8018cdf0fa4f47649a24033a8ac037d1effd101f1b0d2663f16a3183aaf49a",
+   "chars": 25594,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "ac45d1fea268d6c0e364f3375e80713e223e10bc",
+   "diffSha256": "d3ee4b64e91af886e8c8d688969b68f81183d65a2e1023878c083b7223821c7c",
+   "chars": 47819,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "f2fe6e0c724788c596775be259b7208319ae9188",
+   "diffSha256": "d32ecc2568aeaa565f94f1d641d98601218431067085fb74eaf204aec342bc15",
+   "chars": 125319,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "71fcae040b40b57f4b6623db0cba67e6f3dcb017",
+   "diffSha256": "24ef1aff1e4f4d78de0e3b4d5bd73a2c68d86e48d60fe3cdcb3121104d0991ac",
+   "chars": 199814,
+   "verdict": "clean",
+   "findings": []
+  },
+  {
+   "repo": "watch-dream-remember",
+   "sha": "1fdd899086b8075092a445038ca470aae9e1e8eb",
+   "diffSha256": "1f2ed292189424156fd3cd9c8d88cb21fef856205973ae0df578fc0fbd0a4421",
+   "chars": 41648,
+   "verdict": "clean",
+   "findings": []
+  }
+ ]
+}

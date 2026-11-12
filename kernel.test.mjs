@@ -37,7 +37,7 @@ test('RULES is a closed list: unique ids, two severities, plain descriptions', (
   assert.equal(what('scope-file-changed'), 'The scope file (.scopeguard) itself was changed, so the change could have widened its own scope.');
   assert.equal(K.SCOPE_FILE, '.scopeguard');
   assert.ok(Object.isFrozen(RULES));
-  assert.equal(VERSION, 'scopeguard/1');
+  assert.equal(VERSION, 'scopeguard/1.1');
   assert.equal(MAX_CHARS, 50000000);
   assert.equal(K.audit, audit);
   assert.ok(DEFAULT_TESTS.includes('**/*.test.*') && DEFAULT_GATES.includes('.github/workflows/**') && DEFAULT_SNAPSHOTS.includes('**/*.snap'));
@@ -718,7 +718,7 @@ test('audit: verdict, counts, files, the high-first order and the line clip', ()
   const d = mod('src/a.js', ['+// eslint-disable-line ' + long]) + mod('a.test.js', ['-  expect(a).toBe(1);', '+  // expect(a).toBe(1);', '+  it.only("x", f)']);
   const r = audit(d);
   assert.equal(r.ok, true);
-  assert.equal(r.v, 'scopeguard/1');
+  assert.equal(r.v, 'scopeguard/1.1');
   assert.equal(r.verdict, 'flagged');
   assert.deepEqual(r.counts, { files: 2, high: 2, review: 1, added: 3, removed: 1 });
   assert.deepEqual(r.findings.map((f) => f.rule), ['only-added', 'assert-commented', 'checker-silenced'], 'high first, then the rule table order');
@@ -732,7 +732,7 @@ test('audit: verdict, counts, files, the high-first order and the line clip', ()
   const clean = audit(mod('src/a.js', ['-a', '+b']));
   assert.equal(clean.verdict, 'clean');
   assert.deepEqual(clean.counts, { files: 1, high: 0, review: 0, added: 1, removed: 1 });
-  assert.deepEqual(audit(''), { ok: true, v: 'scopeguard/1', verdict: 'clean', counts: { files: 0, high: 0, review: 0, added: 0, removed: 0 }, files: [], findings: [] });
+  assert.deepEqual(audit(''), { ok: true, v: 'scopeguard/1.1', verdict: 'clean', counts: { files: 0, high: 0, review: 0, added: 0, removed: 0 }, files: [], findings: [] });
   const rev = audit(mod('src/a.js', ['+// @ts-ignore']));
   assert.deepEqual([rev.verdict, rev.counts.high, rev.counts.review], ['review', 0, 1]);
   const exactly200 = audit(mod('src/a.js', ['+// @ts-ignore ' + 'y'.repeat(200 - 14)]));
@@ -761,6 +761,73 @@ test('scope-file-changed: a change to the scope file itself, at the repository r
   assert.deepEqual(ruleIds(audit(add('.scopeguard', ['allow **']), 'allow src/**')), ['outside-scope', 'scope-file-changed']);
   assert.deepEqual(audit('diff --git a/.scopeguard b/scope.txt\nsimilarity index 100%\nrename from .scopeguard\nrename to scope.txt\n').findings.map((f) => f.text), ['renamed .scopeguard']);
   assert.deepEqual(rules(audit(mod('sub/.scopeguard', ['-a', '+b']))), [], 'only the root scope file is read, so only it is guarded');
+});
+
+test('v1.1 · test-run-removed: dropping one gated file from a list is a finding; the same files run another way are not', () => {
+  const drop = audit(mod('.github/workflows/ci.yml', ['   node .witness/witness.mjs mutate seed.mjs --test node seed.test.mjs', '-  node .witness/witness.mjs mutate verify-wire.mjs --test node verify-wire.test.mjs', '   node .witness/witness.mjs mutate kard.mjs --test node kard.test.mjs']));
+  assert.deepEqual(rules(drop), ['test-run-removed@2'], 'witness still runs, verify-wire is no longer gated');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['   run: node --test a.test.mjs', '-  run: node --test b.test.mjs']))), ['test-run-removed@2']);
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['-  run: node --test kernel.test.mjs', '+  run: node --test kernel.test.mjs extra.test.mjs']))), [], 'the same file still runs');
+  const loop = audit(mod('.github/workflows/ci.yml', ['-  node w/witness.mjs mutate socket.mjs --test node --test socket.test.mjs', '-  node w/witness.mjs mutate recycle.mjs --test node --test recycle.test.mjs', '+  for k in socket recycle costcase; do', '+    node w/witness.mjs mutate $k.mjs --test node --test $k.test.mjs', '+  done']));
+  assert.deepEqual(rules(loop), [], 'a loop that names every file still runs them');
+  const loopDrops = audit(mod('.github/workflows/ci.yml', ['-  node w/witness.mjs mutate socket.mjs --test node --test socket.test.mjs', '-  node w/witness.mjs mutate recycle.mjs --test node --test recycle.test.mjs', '+  for k in socket costcase; do', '+    node w/witness.mjs mutate $k.mjs --test node --test $k.test.mjs', '+  done']));
+  assert.deepEqual(rules(loopDrops), ['test-run-removed@2'], 'the loop left recycle out');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['   # node --test recycle.test.mjs', '-  run: node --test recycle.test.mjs']))), ['test-run-removed@2'], 'a comment naming it does not keep it');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['   - name: test recycle', '   run: node --test kernel.test.mjs', '-  run: node --test recycle.test.mjs']))), ['test-run-removed@3'], 'a step name naming it does not keep it');
+  assert.deepEqual(K.targetsOf('node .witness/witness.mjs mutate verify-wire.mjs --test node verify-wire.test.mjs tests/test_api.py a_spec.rb x.spec.ts'), ['verify-wire.test.mjs', 'test_api.py', 'a_spec.rb', 'x.spec.ts', 'verify-wire.mjs']);
+  assert.deepEqual(K.targetsOf('"test": "node --test test/*.test.mjs", "start": "node run.mjs"'), [], 'a glob names no file, and a script is not a test');
+  assert.deepEqual(K.targetsOf('node w.mjs mutate "src/$k.mjs" --test node --test "test/$k.test.mjs"'), [], 'a name built from a variable');
+  assert.deepEqual(K.targetsOf('npm test'), []);
+  assert.deepEqual(K.targetsOf(null), []);
+  assert.deepEqual(['socket.test.mjs', 'socket.mjs', 'a_spec.rb', 'test_api.py', 'verify-wire.mjs'].map(K.stemOf), ['socket', 'socket', 'a', 'test_api', 'verify-wire']);
+  assert.equal(K.stemOf(null), '');
+  // the honest shapes met on real commits
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['-        run: node --test pass.test.mjs tier.test.mjs client.test.mjs', '+        run: node --test *.test.mjs']))), [], 'a glob of the same runner runs them all');
+  assert.deepEqual(rules(audit(mod('package.json', ['-    "test": "node --test tier.test.mjs pass.test.mjs",', '+    "test": "node --test",']))), [], 'node --test alone finds every test file');
+  assert.deepEqual(rules(audit(mod('package.json', ['-  "scripts": { "start": "node run.mjs", "test": "node --test test/nest.test.mjs", "gate": "node konomi/run-gate.mjs" },', '+  "scripts": {', '+    "test": "node --test test/nest.test.mjs",', '+    "start": "node run.mjs"', '+  },']))), [], 'a one-line scripts block split into lines');
+  const dead = audit(mod('.github/workflows/gate.yml', ['           node .witness/witness.mjs mutate safe.mjs --test node --test safe.test.mjs | tee -a gate.out', '-          node .witness/witness.mjs mutate bridge.mjs --test node --test | tee -a gate.out', '           node .witness/witness.mjs mutate trial.mjs --test node --test trial.test.mjs | tee -a gate.out']));
+  assert.deepEqual(rules(dead), ['test-run-removed@2'], 'a diff cannot tell that bridge.mjs no longer exists: a reviewer reads it');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['   node w/witness.mjs mutate $k.mjs', '-  node w/witness.mjs mutate seed.mjs']))), ['test-run-removed@2'], 'a loop body with no list does not sweep');
+  // patterns: a removed pattern is kept only by the same pattern or by a command that names nothing
+  assert.deepEqual(rules(audit(mod('.github/workflows/kards.yml', ['-        run: node --test kards/*.test.mjs', '         run: node --test kernel.test.mjs']))), ['test-run-removed@1'], 'kards/*.test.mjs no longer runs');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['-  run: node --test test/*.test.mjs', '+  run: node --test test/*.test.mjs --test-reporter=spec']))), [], 'the same pattern');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['-  run: node --test *.test.mjs', '+  run: node --test']))), [], 'a bare node --test finds everything');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['-  run: node --test kards/*.test.mjs', '+  run: node --test *.test.mjs']))), ['test-run-removed@1'], 'another pattern does not cover it');
+  assert.deepEqual(K.globsOf('"test": "node --test test/*.test.mjs", x: jest "src/**/*.spec.ts" a.js *.md'), ['test/*.test.mjs', 'src/**/*.spec.ts']);
+  assert.deepEqual(K.globsOf('node --test *.test.mjs'), ['*.test.mjs']);
+  assert.deepEqual(K.globsOf(null), []);
+  assert.deepEqual(K.targetsOf('node --test kards/kardart.smoke.test.mjs a.b_spec.rb'), ['kardart.smoke.test.mjs', 'a.b_spec.rb'], 'names with dots');
+  assert.deepEqual(rules(audit(mod('.github/workflows/kards.yml', ['         run: node --test kards/*.test.mjs', '-        run: node --test kards/kardart.smoke.test.mjs']))), [], 'the pattern still runs the file');
+  assert.deepEqual(rules(audit(mod('.github/workflows/kards.yml', ['-        run: node --test kards/*.test.mjs', '         run: node --test kards/kardart.smoke.test.mjs']))), ['test-run-removed@1'], 'one named file does not run the whole pattern');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['-  run: node --test a.test.mjs', '   run: node --test --test-reporter=spec']))), [], 'a bare command with options still finds everything');
+  assert.deepEqual(rules(audit(mod('.github/workflows/ci.yml', ['-  run: node --test a.test.mjs', '   run: node --test tools/check.mjs']))), ['test-run-removed@1'], 'a command naming another file is not bare');
+  assert.equal(K.hasWord('for k in socket recycle; do', 'socket'), true);
+  assert.equal(K.hasWord('for k in sockets; do', 'socket'), false);
+  assert.equal(K.hasWord('node a-socket.mjs', 'socket'), false, 'a hyphen joins a name');
+  assert.equal(K.hasWord('mutate verify-wire.mjs', 'verify-wire'), true);
+  assert.equal(K.hasWord('x.y', 'x.y'), true, 'a name is matched literally');
+  assert.equal(K.hasWord('xzy', 'x.y'), false);
+  assert.equal(K.hasWord(null, 'x'), false);
+  assert.equal(K.hasWord('x', null), false);
+});
+
+test('v1.1 · matcher-loosened: a loosened check is found even when the same value gets other exact checks', () => {
+  const generic = audit(mod('tests/store.test.mjs', ['-  assert.match(r.why, /shield does not match/);', '+  assert.ok(r.why);', '+  assert.match(r.why, /another reason/);']));
+  assert.deepEqual(rules(generic), ['matcher-loosened@1']);
+  assert.deepEqual(rules(audit(mod('a.test.js', ['-  assert.equal(a, 1);', '+  assert.equal( a, 1 )', '+  assert.ok(a);']))), [], 'the same check reformatted is still there');
+  assert.deepEqual(rules(audit(mod('a.test.js', ['-  expect(x).toEqual({ a: 1 });', '+  expect(x).toStrictEqual({ a: 1 });', '+  expect(x).toBeDefined();']))), [], 'the same expected value under a stricter matcher');
+  assert.deepEqual(rules(audit(mod('a.test.js', ['-  expect(x).toEqual({ a: 1 });', '+  expect(x).toStrictEqual({ a: 2 });']))), [], 'a different matcher and a different value: neither rule');
+});
+
+test('v1.1 · assert-neutered: judged in the hunk where the always-true line was added', () => {
+  const two = 'diff --git a/kernel.test.mjs b/kernel.test.mjs\nindex 1..2 100644\n--- a/kernel.test.mjs\n+++ b/kernel.test.mjs\n'
+    + '@@ -1,2 +1,2 @@\n test("a", () => {\n-  assert.strictEqual(result.ok, false);\n+  expect(true).toBe(true);\n'
+    + '@@ -20,1 +20,2 @@\n test("b", () => {\n+  assert.strictEqual(result.ok, false);\n';
+  assert.deepEqual(rules(audit(two)), ['assert-neutered@2'], 'an identical line in another hunk does not hide the replacement');
+  const elsewhere = 'diff --git a/kernel.test.mjs b/kernel.test.mjs\nindex 1..2 100644\n--- a/kernel.test.mjs\n+++ b/kernel.test.mjs\n'
+    + '@@ -1,2 +1,1 @@\n test("a", () => {\n-  assert.equal(x, 1);\n'
+    + '@@ -20,1 +19,2 @@\n test("b", () => {\n+  assert.ok(true);\n';
+  assert.deepEqual(rules(audit(elsewhere)), ['assert-always-true@20'], 'a real assertion lost in another hunk is not a replacement here');
 });
 
 test('line rules count lines, so two new copies of one marker are two findings when one was removed', () => {

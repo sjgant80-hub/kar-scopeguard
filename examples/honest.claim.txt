@@ -1,0 +1,1 @@
+Fixed the rounding in src/cart/total.js and added a test in test/cart/total.test.js.

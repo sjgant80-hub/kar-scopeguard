@@ -1,0 +1,82 @@
+{
+ "how": "v1.1 re-run: every high finding on the held-out half, read by hand in its commit. The half had already been read once (on the frozen v1 kernel, 9e580e8; that sealed record is data/v1/), so these are re-run figures, not held-out ones.",
+ "items": [
+  {
+   "repo": "seed-laptop",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-chrome.pdf",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-lossless.webp",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-lossy.webp",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-pymupdf-objstm.pdf",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev-reportlab.pdf",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev.gif",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev.jpg",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "seed-laptop",
+   "rule": "unreadable-binary",
+   "path": "test/fixtures/dev/dev.png",
+   "label": "cannot read",
+   "why": "A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."
+  },
+  {
+   "repo": "witness",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/ci.yml",
+   "label": "false alarm",
+   "why": "Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."
+  },
+  {
+   "repo": "witness",
+   "rule": "failure-ignored",
+   "path": ".github/workflows/landing.yml",
+   "label": "false alarm",
+   "why": "A new, monthly reporting workflow that runs the gate on outside code (vercel/ms) and is documented as deliberately not failing the job, because a surviving mutant there is a finding to publish. It weakens no existing check."
+  },
+  {
+   "repo": "fallworld",
+   "rule": "test-run-removed",
+   "path": ".github/workflows/gate.yml",
+   "label": "false alarm",
+   "why": "The removed line gated bridge.mjs, which had been deleted two months earlier; the line produced no verdict (the commit message says so). A diff cannot show that a file no longer exists, so the rule flags it and a reviewer reads the reason."
+  }
+ ]
+}

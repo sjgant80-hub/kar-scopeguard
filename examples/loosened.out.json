@@ -1,0 +1,38 @@
+{
+  "verdict": "flagged",
+  "ok": true,
+  "v": "scopeguard/1.1",
+  "counts": {
+    "files": 1,
+    "high": 1,
+    "review": 0,
+    "added": 2,
+    "removed": 2
+  },
+  "files": [
+    {
+      "path": "test/refund.test.js",
+      "oldPath": null,
+      "status": "modified",
+      "kind": "test",
+      "scope": "unscoped",
+      "binary": false,
+      "added": 2,
+      "removed": 2
+    }
+  ],
+  "findings": [
+    {
+      "rule": "matcher-loosened",
+      "severity": "high",
+      "path": "test/refund.test.js",
+      "line": 10,
+      "side": "+",
+      "text": "expect(r.pence).toBe(2500); → expect(r.pence).toBeDefined();"
+    }
+  ],
+  "fingerprints": {
+    "input": "a5f8a5bc89ae803a09d63a9bb634a898ff2ebade1d6c6b785ada1cee26f29ce3",
+    "result": "b9b38b23a22ca78134bfa7cb0c42d5735458bcb4092c66cc81041c904de7de87"
+  }
+}
