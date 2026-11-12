@@ -1,7 +1,7 @@
 {
  "kind": "kar-scopeguard.calibration",
  "at": "2026-11-12",
- "kernelSha256": "b73a4f42d63dda586e3f4014d7743c03210e5c007f287fad85ca893b20ea7fa9",
+ "kernelSha256": "3dfee7a29bc46c1c05b2f780710f8d0b9fdb8ff3a5a894375e3a899c5b211256",
  "summary": {
   "half": "held",
   "repos": 69,
@@ -9,8 +9,8 @@
   "checked": 330,
   "refused": 0,
   "flagged": 4,
-  "review": 103,
-  "clean": 223,
+  "review": 102,
+  "clean": 224,
   "byRule": {
    "baseline-grew": {
     "commits": 48,
@@ -29,8 +29,8 @@
     "findings": 3
    },
    "swallowed-failure": {
-    "commits": 3,
-    "findings": 3
+    "commits": 2,
+    "findings": 2
    },
    "test-run-removed": {
     "commits": 1,
@@ -1717,17 +1717,8 @@
    "sha": "6dc9fcadfc6b69d6bd4e1f51e27fae1a4acdc861",
    "diffSha256": "b60027a35b3d3d19e80371cca32d2a9f2aad81d2b546a39e6bc033687c7cc999",
    "chars": 165907,
-   "verdict": "review",
-   "findings": [
-    {
-     "rule": "swallowed-failure",
-     "severity": "review",
-     "path": "page-safety.test.mjs",
-     "status": "added",
-     "line": 43,
-     "text": "assert.ok(PAGE.includes(\"if (n > max) { rd.cancel().catch(() => {}); throw new Error(\"));"
-    }
-   ]
+   "verdict": "clean",
+   "findings": []
   },
   {
    "repo": "fallkard-forge",

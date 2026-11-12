@@ -79,6 +79,17 @@ test('the sealed v1 record is the frozen kernel\'s, and the page\'s sentence on 
   assert.match(html, /removing a check that a file is byte-identical/);
 });
 
+test('every id on the page is unique, and the page can find and parse its own data block', () => {
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+  const dup = ids.filter((x, i) => ids.indexOf(x) !== i);
+  assert.deepEqual(dup, [], 'a duplicate id makes getElementById return the wrong element (it once hid every measured figure)');
+  const block = html.match(/<script type="application\/json" id="measured-data">([\s\S]*?)<\/script>/);
+  assert.ok(block, 'the data block');
+  const M = JSON.parse(block[1]);
+  assert.ok(M.v1 && M.tune && M.held && M.planted && M.basis && M.witness);
+  assert.match(script, /JSON\.parse\(\$\('measured-data'\)\.textContent/);
+});
+
 test('half() refuses an unlabelled high finding and an unknown label', () => {
   const cal = { summary: { repos: 1, commitsSeen: 1, checked: 1, refused: 0, clean: 0, review: 0, flagged: 1 }, records: [{ repo: 'r', sha: 's', findings: [{ rule: 'skip-added', severity: 'high', path: 'p' }] }] };
   assert.throws(() => half(cal, { items: [] }), /no label for r s skip-added p/);

@@ -1,7 +1,7 @@
 {
  "kind": "kar-scopeguard.calibration",
  "at": "2026-11-12",
- "kernelSha256": "b73a4f42d63dda586e3f4014d7743c03210e5c007f287fad85ca893b20ea7fa9",
+ "kernelSha256": "3dfee7a29bc46c1c05b2f780710f8d0b9fdb8ff3a5a894375e3a899c5b211256",
  "summary": {
   "half": "tune",
   "repos": 74,

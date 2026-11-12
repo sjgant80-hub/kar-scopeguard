@@ -9,11 +9,11 @@
  "gates": [
   {
    "file": "kernel.mjs",
-   "sha256": "b73a4f42d63dda586e3f4014d7743c03210e5c007f287fad85ca893b20ea7fa9",
+   "sha256": "3dfee7a29bc46c1c05b2f780710f8d0b9fdb8ff3a5a894375e3a899c5b211256",
    "tests": "node --test kernel.test.mjs",
-   "testsSha256": "2112adf7858b0af6b7a86de937167517cc3f017edcfaca9ae8db45c2821bb505",
-   "total": 433,
-   "killed": 433,
+   "testsSha256": "ed8cb502eebb083a99c0197996100d8bcbe0b4ca7edd2b21981de20cdaf25316",
+   "total": 454,
+   "killed": 454,
    "survived": 0,
    "baselined": 0,
    "clean": true

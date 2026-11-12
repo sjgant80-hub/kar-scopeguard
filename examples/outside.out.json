@@ -1,7 +1,7 @@
 {
   "verdict": "flagged",
   "ok": true,
-  "v": "scopeguard/1.1",
+  "v": "scopeguard/1.2",
   "counts": {
     "files": 3,
     "high": 2,
@@ -77,6 +77,6 @@
   ],
   "fingerprints": {
     "input": "3f0cc94b28d422d381e2243d744b2bec95734e50b068cc26b63622fe9da62b58",
-    "result": "46a342d5580f973acd810da92167d7fe632611ee786e13d375f9f2aa932e4009"
+    "result": "5a04142cc79c439104f741abc7e0369d96e1e1e43ff08de99165431571ca1a18"
   }
 }

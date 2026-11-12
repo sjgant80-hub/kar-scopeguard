@@ -7,7 +7,7 @@
 //
 // Pure and total: every exported function returns a value for any input and never throws.
 
-export const VERSION = 'scopeguard/1.1';
+export const VERSION = 'scopeguard/1.2';
 export const SCOPE_FILE = '.scopeguard';
 export const MAX_CHARS = 50_000_000;
 
@@ -303,7 +303,29 @@ const ASSERT_RES = [
   /\.should\b|\bshould\.\w/,
 ];
 /** a line that makes an assertion (and is not a comment) */
-export const isAssertion = (s) => typeof s === 'string' && !isComment(s) && ASSERT_RES.some((r) => r.test(s));
+export const isAssertion = (s) => typeof s === 'string' && !isComment(s) && ASSERT_RES.some((r) => inCode(r, s));
+
+/**
+ * inString(s, at) → whether position `at` of one line sits inside a '…', "…" or `…` string literal (v1.2). A test
+ * file that tests a test tool holds markers as data ('+it.skip("x")'), and data is not a skipped test.
+ */
+export function inString(s, at) {
+  if (typeof s !== 'string') return false;
+  let q = null; let esc = false;
+  for (const c of s.slice(0, at)) {
+    if (esc) { esc = false; continue; }
+    if (c === '\\') esc = true;
+    else if (q === null && (c === '"' || c === "'" || c === '`')) q = c;
+    else if (c === q) q = null;
+  }
+  return q !== null;
+}
+/** inCode(re, s) → whether re matches s somewhere that is not inside a string literal (the match's last character decides) */
+export function inCode(re, s) {
+  if (typeof s !== 'string' || !(re instanceof RegExp)) return false;
+  for (const m of s.matchAll(new RegExp(re.source, re.flags.replace('g', '') + 'g'))) if (!inString(s, m.index + m[0].length - 1)) return true;
+  return false;
+}
 
 const SKIP_RES = [
   /(?:^|[^\w$])(?:it|test|describe|context|suite|specify)\.skip(?:If)?\b/,
@@ -482,8 +504,9 @@ export function assertionShape(line) {
   try {
     const s = String(line);
     if (isComment(s)) return null;
-    // JS / RSpec style: expect(subject)[.not|.resolves|.rejects].matcher(args)
-    const ei = s.search(/(?:^|[^\w.$])expect\s*\(/);
+    // JS / RSpec style: expect(subject)[.not|.resolves|.rejects].matcher(args); an expect( inside a string is data (v1.2)
+    const em = [...s.matchAll(/(?:^|[^\w.$])expect\s*\(/g)].find((m) => !inString(s, m.index + m[0].length - 1));
+    const ei = em ? em.index : -1;
     if (ei >= 0) {
       const open = s.indexOf('(', ei);
       const close = closeParen(s, open);
@@ -529,7 +552,7 @@ export function assertionShape(line) {
     // the first call on the line whose receiver and name make it an assertion
     const valid = (prefix, name) => (prefix === 't.' ? /^(?:is|not|deepEqual|true|false|truthy|falsy|equal|ok|same)$/.test(name)
       : prefix === '' || prefix === 'self.' || prefix === 'this.' || prefix === '$this->' ? /^assert/.test(name) : true);
-    const cm = [...s.matchAll(/(?:^|[^\w$])((?:self\.|this\.|\$this->|t\.assert\.|Assert(?:ions)?\.|assert\.|require\.|t\.)?)([A-Za-z]\w*)\s*!?\s*\(/g)].find((m) => valid(m[1], m[2]));
+    const cm = [...s.matchAll(/(?:^|[^\w$])((?:self\.|this\.|\$this->|t\.assert\.|Assert(?:ions)?\.|assert\.|require\.|t\.)?)([A-Za-z]\w*)\s*!?\s*\(/g)].find((m) => valid(m[1], m[2]) && !inString(s, m.index + m[0].length - 1));
     if (cm) {
       const prefix = cm[1];
       let name = cm[2];
@@ -611,12 +634,12 @@ function rulesForFile(f, cls, push) {
   }
 
   // checker-silenced: any file
-  for (const x of unmatched(added.filter((x) => SILENCE_RES.some((r) => r.test(x.s))), removed.filter((x) => SILENCE_RES.some((r) => r.test(x.s))))) push('checker-silenced', x.nu, '+', x.s);
+  for (const x of unmatched(added.filter((x) => SILENCE_RES.some((r) => inCode(r, x.s))), removed.filter((x) => SILENCE_RES.some((r) => inCode(r, x.s))))) push('checker-silenced', x.nu, '+', x.s);
 
   if (isTest) {
     if (f.status === 'deleted') { push('test-file-deleted', null, 'file', removed.filter((x) => isAssertion(x.s)).length + ' assertion lines removed'); return; }
     const js = JSISH.test(f.path || '');
-    const marks = (res) => (x) => !isComment(x.s) && res.some((r) => r.test(x.s));
+    const marks = (res) => (x) => !isComment(x.s) && res.some((r) => inCode(r, x.s));
     for (const x of unmatched(added.filter(marks(SKIP_RES)), removed.filter(marks(SKIP_RES)))) push('skip-added', x.nu, '+', x.s);
     const onlyRes = js ? ONLY_RES.concat(ONLY_JS_RES) : ONLY_RES;
     for (const x of unmatched(added.filter(marks(onlyRes)), removed.filter(marks(onlyRes)))) push('only-added', x.nu, '+', x.s);
@@ -633,13 +656,13 @@ function rulesForFile(f, cls, push) {
     }
     // an always-true assertion is high when its own hunk lost a real assertion (it replaced one), else review.
     // v1.1: judged per hunk; v1 judged the whole file, so an identical line elsewhere could hide the replacement.
-    const isTaut = (x) => !isComment(x.s) && NEUTER_RES.some((r) => r.test(x.s));
+    const isTaut = (x) => !isComment(x.s) && NEUTER_RES.some((r) => inCode(r, x.s));
     for (const h of f.hunks) {
       const hAdd = h.lines.filter((x) => x.t === '+'); const hRem = h.lines.filter((x) => x.t === '-');
       const realLost = unmatched(hRem.filter((x) => isAssertion(x.s) && !isTaut(x)), hAdd).length > 0;
       for (const x of unmatched(hAdd.filter(isTaut), hRem)) push(realLost ? 'assert-neutered' : 'assert-always-true', x.nu, '+', x.s);
     }
-    for (const x of unmatched(added.filter((x) => !isComment(x.s) && SWALLOW_RES.some((r) => r.test(x.s))), removed)) push('swallowed-failure', x.nu, '+', x.s);
+    for (const x of unmatched(added.filter((x) => !isComment(x.s) && SWALLOW_RES.some((r) => inCode(r, x.s))), removed)) push('swallowed-failure', x.nu, '+', x.s);
 
     // matcher-loosened and expected-changed: pair by subject across the file
     const remShapes = unmatched(removed, added).map((x) => ({ x, sh: assertionShape(x.s) })).filter((o) => o.sh);
@@ -853,4 +876,4 @@ export function exitCode(result, failOn = 'high') {
   } catch { return 1; }
 }
 
-export default { VERSION, SCOPE_FILE, RULES, targetsOf, globsOf, stemOf, hasWord, DEFAULT_TESTS, DEFAULT_GATES, DEFAULT_SNAPSHOTS, globToRegExp, parseScope, classify, unquotePath, parseDiff, isComment, uncomment, isAssertion, assertionShape, closeParen, splitArgs, claimedPaths, audit, fingerprintInput, fingerprintResult, exitCode };
+export default { VERSION, SCOPE_FILE, RULES, inString, inCode, targetsOf, globsOf, stemOf, hasWord, DEFAULT_TESTS, DEFAULT_GATES, DEFAULT_SNAPSHOTS, globToRegExp, parseScope, classify, unquotePath, parseDiff, isComment, uncomment, isAssertion, assertionShape, closeParen, splitArgs, claimedPaths, audit, fingerprintInput, fingerprintResult, exitCode };

@@ -62,9 +62,9 @@ changes with their expected reports.
 - The claims were committed before the code.
 - On 395 commits from our own public repositories that touch a test or CI file, used to tune the
   rules, and then once on 330 held-out commits read after the code was frozen: high false alarms on
-  2 of the 330 held-out commits (0.61%) for the sealed version 1; version 1.1, which fixes what the planted weakenings found, re-run on the same commits: 3.
-- Weakenings planted into the held-out real diffs were caught 2853 of 2857 times by version 1.1 (the misses are listed on the page).
-- A mutation gate made 433 single-operator changes to the checking code and the tests caught 433 of them; the kernel checked has SHA-256 b73a4f42d63dda586e3f4014d7743c03210e5c007f287fad85ca893b20ea7fa9.
+  2 of the 330 held-out commits (0.61%) for the sealed version 1; version 1.2, which fixes what the planted weakenings and its own first push found, re-run on the same commits: 3.
+- Weakenings planted into the held-out real diffs were caught 2852 of 2856 times by version 1.2 (the misses are listed on the page).
+- A mutation gate made 454 single-operator changes to the checking code and the tests caught 454 of them; the kernel checked has SHA-256 3dfee7a29bc46c1c05b2f780710f8d0b9fdb8ff3a5a894375e3a899c5b211256.
 
 ## Limits
 

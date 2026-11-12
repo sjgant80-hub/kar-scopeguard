@@ -63,7 +63,7 @@ export function measured() {
   };
 }
 
-const OPEN = '<script type="application/json" id="measured">';
+const OPEN = '<script type="application/json" id="measured-data">';
 export function withBlock(html, m) {
   const i = html.indexOf(OPEN); const j = html.indexOf('</script>', i);
   if (i < 0 || j < 0) throw new Error('no measured block in the page');

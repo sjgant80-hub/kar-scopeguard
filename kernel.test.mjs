@@ -37,7 +37,7 @@ test('RULES is a closed list: unique ids, two severities, plain descriptions', (
   assert.equal(what('scope-file-changed'), 'The scope file (.scopeguard) itself was changed, so the change could have widened its own scope.');
   assert.equal(K.SCOPE_FILE, '.scopeguard');
   assert.ok(Object.isFrozen(RULES));
-  assert.equal(VERSION, 'scopeguard/1.1');
+  assert.equal(VERSION, 'scopeguard/1.2');
   assert.equal(MAX_CHARS, 50000000);
   assert.equal(K.audit, audit);
   assert.ok(DEFAULT_TESTS.includes('**/*.test.*') && DEFAULT_GATES.includes('.github/workflows/**') && DEFAULT_SNAPSHOTS.includes('**/*.snap'));
@@ -718,7 +718,7 @@ test('audit: verdict, counts, files, the high-first order and the line clip', ()
   const d = mod('src/a.js', ['+// eslint-disable-line ' + long]) + mod('a.test.js', ['-  expect(a).toBe(1);', '+  // expect(a).toBe(1);', '+  it.only("x", f)']);
   const r = audit(d);
   assert.equal(r.ok, true);
-  assert.equal(r.v, 'scopeguard/1.1');
+  assert.equal(r.v, 'scopeguard/1.2');
   assert.equal(r.verdict, 'flagged');
   assert.deepEqual(r.counts, { files: 2, high: 2, review: 1, added: 3, removed: 1 });
   assert.deepEqual(r.findings.map((f) => f.rule), ['only-added', 'assert-commented', 'checker-silenced'], 'high first, then the rule table order');
@@ -732,7 +732,7 @@ test('audit: verdict, counts, files, the high-first order and the line clip', ()
   const clean = audit(mod('src/a.js', ['-a', '+b']));
   assert.equal(clean.verdict, 'clean');
   assert.deepEqual(clean.counts, { files: 1, high: 0, review: 0, added: 1, removed: 1 });
-  assert.deepEqual(audit(''), { ok: true, v: 'scopeguard/1.1', verdict: 'clean', counts: { files: 0, high: 0, review: 0, added: 0, removed: 0 }, files: [], findings: [] });
+  assert.deepEqual(audit(''), { ok: true, v: 'scopeguard/1.2', verdict: 'clean', counts: { files: 0, high: 0, review: 0, added: 0, removed: 0 }, files: [], findings: [] });
   const rev = audit(mod('src/a.js', ['+// @ts-ignore']));
   assert.deepEqual([rev.verdict, rev.counts.high, rev.counts.review], ['review', 0, 1]);
   const exactly200 = audit(mod('src/a.js', ['+// @ts-ignore ' + 'y'.repeat(200 - 14)]));
@@ -906,4 +906,41 @@ test('total: no exported function throws on hostile input', () => {
   for (const x of inputs) { let v; assert.doesNotThrow(() => { v = exitCode(x); }); assert.ok(v === 1 || x === toxic); }
   assert.equal(audit(toxic).ok, false);
   assert.equal(parseScope(toxic).ok, false);
+});
+
+test('v1.2 · a marker or an assertion inside a string literal is data, not code', () => {
+  const fixtures = [
+    "+const SKIP = 'diff --git a/t.test.js b/t.test.js\\n+it.skip(\"adds\", () => {\\n';",
+    "+  writeFileSync(join(d, 'x.test.js'), 'it.only(\"x\", () => {});\\n');",
+    "+  const taut = `expect(true).toBe(true)`;",
+    "+  const sw = 'try { f(); } catch {}';",
+    "+  const fx = \"  @pytest.mark.skip(reason='x')\";",
+  ];
+  assert.deepEqual(rules(audit(mod('cli.test.mjs', fixtures))), []);
+  assert.deepEqual(rules(audit(mod('a.test.js', ["-  expect(r.pence).toBe(2500);", "+  const s = '  expect(r.pence).toBeDefined();';"]))), ['assert-net-loss@null'], 'a quoted assertion is not an added assertion, so one was lost');
+  assert.deepEqual(rules(audit(mod('a.test.js', ["+it.skip('real title', () => {})", "+test('x', { skip: 'flaky' }, () => {})"]))), ['skip-added@1', 'skip-added@2'], 'a real marker is outside the quotes');
+  assert.deepEqual(rules(audit(mod('a.test.js', ["-  expect(a).toEqual(1);", "+  expect(a).toBeDefined(); // it's fine"]))), ['matcher-loosened@1'], 'a quote after the code does not hide it');
+  assert.deepEqual(rules(audit(mod('package.json', ['+    "test": "jest --passWithNoTests"']))), ['failure-ignored@1'], 'a config value is a string and still counts');
+  assert.equal(K.inString("a 'b' c", 3), true);
+  assert.equal(K.inString("a 'b' c", 5), false);
+  assert.equal(K.inString('a "x\\"y" z', 6), true, 'an escaped quote does not close the string');
+  assert.equal(K.inString('a `t` b', 3), true);
+  assert.equal(K.inString(null, 1), false);
+  assert.equal(K.inCode(/x/, "'x' x"), true);
+  assert.equal(K.inCode(/x/, "'x'"), false);
+  assert.equal(K.inCode('x', 'x'), false);
+  assert.equal(K.inCode(/x/g, 'x'), true, 'a global pattern works the same');
+  assert.equal(K.inCode(/x/, null), false);
+});
+
+test('v1.2 · checker-silenced: a suppression inside a string is data', () => {
+  assert.deepEqual(rules(audit(mod('src/a.js', ["+const IGNORE = 'x = 1 // @ts-ignore';"]))), []);
+  assert.deepEqual(rules(audit(mod('src/a.js', ["+x = f('a'); // @ts-ignore"]))), ['checker-silenced@1']);
+  assert.deepEqual(rules(audit(mod('src/a.js', ["-x = f('a'); // @ts-ignore", "+x = f('a');  // @ts-ignore"]))), [], 'moved');
+});
+
+test('v1.2 · an assertion whose first argument is a string is still an assertion', () => {
+  assert.deepEqual(assertionShape("expect('abc').toEqual(x)"), { strength: 'strict', matcher: 'toEqual', args: ['x'], subjects: [] });
+  assert.deepEqual(assertionShape("assert.equal('a', x)"), { strength: 'strict', matcher: 'equal', args: ["'a'", 'x'], subjects: ['x'] });
+  assert.deepEqual(assertionShape("const s = 'assert.equal(a, b)'"), null, 'one inside a string is not');
 });

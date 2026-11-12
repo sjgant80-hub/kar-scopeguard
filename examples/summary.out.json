@@ -1,7 +1,7 @@
 {
   "verdict": "review",
   "ok": true,
-  "v": "scopeguard/1.1",
+  "v": "scopeguard/1.2",
   "counts": {
     "files": 3,
     "high": 0,
@@ -69,6 +69,6 @@
   ],
   "fingerprints": {
     "input": "d616772886d557787b774f67f79f6eaebcb644048160a9b7aebc48d0a897b8a0",
-    "result": "f756108c128011b9c36882e5ce98a90bbfc7aec43041c529673030e4ece5ec1d"
+    "result": "3d1ae2c65fbfba367669dc85114cf0791eb8ffa856435b2100b25066eda736e6"
   }
 }

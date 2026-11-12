@@ -35,8 +35,8 @@
   },
   {
    "rule": "matcher-loosened",
-   "copies": 95,
-   "caught": 95,
+   "copies": 94,
+   "caught": 94,
    "missed": []
   },
   {
@@ -113,6 +113,6 @@
    "missed": []
   }
  ],
- "copies": 2857,
- "caught": 2853
+ "copies": 2856,
+ "caught": 2852
 }
