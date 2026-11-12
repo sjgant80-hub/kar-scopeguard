@@ -131,8 +131,8 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size
 
 <section id="measured" aria-labelledby="m-h">
 <h2 id="m-h">Measured: how often it cries wolf, and whether it catches what it says</h2>
-<p>A checker that flags every honest change gets switched off. So before the rules were written, we fixed how they would be judged (<a href="https://github.com/sjgant80-hub/kar-scopeguard/blob/main/CLAIMS.md">CLAIMS.md</a>, committed first): every commit that touches a test or CI file in our own public repositories, split by repository into a half the rules could be tuned on and a half held back and read once, after the code was frozen.</p>
-<h3>The sealed result: version 1, the held-out half read once</h3>
+<p>A checker that flags every honest change gets switched off. So before the rules were written, we fixed how they would be judged (<a href="https://github.com/sjgant80-hub/kar-scopeguard/blob/main/CLAIMS.md">CLAIMS.md</a>, committed first): every commit that touches a test or CI file in our own public repositories, split by repository into a half the rules could be tuned on and a half held back and run once, after the code was frozen.</p>
+<h3>The sealed result: version 1, run once on the held-out half</h3>
 <p class="small" id="v1say"></p>
 <div class="tbl"><table id="mtable"><thead><tr><th></th><th class="n">Tuning half</th><th class="n">Held-out half</th></tr></thead><tbody></tbody></table></div>
 <p id="mread"></p>
@@ -158,6 +158,8 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size
 <li><b>Every language equally.</b> The rules know JavaScript and TypeScript (Jest, Vitest, Mocha, node:test, Chai), Python (pytest, unittest), Go (testing, testify), Java and Kotlin (JUnit), C# (NUnit, xUnit), Ruby (RSpec, Minitest), PHP (PHPUnit) and Rust. The honest-data measurement above is mostly JavaScript, because that is what our repositories are written in, and mostly AI-written. Other languages are covered by the rules and their tests, not yet by a measurement on honest changes.</li>
 <li><b>Multi-line statements.</b> Rules read one line at a time. An assertion split across several lines is seen through its first line only.</li>
 <li><b>Binary files.</b> A binary test or gate file cannot be read, so it is flagged as unreadable rather than passed.</li>
+<li><b>Tests moved between files.</b> Rules judge each file on its own. A test moved from one file to another shows as a review finding (<code>assert-net-loss</code>) on the file it left, which does not block by default; a reviewer clears it by seeing the same assertions arrive in the other file.</li>
+<li><b>No scope file, no scope rules.</b> Without a <code>.scopeguard</code> file every path is in scope, so only the test and CI rules run. The scope rules need the file (the Action and the Claude Code hook read it from the base commit, never the working copy).</li>
 </ul>
 </section>
 
@@ -236,7 +238,7 @@ node cli.mjs --git            # this folder against its last commit, new files i
 
 <section id="sec" aria-labelledby="sec-h">
 <h2 id="sec-h">Security, compliance and data protection</h2>
-<p><b>Nothing leaves the page, and the browser enforces it.</b> The page carries a Content-Security-Policy with <code>connect-src 'none'</code>: it cannot open a connection to any site, its own included, so even a changed copy of the code could not send your diff anywhere. It loads only its own files. Check it yourself: open your browser's developer tools, Network tab, paste a change and press Check it. No request is made.</p>
+<p><b>Nothing leaves the page, and the browser enforces it.</b> The page carries a Content-Security-Policy with <code>connect-src 'none'</code>: it cannot open a connection to any site, its own included, so even a changed copy of the code could not send your diff anywhere. The check itself needs no connection: you paste or drop the change in, and the kernel runs inside this tab. It loads only its own files. Check it yourself: open your browser's developer tools, Network tab, paste a change and press Check it. No request is made.</p>
 <dl>
 <dt>Where is the code processed?</dt><dd>Only in the browser tab, or on the machine that runs the command line (your laptop, your CI runner). No server of ours is involved. GitHub Pages serves the page's files and never sees what is pasted.</dd>
 <dt>How long is anything kept?</dt><dd>On the page: not at all. No cookies, no local storage, nothing written to disk. The hook writes one line to your repository's <code>.git</code> folder: the fingerprint of the last findings it stopped on, so it never stops twice for the same ones.</dd>
@@ -282,7 +284,7 @@ node cli.mjs --git            # this folder against its last commit, new files i
 <p><b>Why a reviewer misses it.</b> The weakening is usually one line in a large change, and it reads as plausible: <code>toBeDefined()</code> looks like a test. A reviewer looks at what the change does, not at what it stopped checking.</p>
 <p><b>What ScopeGuard does.</b> It reads only the diff, so it works on any change from any agent or person, before anything runs. It sorts each file into test, snapshot, CI/test configuration ("gate") or ordinary code, and checks the path against an optional scope. Then it runs a closed list of rules: markers that stop tests running, assertions turned into comments or into checks that can never fail, exact checks replaced by looser ones on the same value, tolerances widened, coverage floors lowered, test commands removed, failures ignored, test files deleted or renamed out of the runner's reach. Each finding carries its line. A diff it cannot fully read (cut off, combined merge, a binary test file) is refused or flagged, never passed.</p>
 <p><b>Why no AI judge.</b> A model judging a change gives a different answer on a different day and can be talked round by the change itself (a comment saying "this skip is fine"). A fixed rule does neither. The fingerprints (SHA-256 of the exact input and of the result) let anyone confirm, later, that a given change got a given verdict.</p>
-<p><b>How it was checked.</b> The claims were written and committed before the code. The rules were tuned on half of our repositories' history and then run, once, on the other half. Each held-out high finding was read and labelled. Weakenings were planted into real diffs to measure whether each rule fires on real-world diff shapes. Every part is mutation-gated. All of it is on this page and in the repository.</p>
+<p><b>How it was checked.</b> The claims were written and committed before the code. The rules were tuned on half of our repositories' history and then run, once, on the other half. Each held-out high finding was read and labelled. Weakenings were planted into real diffs to measure whether each rule fires on real-world diff shapes. Every part is mutation-gated: each file's tests must kill every mutant the gate makes, with none set aside. The counts are in the <a href="#bp">blueprint</a>, read from <code>receipts/witness.json</code>. All of it is on this page and in the repository.</p>
 </section>
 
 <section id="words" aria-labelledby="words-h">
@@ -296,7 +298,7 @@ node cli.mjs --git            # this folder against its last commit, new files i
 <dt>Scope</dt><dd>The files a task is allowed to touch, written as patterns in a <code>.scopeguard</code> file.</dd>
 <dt>Mutation gate</dt><dd>A check on the tests themselves: it changes the code on purpose and expects the tests to fail. If they still pass, they were not really testing that line. Every part of ScopeGuard passes one.</dd>
 <dt>Fingerprint (SHA-256)</dt><dd>A 64-character code computed from exact bytes. Change one character and it changes completely. The same diff always gives the same fingerprint, so a saved result can be checked later.</dd>
-<dt>Held-out data</dt><dd>Data kept aside while the rules were written and read once afterwards, so the rules could not be fitted to it.</dd>
+<dt>Held-out data</dt><dd>Data kept aside while the rules were written and run once afterwards, so the rules could not be fitted to it. Later versions re-run on the same data are labelled as re-runs.</dd>
 <dt>Stop hook</dt><dd>A command Claude Code runs when its agent is about to finish a turn. If the command exits with code 2, the agent keeps working and sees the command's message.</dd>
 </dl>
 </section>
@@ -411,7 +413,7 @@ if (M.v1 && M.tune && M.held) {
   const fa = H.labels.falseAlarm, rate = H.checked ? 100 * fa / H.checked : 0;
   $('mread').innerHTML = 'On the held-out half, high findings that were false alarms came to <b>' + fa + ' of ' + H.checked + ' commits (' + pct(fa, H.checked) + ')</b>. The sealed target was at most ' + target + '%: <b>' + (rate <= target ? 'MET' : 'FAILED') + '</b>. Review findings, which do not fail a build by default, came up on ' + H.reviewAny + ' held-out commits (' + pct(H.reviewAny, H.checked) + ').';
   $('v11table').querySelector('tbody').innerHTML = halves(M.tune, R);
-  $('risk-fa').innerHTML = 'It will sometimes. On the held-out half of our own history, read once, ' + fa + ' of ' + H.checked + ' honest commits (' + pct(fa, H.checked) + ') got a high finding that was a false alarm; version 1.2, re-run on the same commits, ' + R.labels.falseAlarm + ' (' + pct(R.labels.falseAlarm, R.checked) + '). See <a href="#measured">Measured</a>. A false flag costs a reviewer the time to read the named lines and a sentence of explanation.';
+  $('risk-fa').innerHTML = 'It will sometimes. On the held-out half of our own history, run once (version 1, the sealed result), ' + fa + ' of ' + H.checked + ' honest commits (' + pct(fa, H.checked) + ') got a high finding that was a false alarm; version 1.2, re-run on the same commits, ' + R.labels.falseAlarm + ' (' + pct(R.labels.falseAlarm, R.checked) + '). See <a href="#measured">Measured</a>. A false flag costs a reviewer the time to read the named lines and a sentence of explanation.';
   $('labels').querySelector('tbody').innerHTML = (R.items || []).map((x) => '<tr><td><a href="https://github.com/sjgant80-hub/' + esc(x.repo) + '/commit/' + esc(x.sha) + '">' + esc(x.repo) + ' · ' + esc(x.sha.slice(0, 8)) + '</a></td><td><code>' + esc(x.rule) + '</code></td><td><code>' + esc(x.path) + '</code></td><td>' + esc(x.label) + '</td><td class="small">' + esc(x.why) + '</td></tr>').join('') || '<tr><td colspan="5">No high findings on the held-out half.</td></tr>';
 }
 if (M.planted && M.v1) {
