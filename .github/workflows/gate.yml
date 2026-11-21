@@ -16,6 +16,8 @@ jobs:
           node --test cli.test.mjs
       - name: cost case tests (and the pinned sourced basis)
         run: node --test checkcase.test.mjs
+      - name: estate genome cell tests (its judge is this kernel's own audit)
+        run: node --test genome.test.mjs
       - name: page tests (the page runs the same kernel; its examples, rules table and measured figures match)
         run: node --test page.test.mjs
       - name: the page's measured block and the skill script are what their sources give
@@ -87,3 +89,15 @@ jobs:
           cap: 100000
           node-version: 22
           fuzz: checkcase.mjs:checkCase checkcase.mjs:figures
+  witness-genome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: witness v0.6 mutation gate on the estate genome cell (every mutant)
+        uses: sjgant80-hub/witness@v0.6
+        with:
+          files: genome/cell.mjs
+          test-command: node --test genome.test.mjs
+          cap: 100000
+          node-version: 22
+          fuzz: genome/cell.mjs:judge genome/cell.mjs:inLane genome/cell.mjs:health

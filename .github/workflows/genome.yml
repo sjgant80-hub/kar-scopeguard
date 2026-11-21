@@ -1,0 +1,11 @@
+name: genome
+# The birth check: this repo is admitted as a cell only when its four genome traits hold (seed.json, genome/).
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  birth-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - uses: sjgant80-hub/estate-genome@v1

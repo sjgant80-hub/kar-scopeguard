@@ -2,3 +2,4 @@ node_modules
 gate.out
 *.witnessbak
 witness-*.json
+.witness/

@@ -2,6 +2,8 @@
 
 **Live: https://sjgant80-hub.github.io/kar-scopeguard/**
 
+This repository is a cell of the [estate genome](https://sjgant80-hub.github.io/estate-genome/): its `seed.json` and `genome/` let the birth check run its judge (ScopeGuard's own audit), its lane, its health and its tombstone, on every push.
+
 Your AI coding agent says the tests pass. ScopeGuard checks how it got there. It reads the change (a unified diff) and flags every test that was skipped, focused, loosened, commented out, made always-true or deleted, every tolerance widened and coverage floor lowered, every CI step told to ignore failures or removed, and every file outside what the task allowed. Every finding names its rule, its file and line, and the exact text. It runs in your browser, on the command line, in GitHub Actions and as a Claude Code Stop hook, with the same answer and the same SHA-256 fingerprints everywhere. No AI judge, no network, no dependencies.
 
 Built by Kar for AI Native Solutions. MIT. Powered by the Konomi architecture, created by Thomas Frumkin.
