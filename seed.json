@@ -12,9 +12,6 @@
     "in": "{\"diff\":\"<unified diff>\",\"scope\":\"<.scopeguard text, optional>\",\"claim\":\"<the agent's summary, optional>\"}",
     "out": "a verdict (clean, review or flagged) with every finding's rule, file, line and exact text"
   },
-  "act": {
-    "run": "node genome/act.mjs"
-  },
   "judge": {
     "what": "a change is right only when ScopeGuard's own audit finds nothing at all (verdict clean); any high or review finding means it is not verified",
     "run": "node genome/judge.mjs",
