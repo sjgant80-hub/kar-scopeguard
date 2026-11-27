@@ -1,0 +1,160 @@
+{
+ "model": "qwen2.5:7b",
+ "at": "2026-11-27",
+ "page": "index.html",
+ "snapshotSha256": "a34cf8fc8710b16e6224746a5093be60924a83961840478b456580d6aabb80cf",
+ "buyers": [
+  "the CFO of a 400-person firm",
+  "the CTO who also owns security",
+  "the COO who runs the teams that would use it",
+  "the owner-manager of a 12-person business with no technical staff"
+ ],
+ "parts": 6,
+ "readings": 24,
+ "run1": {
+  "readings": 9,
+  "stopped": "it was reading the page’s drawing code as text"
+ },
+ "points": [
+  {
+   "outcome": "fixed",
+   "point": "Claude Code was never explained, nor what the hook does when there are several findings.",
+   "why": "The engineers’ card now says what Claude Code is, and that the hook stops the agent once and lists every serious finding."
+  },
+  {
+   "outcome": "fixed",
+   "point": "The saving was not put in numbers.",
+   "why": "The finance card now links to the cost case, which works the saving out from your own numbers."
+  },
+  {
+   "outcome": "fixed",
+   "point": "Section titles showed twice once a section was opened.",
+   "why": "An opened section now shows its title once."
+  },
+  {
+   "outcome": "fixed",
+   "point": "The page’s drawing code was read as if it were words on the page.",
+   "why": "The drawing code and the checker’s data now come after the page’s words. The walk was then run again on that page."
+  },
+  {
+   "outcome": "fixed",
+   "point": "The missed planted cases were not explained, and the sentence was missing its verbs.",
+   "why": "Each miss is now its own sentence and says what was planted."
+  },
+  {
+   "outcome": "fixed",
+   "point": "The list of the 26 kinds was not shown.",
+   "why": "The receipt now names the section that lists them, The rules. The page draws that list when it runs."
+  },
+  {
+   "outcome": "fixed",
+   "point": "\"The full page. One click away.\" was vague.",
+   "why": "The heading now says every section is there in full, one click each."
+  },
+  {
+   "outcome": "fixed",
+   "point": "\"Point at a face\" was unclear.",
+   "why": "It now says to point at the crystal to read each face."
+  },
+  {
+   "outcome": "fixed",
+   "point": "It was unclear whether it checks languages other than JavaScript.",
+   "why": "The limit now says it checks many languages, and that the false-alarm count was taken mostly on JavaScript."
+  },
+  {
+   "outcome": "fixed",
+   "point": "The answers on data and support were too short for a security buyer.",
+   "why": "That panel now points to the full Security section."
+  },
+  {
+   "outcome": "fixed",
+   "point": "It did not say what happens to a scope file line it does not understand.",
+   "why": "The page now says such a line stops the check and names the line. The checker was tried to confirm it."
+  },
+  {
+   "outcome": "fixed",
+   "point": "\"The first introduction\" read like a broken sentence.",
+   "why": "The folded originals are now called the original introduction and the original footer."
+  },
+  {
+   "outcome": "fixed",
+   "point": "\"1 it could not read\" was unclear.",
+   "why": "It now says that one was a change to pictures and PDFs that tests use, which it cannot look inside. That is what the hand label says."
+  },
+  {
+   "outcome": "fixed",
+   "point": "\"An AI that reads this page\" was unclear.",
+   "why": "It now says an AI agent could choose a weakening that no rule covers."
+  },
+  {
+   "outcome": "fixed",
+   "point": "It was not clear how it can run in a browser if it must check code.",
+   "why": "The opening now says you paste the change in, and it checks it right there."
+  },
+  {
+   "outcome": "fixed",
+   "point": "It was not clear what the \"2 in 100\" goal counts.",
+   "why": "It now says at most 2 false alarms in every 100."
+  },
+  {
+   "outcome": "fixed",
+   "point": "\"No buyer walk is recorded\" was unclear.",
+   "why": "This section now says what the walk is and what it found."
+  },
+  {
+   "outcome": "not changed",
+   "point": "The 10-minute default and the \"share\" in the cost case were unclear.",
+   "why": "Both are the values already in the boxes just above them when the page runs. The walk read the page without running it."
+  },
+  {
+   "outcome": "not changed",
+   "point": "How it tells a skipped or weakened test, and what a finding looks like.",
+   "why": "The rules section lists each kind with what it looks for, and the examples in the box above show real findings."
+  },
+  {
+   "outcome": "not changed",
+   "point": "\"Traced from a real run\", and empty lists for tests, snapshots and gates.",
+   "why": "The page fills these in from the checker when it runs. The walk read it without running it."
+  },
+  {
+   "outcome": "not changed",
+   "point": "What a high finding, a mutation gate, a stop hook, a fingerprint and the held-out half are.",
+   "why": "Each is defined on the page: in Start here, the FAQ, or Words on this page."
+  },
+  {
+   "outcome": "not changed",
+   "point": "The tuning and held-out numbers, and how weakenings were planted.",
+   "why": "The Measured section gives both halves’ counts and how each weakening was planted."
+  },
+  {
+   "outcome": "not changed",
+   "point": "The source link looked broken.",
+   "why": "It works: the repository is public. The walk cannot follow links."
+  },
+  {
+   "outcome": "not changed",
+   "point": "Exit codes, \"the job\", and \"the tools are in tools/\".",
+   "why": "These are notes for engineers setting it up in CI, and their context says what each means."
+  },
+  {
+   "outcome": "not changed",
+   "point": "The false-alarm count was taken mostly on JavaScript, and it only reads the change.",
+   "why": "These are its true limits. They are stated plainly, not widened or hidden."
+  },
+  {
+   "outcome": "not changed",
+   "point": "Some questions in the FAQ seemed to end with no answer.",
+   "why": "Each question has its answer right below it."
+  },
+  {
+   "outcome": "not changed",
+   "point": "The original footer repeats the introduction.",
+   "why": "Kept on purpose: nothing of the old page was removed."
+  },
+  {
+   "outcome": "not changed",
+   "point": "The Konomi credit line says nothing about how it helps.",
+   "why": "It is a fixed credit line, written as the estate’s rules require."
+  }
+ ]
+}

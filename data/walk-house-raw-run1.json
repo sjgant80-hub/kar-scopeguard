@@ -1,0 +1,87 @@
+{
+ "file": "index.html",
+ "model": "qwen2.5:7b",
+ "parts": 9,
+ "chars": 61667,
+ "started": "2026-11-27T21:43:55.342Z",
+ "personas": [
+  {
+   "key": "CFO",
+   "who": "the CFO of a 400-person firm",
+   "cares": "what it costs, what it saves, what it replaces, and what could go wrong with the numbers"
+  },
+  {
+   "key": "CTO",
+   "who": "the CTO who also owns security",
+   "cares": "how it works, what runs where, what data leaves, what it depends on, and what is not proven"
+  },
+  {
+   "key": "COO",
+   "who": "the COO who runs the teams that would use it",
+   "cares": "how people would use it day to day, how to roll it out, and what happens when it fails"
+  },
+  {
+   "key": "OWNER",
+   "who": "the owner-manager of a 12-person business with no technical staff",
+   "cares": "whether you can understand it, try it in ten minutes, and whether it is for you"
+  }
+ ],
+ "readings": [
+  {
+   "who": "CFO",
+   "part": 1,
+   "seconds": 159,
+   "reply": "- ScopeGuard reads the change an AI made. It shows every test that was skipped, weakened or deleted. It runs in your browser, and nothing is sent anywhere.\n\n- The goal was 2 in 100 at most. None was a real weakening: 3 false alarms, 1 it could not read. met\n\n- It flagged 4 of 330 test changes it had never seen. The goal was 2 in 100 at most. None was a real weakening: 3 false alarms, 1 it could not read. met\n\n- It only reads the change. It does not run the tests. A weakening it has no rule for passes unnoticed."
+  },
+  {
+   "who": "CFO",
+   "part": 2,
+   "seconds": 172,
+   "reply": "- ScopeGuard checks how it got there: Could you provide more details on what specific actions or changes are flagged by ScopeGuard? For instance, what exactly does \"every CI step told to ignore failures\" mean in practice?\n\n- Measured: how often it cries wolf, and whether it catches what it says: Can you provide more context on what constitutes \"crying wolf\"? Specifically, what criteria are used to determine when the checker is falsely flagging changes?\n\n- Planted weakenings, on real diffs: How were the \"real diffs\" for the planted weakenings generated? Were they based on actual changes made in the project, or were they synthetic examples created for testing purposes?\n\n- Repository · commit | Rule | File | Label | Why: Could you provide an example of a \"file the checker cannot read\"? Specifically, what does \"git stores it as binary, so it says so instead of passing it\" mean in this context?"
+  },
+  {
+   "who": "CFO",
+   "part": 3,
+   "seconds": 150,
+   "reply": "- ScopeGuard's hook mechanism is not clear on how it handles multiple high findings. It mentions it \"never stops the agent twice for the same findings,\" but it's unclear what happens if there are multiple high findings across different files.\n- The exact impact on cost and time savings is not quantified. While it mentions review time as the cost of using AI agents safely, there are no specific numbers or examples to illustrate how much time is saved or how much it costs.\n- The phrase \"AI-written\" is used without providing a clear definition or context. It's not clear what constitutes \"AI-written\" code and how it affects the tool's analysis.\n- The tool's handling of multi-line assertions is mentioned but not fully explained. It states that \"Rules read one line at a time. An assertion split across several lines is seen through its first line only,\" but it's not clear how this impacts the overall analysis and accuracy."
+  },
+  {
+   "who": "CFO",
+   "part": 4,
+   "seconds": 281,
+   "reply": "- \"The 10-minute default is our assumption; use your own.\" This is unclear without knowing the default time for checking one change by hand.\n\n- \"The share is below 1 because flagged lines still need a human to read them.\" It's not clear what the \"share\" refers to in this context.\n\n- \"The verdict comes from fixed rules in code you can read.\" It would be more convincing if specific examples of these rules were provided.\n\n- \"The first version's rules were tuned on half of our history and still had to pass the held-out half.\" It would be helpful to know the exact percentage or number of changes used for tuning versus the held-out set."
+  },
+  {
+   "who": "CFO",
+   "part": 5,
+   "seconds": 161,
+   "reply": "- \"Claude Code\" is not defined or explained anywhere in this text. Is this a specific AI tool, or a placeholder for any AI agent? Clarification is needed.\n- \"Words on this page\" is repeated twice without additional content. This repetition seems unnecessary and could be removed.\n- \"Mutation gate\" is mentioned but not fully explained. What exactly does this check entail, and how does it work in practice?\n- \"Stop hook\" is introduced but not elaborated on. What kind of command does it run, and how does it interact with the AI agent's workflow?"
+  },
+  {
+   "who": "CFO",
+   "part": 6,
+   "seconds": 189,
+   "reply": "- The exact result of running the command line is not specified. What specific result is being referred to?\n- Can you explain why a test was skipped for a good reason? More context would help.\n- It's unclear what specific rules can be added. The text mentions adding rules but doesn't provide details on how or what they should include.\n- The purpose and functionality of the `FRAG` shader code are not fully explained. What does each part of the shader do, and how does it contribute to the crystal's appearance and behavior?"
+  },
+  {
+   "who": "CFO",
+   "part": 7,
+   "seconds": 460,
+   "reply": "- `vec3 through(vec3 p, vec3 rd, vec3 n, float ior, out float path, out float sX, out float eX){`: This function signature is clear, but the implementation details are missing. The function is supposed to handle light interaction, but the logic inside is not provided.\n\n- `vec3 dr = through(p, ld, nN, 1.41, pa, sa, ea);`: The variables `pa`, `sa`, and `ea` are used without being defined or initialized. This could lead to undefined behavior.\n\n- `vec3 bent = vec3(world(uRot * dr).r, world(uRot * dg).g, world(uRot * db).b);`: The `world` function is used here, but its definition is not provided. This function is crucial for transforming the light paths, and its implementation is missing.\n\n- `const S.turn = rot(S.yaw, S.pitch);`: The `rot` function is used to create a rotation matrix, but the `mul` function, which is used to multiply the rotation matrix with a vector, is not defined in this snippet. This function is necessary for the correct transformation of vectors."
+  },
+  {
+   "who": "CFO",
+   "part": 8,
+   "seconds": 189,
+   "reply": "- `S.drag.moved = 0`: This line uses a single equals sign for assignment, which could be confusing as it might look like a comparison. It would be clearer to use `S.drag.moved = 0;`.\n\n- `const f = face(e); if (f !== S.hot)`: The variable `f` is used to determine if the face has changed, but it's not clear what `face(e)` returns or how it's defined. A brief explanation or a comment would help.\n\n- `S.raf = requestAnimationFrame(frame);`: It's not clear what `frame` is or how it's defined. This should be defined or at least referenced before it's used.\n\n- ` HOUSE.bindScroll(crystal, 0.9);`: The `HOUSE` object is used here, but it's not defined in this snippet. It's likely defined elsewhere, but it would be helpful to see its definition or at least a brief explanation of what it does."
+  },
+  {
+   "who": "CFO",
+   "part": 9,
+   "seconds": 183,
+   "reply": "- none"
+  }
+ ],
+ "snapshotSha256": "6609ff6657feb912f1fc3ddaa6a1c281d393439a27a905c1d5639af2e0d570c8",
+ "note": "Run 1, stopped after 9 of 36 readings: the tool reads the page from <body> to the checker script, and the house kit script then sat before it, so the walk was reading drawing code as page text. The kit and the data block were moved after the page’s words and the walk was run again (run 2). Every reading here is as the tool wrote it."
+}

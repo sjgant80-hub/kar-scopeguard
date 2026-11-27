@@ -56,26 +56,48 @@ const missed = P.copies - P.caught;
 const gateKilled = W.reduce((a, g) => a + g.killed, 0), gateTotal = W.reduce((a, g) => a + g.total, 0);
 const gatesClean = W.length > 0 && W.every((g) => g.clean && g.survived === 0);
 const high = RULES.filter((r) => r.severity === 'high').length;
-const PLAIN_RULE = { 'assert-neutered': 'a real check swapped for one that can never fail', 'test-run-removed': 'the step that runs the tests taken out' };
-const plainMiss = (r) => `${r.copies - r.caught} of ${fmt(r.copies)} where ${PLAIN_RULE[r.rule] || 'the rule ' + r.rule + ' applies'}`;
+// a missed kind, said as a full clause: "1 of the 111 planted cases where a real check was swapped for one that can never fail"
+const PLAIN_RULE = { 'assert-neutered': 'a real check was swapped for one that can never fail', 'test-run-removed': 'the step that runs the tests was taken out' };
+const plainMiss = (r) => `It missed ${r.copies - r.caught} of the ${fmt(r.copies)} planted cases where ${PLAIN_RULE[r.rule] || 'the rule ' + r.rule + ' applies'}.`;
+
+// what the hand labels say about the flagged held-out changes, in plain words read from the labels themselves
+const was = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const unread = (H.items || []).filter((x) => x.label === 'cannot read');
+const unreadBinary = unread.length > 0 && unread.every((x) => x.rule === 'unreadable-binary');
+const labelsSaid = [
+  H.labels.real === 0 ? 'None was a real weakening.' : `${was(H.labels.real, 'was a real weakening, which counts as a catch.', 'were real weakenings, which count as catches.')}`,
+  H.labels.falseAlarm ? `${was(H.labels.falseAlarm, 'was a false alarm.', 'were false alarms.')}` : '',
+  H.labels.cannotRead ? (unreadBinary ? `${was(H.labels.cannotRead, 'was a change to files it cannot look inside, like pictures and PDFs that tests use.', 'were changes to files it cannot look inside, like pictures and PDFs that tests use.')}` : `${was(H.labels.cannotRead, 'it could not read.', 'it could not read.')}`) : '',
+].filter(Boolean).join(' ');
 
 const goals = [
   { id: 'S4', name: 'Few false alarms on honest changes', pass: rateS4 * 100 <= barS4,
-    result: `It flagged ${H.flagged} of ${fmt(H.checked)} test changes it had never seen. The goal was ${barS4} in 100 at most. `
-      + (H.labels.real === 0 ? `None was a real weakening: ${H.labels.falseAlarm} false alarms, ${H.labels.cannotRead} it could not read.` : `${H.labels.real} were real weakenings, which count as catches.`) },
+    result: `It flagged ${H.flagged} of ${fmt(H.checked)} test changes it had never seen. The goal was at most ${barS4} false alarms in every 100. ${labelsSaid}` },
   { id: 'S5', name: 'Catches weakenings planted into real changes', pass: misses.length === 0 && barS5 === 100,
-    result: misses.length === 0 ? `It caught all ${fmt(P.copies)}, in every kind it checks.` : `It caught ${fmt(P.caught)} of ${fmt(P.copies)}. The goal was every one. It missed ${misses.map(plainMiss).join(', and ')}.` },
+    result: misses.length === 0 ? `It caught all ${fmt(P.copies)}, in every kind it checks.` : `It caught ${fmt(P.caught)} of ${fmt(P.copies)}. The goal was every one. ${misses.map(plainMiss).join(' ')}` },
   { id: 'S8', name: 'Its own code is tested by breaking it on purpose', pass: gatesClean,
     result: gatesClean ? `Its tests caught all ${fmt(gateTotal)} breaks, in ${W.length} files, and none was excused.` : `Its tests caught ${fmt(gateKilled)} of ${fmt(gateTotal)} breaks. Some got through.` },
 ];
 const met = goals.filter((g) => g.pass).length, failed = goals.length - met;
 
+// the buyer walk of this page: the local model's readings (data/walk-house-raw.json, as the tool wrote it) and Kar's
+// check of every point it raised (data/walk-house.json). The page says what was fixed and what was not, and why.
+const walk = (() => { try { return JSON.parse(read('data/walk-house.json')); } catch { return null; } })();
+const walkHtml = !walk ? '<p>No buyer walk is recorded for this version of the page.</p>' : (() => {
+  const fixed = walk.points.filter((x) => x.outcome === 'fixed').length, kept = walk.points.length - fixed;
+  const head = `<p>A local AI model (${esc(walk.model)}) read this page cold as ${walk.buyers.length} buyers, part by part: ${walk.readings} readings. It is a first check, not a customer's opinion. Kar checked each point it raised against the page.</p>`
+    + `<p>It read the page as it was before the fixes below.${walk.run1 ? ` A first run was stopped after ${walk.run1.readings} readings, because ${esc(walk.run1.stopped)}. That was fixed, and the walk was run again.` : ''}</p>`
+    + `<p>${walk.points.length === 0 ? 'It raised no point that needed a change.' : `It raised ${walk.points.length} points. ${fixed} ${fixed === 1 ? 'was' : 'were'} fixed on this page, and ${kept} ${kept === 1 ? 'was' : 'were'} not changed, each for the reason given.`}</p>`;
+  const list = walk.points.map((x) => `<li><b>${x.outcome === 'fixed' ? 'Fixed' : 'Not changed'}.</b> ${esc(x.point)} <span class="muted">${esc(x.why)}</span></li>`).join('');
+  return head + (list ? `<ul class="walk">${list}</ul>` : '') + '<p><a class="src" href="data/walk-house-raw.json">receipt: every reading, word for word ↗</a></p>';
+})();
+
 // ---- the house layer -----------------------------------------------------------------------------------------------
 const receipts = [
-  { n: `${H.flagged} of ${fmt(H.checked)}`, lab: `test changes it flagged, from ${H.repos} of our own projects it had never seen. ${H.labels.real === 0 ? 'None was a real weakening.' : H.labels.real + ' were real weakenings.'}`, src: 'data/calibration-held.json', what: 'the set-aside run' },
+  { n: `${H.flagged} of ${fmt(H.checked)}`, lab: `test changes it flagged, from ${H.repos} of our own projects it had never seen. The goal was at most ${barS4} false alarms in every 100. ${H.labels.real === 0 ? 'None was a real weakening.' : was(H.labels.real, 'was a real weakening.', 'were real weakenings.')}`, src: 'data/calibration-held.json', what: 'the set-aside run' },
   { n: `${fmt(P.caught)} of ${fmt(P.copies)}`, lab: missed === 0 ? 'weakenings planted into real changes that it caught. It caught every one.' : `weakenings planted into real changes that it caught. It missed ${missed}, shown in red below.`, src: 'data/planted.json', what: 'the planted run', red: missed > 0 },
   { n: `${fmt(gateKilled)} of ${fmt(gateTotal)}`, lab: 'breaks made on purpose in its own code that its tests caught.', src: 'receipts/witness.json', what: 'the test of the tests' },
-  { n: `${RULES.length}`, lab: `kinds of weakened test it looks for, ${high} of them serious. Each is listed below.`, src: 'kernel.mjs', what: 'the rule list' },
+  { n: `${RULES.length}`, lab: `kinds of weakened test it looks for, ${high} of them serious. Each is listed under The rules, further down.`, src: 'kernel.mjs', what: 'the rule list' },
 ];
 // "X of Y": the house idiom (as on The Seed) sets "of Y" small, so a long count still fits inside its card
 const numHtml = (n, red) => { const m = String(n).match(/^(\S+) of (\S+)$/); const tone = red ? ' style="color:var(--gold)"' : ''; return m ? `<span class="now"${tone}>${esc(m[1])}</span><span class="was" style="font-size:.42em"> of ${esc(m[2])}</span>` : `<span class="now"${tone}>${esc(n)}</span>`; };
@@ -91,15 +113,16 @@ const PART = {
 };
 const partsHtml = W.map((g, i) => { const [nm, line] = PART[g.file] || [g.file, 'a part of this build']; return `<div class="srow${g.clean ? '' : ' red'}" title="${esc(g.file)}"><div class="d">${String(i + 1).padStart(2, '0')}</div><div class="nm"><b>${esc(nm)}</b><span>${esc(line)}</span>${g.clean ? `<span class="tag cy">${fmt(g.killed)} of ${fmt(g.total)} breaks caught</span>` : `<span class="tag rd">${fmt(g.killed)} of ${fmt(g.total)} caught</span>`}</div></div>`; }).join('');
 
+// [role, plain line, an optional link that answers the role's next question]
 const ROLES = [
   ['Engineering leads', 'A green build from an AI agent can be trusted again. Weakened tests are caught before they are merged.'],
   ['Security', 'A list of the files a task may touch becomes a check on every change. No code leaves your machines.'],
-  ['Finance', 'Review time is the cost of using AI safely. It puts the lines that need a person first.'],
+  ['Finance', 'Review time is the cost of using AI safely. It puts the lines that need a person first.', ['cost', 'Work out the saving from your own numbers']],
   ['Operations', 'Fewer surprises from changes that only passed because a test was weakened. A record of each check.'],
   ['The board', 'Proof that AI-written code passes a real control, one anyone can run again and get the same answer.'],
-  ['The engineers', 'No new tool to log into. It is one step in CI and one hook.'],
+  ['The engineers', 'No new tool to log into. It is one step in CI and one hook. In Claude Code, the AI coding tool made by Anthropic, the hook stops the agent once and lists every serious finding.'],
 ];
-const rolesHtml = ROLES.map(([r, l]) => `<div class="act reveal"><b>${esc(r)}</b><p>${esc(l)}</p></div>`).join('');
+const rolesHtml = ROLES.map(([r, l, link]) => `<div class="act reveal"><b>${esc(r)}</b><p>${esc(l)}${link ? ` <a href="#${link[0]}">${esc(link[1])}</a>.` : ''}</p></div>`).join('');
 
 // the glass: the old Try it section, open. Its long first sentence goes one click down, word for word.
 const TRY = sections.find((s) => s.id === 'try').html.replace(/<p>(Pick one of the real-shaped examples[\s\S]*?)<\/p>/, (all, inner) =>
@@ -112,12 +135,12 @@ if (!TRY.includes('What can I paste?')) throw new Error('the Try it section chan
 const fold = (summary, body, id) => `<details class="fold"${id ? ` id="${id}"` : ''}><summary>${esc(summary)}</summary><div class="legacy">${body}</div></details>`;
 const introHtml = header.replace(nav, '').replace(/<h1>([\s\S]*?)<\/h1>/, '<p><b>$1</b></p>');
 const footerHtml = footer.replace(/<p class="small" id="ver"><\/p>\s*/, '');
-const folds = [fold('The first introduction', introHtml, 'fold-intro')]
+const folds = [fold('The original introduction', introHtml, 'fold-intro')]
   .concat(sections.filter((s) => s.id !== 'try').map((s) => fold(text((s.html.match(/<h2[^>]*>([\s\S]*?)<\/h2>/) || [, s.id])[1]), s.html, 'fold-' + s.id)))
-  .concat([fold('The first footer', footerHtml, 'fold-footer')]).join('\n');
+  .concat([fold('The original footer', footerHtml, 'fold-footer')]).join('\n');
 
 const faces = goals.map((g) => g.pass).concat(W.map((g) => g.clean));
-const facet = `${met} of ${goals.length} goals met${failed ? ` · ${failed} missed and kept` : ''} · point at a face`;
+const facet = `${met} of ${goals.length} goals met${failed ? ` · ${failed} missed and kept` : ''} · point at the crystal to read each face`;
 const facesJson = JSON.stringify({ faces, labels: goals.map((g) => `${g.id} ${g.name} · ${g.pass ? 'met' : 'missed, kept'}`).concat(W.map((g) => `${(PART[g.file] || [g.file])[0]} · ${g.killed} of ${g.total} breaks caught`)), facet });
 
 // the kit, inlined in scope (no file is fetched): exports become a namespace object
@@ -142,6 +165,7 @@ const LOCAL_CSS = `
 details.fold{border:1px solid rgba(174,190,203,.14);border-radius:12px;margin:10px 0;background:rgba(8,19,32,.6)}
 details.fold>summary{padding:14px 16px;cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center}
 details.fold>.legacy{padding:0 16px 16px;overflow-x:auto}
+details.fold>.legacy>section>h2:first-of-type{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 details.note{margin:.4em 0}details.note>summary{cursor:pointer;color:var(--soft);font-size:.92rem;min-height:36px;display:flex;align-items:center}
 .acts .act b{display:block;color:var(--ink);margin-bottom:.3em}
 .acts .act p{margin:0;color:var(--soft)}
@@ -172,7 +196,7 @@ ${LOCAL_CSS.trim()}
   <div class="wrap hero-in">
     <p class="eyebrow reveal">For teams that let AI write code</p>
     <h1>Your AI says the tests pass. <em>See how.</em></h1>
-    <p class="lede reveal">ScopeGuard reads the change an AI made. It shows every test that was skipped, weakened or deleted. It runs in your browser, and nothing is sent anywhere.</p>
+    <p class="lede reveal">ScopeGuard checks a change an AI made to your code. It shows every test that was skipped, weakened or deleted. You paste the change in, and it checks it right here in your browser. Nothing is sent anywhere.</p>
   </div>
   <p class="facet" id="facet" aria-live="polite">${esc(facet)}</p>
 </header>
@@ -241,26 +265,30 @@ ${LOCAL_CSS.trim()}
       <p>It cannot tell why a line changed. A flagged line can be honest, like a test removed along with the feature it tested.</p>
       <p>It only reads the change. It does not run the tests. A weakening it has no rule for passes unnoticed.</p>
       <p>Its rules read one line at a time. A check split over several lines is seen only through its first line.</p>
-      <p>The count of false alarms was taken mostly on JavaScript. Other languages have rules and tests, but no such count yet.</p></div></details>
+      <p>It checks many languages. But its count of false alarms was taken mostly on JavaScript. Other languages have rules and tests, and no such count yet.</p></div></details>
     <details class="honest reveal"><summary>What can go wrong</summary><div class="in">
       <p>${wrongFlags === 0 ? 'On the set it had never seen, it raised no false alarm. It still can.' : `It will sometimes flag an honest change. On the set it had never seen, that was ${wrongFlags} of ${fmt(H.checked)}.`} A false flag costs a reviewer a minute of reading.</p>
       <p>${missed === 0 ? 'It caught every weakening planted into real changes. It can still miss one it has no rule for.' : `It can miss a weakening. On the planted cases it missed ${missed}, and those stay in red above.`}</p>
-      <p>An AI that reads this page could pick a weakening with no rule. So "clean" only means no listed rule fired.</p>
+      <p>An AI agent that reads this page could choose a weakening that no rule covers. So "clean" only means no listed rule fired.</p>
+      <p>A scope file with a line it does not understand stops the check and names the line. The line is never skipped.</p>
       <p>People decide what is merged. ScopeGuard only points at the lines to read.</p></div></details>
     <details class="honest reveal"><summary>Your data, who owns it, and support</summary><div class="in">
       <p>The check runs in your browser or on your own machine. This page cannot connect to anything: its security rules forbid it.</p>
       <p>It is open code under the MIT licence. Your copy is yours to run, change and keep, with or without us.</p>
-      <p>It is supplied by ${SUPPLIER}. Support is agreed per deployment, in each deployment's agreement.</p></div></details>
+      <p>It is supplied by ${SUPPLIER}. Support is agreed per deployment, in each deployment's agreement.</p>
+      <p>The full answers on security, data protection and the supply chain are under <a href="#sec">Security</a>, further down.</p></div></details>
     <details class="honest reveal"><summary>What changed on this page</summary><div class="in">
       <p>This page was rebuilt to the house standard. Nothing was taken out: every section of the old page is below, one click away.</p>
       <p>The checker, its records and its tests were not changed. The script that runs the check is the same script as before.</p></div></details>
+    <details class="honest reveal"><summary>What a buyer walk found, and what was done</summary><div class="in">
+      ${walkHtml}</div></details>
   </div>
 </section>
 
 <section class="pad" id="full">
   <div class="wrap">
     <p class="kline reveal">Every detail is still here</p>
-    <h2 class="claim reveal">The full page. <b>One click away.</b></h2>
+    <h2 class="claim reveal">Every section in full. <b>One click opens each.</b></h2>
 ${folds}
   </div>
 </section>
@@ -271,7 +299,11 @@ ${folds}
     <div class="taglist"><span>›</span> Checks how the tests went green.<br><span>›</span> Runs on your machine. Sends nothing.</div>
   </div>
 </footer>
+${moduleScript}
+${dataOpen}</script>
 <script>
+// after the page's own words: the checker script, its data block (a module script runs only once the page is read,
+// so it still finds the block), then the house kit and layer. They draw and compute; they are not text to read.
 ${inline('CRYSTAL', 'vendor/house/crystal.js')}
 
 ${inline('HOUSE', 'vendor/house/house.js')}
@@ -293,8 +325,6 @@ ${inline('HOUSE', 'vendor/house/house.js')}
   HOUSE.light(document);
 })();
 </script>
-${dataOpen}</script>
-${moduleScript}
 </body>
 </html>
 `;

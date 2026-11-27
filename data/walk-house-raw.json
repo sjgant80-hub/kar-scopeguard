@@ -1,0 +1,178 @@
+{
+ "file": "index.html",
+ "model": "qwen2.5:7b",
+ "parts": 6,
+ "chars": 28933,
+ "started": "2026-11-27T22:20:39.528Z",
+ "personas": [
+  {
+   "key": "CFO",
+   "who": "the CFO of a 400-person firm",
+   "cares": "what it costs, what it saves, what it replaces, and what could go wrong with the numbers"
+  },
+  {
+   "key": "CTO",
+   "who": "the CTO who also owns security",
+   "cares": "how it works, what runs where, what data leaves, what it depends on, and what is not proven"
+  },
+  {
+   "key": "COO",
+   "who": "the COO who runs the teams that would use it",
+   "cares": "how people would use it day to day, how to roll it out, and what happens when it fails"
+  },
+  {
+   "key": "OWNER",
+   "who": "the owner-manager of a 12-person business with no technical staff",
+   "cares": "whether you can understand it, try it in ten minutes, and whether it is for you"
+  }
+ ],
+ "readings": [
+  {
+   "who": "CFO",
+   "part": 1,
+   "seconds": 141,
+   "reply": "- \"It shows every test that was skipped, weakened or deleted.\" This statement is unclear without more context on how exactly the tool identifies and categorizes these tests.\n\n- \"It catches weakenings planted into real changes It caught 2,852 of 2,856. The goal was every one. It missed 1 of 111 where a real check swapped for one that can never fail, and 3 of 63 where the step that runs the tests taken out.\" The numbers (111 and 63) are not explained, making it hard to understand the context of the misses.\n\n- \"Each of the 26 kinds of weakened test it looks for, 17 of them serious. Each is listed below.\" The list of 26 kinds of weakened tests is not provided, making it difficult to assess the comprehensiveness of the tool.\n\n- \"The count of false alarms was taken mostly on JavaScript. Other languages have rules and tests, but no such count yet.\" This statement is unconvincing without additional data or examples from other languages to support the claim."
+  },
+  {
+   "who": "CFO",
+   "part": 2,
+   "seconds": 149,
+   "reply": "- \"No buyer walk is recorded for this version of the page.\" This statement is unclear without context. What is a \"buyer walk,\" and why is it significant?\n\n- \"The full page. One click away.\" This phrase is vague. Does it mean the full page content is accessible with one click, or is it referring to something else?\n\n- \"Traced from a real run\" - This is unclear. What exactly is being traced, and how does this trace help in understanding the functionality?\n\n- \"A checker that flags every honest change gets switched off.\" This statement is ambiguous. What constitutes an \"honest change,\" and how does this affect the overall functionality and reliability of the system?"
+  },
+  {
+   "who": "CFO",
+   "part": 3,
+   "seconds": 174,
+   "reply": "- \"The tools are in tools/.\" This statement is unclear without additional context or a link to the tools' location.\n\n- \"The honest-data measurement above is mostly JavaScript, because that is what our repositories are written in, and mostly AI-written.\" It's not clear what \"honest-data measurement\" refers to, and there's no explanation of what kind of measurement is being made.\n\n- \"On a high finding it stops the agent once, lists the lines, and asks it to fix the code instead of the check, or to explain an honest change in its final message.\" It's unclear what constitutes a \"high finding\" and how the agent is expected to respond to it.\n\n- \"Exit codes: 0 clean (and review, unless --fail-on review ), 2 flagged, 1 the input could not be read or the options were wrong.\" The explanation for exit code 1 is not clear, and it would be helpful to have more detail on what specific issues would cause this code to be returned."
+  },
+  {
+   "who": "CFO",
+   "part": 4,
+   "seconds": 347,
+   "reply": "- \"The 10-minute default is our assumption; use your own.\" This is unclear without knowing the default time for checking one change by hand. A specific time should be provided for better understanding.\n\n- \"The share is below 1 because flagged lines still need a human to read them.\" This is not clear. A more detailed explanation of how the flagged lines are handled would be helpful.\n\n- \"The verdict comes from fixed rules in code you can read.\" This is good, but it would be more convincing if there were a link or reference to the actual code where these rules are defined.\n\n- \"The first version's rules were tuned on half of our history and still had to pass the held-out half.\" This is unclear. It would be more convincing if the exact percentage of the held-out data and the specific tuning process were provided."
+  },
+  {
+   "who": "CFO",
+   "part": 5,
+   "seconds": 123,
+   "reply": "- \"Claude Code\" is not defined or explained anywhere on the page. This term is used without context, making it unclear what it refers to.\n- \"Words on this page\" is repeated twice without any additional content. This repetition seems unnecessary and could be removed.\n- \"Why no AI judge\" is mentioned but not fully explained. The reasoning behind why an AI judge is not used is not elaborated on.\n- \"Fingerprint (SHA-256)\" is introduced but not fully explained. What exactly does this fingerprint prove in the context of ScopeGuard's functionality?"
+  },
+  {
+   "who": "CFO",
+   "part": 6,
+   "seconds": 75,
+   "reply": "- \"A test was skipped for a good reason. What do I do?\" This sentence ends abruptly without providing guidance on the appropriate action.\n\n- \"Can I add my own rules?\" The response is brief and technical, but it doesn't explain how to go about adding rules or what the implications might be.\n\n- \"Does it support GitLab, Bitbucket or other CI?\" The response is limited to GitHub Actions. It would be helpful to know if there are plans to support other CI systems or if there are alternative methods for integration.\n\n- \"The first footer\" This section seems to be a repetition of the header information and doesn't provide any new or relevant information."
+  },
+  {
+   "who": "CTO",
+   "part": 1,
+   "seconds": 192,
+   "reply": "- \"2 of 3 goals met · 1 missed and kept · point at a face\" - This phrase is unclear and seems incomplete. It's not immediately clear what the \"point at a face\" means in this context.\n\n- \"S5 Catches weakenings planted into real changes It caught 2,852 of 2,856. The goal was every one. It missed 1 of 111 where a real check swapped for one that can never fail, and 3 of 63 where the step that runs the tests taken out. missed · kept\" - The numbers 111 and 63 are not explained, making it hard to understand the context and significance of the misses.\n\n- \"The count of false alarms was taken mostly on JavaScript. Other languages have rules and tests, but no such count yet.\" - This statement is unclear about the extent of the testing across different languages. It's not clear if the tool only tests JavaScript or if it tests other languages but with different metrics.\n\n- \"Your data, who owns it, and support\" - This section is too brief and does not provide specific details on data ownership or support mechanisms, which are critical for security and compliance."
+  },
+  {
+   "who": "CTO",
+   "part": 2,
+   "seconds": 143,
+   "reply": "- \"No buyer walk is recorded for this version of the page.\" This statement is unclear and does not provide any context or explanation for its significance.\n\n- \"The first introduction ScopeGuard\" seems to be incomplete or missing a sentence. It should clarify what ScopeGuard is and why it is important.\n\n- \"Tests: Snapshots: Gates (CI and test configuration):\" These sections are listed but lack any content or explanation. It is unclear what these terms refer to without additional context.\n\n- \"Planted weakenings, on real diffs\" is a technical term but lacks a clear explanation of what \"planted weakenings\" means in this context."
+  },
+  {
+   "who": "CTO",
+   "part": 3,
+   "seconds": 189,
+   "reply": "- \"The tools are in tools/.\" This statement is unclear without context. Are these tools part of the product, or are they external tools that need to be installed separately?\n\n- \"The honest-data measurement above is mostly JavaScript, because that is what our repositories are written in, and mostly AI-written.\" This sentence is unclear. Does \"honest-data measurement\" refer to a specific feature or tool? More context is needed to understand what this measurement entails.\n\n- \"Without a .scope file, every path is in scope, so only the test and CI rules run.\" This statement is missing a crucial detail: what happens if a .scope file is present but not correctly formatted or missing some paths?\n\n- \"Exit codes: 0 clean (and review, unless --fail-on review), 2 flagged, 1 the input could not be read or the options were wrong.\" This explanation is incomplete. It does not specify what happens when the exit code is 1, and it could be clearer about the implications of the different exit codes."
+  },
+  {
+   "who": "CTO",
+   "part": 4,
+   "seconds": 152,
+   "reply": "- \"The 10-minute default is our assumption; use your own.\" This is unclear without a specific default value or a way to input a custom value.\n\n- \"The share is below 1 because flagged lines still need a human to read them.\" This is not clear without a specific percentage or a range for the share.\n\n- \"The measured rate is in Measured.\" This is unclear without a link or reference to where the measured rate can be found.\n\n- \"Mutation testing, which checks whether the tests can fail at all, is the natural partner.\" This is unconvincing without more details on how mutation testing complements ScopeGuard and its effectiveness."
+  },
+  {
+   "who": "CTO",
+   "part": 5,
+   "seconds": 162,
+   "reply": "- \"Claude Code\" is not defined or explained. Is this a specific tool or a placeholder for an AI agent? More context would be helpful.\n- \"Words on this page\" appears twice without additional content. It seems redundant and could be removed or expanded.\n- \"Each held-out high finding was read and labelled.\" This sentence is unclear. What exactly is a \"high finding\"? How is it different from a regular finding?\n- \"Every part of ScopeGuard passes one.\" This is vague. What does \"one\" refer to? A mutation gate? A test? Clarification is needed."
+  },
+  {
+   "who": "CTO",
+   "part": 6,
+   "seconds": 78,
+   "reply": "- \"Exit code 2 fails the job.\" is not clear what \"the job\" refers to. Is it a specific CI/CD pipeline or a general term? More context would be helpful."
+  },
+  {
+   "who": "COO",
+   "part": 1,
+   "seconds": 195,
+   "reply": "- \"2 of 3 goals met · 1 missed and kept · point at a face\" - This phrase is unclear and seems incomplete. It's not immediately clear what the \"point at a face\" refers to or how it relates to the goals.\n\n- \"S4 Few false alarms on honest changes It flagged 4 of 330 test changes it had never seen. The goal was 2 in 100 at most. None was a real weakening: 3 false alarms, 1 it could not read. met\" - The phrase \"3 false alarms, 1 it could not read\" is unclear. It's not clear what \"it could not read\" means in this context.\n\n- \"The count of false alarms was taken mostly on JavaScript. Other languages have rules and tests, but no such count yet.\" - This sentence is unclear. It's not clear what \"the count of false alarms\" refers to or how it is relevant to other languages.\n\n- \"An AI that reads this page could pick a weakening with no rule. So \"clean\" only means no listed rule fired.\" - This sentence is unclear. It's not clear what \"An AI that reads this page\" means in this context or how it relates to the concept of \"clean.\""
+  },
+  {
+   "who": "COO",
+   "part": 2,
+   "seconds": 148,
+   "reply": "- \"No buyer walk is recorded for this version of the page.\" This statement is unclear and doesn't provide any context or information that would help understand the product's value or usage.\n\n- \"The full page. One click away.\" This phrase is vague and doesn't clarify what \"the full page\" refers to or how it can be accessed.\n\n- \"Traced from a real run\" without a diagram or explanation, this phrase is unconvincing and doesn't provide any visual or textual context to understand what the trace represents.\n\n- \"A checker that flags every honest change gets switched off.\" This statement is unclear and doesn't explain what \"honest change\" means or why such a checker would be switched off."
+  },
+  {
+   "who": "COO",
+   "part": 3,
+   "seconds": 194,
+   "reply": "- \"The tools are in tools/.\" This statement is unclear without more context on where these tools are located or how to access them.\n\n- \"The honest-data measurement above is mostly JavaScript, because that is what our repositories are written in, and mostly AI-written.\" It's not clear what \"honest-data measurement\" refers to, and the statement is somewhat vague.\n\n- \"On a high finding it stops the agent once, lists the lines, and asks it to fix the code instead of the check, or to explain an honest change in its final message.\" It's unclear what constitutes a \"high finding\" and how the agent is expected to respond to it.\n\n- \"Exit codes: 0 clean (and review, unless --fail-on review ), 2 flagged, 1 the input could not be read or the options were wrong.\" The explanation for exit code 1 is not clear and could be more detailed."
+  },
+  {
+   "who": "COO",
+   "part": 4,
+   "seconds": 151,
+   "reply": "- \"The 10-minute default is our assumption; use your own.\" This is unclear without a specific default value or guidance on how to input a custom time.\n\n- \"The share is below 1 because flagged lines still need a human to read them.\" This is not clear without a specific value or explanation of what \"below 1\" means in practical terms.\n\n- \"The verdict comes from fixed rules in code you can read.\" This is unconvincing without a link or reference to the actual code where these rules are located.\n\n- \"The first version's rules were tuned on half of our history and still had to pass the held-out half.\" This is unclear without knowing the exact percentage or how the \"held-out half\" was determined."
+  },
+  {
+   "who": "COO",
+   "part": 5,
+   "seconds": 131,
+   "reply": "- \"Claude Code\" is not defined or explained. Is this a specific tool or a placeholder? More context would be helpful.\n- \"Words on this page\" appears twice without additional content. It seems redundant and could be removed.\n- \"Mutation gate\" is mentioned but not fully explained. What exactly does this check entail, and how does it work?\n- \"Stop hook\" is introduced but not elaborated on. What command does it run, and how does it interact with the agent?"
+  },
+  {
+   "who": "COO",
+   "part": 6,
+   "seconds": 96,
+   "reply": "- \"Exit code 2 fails the job.\" is not clear on what \"the job\" refers to. Is it a specific CI/CD pipeline or a general term? \n\n- \"The cost: an assertion split over several lines is seen through its first line only.\" This statement is somewhat unclear. Could it be more explicitly explained what the \"cost\" entails?\n\n- \"MIT licence. Source, tests, the sealed claims and every gate receipt: github.com/sjgant80-hub/kar-scopeguard .\" The link provided seems incomplete or incorrect, as it doesn't lead to a valid GitHub repository.\n\n- \"Powered by the Konomi architecture, created by Thomas Frumkin.\" This is a general statement and doesn't provide any specific details on how the architecture supports the product's functionality."
+  },
+  {
+   "who": "OWNER",
+   "part": 1,
+   "seconds": 176,
+   "reply": "- ScopeGuard shows every test that was skipped, weakened or deleted. It runs in your browser, and nothing is sent anywhere. However, it's not clear how it can run in the browser if it needs to analyze code changes. Can you clarify this?\n\n- It flagged 4 of 330 test changes it had never seen. The goal was 2 in 100 at most. None was a real weakening: 3 false alarms, 1 it could not read. It's not clear what the \"2 in 100\" goal refers to. Could you specify if this is the goal for false alarms or something else?\n\n- The count of false alarms was taken mostly on JavaScript. Other languages have rules and tests, but no such count yet. It's unclear how this affects the overall reliability of the tool. Could you provide more context or a comparison across different languages?\n\n- It only reads the change. It does not run the tests. A weakening it has no rule for passes unnoticed. It's not clear how this impacts the tool's effectiveness. Could you provide more details on how this limitation affects its ability to catch weakenings?"
+  },
+  {
+   "who": "OWNER",
+   "part": 2,
+   "seconds": 155,
+   "reply": "- \"No buyer walk is recorded for this version of the page.\" This statement is unclear without context. What does a \"buyer walk\" mean in this context?\n\n- \"The full page. One click away.\" This is a vague statement. It would be more helpful if it specified what exactly is \"one click away.\"\n\n- \"Read each finding. Every one names its rule, the file and line, and the exact text.\" This is a bit unclear. It would be more helpful if it provided an example of what a finding looks like.\n\n- \"Planted weakenings, on real diffs\" This phrase is unclear without further explanation. What exactly are \"planted weakenings\" and how were they used in the testing process?"
+  },
+  {
+   "who": "OWNER",
+   "part": 3,
+   "seconds": 242,
+   "reply": "- \"Every language equally.\" This statement is unclear. Does it mean the tool supports all languages equally well, or does it imply that the tool is language-agnostic? More context would be helpful.\n- \"The honest-data measurement above is mostly JavaScript, because that is what our repositories are written in, and mostly AI-written.\" This is unconvincing. It implies that the tool is biased towards JavaScript and AI-generated code, which might not be a fair representation of its capabilities across different languages and types of code.\n- \"On a high finding it stops the agent once, lists the lines, and asks it to fix the code instead of the check, or to explain an honest change in its final message.\" This is unclear. It's not clear what constitutes a \"high finding\" or how the agent is expected to respond to such a finding.\n- \"Exit codes: 0 clean (and review, unless --fail-on review ), 2 flagged, 1 the input could not be read or the options were wrong.\" This is unconvincing. The exit codes are not intuitive, and it's not clear why a code of 1 is used for input issues or option errors, which could be confusing."
+  },
+  {
+   "who": "OWNER",
+   "part": 4,
+   "seconds": 147,
+   "reply": "- \"The 10-minute default is our assumption; use your own.\" This is unclear without knowing your specific time constraints.\n\n- \"The share is below 1 because flagged lines still need a human to read them.\" It's not clear what the \"share\" refers to in this context.\n\n- \"The verdict comes from fixed rules in code you can read.\" It would be helpful to know where exactly in the code these rules are located.\n\n- \"The first version's rules were tuned on half of our history and still had to pass the held-out half.\" It's unclear what \"held-out half\" means in this context."
+  },
+  {
+   "who": "OWNER",
+   "part": 5,
+   "seconds": 166,
+   "reply": "- \"Claude Code\" is not defined or explained. Is this a specific tool or a placeholder? More context would help.\n- \"Each finding carries its line.\" This is a bit vague. Does \"line\" refer to the line of code that was changed or the line number in the diff? Clarification needed.\n- \"Every part is mutation-gated: each file's tests must kill every mutant the gate makes, with none set aside.\" This is complex. Can you provide a simpler explanation or an example of what this means in practice?\n- \"The counts are in the blueprint, read from receipts/witness.json.\" What exactly is the blueprint, and where can I find it? More details would be helpful."
+  },
+  {
+   "who": "OWNER",
+   "part": 6,
+   "seconds": 96,
+   "reply": "- \"A test was skipped for a good reason. What do I do?\" This sentence ends abruptly without providing guidance on what to do when a test is skipped.\n\n- \"Rules are deliberately a closed list in code, not a configuration file, so a change cannot turn a rule off.\" This statement is a bit cryptic and could be more explicit about what actions are or are not allowed.\n\n- \"The cost: an assertion split over several lines is seen through its first line only.\" This explanation could be clearer about how this limitation affects the testing process and what developers should be aware of.\n\n- \"Powered by the Konomi architecture, created by Thomas Frumkin.\" While this is informative, it doesn't explain how the Konomi architecture specifically benefits the tool or how it impacts the user experience."
+  }
+ ],
+ "finished": "2026-11-27T23:24:21.570Z",
+ "snapshotSha256": "a34cf8fc8710b16e6224746a5093be60924a83961840478b456580d6aabb80cf",
+ "note": "Run 2, complete. The file field was a local path; it is replaced by the page name and the SHA-256 of the exact page the walk read. Every reading is as the tool wrote it."
+}
