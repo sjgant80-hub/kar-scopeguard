@@ -2,70 +2,281 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; font-src 'self'; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ScopeGuard</title>
 <meta name="description" content="Checks a code change made by an AI coding agent: did it stay inside the files it was allowed to touch, and did it make the tests easier to pass instead of making the code right? Runs in your browser; nothing is uploaded.">
 <style>
-:root{--bg:#fbfaf7;--card:#ffffff;--ink:#1c1b19;--muted:#5d5a54;--line:#e3dfd6;--accent:#1f5f8b;--accent-ink:#ffffff;--good:#2f7a3d;--warn:#8a5f00;--bad:#a3322a;--code:#f2efe8;--hi:#fbe9e7;--rv:#fdf3dc}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#151513;--card:#1e1d1b;--ink:#ecebe7;--muted:#a7a39b;--line:#34322e;--accent:#6fb0dc;--accent-ink:#0d1b24;--good:#6cc47b;--warn:#e0b04a;--bad:#ec7a70;--code:#262522;--hi:#3a2422;--rv:#3a3020}}
-:root[data-theme="dark"]{--bg:#151513;--card:#1e1d1b;--ink:#ecebe7;--muted:#a7a39b;--line:#34322e;--accent:#6fb0dc;--accent-ink:#0d1b24;--good:#6cc47b;--warn:#e0b04a;--bad:#ec7a70;--code:#262522;--hi:#3a2422;--rv:#3a3020}
+/* house.css — the AI Native house standard: one token sheet, one kit. Every page is built from these and nothing else.
+   HERO · RECEIPTS · THE STACK · THE GLASS · HONEST EXPANDER. The law of the page: the loudest true number leads, every
+   caveat waits behind a click, and no section is prose. Fonts are the house's three faces, served from the page. */
+@font-face{font-family:'Fraunces';src:url('vendor/fonts/fraunces/files/fraunces-latin-full-italic.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap}
+@font-face{font-family:'Fraunces';src:url('vendor/fonts/fraunces/files/fraunces-latin-full-normal.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Hanken Grotesk';src:url('vendor/fonts/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'JetBrains Mono';src:url('vendor/fonts/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2') format('woff2');font-weight:100 800;font-display:swap}
+:root{color-scheme:dark;--bg:#02070c;--bg2:#060e18;--panel:#081320;--ink:#e9f2f6;--soft:#aebecb;--muted:#6f8698;--cyan:#49e8c8;--cyan-dim:#1f6a60;--gold:#ffcf6a;--red:#ff6b6b;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.055);--display:'Fraunces',Georgia,serif;--sans:'Hanken Grotesk',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--gut:max(20px,env(safe-area-inset-left,0px));--gutr:max(20px,env(safe-area-inset-right,0px))}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:940px;margin:0 auto;padding:24px 16px 64px}
-h1{font-size:1.9rem;margin:.2em 0 .1em}h2{font-size:1.35rem;margin:2.2em 0 .5em;padding-top:.6em;border-top:1px solid var(--line)}h3{font-size:1.05rem;margin:1.4em 0 .3em}
-p,li{max-width:74ch}a{color:var(--accent)}
-.lede{font-size:1.12rem;color:var(--muted)}
-nav.toc{display:flex;flex-wrap:wrap;gap:4px 6px;font-size:.92rem;margin:14px 0}
-nav.toc a{display:inline-flex;align-items:center;min-height:32px;padding:0 8px;border-radius:6px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0}
-textarea{width:100%;min-height:200px;font:13px/1.4 ui-monospace,Consolas,monospace;background:var(--code);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px}
-textarea.short{min-height:70px}
-input{font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
-input[type=number]{width:7.5em}
-label{font-size:.93rem}
-button{font:inherit;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:8px 14px;cursor:pointer;min-height:40px}
-button.ghost{background:transparent;color:var(--accent)}
-button[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:1px;font-weight:650}
-button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
-.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.verdict{font-size:1.3rem;font-weight:700}
-.v-clean{color:var(--good)}.v-review{color:var(--warn)}.v-flagged{color:var(--bad)}.v-error{color:var(--bad)}
-table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border-bottom:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}
-td.n,th.n{text-align:right;white-space:nowrap}
-.tbl{overflow-x:auto}
-tr.high td{background:var(--hi)}tr.review td{background:var(--rv)}
-code,pre{background:var(--code);border-radius:4px;font-size:.9em}
-code{padding:1px 5px;overflow-wrap:anywhere}
-pre{padding:10px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere}
-.muted{color:var(--muted)}.small{font-size:.88rem}
-.sev{font-weight:700;white-space:nowrap}.sev-high{color:var(--bad)}.sev-review{color:var(--warn)}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-dl dt{font-weight:650;margin-top:.8em}dl dd{margin:.15em 0 0 0;color:var(--muted)}
-.fp{font:12px ui-monospace,Consolas,monospace;word-break:break-all}
-.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:1px 9px;font-size:.85rem;margin:2px 4px 2px 0}
-svg{max-width:100%;height:auto}
-svg text{fill:var(--ink);font:13px system-ui,sans-serif}
-svg .box{fill:var(--card);stroke:var(--line)}svg .acc{fill:none;stroke:var(--accent);stroke-width:2}svg .bad{fill:var(--bad)}svg .good{fill:var(--good)}
-details{margin:.5em 0}summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center}
-.trace li{margin:.35em 0}
-footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{line-height:1.5;font-size:16px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+.mono{font-family:var(--mono)}
+em{font-style:italic;font-family:var(--display);font-weight:600}
+code{font:500 .88em var(--mono);color:var(--cyan);overflow-wrap:anywhere}
+.pass{color:var(--cyan)}.fail{color:var(--red)}.pend{color:var(--gold)}.dim{color:var(--muted)}
+
+/* HERO: the crystal behind the headline */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(120% 90% at 70% 18%,#0a1826 0%,var(--bg) 58%)}
+#crystal{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+.hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(2,7,12,.78) 0%,rgba(2,7,12,.34) 46%,rgba(2,7,12,0) 70%),radial-gradient(130% 110% at 50% 42%,transparent 50%,rgba(2,6,12,.7) 100%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-block:12vh;pointer-events:none}
+.hero .wrap>*{pointer-events:auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,9vw,104px);line-height:.98;letter-spacing:-.02em;margin:18px 0 0;text-wrap:balance;max-width:14ch}
+h1 em{color:var(--cyan)}
+.sub{font-size:clamp(16px,2.3vw,21px);color:var(--soft);max-width:46ch;margin:26px 0 0;line-height:1.55}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13.5px;letter-spacing:.02em;padding:13px 20px;min-height:46px;border-radius:999px;text-decoration:none;transition:.18s ease;white-space:nowrap;cursor:pointer;border:1px solid transparent;background:none;color:var(--ink)}
+.btn.primary{background:var(--cyan);color:#021310;font-weight:700}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px -12px var(--cyan)}
+.btn.ghost{border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
+.facet{position:absolute;z-index:3;left:var(--gut);bottom:22px;font:500 12px/1.5 var(--mono);color:var(--soft);max-width:min(560px,calc(100vw - 40px));min-height:18px;pointer-events:none}
+.facet b{color:var(--ink);font-weight:500}
+
+/* SECTIONS */
+section{position:relative;z-index:2}
+.pad{padding-block:clamp(72px,11vh,140px)}
+.alt{background:linear-gradient(180deg,var(--bg),#040b14);border-top:1px solid var(--line2)}
+.deep{background:var(--bg2);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
+.kline{font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);margin:0 0 20px}
+.claim{font-family:var(--display);font-weight:400;font-size:clamp(30px,5.2vw,58px);line-height:1.05;letter-spacing:-.015em;text-wrap:balance;max-width:20ch;margin:0}
+.claim b{font-weight:600}
+.claim em{color:var(--cyan)}
+.lede{color:var(--soft);font-size:clamp(15px,1.9vw,18px);line-height:1.6;max-width:52ch;margin:26px 0 0}
+.lede b{color:var(--ink);font-weight:600}
+
+/* RECEIPTS: the number is the hero */
+/* a receipt's number is sized by its own column (cqi), so a long before→after never pushes a receipt off the page:
+   by default a number of up to 11 characters fits; a row of short numbers (7 or fewer) may be marked .loud */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:64px;border-top:1px solid var(--line);padding-top:48px}
+.stats.loud{--fit:21cqi}
+.stat{min-width:0;container-type:inline-size}
+.stat .n{font-family:var(--mono);font-weight:700;font-size:clamp(30px,4.2vw,56px);font-size:clamp(30px,var(--fit,14.2cqi),76px);line-height:1;letter-spacing:-.02em;white-space:nowrap}
+.stat .n .was{color:var(--muted)}.stat .n .arrow{color:var(--cyan-dim);padding:0 .12em}.stat .n .now{color:var(--cyan)}.stat .n .bad{color:var(--red)}.stat .n .wait{color:var(--gold)}
+.stat .lab{color:var(--soft);font-size:14px;margin-top:16px;line-height:1.5;max-width:28ch}
+.stat .lab b{color:var(--ink);font-weight:600}
+.src{display:inline-block;font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--muted);text-decoration:none;margin-top:10px;border-bottom:1px dotted var(--muted);padding-bottom:2px}
+.src:hover{color:var(--cyan);border-color:var(--cyan)}
+.wins{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px}
+.win{border:1px solid var(--line2);border-radius:16px;padding:26px 22px;background:var(--panel)}
+.win .wn{font-family:var(--mono);font-weight:700;font-size:clamp(26px,3.6vw,42px);color:var(--cyan);letter-spacing:-.02em;line-height:1;white-space:nowrap}
+.win .wn .of{color:var(--muted)}
+.win .wl{color:var(--soft);font-size:13px;margin-top:12px;line-height:1.5}
+
+/* CARDS */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.acts.two{grid-template-columns:repeat(2,1fr)}
+.act{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--panel),#050c15);border:1px solid var(--line2);border-radius:18px;padding:28px 24px 24px;text-decoration:none;transition:.2s ease;overflow:hidden}
+a.act:hover,.act.lift:hover{border-color:var(--cyan);transform:translateY(-4px);box-shadow:0 24px 60px -34px #000}
+.act::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(73,232,200,.10),transparent 60%)}
+.act:hover::before{opacity:1}
+.act .num{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--muted)}
+.act h3{font-family:var(--display);font-weight:500;font-size:26px;letter-spacing:-.01em;margin:14px 0 0}
+.act p{color:var(--soft);font-size:14.5px;line-height:1.55;margin:10px 0 0;flex:1}
+.act .go{font-family:var(--mono);font-size:12.5px;color:var(--cyan);margin-top:18px;display:inline-flex;gap:7px;align-items:center}
+
+/* THE STACK: one line per layer */
+.stack{margin-top:44px;border:1px solid var(--line2);border-radius:18px;overflow:hidden;background:#040b13}
+.srow{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;border-top:1px solid var(--line2);padding:16px 22px;transition:.16s}
+.srow:first-child{border-top:none}
+.srow:hover{background:#08141f}
+.srow .d{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.12em}
+.srow .nm{display:flex;gap:6px 14px;align-items:baseline;flex-wrap:wrap;min-width:0}
+.srow .nm b{font-family:var(--display);font-weight:500;font-size:19px}
+.srow .nm span{color:var(--soft);font-size:14px;min-width:0;overflow-wrap:anywhere}
+.srow.red .d{color:var(--red)}.srow.gold .d{color:var(--gold)}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.tag.off{color:var(--muted);border:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.spark{display:block;width:100%;max-width:520px;height:64px;margin:12px 0 0}
+.tag.cy{color:var(--cyan);border:1px solid rgba(73,232,200,.32)}
+.tag.gd{color:var(--gold);border:1px solid rgba(255,207,106,.34);animation:breathe 2.4s ease-in-out infinite}
+.tag.rd{color:var(--red);border:1px solid rgba(255,107,107,.4)}
+@keyframes breathe{50%{opacity:.55}}
+
+/* THE GLASS: it runs here, on the visitor's own device */
+.glass{margin-top:44px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#07121d,#040b13);padding:26px 24px;box-shadow:0 30px 80px -50px #000,inset 0 1px 0 rgba(255,255,255,.04)}
+.glass h3{font-family:var(--display);font-weight:500;font-size:24px;margin:0 0 6px}
+.glass .hint{color:var(--soft);font-size:14px;margin:0 0 16px;max-width:60ch}
+.glass .out{font:500 13px/1.6 var(--mono);color:var(--soft);margin:14px 0 0;min-height:22px}
+.glass textarea,.glass input,.glass select{font:500 13px/1.5 var(--mono);color:var(--ink);background:rgba(2,7,12,.75);border:1px solid var(--line);border-radius:10px;padding:10px 12px;max-width:100%;min-height:42px}
+.glass textarea{width:100%;min-height:128px}
+.glass label{font:500 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:inline-flex;flex-direction:column;gap:5px}
+.row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:1px solid var(--line2);border-radius:14px;padding:14px 16px;background:rgba(2,7,12,.5);min-width:0}
+.box h4{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+pre{font:500 12.5px/1.55 var(--mono);color:var(--ink);margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.wall svg{width:100%;height:auto;display:block}
+.wall rect{cursor:pointer;transition:opacity .15s}
+.wall rect:hover{opacity:.7}
+.key{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font:500 11.5px/1.4 var(--mono);color:var(--muted)}
+.key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* PROOF + THE HONEST EXPANDER */
+.proof{text-align:center}
+.proof .hl{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(38px,8vw,88px);line-height:1;letter-spacing:-.02em;margin:0}
+.proof .hl .a{color:var(--muted)}.proof .hl .b{color:var(--cyan)}
+.proof .sub2{color:var(--soft);margin:24px auto 0;max-width:42ch;font-size:16px}
+.links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.plink{font-family:var(--mono);font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);padding:11px 18px;border-radius:999px;transition:.18s;min-height:44px;display:inline-flex;align-items:center}
+.plink:hover{border-color:var(--cyan);color:var(--cyan)}
+details.honest{max-width:680px;margin:22px auto 0;border:1px solid var(--line2);border-radius:14px;background:#040b13;text-align:left}
+details.honest:first-of-type{margin-top:52px}
+details.honest summary{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted);padding:16px 20px;cursor:pointer;list-style:none;min-height:48px}
+details.honest summary::-webkit-details-marker{display:none}
+details.honest summary::before{content:"+ ";color:var(--cyan)}
+details.honest[open] summary::before{content:"– "}
+details.honest .in{padding:0 20px 20px;color:var(--soft);font-size:14px;line-height:1.6}
+details.honest .in p{margin:0 0 10px}
+details.honest .in b{color:var(--ink)}
+details.honest .in a{color:var(--cyan)}
+
+footer{border-top:1px solid var(--line2);padding-block:46px;position:relative;z-index:2}
+.frow{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-size:22px}
+.taglist{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.9;letter-spacing:.02em}
+.taglist span{color:var(--cyan)}
+.fnote{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px;letter-spacing:.02em;line-height:1.8}
+.fnote a{color:var(--soft)}
+
+/* MOTION */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media(max-width:860px){.acts{grid-template-columns:repeat(2,1fr)}.wins{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.stats{grid-template-columns:1fr;gap:40px}.two{grid-template-columns:1fr}.hero-shade{background:linear-gradient(180deg,rgba(2,7,12,.2) 0%,rgba(2,7,12,.82) 62%)}.hero{align-items:flex-end}.hero .wrap{padding-block:9vh}}
+@media(max-width:680px){.acts,.acts.two{grid-template-columns:1fr}.srow{grid-template-columns:48px minmax(0,1fr);padding:14px 16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}.tag.gd{animation:none}.btn,.act{transition:none}}
+/* the old page's own styles, for its own content only (scope() from the house standard) */
+.legacy{--bg:#fbfaf7;--card:#ffffff;--ink:#1c1b19;--muted:#5d5a54;--line:#e3dfd6;--accent:#1f5f8b;--accent-ink:#ffffff;--good:#2f7a3d;--warn:#8a5f00;--bad:#a3322a;--code:#f2efe8;--hi:#fbe9e7;--rv:#fdf3dc}
+.legacy{--bg:#151513;--card:#1e1d1b;--ink:#ecebe7;--muted:#a7a39b;--line:#34322e;--accent:#6fb0dc;--accent-ink:#0d1b24;--good:#6cc47b;--warn:#e0b04a;--bad:#ec7a70;--code:#262522;--hi:#3a2422;--rv:#3a3020}
+.legacy h2{font-size:1.35rem;margin:2.2em 0 .5em;padding-top:.6em;border-top:1px solid var(--line)}
+.legacy h3{font-size:1.05rem;margin:1.4em 0 .3em}
+.legacy p,.legacy li{max-width:74ch}
+.legacy a{color:var(--accent)}
+.legacy .lede{font-size:1.12rem;color:var(--muted)}
+.legacy .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0}
+.legacy textarea{width:100%;min-height:200px;font:13px/1.4 ui-monospace,Consolas,monospace;background:var(--code);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px}
+.legacy textarea.short{min-height:70px}
+.legacy input{font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+.legacy input[type=number]{width:7.5em}
+.legacy label{font-size:.93rem}
+.legacy button{font:inherit;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:8px 14px;cursor:pointer;min-height:40px}
+.legacy button.ghost{background:transparent;color:var(--accent)}
+.legacy button[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:1px;font-weight:650}
+.legacy button:focus-visible,.legacy a:focus-visible,.legacy input:focus-visible,.legacy textarea:focus-visible,.legacy summary:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
+.legacy .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.legacy .verdict{font-size:1.3rem;font-weight:700}
+.legacy .v-clean{color:var(--good)}
+.legacy .v-review{color:var(--warn)}
+.legacy .v-flagged{color:var(--bad)}
+.legacy .v-error{color:var(--bad)}
+.legacy table{border-collapse:collapse;width:100%;font-size:.92rem}
+.legacy th,.legacy td{border-bottom:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}
+.legacy td.n,.legacy th.n{text-align:right;white-space:nowrap}
+.legacy .tbl{overflow-x:auto}
+.legacy tr.high td{background:var(--hi)}
+.legacy tr.review td{background:var(--rv)}
+.legacy code,.legacy pre{background:var(--code);border-radius:4px;font-size:.9em}
+.legacy code{padding:1px 5px;overflow-wrap:anywhere}
+.legacy pre{padding:10px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.legacy .muted{color:var(--muted)}
+.legacy .small{font-size:.88rem}
+.legacy .sev{font-weight:700;white-space:nowrap}
+.legacy .sev-high{color:var(--bad)}
+.legacy .sev-review{color:var(--warn)}
+.legacy .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.legacy dl dt{font-weight:650;margin-top:.8em}
+.legacy dl dd{margin:.15em 0 0 0;color:var(--muted)}
+.legacy .fp{font:12px ui-monospace,Consolas,monospace;word-break:break-all}
+.legacy .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:1px 9px;font-size:.85rem;margin:2px 4px 2px 0}
+.legacy svg{max-width:100%;height:auto}
+.legacy svg text{fill:var(--ink);font:13px system-ui,sans-serif}
+.legacy svg .box{fill:var(--card);stroke:var(--line)}
+.legacy svg .acc{fill:none;stroke:var(--accent);stroke-width:2}
+.legacy svg .bad{fill:var(--bad)}
+.legacy svg .good{fill:var(--good)}
+.legacy details{margin:.5em 0}
+.legacy summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center}
+.legacy .trace li{margin:.35em 0}
+.legacy{--bg:transparent;--card:#081320;--ink:#e9f2f6;--muted:#aebecb;--line:rgba(174,190,203,.18);--accent:#49e8c8;--accent-ink:#02070c;--good:#49e8c8;--warn:#ffcf6a;--bad:#ff6b6b;--code:#060e18;--hi:rgba(255,107,107,.12);--rv:rgba(255,207,106,.1);color:var(--ink)}
+@media(min-width:761px){#result .stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.hero .hero-in{padding-bottom:84px}}
+.jump{display:flex;flex-wrap:wrap;gap:6px 8px;padding:18px 0 4px}
+.jump a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid rgba(174,190,203,.18);border-radius:999px;color:var(--soft);text-decoration:none;font:500 .88rem var(--mono,'JetBrains Mono',monospace)}
+.jump a:hover,.jump a:focus-visible{color:var(--cyan);border-color:var(--cyan)}
+.steps{margin:0;padding-left:1.2em;color:var(--soft)}.steps li{margin:.35em 0}
+.glass .legacy section{margin:0}
+.glass .legacy textarea{max-width:100%}
+.legacy .card{overflow-x:auto}
+details.fold{border:1px solid rgba(174,190,203,.14);border-radius:12px;margin:10px 0;background:rgba(8,19,32,.6)}
+details.fold>summary{padding:14px 16px;cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center}
+details.fold>.legacy{padding:0 16px 16px;overflow-x:auto}
+details.note{margin:.4em 0}details.note>summary{cursor:pointer;color:var(--soft);font-size:.92rem;min-height:36px;display:flex;align-items:center}
+.acts .act b{display:block;color:var(--ink);margin-bottom:.3em}
+.acts .act p{margin:0;color:var(--soft)}
+.srow .mono{font-size:.8em}
+footer #ver{margin:.6em 0 0}
 </style>
 </head>
 <body>
-<main>
-<header>
-<h1>ScopeGuard</h1>
-<p class="lede">Your AI coding agent says the tests pass. ScopeGuard checks how it got there. It reads the change and flags every test that was skipped, loosened, commented out or deleted, every CI step told to ignore failures, and every file the task never allowed it to touch.</p>
-<p class="row"><span class="pill">Runs in your browser: nothing is uploaded</span><span class="pill">No AI decides the verdict</span><span class="pill">Same answer on the command line, in CI and as a Claude Code hook</span><span class="pill">MIT licence</span></p>
-<nav class="toc" aria-label="On this page">
-<a href="#try">Try it</a><a href="#start">Start here</a><a href="#how">How it works</a><a href="#rules">The rules</a><a href="#measured">Measured</a><a href="#limits">What it can't tell you</a><a href="#install">Put it to work</a><a href="#bp">Blueprint</a><a href="#biz">For your business</a><a href="#cost">Cost case</a><a href="#sec">Security</a><a href="#ro">Roll-out</a><a href="#risk">Risks</a><a href="#board">For the board</a><a href="#paper">The explainer</a><a href="#words">Words</a><a href="#faq">FAQ</a>
-</nav>
+<header class="hero" id="top">
+  <canvas id="crystal" role="img" aria-label="A crystal of faces. Each lit face is one of this build's measured goals or tested parts: cyan when met, red when missed and kept."></canvas>
+  <div class="hero-shade"></div>
+  <div class="wrap hero-in">
+    <p class="eyebrow reveal">For teams that let AI write code</p>
+    <h1>Your AI says the tests pass. <em>See how.</em></h1>
+    <p class="lede reveal">ScopeGuard reads the change an AI made. It shows every test that was skipped, weakened or deleted. It runs in your browser, and nothing is sent anywhere.</p>
+  </div>
+  <p class="facet" id="facet" aria-live="polite">2 of 3 goals met · 1 missed and kept · point at a face</p>
 </header>
 
-<section id="try" aria-labelledby="try-h">
+<div class="wrap"><nav class="jump" aria-label="On this page">
+<a href="#try">Try it</a><a href="#start">Start here</a><a href="#how">How it works</a><a href="#rules">The rules</a><a href="#measured">Measured</a><a href="#limits">What it can't tell you</a><a href="#install">Put it to work</a><a href="#bp">Blueprint</a><a href="#biz">For your business</a><a href="#cost">Cost case</a><a href="#sec">Security</a><a href="#ro">Roll-out</a><a href="#risk">Risks</a><a href="#board">For the board</a><a href="#paper">The explainer</a><a href="#words">Words</a><a href="#faq">FAQ</a>
+</nav></div>
+
+<section class="pad" id="result">
+  <div class="wrap">
+    <p class="kline reveal">Measured, not claimed</p>
+    <h2 class="claim reveal">Read from its own records. <b>Each number has its source one click away.</b></h2>
+    <div class="stats"><div class="stat reveal"><div class="n"><span class="now">4</span><span class="was" style="font-size:.42em"> of 330</span></div><div class="lab">test changes it flagged, from 69 of our own projects it had never seen. None was a real weakening.</div><a class="src" href="data/calibration-held.json">receipt: the set-aside run ↗</a></div><div class="stat reveal"><div class="n"><span class="now" style="color:var(--gold)">2,852</span><span class="was" style="font-size:.42em"> of 2,856</span></div><div class="lab">weakenings planted into real changes that it caught. It missed 4, shown in red below.</div><a class="src" href="data/planted.json">receipt: the planted run ↗</a></div><div class="stat reveal"><div class="n"><span class="now">542</span><span class="was" style="font-size:.42em"> of 542</span></div><div class="lab">breaks made on purpose in its own code that its tests caught.</div><a class="src" href="receipts/witness.json">receipt: the test of the tests ↗</a></div><div class="stat reveal"><div class="n"><span class="now">26</span></div><div class="lab">kinds of weakened test it looks for, 17 of them serious. Each is listed below.</div><a class="src" href="kernel.mjs">receipt: the rule list ↗</a></div></div>
+  </div>
+</section>
+
+<section class="pad alt" id="start-now">
+  <div class="wrap">
+    <p class="kline reveal">Start here</p>
+    <h2 class="claim reveal">Four steps. <b>No sign-up.</b></h2>
+    <ol class="steps reveal">
+      <li>Press one of the examples in the box below.</li>
+      <li>Press <b>Check it</b>.</li>
+      <li>Read what it found. Each line says which rule fired and why.</li>
+      <li>Then paste a change of your own. Nothing leaves this page.</li>
+    </ol>
+    <p class="sub reveal">The full guide is in <a href="#start">Start here</a>, further down.</p>
+  </div>
+</section>
+
+<section class="pad proof" id="glass-wrap">
+  <div class="wrap">
+    <p class="kline reveal">Try it: it runs here, on your machine</p>
+    <div class="glass"><div class="legacy"><section id="try" aria-labelledby="try-h">
 <h2 id="try-h" style="border:0;margin-top:0;padding-top:0">Try it</h2>
-<p>Pick one of the real-shaped examples, or paste your own change: the output of <code>git diff</code>, <code>git show</code>, or a pull request's <code>.diff</code> link saved as text.</p>
+<p>Press an example, or paste a change of your own.</p><details class="note"><summary>What can I paste?</summary><p>Pick one of the real-shaped examples, or paste your own change: the output of <code>git diff</code>, <code>git show</code>, or a pull request's <code>.diff</code> link saved as text.</p></details>
 <div class="row" id="examples" role="group" aria-label="Examples"></div>
 <p class="small muted" id="story" aria-live="polite"></p>
 <div class="card">
@@ -80,9 +291,70 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size
 <div class="row" style="margin-top:10px"><button id="go" type="button">Check it</button><button id="clear" type="button" class="ghost">Clear</button></div>
 </div>
 <div id="out" aria-live="polite"></div>
+</section></div></div>
+  </div>
 </section>
 
-<section id="start" aria-labelledby="start-h">
+<section class="pad" id="goals">
+  <div class="wrap">
+    <p class="kline reveal">Goals written down before any code</p>
+    <h2 class="claim reveal">2 of 3 measured goals met. <b>The miss stays on the page.</b></h2>
+    <div class="stack reveal"><div class="srow"><div class="d">S4</div><div class="nm"><b>Few false alarms on honest changes</b><span>It flagged 4 of 330 test changes it had never seen. The goal was 2 in 100 at most. None was a real weakening: 3 false alarms, 1 it could not read.</span><span class="tag cy">met</span></div></div><div class="srow red"><div class="d">S5</div><div class="nm"><b>Catches weakenings planted into real changes</b><span>It caught 2,852 of 2,856. The goal was every one. It missed 1 of 111 where a real check swapped for one that can never fail, and 3 of 63 where the step that runs the tests taken out.</span><span class="tag rd">missed · kept</span></div></div><div class="srow"><div class="d">S8</div><div class="nm"><b>Its own code is tested by breaking it on purpose</b><span>Its tests caught all 542 breaks, in 4 files, and none was excused.</span><span class="tag cy">met</span></div></div></div>
+    <p class="sub reveal">Six more goals (S1 to S3, S6, S7 and S9) are checked by its tests on every change. All nine are in full in the sealed claims file.</p>
+  </div>
+</section>
+
+<section class="pad alt" id="parts">
+  <div class="wrap">
+    <p class="kline reveal">How it is built</p>
+    <h2 class="claim reveal">Small files, one job each. <b>Each one tested by breaking it.</b></h2>
+    <div class="stack reveal"><div class="srow" title="kernel.mjs"><div class="d">01</div><div class="nm"><b>The checker</b><span>reads a change line by line and finds weakened tests</span><span class="tag cy">454 of 454 breaks caught</span></div></div><div class="srow" title="cli.mjs"><div class="d">02</div><div class="nm"><b>The command line</b><span>the same checker in a terminal, in CI, or as a hook</span><span class="tag cy">55 of 55 breaks caught</span></div></div><div class="srow" title="skillcli.mjs"><div class="d">03</div><div class="nm"><b>The one-file skill</b><span>a single file you can drop into any project</span><span class="tag cy">17 of 17 breaks caught</span></div></div><div class="srow" title="checkcase.mjs"><div class="d">04</div><div class="nm"><b>The cost sums</b><span>works out review time from sourced pay figures</span><span class="tag cy">16 of 16 breaks caught</span></div></div></div>
+  </div>
+</section>
+
+<section class="pad" id="who">
+  <div class="wrap">
+    <p class="kline reveal">Who it is for</p>
+    <h2 class="claim reveal">One check. <b>Something for each role.</b></h2>
+    <div class="acts"><div class="act reveal"><b>Engineering leads</b><p>A green build from an AI agent can be trusted again. Weakened tests are caught before they are merged.</p></div><div class="act reveal"><b>Security</b><p>A list of the files a task may touch becomes a check on every change. No code leaves your machines.</p></div><div class="act reveal"><b>Finance</b><p>Review time is the cost of using AI safely. It puts the lines that need a person first.</p></div><div class="act reveal"><b>Operations</b><p>Fewer surprises from changes that only passed because a test was weakened. A record of each check.</p></div><div class="act reveal"><b>The board</b><p>Proof that AI-written code passes a real control, one anyone can run again and get the same answer.</p></div><div class="act reveal"><b>The engineers</b><p>No new tool to log into. It is one step in CI and one hook.</p></div></div>
+  </div>
+</section>
+
+<section class="pad alt" id="honest">
+  <div class="wrap">
+    <p class="kline reveal">Said straight</p>
+    <h2 class="claim reveal">What it cannot do. <b>What can go wrong.</b></h2>
+    <details class="honest reveal"><summary>What it can't tell you</summary><div class="in">
+      <p>It cannot tell why a line changed. A flagged line can be honest, like a test removed along with the feature it tested.</p>
+      <p>It only reads the change. It does not run the tests. A weakening it has no rule for passes unnoticed.</p>
+      <p>Its rules read one line at a time. A check split over several lines is seen only through its first line.</p>
+      <p>The count of false alarms was taken mostly on JavaScript. Other languages have rules and tests, but no such count yet.</p></div></details>
+    <details class="honest reveal"><summary>What can go wrong</summary><div class="in">
+      <p>It will sometimes flag an honest change. On the set it had never seen, that was 4 of 330. A false flag costs a reviewer a minute of reading.</p>
+      <p>It can miss a weakening. On the planted cases it missed 4, and those stay in red above.</p>
+      <p>An AI that reads this page could pick a weakening with no rule. So "clean" only means no listed rule fired.</p>
+      <p>People decide what is merged. ScopeGuard only points at the lines to read.</p></div></details>
+    <details class="honest reveal"><summary>Your data, who owns it, and support</summary><div class="in">
+      <p>The check runs in your browser or on your own machine. This page cannot connect to anything: its security rules forbid it.</p>
+      <p>It is open code under the MIT licence. Your copy is yours to run, change and keep, with or without us.</p>
+      <p>It is supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>. Support is agreed per deployment, in each deployment's agreement.</p></div></details>
+    <details class="honest reveal"><summary>What changed on this page</summary><div class="in">
+      <p>This page was rebuilt to the house standard. Nothing was taken out: every section of the old page is below, one click away.</p>
+      <p>The checker, its records and its tests were not changed. The script that runs the check is the same script as before.</p></div></details>
+  </div>
+</section>
+
+<section class="pad" id="full">
+  <div class="wrap">
+    <p class="kline reveal">Every detail is still here</p>
+    <h2 class="claim reveal">The full page. <b>One click away.</b></h2>
+<details class="fold" id="fold-intro"><summary>The first introduction</summary><div class="legacy">
+<p><b>ScopeGuard</b></p>
+<p class="lede">Your AI coding agent says the tests pass. ScopeGuard checks how it got there. It reads the change and flags every test that was skipped, loosened, commented out or deleted, every CI step told to ignore failures, and every file the task never allowed it to touch.</p>
+<p class="row"><span class="pill">Runs in your browser: nothing is uploaded</span><span class="pill">No AI decides the verdict</span><span class="pill">Same answer on the command line, in CI and as a Claude Code hook</span><span class="pill">MIT licence</span></p>
+
+</div></details>
+<details class="fold" id="fold-start"><summary>Start here</summary><div class="legacy"><section id="start" aria-labelledby="start-h">
 <h2 id="start-h">Start here</h2>
 <ol>
 <li><b>Press an example above</b>, then <b>Check it</b>. "It skipped the failing test" is the quickest to read: one line, one finding.</li>
@@ -92,9 +364,8 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size
 <li><b>Add a scope</b> if the task should only touch some files: one <code>allow</code> line per folder or file pattern. Anything else the change touches is flagged.</li>
 <li><b>Put it to work</b>: in CI on every pull request, as a Claude Code hook so the agent cannot finish with a weakened test, or as a pre-commit check. See <a href="#install">Put it to work</a>.</li>
 </ol>
-</section>
-
-<section id="how" aria-labelledby="how-h">
+</section></div></details>
+<details class="fold" id="fold-how"><summary>How it works</summary><div class="legacy"><section id="how" aria-labelledby="how-h">
 <h2 id="how-h">How it works</h2>
 <p>Five steps, all in one small file of code (<code>kernel.mjs</code>) that this page runs directly. The same file runs on the command line and in CI, so this page's answer is the command line's answer.</p>
 <svg viewBox="0 0 900 190" role="img" aria-labelledby="flow-t">
@@ -116,9 +387,8 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size
 <h3>Two kinds of rule</h3>
 <p><b>Line rules</b> look at one added line: a skip marker, a focus marker, a "continue on error". They only fire when the marker is new: one that was removed and added back (moved, re-indented) is not new.</p>
 <p><b>Pairing rules</b> compare what was removed with what was added in the same file. An exact check (<code>toBe(2500)</code>, <code>assertEqual</code>, <code>==</code>) removed and a looser one (<code>toBeDefined()</code>, <code>assertTrue</code>, <code>!=</code>) added <i>on the same value</i> is a loosened check. The pairing is by the value being checked, so argument order does not matter, and a rename to a different value is not paired. A removed line and an added line that differ only in one number are compared number by number, which is how a widened tolerance or a lowered coverage floor is found.</p>
-</section>
-
-<section id="rules" aria-labelledby="rules-h">
+</section></div></details>
+<details class="fold" id="fold-rules"><summary>The rules</summary><div class="legacy"><section id="rules" aria-labelledby="rules-h">
 <h2 id="rules-h">The rules</h2>
 <p>This is the whole list, read from the kernel as the page loads. Nothing is checked that is not on it. <b>High</b>: a reviewer must read it before merging. <b>Review</b>: worth a look, often honest.</p>
 <div class="tbl"><table id="ruletable"><thead><tr><th>Rule</th><th>Level</th><th>Looks at</th><th>What it finds</th></tr></thead><tbody></tbody></table></div>
@@ -127,9 +397,8 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size
 <p class="small"><b>Snapshots:</b> <span id="defsnaps"></span></p>
 <p class="small"><b>Gates</b> (CI and test configuration): <span id="defgates"></span></p>
 <p class="small">Add your own with <code>tests &lt;pattern&gt;</code> and <code>gate &lt;pattern&gt;</code> lines in the scope. Patterns: <code>**</code> any number of folders, <code>*</code> any characters within one name, <code>?</code> one character.</p>
-</section>
-
-<section id="measured" aria-labelledby="m-h">
+</section></div></details>
+<details class="fold" id="fold-measured"><summary>Measured: how often it cries wolf, and whether it catches what it says</summary><div class="legacy"><section id="measured" aria-labelledby="m-h">
 <h2 id="m-h">Measured: how often it cries wolf, and whether it catches what it says</h2>
 <p>A checker that flags every honest change gets switched off. So before the rules were written, we fixed how they would be judged (<a href="https://github.com/sjgant80-hub/kar-scopeguard/blob/main/CLAIMS.md">CLAIMS.md</a>, committed first): every commit that touches a test or CI file in our own public repositories, split by repository into a half the rules could be tuned on and a half held back and run once, after the code was frozen.</p>
 <h3>The sealed result: version 1, run once on the held-out half</h3>
@@ -147,9 +416,8 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size
 <p class="small">Each was read by hand and labelled: a real weakening (a catch, not a false alarm), a false alarm, or a file the checker cannot read (git stores it as binary, so it says so instead of passing it).</p>
 <div class="tbl"><table id="labels"><thead><tr><th>Repository · commit</th><th>Rule</th><th>File</th><th>Label</th><th>Why</th></tr></thead><tbody></tbody></table></div>
 <p class="small muted">Re-run any number on this page: every record names a public repository, a commit and the SHA-256 of the diff the kernel read. <code>git show --format= --no-color --no-ext-diff -M &lt;commit&gt; | node cli.mjs - --json</code> gives the same findings. The tools are in <code>tools/</code>.</p>
-</section>
-
-<section id="limits" aria-labelledby="limits-h">
+</section></div></details>
+<details class="fold" id="fold-limits"><summary>What it can't tell you</summary><div class="legacy"><section id="limits" aria-labelledby="limits-h">
 <h2 id="limits-h">What it can't tell you</h2>
 <ul>
 <li><b>Intent.</b> A flagged line can be honest: a test deleted along with the feature it tested, an expected value changed because the specification changed. The verdict is a list of lines to read, with the reason for each, not an accusation.</li>
@@ -161,9 +429,8 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size
 <li><b>Tests moved between files.</b> Rules judge each file on its own. A test moved from one file to another shows as a review finding (<code>assert-net-loss</code>) on the file it left, which does not block by default; a reviewer clears it by seeing the same assertions arrive in the other file.</li>
 <li><b>No scope file, no scope rules.</b> Without a <code>.scopeguard</code> file every path is in scope, so only the test and CI rules run. The scope rules need the file (the Action and the Claude Code hook read it from the base commit, never the working copy).</li>
 </ul>
-</section>
-
-<section id="install" aria-labelledby="install-h">
+</section></div></details>
+<details class="fold" id="fold-install"><summary>Put it to work</summary><div class="legacy"><section id="install" aria-labelledby="install-h">
 <h2 id="install-h">Put it to work</h2>
 <h3>In CI, on every pull request (GitHub Actions)</h3>
 <pre id="yaml-ci">name: scopeguard
@@ -195,16 +462,14 @@ jobs:
 node cli.mjs change.diff --claim summary.txt --json
 node cli.mjs --git            # this folder against its last commit, new files included</pre>
 <p class="small">Exit codes: <b>0</b> clean (and review, unless <code>--fail-on review</code>), <b>2</b> flagged, <b>1</b> the input could not be read or the options were wrong. Node.js 20 or later; nothing to install.</p>
-</section>
-
-<section id="bp" aria-labelledby="bp-h">
+</section></div></details>
+<details class="fold" id="fold-bp"><summary>Blueprint</summary><div class="legacy"><section id="bp" aria-labelledby="bp-h">
 <h2 id="bp-h">Blueprint</h2>
 <p>Each part, what it does and how it is checked. A mutation gate changes the code on purpose (flips a comparison, swaps <code>&amp;&amp;</code> for <code>||</code>) and reruns the tests: if the tests still pass, they were not really checking that line. Every part below is gated on every change, in public, on GitHub.</p>
 <div class="tbl"><table id="bptable"><thead><tr><th>Part</th><th>What it does</th><th class="n">Gate</th></tr></thead><tbody></tbody></table></div>
 <p class="small muted" id="bpnote"></p>
-</section>
-
-<section id="biz" aria-labelledby="biz-h">
+</section></div></details>
+<details class="fold" id="fold-biz"><summary>For your business</summary><div class="legacy"><section id="biz" aria-labelledby="biz-h">
 <h2 id="biz-h">For your business</h2>
 <p>AI coding agents are now writing a large share of the changes many teams merge. They are rewarded for one thing: the tests going green. When a test is hard to pass, the cheapest way to green is often to change the test, not the code. A reviewer reading a large AI change can miss one <code>.skip</code> or one <code>toBeDefined()</code> among hundreds of lines. ScopeGuard reads every line, every time, and puts those lines at the top.</p>
 <div class="grid2">
@@ -217,9 +482,8 @@ node cli.mjs --git            # this folder against its last commit, new files i
 </div>
 <h3>Against what you pay now</h3>
 <p>Today this check is done, when it is done, by a human reviewer reading the whole diff. AI code-review services read changes too, usually sold as a subscription for each developer, and judge them with a model, so the same change can get a different answer on a different day. ScopeGuard is MIT-licensed with no licence fee, gives the same answer every time, and runs on your own machines. If it replaces a tool you pay for, enter that tool's monthly cost in the case below and it is counted. We do not quote other vendors' prices; yours are the ones that matter.</p>
-</section>
-
-<section id="cost" aria-labelledby="cost-h">
+</section></div></details>
+<details class="fold" id="fold-cost"><summary>Cost case</summary><div class="legacy"><section id="cost" aria-labelledby="cost-h">
 <h2 id="cost-h">Cost case</h2>
 <p>The inputs are yours; change them. Staff time is costed at the UK median hourly wage with on-costs left out, so the figure is a floor (an engineer costs more). It rises each year with UK inflation. Both figures are from the Office for National Statistics and listed under the table.</p>
 <div class="card">
@@ -234,9 +498,8 @@ node cli.mjs --git            # this folder against its last commit, new files i
 <div id="cost-out" aria-live="polite" style="margin-top:12px">Working it out…</div>
 </div>
 <p class="small muted">"By hand" means a reviewer going through the diff for test, CI and scope changes specifically. The 10-minute default is our assumption; use your own. The share is below 1 because flagged lines still need a human to read them.</p>
-</section>
-
-<section id="sec" aria-labelledby="sec-h">
+</section></div></details>
+<details class="fold" id="fold-sec"><summary>Security, compliance and data protection</summary><div class="legacy"><section id="sec" aria-labelledby="sec-h">
 <h2 id="sec-h">Security, compliance and data protection</h2>
 <p><b>Nothing leaves the page, and the browser enforces it.</b> The page carries a Content-Security-Policy with <code>connect-src 'none'</code>: it cannot open a connection to any site, its own included, so even a changed copy of the code could not send your diff anywhere. The check itself needs no connection: you paste or drop the change in, and the kernel runs inside this tab. It loads only its own files. Check it yourself: open your browser's developer tools, Network tab, paste a change and press Check it. No request is made.</p>
 <dl>
@@ -248,9 +511,8 @@ node cli.mjs --git            # this folder against its last commit, new files i
 <dt>Who is the data processor?</dt><dd>Nobody: no data reaches AI Native Solutions, GitHub or anyone else when you use the page or the command line. You stay the controller of your own code.</dd>
 <dt>Can a change get past it by editing the scope?</dt><dd>In CI and in the hook, the scope is read from the committed version, not the change being checked. A change to <code>.scopeguard</code> itself is a high finding.</dd>
 </dl>
-</section>
-
-<section id="ro" aria-labelledby="ro-h">
+</section></div></details>
+<details class="fold" id="fold-ro"><summary>Roll-out</summary><div class="legacy"><section id="ro" aria-labelledby="ro-h">
 <h2 id="ro-h">Roll-out</h2>
 <ol>
 <li><b>Day one:</b> paste last week's three largest AI-made changes into this page. Read what it flags.</li>
@@ -260,9 +522,8 @@ node cli.mjs --git            # this folder against its last commit, new files i
 </ol>
 <h3>Support and ownership</h3>
 <p>Supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>; start through that site. Support, any service level, warranty and liability are agreed per deployment, in each deployment's agreement. The software is MIT-licensed and keeps running without us: you own your copy.</p>
-</section>
-
-<section id="risk" aria-labelledby="risk-h">
+</section></div></details>
+<details class="fold" id="fold-risk"><summary>Risks, answered straight</summary><div class="legacy"><section id="risk" aria-labelledby="risk-h">
 <h2 id="risk-h">Risks, answered straight</h2>
 <dl>
 <dt>What if it flags honest changes?</dt><dd id="risk-fa">It will sometimes. The measured rate is in <a href="#measured">Measured</a>. A false flag costs a reviewer the time to read the named lines and a sentence of explanation.</dd>
@@ -271,23 +532,20 @@ node cli.mjs --git            # this folder against its last commit, new files i
 <dt>Can I trust the code?</dt><dd>Read it: the kernel is one file, and every rule has a test with an example that must fire and one that must not. A mutation gate checks the tests on every change. The first version's rules were tuned on half of our history and still had to pass the held-out half.</dd>
 <dt>Who is accountable for a merge?</dt><dd>Your reviewers. ScopeGuard points; people decide.</dd>
 </dl>
-</section>
-
-<section id="board" aria-labelledby="board-h">
+</section></div></details>
+<details class="fold" id="fold-board"><summary>The case for the board</summary><div class="legacy"><section id="board" aria-labelledby="board-h">
 <h2 id="board-h">The case for the board</h2>
 <p>AI agents write code faster than people can review it. The specific way that goes wrong is quiet: the agent makes the checks pass by weakening the checks. That failure leaves no trace in a green build. ScopeGuard is a fixed, published control that finds it on every change, costs no licence fee, sends nothing outside the company, and gives an answer anyone can rerun. Its false-alarm rate on honest changes is measured and published, not promised.</p>
-</section>
-
-<section id="paper" aria-labelledby="paper-h">
+</section></div></details>
+<details class="fold" id="fold-paper"><summary>The explainer</summary><div class="legacy"><section id="paper" aria-labelledby="paper-h">
 <h2 id="paper-h">The explainer</h2>
 <p><b>The problem.</b> A coding agent is trained and prompted to finish tasks, and a task is "finished" when the tests pass. Tests are code, and the agent can edit code. So there are two ways to green: fix the program, or change the test. Agents take the second way often enough that people who supervise them have learnt to look for it, and published evaluations of coding agents have caught it many times: tests skipped, assertions deleted, expected values rewritten to match wrong output, CI told to ignore a failing step.</p>
 <p><b>Why a reviewer misses it.</b> The weakening is usually one line in a large change, and it reads as plausible: <code>toBeDefined()</code> looks like a test. A reviewer looks at what the change does, not at what it stopped checking.</p>
 <p><b>What ScopeGuard does.</b> It reads only the diff, so it works on any change from any agent or person, before anything runs. It sorts each file into test, snapshot, CI/test configuration ("gate") or ordinary code, and checks the path against an optional scope. Then it runs a closed list of rules: markers that stop tests running, assertions turned into comments or into checks that can never fail, exact checks replaced by looser ones on the same value, tolerances widened, coverage floors lowered, test commands removed, failures ignored, test files deleted or renamed out of the runner's reach. Each finding carries its line. A diff it cannot fully read (cut off, combined merge, a binary test file) is refused or flagged, never passed.</p>
 <p><b>Why no AI judge.</b> A model judging a change gives a different answer on a different day and can be talked round by the change itself (a comment saying "this skip is fine"). A fixed rule does neither. The fingerprints (SHA-256 of the exact input and of the result) let anyone confirm, later, that a given change got a given verdict.</p>
 <p><b>How it was checked.</b> The claims were written and committed before the code. The rules were tuned on half of our repositories' history and then run, once, on the other half. Each held-out high finding was read and labelled. Weakenings were planted into real diffs to measure whether each rule fires on real-world diff shapes. Every part is mutation-gated: each file's tests must kill every mutant the gate makes, with none set aside. The counts are in the <a href="#bp">blueprint</a>, read from <code>receipts/witness.json</code>. All of it is on this page and in the repository.</p>
-</section>
-
-<section id="words" aria-labelledby="words-h">
+</section></div></details>
+<details class="fold" id="fold-words"><summary>Words on this page</summary><div class="legacy"><section id="words" aria-labelledby="words-h">
 <h2 id="words-h">Words on this page</h2>
 <dl>
 <dt>Diff</dt><dd>The text that shows what a change added (lines starting <code>+</code>) and removed (<code>-</code>). <code>git diff</code> prints one.</dd>
@@ -301,9 +559,8 @@ node cli.mjs --git            # this folder against its last commit, new files i
 <dt>Held-out data</dt><dd>Data kept aside while the rules were written and run once afterwards, so the rules could not be fitted to it. Later versions re-run on the same data are labelled as re-runs.</dd>
 <dt>Stop hook</dt><dd>A command Claude Code runs when its agent is about to finish a turn. If the command exits with code 2, the agent keeps working and sees the command's message.</dd>
 </dl>
-</section>
-
-<section id="faq" aria-labelledby="faq-h">
+</section></div></details>
+<details class="fold" id="fold-faq"><summary>FAQ</summary><div class="legacy"><section id="faq" aria-labelledby="faq-h">
 <h2 id="faq-h">FAQ</h2>
 <details><summary>Does it only work on changes made by AI?</summary><p>No. It reads any diff. People weaken tests too, usually under deadline pressure. It was built for AI agents because they make many changes, fast, and are rewarded for green.</p></details>
 <details><summary>Why are some findings "review" and not "high"?</summary><p>Because on honest changes they are common. An expected value changes whenever a specification changes, and a mutation baseline grows when a survivor is accepted with a reason. They are listed so a reviewer can read them, but by default they do not fail the build. <code>--fail-on review</code> makes them fail it.</p></details>
@@ -312,15 +569,305 @@ node cli.mjs --git            # this folder against its last commit, new files i
 <details><summary>Can I add my own rules?</summary><p>The kernel is one MIT-licensed file; add a rule with a test that fires and one that does not, and run the mutation gate. Rules are deliberately a closed list in code, not a configuration file, so a change cannot turn a rule off.</p></details>
 <details><summary>Does it support GitLab, Bitbucket or other CI?</summary><p>Yes, through the command line: <code>git diff "$BASE"...HEAD | node cli.mjs -</code>. Exit code 2 fails the job. The GitHub Action is a convenience around that line.</p></details>
 <details><summary>Why does it read only one line at a time?</summary><p>Because a diff is lines, and a rule that reads one line is simple enough to test completely. The cost: an assertion split over several lines is seen through its first line only. That is written down above as a limit.</p></details>
+</section></div></details>
+<details class="fold" id="fold-footer"><summary>The first footer</summary><div class="legacy">
+<p>ScopeGuard, built by Kar for <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>. MIT licence. Source, tests, the sealed claims and every gate receipt: <a href="https://github.com/sjgant80-hub/kar-scopeguard">github.com/sjgant80-hub/kar-scopeguard</a>.</p>
+<p>Powered by the Konomi architecture, created by Thomas Frumkin.</p>
+</div></details>
+  </div>
 </section>
 
 <footer>
-<p>ScopeGuard, built by Kar for <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>. MIT licence. Source, tests, the sealed claims and every gate receipt: <a href="https://github.com/sjgant80-hub/kar-scopeguard">github.com/sjgant80-hub/kar-scopeguard</a>.</p>
-<p>Powered by the Konomi architecture, created by Thomas Frumkin.</p>
-<p class="small" id="ver"></p>
+  <div class="wrap frow">
+    <div><div class="brand">ScopeGuard</div><div class="fnote">Built by Kar · MIT licence (holder Simon Gant) · supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a><br>Powered by the Konomi architecture, created by Thomas Frumkin.</div><p class="small" id="ver"></p></div>
+    <div class="taglist"><span>›</span> Checks how the tests went green.<br><span>›</span> Runs on your machine. Sends nothing.</div>
+  </div>
 </footer>
-</main>
+<script>
+// vendor/house/crystal.js, inlined byte for byte (export removed)
+const CRYSTAL = (() => {
+// crystal.js — the house hero: a living crystal, drawn by one fragment shader. No library is fetched.
+//
+// It is a real solid, not a picture of one: a 32-faced gem (an icosahedron cut by a dodecahedron) that every pixel's
+// ray is intersected with exactly. Light is bent into the body, carried through it, turned back where it cannot leave
+// and bent out again, once for each of three colours, so the facets split light the way glass does. The body absorbs
+// as it carries; its edges burn; a slow lattice of light moves inside it.
+//
+// And it is bound to data. Each of the 32 faces holds a state the page gives it: dark, proven (cyan), sealing (gold,
+// breathing) or failed (red, kept). A page lights a face only for a receipt it has re-derived, so the crystal is the
+// record, not decoration. A face can be pointed at and pressed: the page is told which one.
+//
+//   mount(canvas, options) → { setFaces, setEnergy, setCentre, onHover, onPick, redraw, destroy, FACES }   or null
+// It decides nothing. With no WebGL the canvas is left as it is (the page's own background shows) and null is returned.
 
+const FACES = 32;
+const STATE = { dark: 0, proven: 1, sealing: 2, failed: 3 };
+const PHI = (1 + Math.sqrt(5)) / 2;
+const unit = (v) => { const l = Math.hypot(v[0], v[1], v[2]); return [v[0] / l, v[1] / l, v[2] / l]; };
+// ten icosahedron normals, then six dodecahedron normals; each stands for a pair of opposite faces (i and i + 16)
+const NORMALS = [[1, 1, 1], [-1, 1, 1], [1, -1, 1], [1, 1, -1], [0, 1, PHI + 1], [0, -1, PHI + 1], [PHI + 1, 0, 1], [-PHI - 1, 0, 1], [1, PHI + 1, 0], [-1, PHI + 1, 0], [0, PHI, 1], [0, -PHI, 1], [1, 0, PHI], [-1, 0, PHI], [PHI, 1, 0], [-PHI, 1, 0]].map(unit);
+const R_ICOSA = 1.2, R_CUT = 1.37, CAMERA = 5.2, FOV = 0.8284;
+
+const VERT = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+const FRAG = `
+precision highp float;
+uniform vec2 uRes; uniform float uTime; uniform mat3 uRot; uniform mat3 uInv; uniform vec3 uCen;
+uniform vec3 uN[16]; uniform float uR[16]; uniform float uState[32]; uniform float uEnergy; uniform float uHot;
+const vec3 CYAN = vec3(0.286, 0.910, 0.784); const vec3 GOLD = vec3(1.0, 0.812, 0.416); const vec3 RED = vec3(1.0, 0.42, 0.42);
+float hash(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+float hash3(vec3 p){ p = fract(p * 0.3183099 + 0.1); p *= 17.0; return fract(p.x * p.y * p.z * (p.x + p.y + p.z)); }
+float noise(vec3 x){ vec3 i = floor(x), f = fract(x); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(hash3(i), hash3(i + vec3(1,0,0)), f.x), mix(hash3(i + vec3(0,1,0)), hash3(i + vec3(1,1,0)), f.x), f.y),
+             mix(mix(hash3(i + vec3(0,0,1)), hash3(i + vec3(1,0,1)), f.x), mix(hash3(i + vec3(0,1,1)), hash3(i + vec3(1,1,1)), f.x), f.y), f.z); }
+vec3 tint(float s){ return s < 0.5 ? vec3(0.0) : s < 1.5 ? CYAN : s < 2.5 ? GOLD : RED; }
+// the solid: sixteen pairs of planes. Where a ray enters and leaves, through which faces, and how near an edge.
+bool solid(vec3 ro, vec3 rd, out float tN, out float tF, out vec3 nN, out vec3 nF, out float sN, out float sF, out float eN, out float eF, out float iN){
+  tN = -1e9; tF = 1e9; float tN2 = -1e9; float tF2 = 1e9; nN = vec3(0.0); nF = vec3(0.0); sN = 0.0; sF = 0.0; iN = -1.0;
+  for (int i = 0; i < 16; i++){
+    vec3 n = uN[i]; float dn = dot(rd, n); dn = abs(dn) < 1e-5 ? 1e-5 : dn; float po = dot(ro, n);
+    float tp = (uR[i] - po) / dn; float tm = (-uR[i] - po) / dn;
+    float ta; float tb; vec3 na; vec3 nb; float sa; float sb; float ia;
+    if (dn < 0.0) { ta = tp; na = n; sa = uState[i]; ia = float(i); tb = tm; nb = -n; sb = uState[i + 16]; }
+    else { ta = tm; na = -n; sa = uState[i + 16]; ia = float(i) + 16.0; tb = tp; nb = n; sb = uState[i]; }
+    if (ta > tN) { tN2 = tN; tN = ta; nN = na; sN = sa; iN = ia; } else if (ta > tN2) { tN2 = ta; }
+    if (tb < tF) { tF2 = tF; tF = tb; nF = nb; sF = sb; } else if (tb < tF2) { tF2 = tb; }
+  }
+  eN = tN - tN2; eF = tF2 - tF;
+  return tN < tF && tF > 0.0;
+}
+// what the crystal reflects and bends: a dark sea, three lamps, a horizon, slow bars of light
+vec3 world(vec3 d){
+  vec3 c = mix(vec3(0.0006, 0.003, 0.006), vec3(0.006, 0.028, 0.042), pow(clamp(d.y * 0.5 + 0.5, 0.0, 1.0), 1.5));
+  c += CYAN * 2.2 * pow(max(dot(d, normalize(vec3(0.6, 0.7, 0.4))), 0.0), 26.0);
+  c += vec3(0.6, 0.8, 1.0) * 1.3 * pow(max(dot(d, normalize(vec3(-0.7, 0.3, 0.5))), 0.0), 60.0);
+  c += GOLD * 0.55 * pow(max(dot(d, normalize(vec3(0.1, -0.8, 0.5))), 0.0), 28.0);
+  c += vec3(0.15, 0.5, 0.45) * exp(-abs(d.y) * 14.0) * 0.12;
+  float bars = smoothstep(0.9, 1.0, sin(d.x * 9.0 + d.z * 5.0 + uTime * 0.07) * 0.5 + 0.5);
+  return c + vec3(0.5, 0.9, 0.85) * bars * 0.22 * smoothstep(-0.2, 0.6, d.y);
+}
+// one colour of light through the body: bent in, carried, turned back once if it cannot leave, bent out
+vec3 through(vec3 p, vec3 rd, vec3 n, float ior, out float path, out float sX, out float eX){
+  vec3 d = refract(rd, n, 1.0 / ior); vec3 o = p - n * 0.003; vec3 leave = d; path = 0.0; sX = 0.0; eX = 1.0;
+  for (int b = 0; b < 2; b++){
+    float tN; float tF; vec3 nN; vec3 nF; float sN; float sF; float eN; float eF; float iN;
+    solid(o, d, tN, tF, nN, nF, sN, sF, eN, eF, iN);
+    path += max(tF, 0.0);
+    if (b == 0) { sX = sF; eX = eF; }
+    vec3 r = refract(d, -nF, ior);
+    if (dot(r, r) > 0.0) { leave = r; break; }
+    vec3 q = o + d * tF; d = reflect(d, -nF); o = q - nF * 0.003; leave = d;
+  }
+  return leave;
+}
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
+  vec3 ro = vec3(0.0, 0.0, ${CAMERA.toFixed(1)}); vec3 rd = normalize(vec3(uv * ${FOV.toFixed(4)}, -1.0));
+  // the room: depth, a breath of light round the crystal, three drifts of dust
+  vec3 col = mix(vec3(0.0002, 0.0008, 0.0016), vec3(0.0016, 0.0042, 0.0085), exp(-length(uv - vec2(0.36, 0.3)) * 1.9));
+  float near = length(cross(rd, uCen - ro));
+  col += CYAN * 0.010 * uEnergy * exp(-near * near * 0.42);
+  for (int k = 0; k < 3; k++){
+    float sc = 14.0 + float(k) * 11.0; vec2 g = uv * sc + vec2(uTime * 0.010 * float(k + 1), uTime * 0.006);
+    vec2 id = floor(g); vec2 f = fract(g) - 0.5; float h = hash(id + float(k) * 17.0);
+    vec2 o = vec2(hash(id + 3.1), hash(id + 7.7)) - 0.5; float tw = 0.5 + 0.5 * sin(uTime * (0.6 + h * 2.0) + h * 40.0);
+    col += vec3(0.56, 0.91, 0.85) * smoothstep(0.045, 0.0, length(f - o * 0.7)) * step(0.9, h) * tw * (0.22 - 0.05 * float(k));
+  }
+  vec3 lo = uInv * (ro - uCen); vec3 ld = uInv * rd;
+  float tN; float tF; vec3 nN; vec3 nF; float sN; float sF; float eN; float eF; float iN;
+  if (solid(lo, ld, tN, tF, nN, nF, sN, sF, eN, eF, iN) && tN > 0.0){
+    vec3 p = lo + ld * tN; float facing = max(dot(-ld, nN), 0.0); float fres = pow(1.0 - facing, 3.0);
+    float pa; float sa; float ea; float pathG; float sX; float eX;
+    vec3 dr = through(p, ld, nN, 1.41, pa, sa, ea);
+    vec3 dg = through(p, ld, nN, 1.45, pathG, sX, eX);
+    vec3 db = through(p, ld, nN, 1.50, pa, sa, ea);
+    vec3 bent = vec3(world(uRot * dr).r, world(uRot * dg).g, world(uRot * db).b);
+    vec3 body = exp(-pathG * vec3(1.5, 0.38, 0.52) * 0.8);
+    vec3 c = mix(bent * body, world(uRot * reflect(ld, nN)), 0.06 + 0.9 * fres);
+    vec3 cN = tint(sN); vec3 cX = tint(sX);
+    float breath = (sN > 1.5 && sN < 2.5) ? 0.6 + 0.4 * sin(uTime * 1.8 + iN) : 1.0;
+    c += cN * (0.012 + 0.10 * fres) * breath * uEnergy;                 // a lit face glows from within
+    c += cX * 0.03 * body.g * uEnergy;                                  // the far side, seen through the body
+    float edge = exp(-eN * 90.0) + 0.35 * exp(-eX * 60.0) * body.g;      // edges burn
+    c += mix(vec3(0.16, 0.55, 0.48), cN, step(0.5, sN)) * edge * (0.35 + 0.45 * uEnergy);
+    vec3 mid = p + refract(ld, nN, 1.0 / 1.45) * pathG * 0.5;           // the lattice of light inside
+    c += CYAN * pow(noise(mid * 3.2 + vec3(0.0, uTime * 0.12, uTime * 0.05)), 3.0) * 0.05 * uEnergy;
+    c += vec3(0.5, 0.9, 0.85) * (1.0 - step(0.5, abs(iN - uHot))) * 0.07;         // the face under the pointer
+    col = c;
+  }
+  col *= 1.0 - 0.5 * pow(length(uv * vec2(0.75, 1.0)), 2.2);
+  col = 1.0 - exp(-col * 2.4);
+  col = pow(col, vec3(0.4545)); col = mix(col, col * col * (3.0 - 2.0 * col), 0.65) + (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.014;
+  gl_FragColor = vec4(col, 1.0);
+}`;
+
+const mul = (m, v) => [m[0] * v[0] + m[3] * v[1] + m[6] * v[2], m[1] * v[0] + m[4] * v[1] + m[7] * v[2], m[2] * v[0] + m[5] * v[1] + m[8] * v[2]];
+// rot(yaw, pitch) → the turn of the crystal as a column-major 3×3, and its inverse (its transpose)
+function rot(yaw, pitch) {
+  const cy = Math.cos(yaw), sy = Math.sin(yaw), cx = Math.cos(pitch), sx = Math.sin(pitch);
+  const m = [cy, sx * sy, -cx * sy, 0, cx, sx, sy, -sx * cy, cx * cy];
+  return { m, inv: [m[0], m[3], m[6], m[1], m[4], m[7], m[2], m[5], m[8]] };
+}
+// faceAt(u, v, aspect, turn, centre, cut) → the face (0…31) a ray through that point of the screen enters by, or -1.
+// u, v run 0…1 from the top left. The same sum the shader does, so the page and the picture agree on which face it is.
+function faceAt(u, v, aspect, turn, centre, cut) {
+  const x = (u - 0.5) * aspect * FOV, y = (0.5 - v) * FOV, l = Math.hypot(x, y, 1);
+  const rd = mul(turn.inv, [x / l, y / l, -1 / l]), ro = mul(turn.inv, [-centre[0], -centre[1], CAMERA - centre[2]]);
+  let tN = -1e9, tF = 1e9, face = -1;
+  for (let i = 0; i < 16; i++) {
+    const n = NORMALS[i], r = i < 10 ? R_ICOSA : cut;
+    let dn = rd[0] * n[0] + rd[1] * n[1] + rd[2] * n[2]; if (Math.abs(dn) < 1e-5) dn = 1e-5;
+    const po = ro[0] * n[0] + ro[1] * n[1] + ro[2] * n[2], tp = (r - po) / dn, tm = (-r - po) / dn;
+    const ta = dn < 0 ? tp : tm, tb = dn < 0 ? tm : tp;
+    if (ta > tN) { tN = ta; face = dn < 0 ? i : i + 16; }
+    if (tb < tF) tF = tb;
+  }
+  return tN < tF && tN > 0 ? face : -1;
+}
+
+function mount(canvas, options) {
+  const opt = options || {};
+  let gl = null;
+  try { gl = canvas && canvas.getContext ? canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' }) : null; } catch { gl = null; }
+  if (!gl) return null;
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
+  const vs = sh(gl.VERTEX_SHADER, VERT), fs = sh(gl.FRAGMENT_SHADER, FRAG);
+  if (!vs || !fs) return null;
+  const prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null;
+  gl.useProgram(prog);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const a = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
+  const U = (n) => gl.getUniformLocation(prog, n);
+  const u = { res: U('uRes'), time: U('uTime'), rot: U('uRot'), inv: U('uInv'), cen: U('uCen'), n: U('uN[0]'), r: U('uR[0]'), state: U('uState[0]'), energy: U('uEnergy'), hot: U('uHot') };
+  gl.uniform3fv(u.n, new Float32Array(NORMALS.flat()));
+  const still = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const S = { faces: new Float32Array(FACES), energy: opt.energy ?? 0.8, target: opt.energy ?? 0.8, centre: [0, 0, 0], yaw: 0.5, pitch: 0.18, vy: 0, vp: 0, drag: null, hot: -1, scale: 1, ms: 16, t: 0, last: 0, seen: true, raf: 0, dead: false, hover: null, pick: null, turn: rot(0.5, 0.18), cut: R_CUT };
+  const size = () => {
+    const w = canvas.clientWidth || 1, h = canvas.clientHeight || 1, d = Math.min(1.5, globalThis.devicePixelRatio || 1) * S.scale;
+    const W = Math.max(2, Math.round(w * d)), H = Math.max(2, Math.round(h * d));
+    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+    S.centre = typeof opt.centre === 'function' ? opt.centre(w, h) : [w > 820 ? 1.25 : 0, w > 820 ? 0 : 0.55, 0];
+  };
+  const draw = () => {
+    size();
+    S.turn = rot(S.yaw, S.pitch);
+    S.cut = R_CUT + 0.07 * Math.sin(S.t * 0.35);                        // the cut faces open and close: it breathes
+    const r = new Float32Array(16); for (let i = 0; i < 16; i++) r[i] = i < 10 ? R_ICOSA : S.cut;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform2f(u.res, canvas.width, canvas.height); gl.uniform1f(u.time, S.t); gl.uniformMatrix3fv(u.rot, false, new Float32Array(S.turn.m)); gl.uniformMatrix3fv(u.inv, false, new Float32Array(S.turn.inv));
+    gl.uniform3f(u.cen, S.centre[0], S.centre[1], S.centre[2]); gl.uniform1fv(u.r, r); gl.uniform1fv(u.state, S.faces); gl.uniform1f(u.energy, S.energy); gl.uniform1f(u.hot, S.hot);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  };
+  const frame = (now) => {
+    if (S.dead) return;
+    S.raf = requestAnimationFrame(frame);
+    if (!S.seen || (typeof document !== 'undefined' && document.hidden)) { S.last = now; return; }
+    const dt = Math.min(0.05, (now - (S.last || now)) / 1000); S.last = now;
+    S.ms += ((dt * 1000) - S.ms) * 0.08;
+    if (S.ms > 30 && S.scale > 0.45) S.scale *= 0.92; else if (S.ms < 14 && S.scale < 1) S.scale = Math.min(1, S.scale * 1.03);
+    if (!still) { S.t += dt; if (!S.drag) { S.yaw += dt * 0.16 + S.vy; S.pitch += (0.18 + 0.12 * Math.sin(S.t * 0.22) - S.pitch) * 0.02 + S.vp; S.vy *= 0.94; S.vp *= 0.94; } }
+    S.energy += (S.target - S.energy) * 0.04;
+    draw();
+  };
+  const where = (e) => { const b = canvas.getBoundingClientRect(); return [(e.clientX - b.left) / b.width, (e.clientY - b.top) / b.height, b.width / b.height]; };
+  const face = (e) => { const [x, y, asp] = where(e); return faceAt(x, y, asp, S.turn, S.centre, S.cut); };
+  const down = (e) => { S.drag = { x: e.clientX, y: e.clientY, moved: 0 }; };
+  const move = (e) => {
+    if (S.drag) { const dx = e.clientX - S.drag.x, dy = e.clientY - S.drag.y; S.drag.x = e.clientX; S.drag.y = e.clientY; S.drag.moved += Math.abs(dx) + Math.abs(dy); S.yaw += dx * 0.006; S.pitch = Math.max(-1.2, Math.min(1.2, S.pitch + dy * 0.006)); S.vy = dx * 0.0006; S.vp = 0; if (still) draw(); return; }
+    const f = face(e); if (f !== S.hot) { S.hot = f; canvas.style.cursor = f >= 0 ? 'pointer' : 'grab'; if (S.hover) S.hover(f, e); if (still) draw(); }
+  };
+  const up = (e) => { const d = S.drag; S.drag = null; if (d && d.moved < 6 && S.pick) { const f = face(e); if (f >= 0) S.pick(f, e); } };
+  const leave = () => { S.drag = null; if (S.hot !== -1) { S.hot = -1; if (S.hover) S.hover(-1, null); if (still) draw(); } };
+  canvas.addEventListener('pointerdown', down); canvas.addEventListener('pointermove', move); canvas.addEventListener('pointerup', up); canvas.addEventListener('pointerleave', leave);
+  canvas.style.cursor = 'grab'; canvas.style.touchAction = 'pan-y';
+  let io = null;
+  if (typeof IntersectionObserver === 'function') { io = new IntersectionObserver((es) => { for (const e of es) S.seen = e.isIntersecting; }); io.observe(canvas); }
+  const onSize = () => { if (still) draw(); };
+  if (typeof addEventListener === 'function') addEventListener('resize', onSize);
+  draw();
+  S.raf = requestAnimationFrame(frame);
+  return {
+    FACES,
+    setFaces(states) { for (let i = 0; i < FACES; i++) S.faces[i] = Number(states && states[i]) || 0; if (still) draw(); },
+    setEnergy(x) { S.target = Math.max(0, Math.min(1.4, Number(x) || 0)); },
+    setCentre(fn) { opt.centre = fn; if (still) draw(); },
+    onHover(fn) { S.hover = fn; }, onPick(fn) { S.pick = fn; },
+    redraw: draw,
+    destroy() { S.dead = true; cancelAnimationFrame(S.raf); if (io) io.disconnect(); canvas.removeEventListener('pointerdown', down); canvas.removeEventListener('pointermove', move); canvas.removeEventListener('pointerup', up); canvas.removeEventListener('pointerleave', leave); if (typeof removeEventListener === 'function') removeEventListener('resize', onSize); },
+  };
+}
+return { FACES, STATE, NORMALS, rot, faceAt, mount };
+})();
+
+// vendor/house/house.js, inlined byte for byte (export removed)
+const HOUSE = (() => {
+// house.js — the kit's motion: what makes a house page feel alive without saying anything untrue.
+//   reveal(root)          sections rise into place as they are reached
+//   light(root)           a soft light follows the pointer across cards
+//   count(el, text)       a receipt's number runs up to its value when first seen; the value written is exactly `text`
+//   bindScroll(crystal)   the crystal's light answers the scroll: brightest at the top, quieter as the page is read
+// Each is safe to call with nothing to act on, and does nothing where motion is not wanted.
+const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function reveal(root) {
+  const els = root && root.querySelectorAll ? [...root.querySelectorAll('.reveal')] : [];
+  if (typeof IntersectionObserver !== 'function' || still()) return;                 // nothing is hidden, so nothing needs showing
+  if (root.documentElement && root.documentElement.classList) root.documentElement.classList.add('js');   // only now may .reveal start hidden
+  const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { threshold: 0.14 });
+  for (const el of els) io.observe(el);
+}
+
+function light(root) {
+  if (!root || !root.addEventListener || still()) return;
+  root.addEventListener('pointermove', (e) => {
+    const card = e.target && e.target.closest ? e.target.closest('.act') : null;
+    if (!card) return;
+    const b = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - b.left}px`); card.style.setProperty('--my', `${e.clientY - b.top}px`);
+  });
+}
+
+// count(el, text): text is the final, true text of the number (for example "31.6%"). Only its digits move, and only
+// on the way in: when it stops, the element holds exactly `text`.
+function count(el, text) {
+  const final = String(text), m = final.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);
+  if (!el || !m || still() || typeof requestAnimationFrame !== 'function' || typeof IntersectionObserver !== 'function') { if (el) el.textContent = final; return; }
+  const to = Number(m[2]), places = (m[2].split('.')[1] || '').length;
+  el.textContent = final;
+  const io = new IntersectionObserver((es) => {
+    if (!es.some((e) => e.isIntersecting)) return;
+    io.disconnect();
+    const t0 = performance.now(), run = (now) => { const k = Math.min(1, (now - t0) / 900), ease = 1 - (1 - k) ** 3; el.textContent = k < 1 ? `${m[1]}${(to * ease).toFixed(places)}${m[3]}` : final; if (k < 1) requestAnimationFrame(run); };
+    requestAnimationFrame(run);
+  }, { threshold: 0.4 });
+  io.observe(el);
+}
+
+function bindScroll(crystal, base) {
+  if (!crystal || typeof addEventListener !== 'function') return;
+  const top = base ?? 1, set = () => crystal.setEnergy(top * Math.max(0.35, 1 - (globalThis.scrollY || 0) / ((globalThis.innerHeight || 800) * 1.2)));
+  addEventListener('scroll', set, { passive: true }); set();
+}
+return { reveal, light, count, bindScroll };
+})();
+
+// the house layer: the crystal lit by the goals and parts computed at build time, and links that open their fold
+(() => {
+  const D = {"faces":[true,false,true,true,true,true,true],"labels":["S4 Few false alarms on honest changes · met","S5 Catches weakenings planted into real changes · missed, kept","S8 Its own code is tested by breaking it on purpose · met","The checker · 454 of 454 breaks caught","The command line · 55 of 55 breaks caught","The one-file skill · 17 of 17 breaks caught","The cost sums · 16 of 16 breaks caught"],"facet":"2 of 3 goals met · 1 missed and kept · point at a face"};
+  const $ = (id) => document.getElementById(id);
+  const crystal = CRYSTAL.mount($('crystal'), { energy: 0.9 });
+  if (crystal) {
+    crystal.setFaces(Array.from({ length: CRYSTAL.FACES }, (_, i) => (D.faces[i % D.faces.length] ? 1 : 3)));
+    crystal.onHover((i) => { const l = D.labels[i % D.labels.length]; $('facet').textContent = l || D.facet; });
+    HOUSE.bindScroll(crystal, 0.9);
+  }
+  const openTo = (id) => { const t = document.getElementById(id); if (!t) return false; for (let e = t; e; e = e.parentElement) if (e.tagName === 'DETAILS') e.open = true; t.scrollIntoView({ block: 'start' }); return true; };
+  document.addEventListener('click', (e) => { const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return; const id = decodeURIComponent(a.getAttribute('href').slice(1)); if (id && openTo(id)) { e.preventDefault(); history.replaceState(null, '', '#' + id); } });
+  if (location.hash) openTo(decodeURIComponent(location.hash.slice(1)));
+  HOUSE.reveal(document);
+  HOUSE.light(document);
+})();
+</script>
 <script type="application/json" id="measured-data">{"generated":"2026-11-12","v1":{"kernelSha256":"d4bbe7e4f8916b0c775e68344dffb7f503eab674a18c5a0ce65342eb5b98b930","commit":"9e580e8","tune":{"repos":74,"commitsSeen":1257,"checked":395,"refused":0,"clean":303,"review":88,"flagged":4,"reviewAny":88,"labels":{"real":0,"falseAlarm":0,"cannotRead":4}},"held":{"repos":69,"commitsSeen":7865,"checked":330,"refused":0,"clean":224,"review":103,"flagged":3,"reviewAny":106,"labels":{"real":0,"falseAlarm":2,"cannotRead":1},"items":[{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-chrome.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-lossless.webp","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-lossy.webp","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-pymupdf-objstm.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-reportlab.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.gif","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.jpg","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.png","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5a1ffba13c06eb0e4702f8eb7468bbf53c3281ea","rule":"failure-ignored","path":".github/workflows/landing.yml","label":"false alarm","why":"A new, monthly reporting workflow that runs the gate on outside code (vercel/ms) and is documented as deliberately not failing the job, because a surviving mutant there is a finding to publish. It weakens no existing check."}]},"planted":{"rules":[{"rule":"skip-added","copies":271,"caught":271},{"rule":"only-added","copies":271,"caught":271},{"rule":"assert-commented","copies":111,"caught":111},{"rule":"assert-neutered","copies":111,"caught":110},{"rule":"matcher-loosened","copies":95,"caught":89},{"rule":"tolerance-widened","copies":271,"caught":271},{"rule":"failure-ignored","copies":205,"caught":205},{"rule":"test-run-removed","copies":63,"caught":32},{"rule":"threshold-lowered","copies":212,"caught":212},{"rule":"check-turned-off","copies":212,"caught":212},{"rule":"test-script-noop","copies":45,"caught":45},{"rule":"test-file-deleted","copies":330,"caught":330},{"rule":"test-moved-out","copies":330,"caught":330},{"rule":"unreadable-binary","copies":330,"caught":330}],"copies":2857,"caught":2819}},"tune":{"repos":74,"commitsSeen":1257,"checked":395,"refused":0,"clean":303,"review":88,"flagged":4,"reviewAny":88,"labels":{"real":0,"falseAlarm":0,"cannotRead":4}},"held":{"repos":69,"commitsSeen":7865,"checked":330,"refused":0,"clean":224,"review":102,"flagged":4,"reviewAny":105,"labels":{"real":0,"falseAlarm":3,"cannotRead":1},"items":[{"repo":"fallworld","sha":"bcef77d31f1fff668cde5709b635ed48d4637a82","rule":"test-run-removed","path":".github/workflows/gate.yml","label":"false alarm","why":"The removed line gated bridge.mjs, which had been deleted two months earlier; the line produced no verdict (the commit message says so). A diff cannot show that a file no longer exists, so the rule flags it and a reviewer reads the reason."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-chrome.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-lossless.webp","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-lossy.webp","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-pymupdf-objstm.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev-reportlab.pdf","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.gif","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.jpg","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"seed-laptop","sha":"acabc9dcc519d364ce3cf783e916a5a4ce5cf2dc","rule":"unreadable-binary","path":"test/fixtures/dev/dev.png","label":"cannot read","why":"A binary test fixture (an image or PDF the tests read), not test code. It sits under test/, so it is a test path, and its content cannot be read, so it is flagged rather than passed. A reviewer would call this noise."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5c5da265d167c7e93f96dba685af6b182e41388f","rule":"failure-ignored","path":".github/workflows/ci.yml","label":"false alarm","why":"Each \"set +e\" step saves the gate's exit code (code=$?), stamps a receipt and then fails with \"exit $code\"; each \"continue-on-error: true\" runs a must-fail negative control whose failure the next step checks. Nothing is ignored. The rule has no pattern for a saved and re-raised exit code."},{"repo":"witness","sha":"5a1ffba13c06eb0e4702f8eb7468bbf53c3281ea","rule":"failure-ignored","path":".github/workflows/landing.yml","label":"false alarm","why":"A new, monthly reporting workflow that runs the gate on outside code (vercel/ms) and is documented as deliberately not failing the job, because a surviving mutant there is a finding to publish. It weakens no existing check."}]},"planted":{"rules":[{"rule":"skip-added","copies":271,"caught":271},{"rule":"only-added","copies":271,"caught":271},{"rule":"assert-commented","copies":111,"caught":111},{"rule":"assert-neutered","copies":111,"caught":110},{"rule":"matcher-loosened","copies":94,"caught":94},{"rule":"tolerance-widened","copies":271,"caught":271},{"rule":"failure-ignored","copies":205,"caught":205},{"rule":"test-run-removed","copies":63,"caught":60},{"rule":"threshold-lowered","copies":212,"caught":212},{"rule":"check-turned-off","copies":212,"caught":212},{"rule":"test-script-noop","copies":45,"caught":45},{"rule":"test-file-deleted","copies":330,"caught":330},{"rule":"test-moved-out","copies":330,"caught":330},{"rule":"unreadable-binary","copies":330,"caught":330}],"copies":2856,"caught":2852},"witness":{"gates":[{"file":"kernel.mjs","total":454,"killed":454,"survived":0,"baselined":0,"clean":true},{"file":"cli.mjs","total":55,"killed":55,"survived":0,"baselined":0,"clean":true},{"file":"skillcli.mjs","total":17,"killed":17,"survived":0,"baselined":0,"clean":true},{"file":"checkcase.mjs","total":16,"killed":16,"survived":0,"baselined":0,"clean":true}]},"basis":{"wageMedianHourly":{"value":19.67,"unit":"GBP per hour","what":"ONS ASHE 2025: median hourly earnings excluding overtime, full-time employees, UK","source":"https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2025"},"cpi":{"value":0.031,"unit":"","what":"UK CPI, 12 months to August 2026 — applied every year to pay, seats and electricity","source":"https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/august2026"}}}</script>
 <script type="module">
 import { audit, RULES, VERSION, DEFAULT_TESTS, DEFAULT_GATES, DEFAULT_SNAPSHOTS, fingerprintInput, fingerprintResult } from './kernel.mjs';

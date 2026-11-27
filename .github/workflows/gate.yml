@@ -20,9 +20,12 @@ jobs:
         run: node --test genome.test.mjs
       - name: page tests (the page runs the same kernel; its examples, rules table and measured figures match)
         run: node --test page.test.mjs
-      - name: the page's measured block and the skill script are what their sources give
+      - name: the page holds to the house standard (the seven-rule ship gate and the reading check) and cannot drift back
+        run: node --test house.test.mjs
+      - name: the page's measured block, the house page and the skill script are what their sources give
         run: |
           node tools/build-page.mjs --check
+          node tools/build-house.mjs --check
           node tools/build-skill.mjs --check
       - name: skill tests (the one-file script runs alone in an empty folder on every example)
         run: |
